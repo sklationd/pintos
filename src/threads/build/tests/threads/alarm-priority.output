@@ -1,9 +1,9 @@
-Writing command line to /tmp/gybMWhZLpu.dsk...
+Writing command line to /tmp/91n5MUrKKn.dsk...
 warning: can't find squish-pty, so terminal input will fail
 bochs -q
 Kernel command line: -q run alarm-priority
 Pintos booting with 4,096 kB RAM...
-375 pages available in kernel pool.
+374 pages available in kernel pool.
 374 pages available in user pool.
 Calibrating timer...  204,600 loops/s.
 Boot complete.
@@ -21,8 +21,8 @@ Executing 'alarm-priority':
 (alarm-priority) Thread priority 21 woke up.
 (alarm-priority) end
 Execution of 'alarm-priority' complete.
-Timer: 605 ticks
-Thread: 469 idle ticks, 139 kernel ticks, 0 user ticks
+Timer: 609 ticks
+Thread: 466 idle ticks, 146 kernel ticks, 0 user ticks
 Console: 837 characters output
 Keyboard: 0 keys pressed
 Powering off...

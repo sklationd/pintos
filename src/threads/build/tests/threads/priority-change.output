@@ -1,9 +1,9 @@
-Writing command line to /tmp/C0dOHwBx_Q.dsk...
+Writing command line to /tmp/leqW6Ul9wZ.dsk...
 warning: can't find squish-pty, so terminal input will fail
 bochs -q
 Kernel command line: -q run priority-change
 Pintos booting with 4,096 kB RAM...
-375 pages available in kernel pool.
+374 pages available in kernel pool.
 374 pages available in user pool.
 Calibrating timer...  204,600 loops/s.
 Boot complete.
@@ -17,7 +17,7 @@ Executing 'priority-change':
 (priority-change) end
 Execution of 'priority-change' complete.
 Timer: 73 ticks
-Thread: 0 idle ticks, 75 kernel ticks, 0 user ticks
+Thread: 0 idle ticks, 76 kernel ticks, 0 user ticks
 Console: 645 characters output
 Keyboard: 0 keys pressed
 Powering off...

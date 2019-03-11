@@ -44,6 +44,16 @@ less(const struct list_elem *a, const struct list_elem *b, void *aux) {
 	return (list_entry(a, struct thread, elem)->priority) <= (list_entry(b, struct thread, elem)->priority);
   };
 
+bool
+sema_less(const struct list_elem *a, const struct list_elem *b, void *aux) {
+  return (list_entry(a, struct thread, sema_elem)->priority) <= (list_entry(b, struct thread, sema_elem)->priority);
+  };
+
+bool 
+sort_less(const struct list_elem *a, const struct list_elem *b, void *aux){
+  return (list_entry(a, struct thread, elem)->priority) < (list_entry(b, struct thread, elem)->priority);
+}
+
 
 /* Stack frame for kernel_thread(). */
 struct kernel_thread_frame 
@@ -331,6 +341,7 @@ thread_yield (void)
   ASSERT (!intr_context ());
 
   old_level = intr_disable ();
+  list_sort(&ready_list, sort_less, NULL);
   if (curr != idle_thread) //list_push_back (&ready_list, &curr->elem);
 	list_insert_ordered(&ready_list, &curr->elem,less,NULL);
   curr->status = THREAD_READY;
@@ -461,6 +472,8 @@ static bool
 is_thread (struct thread *t)
 {
   //printf("is_thread function is called\n");
+  ASSERT(t);
+  ASSERT(t->magic == THREAD_MAGIC);
   return t != NULL && t->magic == THREAD_MAGIC;
 }
 
@@ -479,6 +492,7 @@ init_thread (struct thread *t, const char *name, int priority)
   strlcpy (t->name, name, sizeof t->name);
   t->stack = (uint8_t *) t + PGSIZE;
   t->priority = priority;
+  t->size = 0;
   t->magic = THREAD_MAGIC;
 }
 

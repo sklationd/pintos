@@ -1,9 +1,9 @@
-Writing command line to /tmp/FslOiGs8So.dsk...
+Writing command line to /tmp/ZOmVqvSyu3.dsk...
 warning: can't find squish-pty, so terminal input will fail
 bochs -q
 Kernel command line: -q -mlfqs run mlfqs-block
 Pintos booting with 4,096 kB RAM...
-375 pages available in kernel pool.
+374 pages available in kernel pool.
 374 pages available in user pool.
 Calibrating timer...  204,600 loops/s.
 Boot complete.
@@ -15,12 +15,13 @@ Executing 'mlfqs-block':
 (mlfqs-block) Block thread acquiring lock...
 (mlfqs-block) Main thread spinning for 5 seconds...
 (mlfqs-block) Main thread releasing lock.
-(mlfqs-block) Block thread should have already acquired lock.
+(mlfqs-block) (mlfqs-block) ...got it.Block thread should have already acquired lock.
+
 (mlfqs-block) end
 Execution of 'mlfqs-block' complete.
-Timer: 3073 ticks
-Thread: 491 idle ticks, 2586 kernel ticks, 0 user ticks
-Console: 750 characters output
+Timer: 3079 ticks
+Thread: 489 idle ticks, 2593 kernel ticks, 0 user ticks
+Console: 775 characters output
 Keyboard: 0 keys pressed
 Powering off...
 ========================================================================

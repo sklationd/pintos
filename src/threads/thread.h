@@ -23,7 +23,7 @@ typedef int tid_t;      /* thread id */
 #define PRI_MIN 0                       /* Lowest priority. */
 #define PRI_DEFAULT 31                  /* Default priority. */
 #define PRI_MAX 63                      /* Highest priority. */
-
+ 
 
 /* A kernel thread or user process.
 
@@ -89,11 +89,14 @@ struct thread
     char name[16];                      /* Name (for debugging purposes). */
     uint8_t *stack;                     /* Saved stack pointer. */
     int priority;                       /* Priority. */
-
+    int size;
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */  
     struct list_elem sleep_elem;        /* Sleep list element */
+    struct list_elem sema_elem;
     int64_t wakeup_time;                /* Timer_sleep wakeup time */
+    int priority_stack[10];                  /* Priority before receiving donation. default value is -1 */
+
 #ifdef USERPROG
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
@@ -101,11 +104,11 @@ struct thread
 
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */
-
   };
 
 bool less(const struct list_elem *a, const struct list_elem *b, void *aux);
-
+bool sema_less(const struct list_elem *a, const struct list_elem *b, void *aux);
+bool sort_less(const struct list_elem *a, const struct list_elem *b, void *aux);
 
 /* If false (default), use round-robin scheduler.
    If true, use multi-level feedback queue scheduler.
@@ -130,6 +133,7 @@ const char *thread_name (void);
 
 void thread_exit (void) NO_RETURN;
 void thread_yield (void);
+
 
 int thread_get_priority (void);
 void thread_set_priority (int);
