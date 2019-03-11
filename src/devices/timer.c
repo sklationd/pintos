@@ -146,6 +146,19 @@ timer_print_stats (void)
   printf ("Timer: %"PRId64" ticks\n", timer_ticks ());
 }
 
+void
+wakeup_sleep_thread(void){
+  struct list_elem *prev;
+  struct list_elem *e;
+  for (e = list_begin (&sleep_list); e != list_end (&sleep_list); e = list_next (e)){
+    if(list_entry(e, struct thread, sleep_elem)->wakeup_time <= ticks){
+      prev = list_prev(e);
+      list_remove(e);
+      thread_unblock(list_entry(e, struct thread, sleep_elem));
+      e = prev;
+    }
+  }
+}
 /* Timer interrupt handler. */
 static void
 timer_interrupt (struct intr_frame *args UNUSED)
@@ -153,15 +166,7 @@ timer_interrupt (struct intr_frame *args UNUSED)
   //printf("timer: %d\n",ticks);
   ticks++;
   thread_tick ();
-  struct list_elem *prev;
-  struct list_elem *e;
-  for (e = list_begin (&sleep_list); e != list_end (&sleep_list); e = list_next (e))
-    if(list_entry(e, struct thread, sleep_elem)->wakeup_time <= ticks){
-      prev = list_prev(e);
-      list_remove(e);
-      thread_unblock(list_entry(e, struct thread, sleep_elem));
-      e = prev;
-    }
+  wakeup_sleep_thread();
 }
 
 /* Returns true if LOOPS iterations waits for more than one timer
