@@ -40,20 +40,14 @@ static struct lock tid_lock;
 
 /* Compare priority of given two thread */
 bool 
-less(const struct list_elem *a, const struct list_elem *b, void *aux) {
-	return (list_entry(a, struct thread, elem)->priority) <= (list_entry(b, struct thread, elem)->priority);
+priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux) {
+	return (list_entry(a, struct thread, elem)->priority) > (list_entry(b, struct thread, elem)->priority);
   };
 
 bool
-sema_less(const struct list_elem *a, const struct list_elem *b, void *aux) {
-  return (list_entry(a, struct thread, sema_elem)->priority) <= (list_entry(b, struct thread, sema_elem)->priority);
+sema_bigger(const struct list_elem *a, const struct list_elem *b, void *aux) {
+  return (list_entry(a, struct thread, sema_elem)->priority) > (list_entry(b, struct thread, sema_elem)->priority);
   };
-
-bool 
-sort_less(const struct list_elem *a, const struct list_elem *b, void *aux){
-  return (list_entry(a, struct thread, elem)->priority) < (list_entry(b, struct thread, elem)->priority);
-}
-
 
 /* Stack frame for kernel_thread(). */
 struct kernel_thread_frame 
@@ -268,7 +262,7 @@ thread_unblock (struct thread *t)
   old_level = intr_disable ();
   ASSERT (t->status == THREAD_BLOCKED);
   //list_push_back (&ready_list, &t->elem); /// need to modify -> ordered insertion
-  list_insert_ordered(&ready_list, &t->elem,less,NULL);
+  list_insert_ordered(&ready_list, &t->elem,priority_bigger,NULL);
   t->status = THREAD_READY;
   intr_set_level (old_level);
 }
@@ -337,13 +331,10 @@ thread_yield (void)
   //printf("thread_yield function is called\n");
   struct thread *curr = thread_current ();
   enum intr_level old_level;
-  
   ASSERT (!intr_context ());
-
   old_level = intr_disable ();
-  list_sort(&ready_list, sort_less, NULL);
-  if (curr != idle_thread) //list_push_back (&ready_list, &curr->elem);
-	list_insert_ordered(&ready_list, &curr->elem,less,NULL);
+  if (curr != idle_thread)
+    list_insert_ordered(&ready_list, &curr->elem,priority_bigger,NULL);
   curr->status = THREAD_READY;
   schedule ();
   intr_set_level (old_level);
@@ -522,7 +513,7 @@ next_thread_to_run (void)
   if (list_empty (&ready_list))
     return idle_thread;
   else /// need to modify
-    return list_entry (list_pop_back (&ready_list), struct thread, elem);
+    return list_entry (list_pop_front (&ready_list), struct thread, elem);
 }
  
 /* Completes a thread switch by activating the new thread's page
