@@ -4,7 +4,7 @@
 #include <debug.h>
 #include <list.h>
 #include <stdint.h>
-
+#include "threads/synch.h"
 /* States in a thread's life cycle. */
 enum thread_status
   {
@@ -89,22 +89,28 @@ struct thread
     char name[16];                      /* Name (for debugging purposes). */
     uint8_t *stack;                     /* Saved stack pointer. */
     int priority;                       /* Priority. */
-        /* Shared between thread.c and synch.c. */
+    int size;      
+    
+    /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */  
     struct list_elem sleep_elem;        /* Sleep list element */
-    struct list_elem sema_elem;
+    struct list_elem sema_elem;         /* Semaphore->waiters list element */
+    struct list holding_lock_list;      /* list of lock that is holded by this thread */
+    struct lock* desire_lock;           /* pointer of lock that this thread acquires */
     int64_t wakeup_time;                /* Timer_sleep wakeup time */
-    int priority_stack[10];                  /* Priority before receiving donation. default value is -1 */
-    int size;
+    int priority_stack[10];             /* Priority before receiving donation. default value is -1 */
+    struct lock* lock_stack[10];        /* Stack that stores lock that caused donation */
+                         /* size of priority_stack */
+
 
 
 #ifdef USERPROG
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
 #endif
-
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */
+
   };
 
 bool priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);

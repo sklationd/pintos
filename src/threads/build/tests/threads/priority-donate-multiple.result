@@ -26,5 +26,6 @@ Differences in `diff -u' format:
   (priority-donate-multiple) Thread a acquired lock a.
   (priority-donate-multiple) Thread a finished.
   (priority-donate-multiple) Thread a should have just finished.
-  (priority-donate-multiple) Main thread should have priority 31.  Actual priority: 31.
+- (priority-donate-multiple) Main thread should have priority 31.  Actual priority: 31.
++ (priority-donate-multiple) Main thread should have priority 31.  Actual priority: 0.
   (priority-donate-multiple) end

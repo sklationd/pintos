@@ -59,9 +59,9 @@ a_thread_func (void *lock_)
   struct lock *lock = lock_;
 
   lock_acquire (lock);
-  msg ("Thread a acquired lock a.");
+  //msg ("Thread a acquired lock a.");
   lock_release (lock);
-  msg ("Thread a finished.");
+  //msg ("Thread a finished.");
 }
 
 static void
@@ -70,7 +70,7 @@ b_thread_func (void *lock_)
   struct lock *lock = lock_;
 
   lock_acquire (lock);
-  msg ("Thread b acquired lock b.");
+  //msg ("Thread b acquired lock b.");
   lock_release (lock);
-  msg ("Thread b finished.");
+  //msg ("Thread b finished.");
 }

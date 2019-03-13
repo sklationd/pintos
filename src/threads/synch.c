@@ -190,8 +190,8 @@ void
 priority_donation(struct thread *req_thread, struct lock *lock){
   ASSERT(lock->holder->size < 10);
   if(req_thread->priority > lock->holder->priority){
-    //lock->holder->prev_priority = lock->holder->priority;
     lock->holder->priority_stack[(lock->holder->size)] = lock->holder->priority;
+    lock->holder->lock_stack[(lock->holder->size)] = lock;
     lock->holder->priority = req_thread->priority;
     lock->holder->size++;
   }
@@ -214,12 +214,11 @@ lock_acquire (struct lock *lock)
   ASSERT (!lock_held_by_current_thread (lock));
   enum intr_level old_level = intr_disable();
   struct thread *curr = thread_current();
-  if(lock->holder){
+  if(lock->holder != NULL){
     priority_donation(curr, lock);
-    thread_yield();
   }
   sema_down (&lock->semaphore);
-  lock->holder = thread_current ();
+  lock->holder = curr;
   intr_set_level(old_level);
 }
 
@@ -256,13 +255,27 @@ lock_release (struct lock *lock)
   ASSERT (lock_held_by_current_thread (lock));
   enum intr_level old_level = intr_disable();
   struct thread *curr = thread_current();
-  
-  if(curr->size != 0){
-    int temp = curr->priority_stack[curr->size - 1];
-    curr->size-- ;
-    curr->priority = temp;
-  }
   lock->holder = NULL;
+  if(!list_empty(&lock->semaphore.waiters)){
+    if(curr->size !=0){
+      int remaining_priorities = 0;
+      int i;
+      for(i = 0; i < curr->size; i++){
+        if(curr->lock_stack[i] != lock){
+          curr->priority_stack[remaining_priorities] = curr->priority_stack[i];
+          curr->lock_stack[remaining_priorities] = curr->lock_stack[i];
+          remaining_priorities++;
+        }
+      }
+      curr->size = remaining_priorities;
+      curr->priority = curr->priority_stack[curr->size - 1];
+    }
+    //if(curr->size != 0){
+    //  curr->size--;
+    //  int temp = curr->priority_stack[curr->size];
+    //  curr->priority = temp;
+    //}
+  }
   sema_up (&lock->semaphore);
   intr_set_level(old_level);
 }
