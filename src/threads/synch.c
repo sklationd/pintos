@@ -117,8 +117,9 @@ sema_up (struct semaphore *sema)
 
   old_level = intr_disable ();
   if (!list_empty (&sema->waiters)) {
+    list_sort(&sema->waiters,sema_bigger,NULL);
     thread_unblock (list_entry (list_pop_front (&sema->waiters),
-                                struct thread, sema_elem));
+                                struct thread, sema_elem) );
   }
   sema->value++;
   thread_yield();
@@ -190,9 +191,12 @@ void
 priority_donation(struct thread *req_thread, struct lock *lock){
   ASSERT(lock->holder->size < 10);
   if(req_thread->priority > lock->holder->priority){
+    lock->holder->priority = req_thread->priority;
+    if(lock->holder->desire_lock){
+      priority_donation(lock->holder,lock->holder->desire_lock);
+    }
     lock->holder->priority_stack[(lock->holder->size)] = lock->holder->priority;
     lock->holder->lock_stack[(lock->holder->size)] = lock;
-    lock->holder->priority = req_thread->priority;
     lock->holder->size++;
   }
 }
@@ -214,11 +218,13 @@ lock_acquire (struct lock *lock)
   ASSERT (!lock_held_by_current_thread (lock));
   enum intr_level old_level = intr_disable();
   struct thread *curr = thread_current();
+  curr->desire_lock = lock;
   if(lock->holder != NULL){
     priority_donation(curr, lock);
   }
   sema_down (&lock->semaphore);
   lock->holder = curr;
+  curr->desire_lock = NULL;
   intr_set_level(old_level);
 }
 
@@ -255,9 +261,10 @@ lock_release (struct lock *lock)
   ASSERT (lock_held_by_current_thread (lock));
   enum intr_level old_level = intr_disable();
   struct thread *curr = thread_current();
+  ASSERT (curr->size > 0);
   lock->holder = NULL;
   if(!list_empty(&lock->semaphore.waiters)){
-    if(curr->size !=0){
+    if(curr->size > 1){
       int remaining_priorities = 0;
       int i;
       for(i = 0; i < curr->size; i++){

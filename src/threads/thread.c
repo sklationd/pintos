@@ -346,7 +346,15 @@ thread_set_priority (int new_priority)
 {
   //printf("thread_set_priority function is called\n");
   struct thread *curr = thread_current();
-  curr->priority = new_priority;
+  if(curr->priority < new_priority){
+    curr->priority = new_priority;
+  }
+  else{
+    if(curr->size > 1)
+      curr->priority_stack[0] = new_priority;
+    else  
+      curr->priority = new_priority;
+  }
   thread_yield();
 }
 
@@ -484,9 +492,12 @@ init_thread (struct thread *t, const char *name, int priority)
   strlcpy (t->name, name, sizeof t->name);
   t->stack = (uint8_t *) t + PGSIZE;
 
-  list_init(&t->holding_lock_list);
+  //list_init(&t->holding_lock_list);
   t->priority = priority;
-  t->size = 0;
+  t->priority_stack[0] = priority;
+  t->lock_stack[0] = NULL;
+  t->size = 1;
+  t->desire_lock = NULL;
   
   t->magic = THREAD_MAGIC;
 }
