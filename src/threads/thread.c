@@ -42,12 +42,19 @@ static struct lock tid_lock;
 bool 
 priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux) {
 	return (list_entry(a, struct thread, elem)->priority) > (list_entry(b, struct thread, elem)->priority);
-  };
+};
 
 bool
 sema_bigger(const struct list_elem *a, const struct list_elem *b, void *aux) {
   return (list_entry(a, struct thread, sema_elem)->priority) > (list_entry(b, struct thread, sema_elem)->priority);
-  };
+};
+
+bool
+cond_bigger(const struct list_elem *a, const struct list_elem *b, void *aux) {
+  return (list_entry(a, struct semaphore_elem, elem)->priority) > (list_entry(b, struct semaphore_elem, elem)->priority);
+};
+
+
 
 /* Stack frame for kernel_thread(). */
 struct kernel_thread_frame 
@@ -352,8 +359,10 @@ thread_set_priority (int new_priority)
   else{
     if(curr->size > 1)
       curr->priority_stack[0] = new_priority;
-    else  
+    else{
       curr->priority = new_priority;
+      curr->priority_stack[0] = new_priority;
+    }
   }
   thread_yield();
 }

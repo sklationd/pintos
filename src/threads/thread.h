@@ -115,6 +115,8 @@ struct thread
 
 bool priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
 bool sema_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
+bool cond_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
+
 
 /* If false (default), use round-robin scheduler.
    If true, use multi-level feedback queue scheduler.
