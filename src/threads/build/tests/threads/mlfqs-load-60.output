@@ -1,15 +1,111 @@
-Writing command line to /tmp/vVrxil1MTT.dsk...
+Writing command line to /tmp/c7Yh5qULji.dsk...
 warning: can't find squish-pty, so terminal input will fail
 bochs -q
 Kernel command line: -q -mlfqs run mlfqs-load-60
-Kernel PANIC at ../../threads/thread.c:520 in is_thread(): assertion `t' failed.
-Call stack: 0xc0107a99 0xc01007a1 0xc0100d83 0xc0100e5d 0xc0102dde 0xc01030b6 0xc01011c1 0xc010175f 0xc01002ff.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 462 characters output
+Pintos booting with 4,096 kB RAM...
+374 pages available in kernel pool.
+374 pages available in user pool.
+Calibrating timer...  204,600 loops/s.
+Boot complete.
+Executing 'mlfqs-load-60':
+(mlfqs-load-60) begin
+(mlfqs-load-60) Starting 60 niced load threads...
+(mlfqs-load-60) Starting threads took 1 seconds.
+(mlfqs-load-60) After 0 seconds, load average=0.03.
+(mlfqs-load-60) After 2 seconds, load average=2.01.
+(mlfqs-load-60) After 4 seconds, load average=3.93.
+(mlfqs-load-60) After 6 seconds, load average=5.78.
+(mlfqs-load-60) After 8 seconds, load average=7.57.
+(mlfqs-load-60) After 10 seconds, load average=9.30.
+(mlfqs-load-60) After 12 seconds, load average=10.98.
+(mlfqs-load-60) After 14 seconds, load average=12.59.
+(mlfqs-load-60) After 16 seconds, load average=14.16.
+(mlfqs-load-60) After 18 seconds, load average=15.67.
+(mlfqs-load-60) After 20 seconds, load average=17.14.
+(mlfqs-load-60) After 22 seconds, load average=18.55.
+(mlfqs-load-60) After 24 seconds, load average=19.92.
+(mlfqs-load-60) After 26 seconds, load average=21.24.
+(mlfqs-load-60) After 28 seconds, load average=22.52.
+(mlfqs-load-60) After 30 seconds, load average=23.75.
+(mlfqs-load-60) After 32 seconds, load average=24.95.
+(mlfqs-load-60) After 34 seconds, load average=26.10.
+(mlfqs-load-60) After 36 seconds, load average=27.22.
+(mlfqs-load-60) After 38 seconds, load average=28.30.
+(mlfqs-load-60) After 40 seconds, load average=29.34.
+(mlfqs-load-60) After 42 seconds, load average=30.35.
+(mlfqs-load-60) After 44 seconds, load average=31.33.
+(mlfqs-load-60) After 46 seconds, load average=32.27.
+(mlfqs-load-60) After 48 seconds, load average=33.19.
+(mlfqs-load-60) After 50 seconds, load average=34.07.
+(mlfqs-load-60) After 52 seconds, load average=34.92.
+(mlfqs-load-60) After 54 seconds, load average=35.75.
+(mlfqs-load-60) After 56 seconds, load average=36.54.
+(mlfqs-load-60) After 58 seconds, load average=37.31.
+(mlfqs-load-60) After 60 seconds, load average=38.06.
+(mlfqs-load-60) After 62 seconds, load average=36.80.
+(mlfqs-load-60) After 64 seconds, load average=35.58.
+(mlfqs-load-60) After 66 seconds, load average=34.40.
+(mlfqs-load-60) After 68 seconds, load average=33.25.
+(mlfqs-load-60) After 70 seconds, load average=32.15.
+(mlfqs-load-60) After 72 seconds, load average=31.09.
+(mlfqs-load-60) After 74 seconds, load average=30.05.
+(mlfqs-load-60) After 76 seconds, load average=29.06.
+(mlfqs-load-60) After 78 seconds, load average=28.09.
+(mlfqs-load-60) After 80 seconds, load average=27.16.
+(mlfqs-load-60) After 82 seconds, load average=26.26.
+(mlfqs-load-60) After 84 seconds, load average=25.39.
+(mlfqs-load-60) After 86 seconds, load average=24.55.
+(mlfqs-load-60) After 88 seconds, load average=23.73.
+(mlfqs-load-60) After 90 seconds, load average=22.95.
+(mlfqs-load-60) After 92 seconds, load average=22.18.
+(mlfqs-load-60) After 94 seconds, load average=21.45.
+(mlfqs-load-60) After 96 seconds, load average=20.74.
+(mlfqs-load-60) After 98 seconds, load average=20.05.
+(mlfqs-load-60) After 100 seconds, load average=19.38.
+(mlfqs-load-60) After 102 seconds, load average=18.74.
+(mlfqs-load-60) After 104 seconds, load average=18.12.
+(mlfqs-load-60) After 106 seconds, load average=17.52.
+(mlfqs-load-60) After 108 seconds, load average=16.94.
+(mlfqs-load-60) After 110 seconds, load average=16.38.
+(mlfqs-load-60) After 112 seconds, load average=15.83.
+(mlfqs-load-60) After 114 seconds, load average=15.31.
+(mlfqs-load-60) After 116 seconds, load average=14.80.
+(mlfqs-load-60) After 118 seconds, load average=14.31.
+(mlfqs-load-60) After 120 seconds, load average=13.83.
+(mlfqs-load-60) After 122 seconds, load average=13.54.
+(mlfqs-load-60) After 124 seconds, load average=13.09.
+(mlfqs-load-60) After 126 seconds, load average=12.66.
+(mlfqs-load-60) After 128 seconds, load average=12.24.
+(mlfqs-load-60) After 130 seconds, load average=11.83.
+(mlfqs-load-60) After 132 seconds, load average=11.44.
+(mlfqs-load-60) After 134 seconds, load average=11.06.
+(mlfqs-load-60) After 136 seconds, load average=10.69.
+(mlfqs-load-60) After 138 seconds, load average=10.34.
+(mlfqs-load-60) After 140 seconds, load average=9.99.
+(mlfqs-load-60) After 142 seconds, load average=9.66.
+(mlfqs-load-60) After 144 seconds, load average=9.34.
+(mlfqs-load-60) After 146 seconds, load average=9.03.
+(mlfqs-load-60) After 148 seconds, load average=8.73.
+(mlfqs-load-60) After 150 seconds, load average=8.44.
+(mlfqs-load-60) After 152 seconds, load average=8.16.
+(mlfqs-load-60) After 154 seconds, load average=7.89.
+(mlfqs-load-60) After 156 seconds, load average=7.63.
+(mlfqs-load-60) After 158 seconds, load average=7.38.
+(mlfqs-load-60) After 160 seconds, load average=7.13.
+(mlfqs-load-60) After 162 seconds, load average=6.90.
+(mlfqs-load-60) After 164 seconds, load average=6.67.
+(mlfqs-load-60) After 166 seconds, load average=6.45.
+(mlfqs-load-60) After 168 seconds, load average=6.23.
+(mlfqs-load-60) After 170 seconds, load average=6.02.
+(mlfqs-load-60) After 172 seconds, load average=5.82.
+(mlfqs-load-60) After 174 seconds, load average=5.63.
+(mlfqs-load-60) After 176 seconds, load average=5.44.
+(mlfqs-load-60) After 178 seconds, load average=5.26.
+(mlfqs-load-60) end
+Execution of 'mlfqs-load-60' complete.
+Timer: 18843 ticks
+Thread: 11979 idle ticks, 6867 kernel ticks, 0 user ticks
+Console: 5362 characters output
 Keyboard: 0 keys pressed
 Powering off...
 ========================================================================

@@ -1,15 +1,111 @@
-Writing command line to /tmp/xOqpPZP3cJ.dsk...
+Writing command line to /tmp/gotbYQxPRV.dsk...
 warning: can't find squish-pty, so terminal input will fail
 bochs -q
 Kernel command line: -q -mlfqs run mlfqs-load-avg
-Kernel PANIC at ../../threads/thread.c:520 in is_thread(): assertion `t' failed.
-Call stack: 0xc0107a99 0xc01007a1 0xc0100d83 0xc0100e5d 0xc0102dde 0xc01030b6 0xc01011c1 0xc010175f 0xc01002ff.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 463 characters output
+Pintos booting with 4,096 kB RAM...
+374 pages available in kernel pool.
+374 pages available in user pool.
+Calibrating timer...  204,600 loops/s.
+Boot complete.
+Executing 'mlfqs-load-avg':
+(mlfqs-load-avg) begin
+(mlfqs-load-avg) Starting 60 load threads...
+(mlfqs-load-avg) Starting threads took 1 seconds.
+(mlfqs-load-avg) After 0 seconds, load average=0.03.
+(mlfqs-load-avg) After 2 seconds, load average=0.08.
+(mlfqs-load-avg) After 4 seconds, load average=0.19.
+(mlfqs-load-avg) After 6 seconds, load average=0.37.
+(mlfqs-load-avg) After 8 seconds, load average=0.60.
+(mlfqs-load-avg) After 10 seconds, load average=0.90.
+(mlfqs-load-avg) After 12 seconds, load average=1.25.
+(mlfqs-load-avg) After 14 seconds, load average=1.65.
+(mlfqs-load-avg) After 16 seconds, load average=2.11.
+(mlfqs-load-avg) After 18 seconds, load average=2.62.
+(mlfqs-load-avg) After 20 seconds, load average=3.17.
+(mlfqs-load-avg) After 22 seconds, load average=3.78.
+(mlfqs-load-avg) After 24 seconds, load average=4.43.
+(mlfqs-load-avg) After 26 seconds, load average=5.13.
+(mlfqs-load-avg) After 28 seconds, load average=5.87.
+(mlfqs-load-avg) After 30 seconds, load average=6.65.
+(mlfqs-load-avg) After 32 seconds, load average=7.47.
+(mlfqs-load-avg) After 34 seconds, load average=8.33.
+(mlfqs-load-avg) After 36 seconds, load average=9.22.
+(mlfqs-load-avg) After 38 seconds, load average=10.16.
+(mlfqs-load-avg) After 40 seconds, load average=11.13.
+(mlfqs-load-avg) After 42 seconds, load average=12.13.
+(mlfqs-load-avg) After 44 seconds, load average=13.16.
+(mlfqs-load-avg) After 46 seconds, load average=14.23.
+(mlfqs-load-avg) After 48 seconds, load average=15.33.
+(mlfqs-load-avg) After 50 seconds, load average=16.46.
+(mlfqs-load-avg) After 52 seconds, load average=17.61.
+(mlfqs-load-avg) After 54 seconds, load average=18.80.
+(mlfqs-load-avg) After 56 seconds, load average=20.01.
+(mlfqs-load-avg) After 58 seconds, load average=21.24.
+(mlfqs-load-avg) After 60 seconds, load average=22.50.
+(mlfqs-load-avg) After 62 seconds, load average=23.74.
+(mlfqs-load-avg) After 64 seconds, load average=24.84.
+(mlfqs-load-avg) After 66 seconds, load average=25.83.
+(mlfqs-load-avg) After 68 seconds, load average=26.74.
+(mlfqs-load-avg) After 70 seconds, load average=27.56.
+(mlfqs-load-avg) After 72 seconds, load average=28.26.
+(mlfqs-load-avg) After 74 seconds, load average=28.91.
+(mlfqs-load-avg) After 76 seconds, load average=29.47.
+(mlfqs-load-avg) After 78 seconds, load average=29.91.
+(mlfqs-load-avg) After 80 seconds, load average=30.28.
+(mlfqs-load-avg) After 82 seconds, load average=30.56.
+(mlfqs-load-avg) After 84 seconds, load average=30.77.
+(mlfqs-load-avg) After 86 seconds, load average=30.89.
+(mlfqs-load-avg) After 88 seconds, load average=30.94.
+(mlfqs-load-avg) After 90 seconds, load average=30.94.
+(mlfqs-load-avg) After 92 seconds, load average=30.89.
+(mlfqs-load-avg) After 94 seconds, load average=30.75.
+(mlfqs-load-avg) After 96 seconds, load average=30.54.
+(mlfqs-load-avg) After 98 seconds, load average=30.29.
+(mlfqs-load-avg) After 100 seconds, load average=29.96.
+(mlfqs-load-avg) After 102 seconds, load average=29.60.
+(mlfqs-load-avg) After 104 seconds, load average=29.16.
+(mlfqs-load-avg) After 106 seconds, load average=28.67.
+(mlfqs-load-avg) After 108 seconds, load average=28.13.
+(mlfqs-load-avg) After 110 seconds, load average=27.55.
+(mlfqs-load-avg) After 112 seconds, load average=26.93.
+(mlfqs-load-avg) After 114 seconds, load average=26.25.
+(mlfqs-load-avg) After 116 seconds, load average=25.53.
+(mlfqs-load-avg) After 118 seconds, load average=24.77.
+(mlfqs-load-avg) After 120 seconds, load average=23.96.
+(mlfqs-load-avg) After 122 seconds, load average=23.17.
+(mlfqs-load-avg) After 124 seconds, load average=22.40.
+(mlfqs-load-avg) After 126 seconds, load average=21.65.
+(mlfqs-load-avg) After 128 seconds, load average=20.94.
+(mlfqs-load-avg) After 130 seconds, load average=20.24.
+(mlfqs-load-avg) After 132 seconds, load average=19.57.
+(mlfqs-load-avg) After 134 seconds, load average=18.92.
+(mlfqs-load-avg) After 136 seconds, load average=18.29.
+(mlfqs-load-avg) After 138 seconds, load average=17.69.
+(mlfqs-load-avg) After 140 seconds, load average=17.10.
+(mlfqs-load-avg) After 142 seconds, load average=16.53.
+(mlfqs-load-avg) After 144 seconds, load average=15.98.
+(mlfqs-load-avg) After 146 seconds, load average=15.45.
+(mlfqs-load-avg) After 148 seconds, load average=14.94.
+(mlfqs-load-avg) After 150 seconds, load average=14.45.
+(mlfqs-load-avg) After 152 seconds, load average=13.97.
+(mlfqs-load-avg) After 154 seconds, load average=13.50.
+(mlfqs-load-avg) After 156 seconds, load average=13.06.
+(mlfqs-load-avg) After 158 seconds, load average=12.62.
+(mlfqs-load-avg) After 160 seconds, load average=12.20.
+(mlfqs-load-avg) After 162 seconds, load average=11.80.
+(mlfqs-load-avg) After 164 seconds, load average=11.41.
+(mlfqs-load-avg) After 166 seconds, load average=11.03.
+(mlfqs-load-avg) After 168 seconds, load average=10.66.
+(mlfqs-load-avg) After 170 seconds, load average=10.31.
+(mlfqs-load-avg) After 172 seconds, load average=9.97.
+(mlfqs-load-avg) After 174 seconds, load average=9.64.
+(mlfqs-load-avg) After 176 seconds, load average=9.32.
+(mlfqs-load-avg) After 178 seconds, load average=9.01.
+(mlfqs-load-avg) end
+Execution of 'mlfqs-load-avg' complete.
+Timer: 18843 ticks
+Thread: 6494 idle ticks, 12353 kernel ticks, 0 user ticks
+Console: 5456 characters output
 Keyboard: 0 keys pressed
 Powering off...
 ========================================================================

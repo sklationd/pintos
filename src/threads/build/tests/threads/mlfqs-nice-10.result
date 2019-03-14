@@ -1,13 +1,14 @@
 FAIL
-Kernel panic in run: PANIC at ../../threads/thread.c:520 in is_thread(): assertion `t' failed.
-Call stack: 0xc0107a99 0xc01007a1 0xc0100d83 0xc0100e5d 0xc0102dde 0xc01030b6 0xc01011c1 0xc010175f 0xc01002ff
-Translation of call stack:
-0xc0107a99: debug_panic (.../../lib/kernel/debug.c:34)
-0xc01007a1: is_thread (..../../threads/thread.c:521)
-0xc0100d83: schedule (..../../threads/thread.c:653)
-0xc0100e5d: thread_yield (..../../threads/thread.c:373)
-0xc0102dde: sema_up (...../../threads/synch.c:126)
-0xc01030b6: lock_release (...../../threads/synch.c:287)
-0xc01011c1: allocate_tid (..../../threads/thread.c:673)
-0xc010175f: thread_init (..../../threads/thread.c:124)
-0xc01002ff: main (...d/../../threads/init.c:80)
+Some tick counts were missing or differed from those expected by more than 25.
+thread   actual <-> expected explanation
+------ -------- --- -------- ----------------------------------------
+     0      701 >>> 672      Too big, by 4.
+     1      592  =  588      
+     2      496  =  492      
+     3      396  =  408      
+     4      317  =  316      
+     5      224  =  232      
+     6      148  =  152      
+     7       84  =  92       
+     8       37  =  40       
+     9        8  =  8        
