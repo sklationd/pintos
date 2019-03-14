@@ -264,7 +264,6 @@ lock_release (struct lock *lock)
   ASSERT (lock_held_by_current_thread (lock));
   enum intr_level old_level = intr_disable();
   struct thread *curr = thread_current();
-  lock->holder = NULL;
   if(!thread_mlfqs){
     ASSERT (curr->size > 0);
     if(!list_empty(&lock->semaphore.waiters)){
@@ -284,6 +283,7 @@ lock_release (struct lock *lock)
     }
   }
   sema_up (&lock->semaphore);
+  lock->holder = NULL;
   intr_set_level(old_level);
 }
 

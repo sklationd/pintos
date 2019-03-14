@@ -349,9 +349,9 @@ thread_exit (void)
   /* Just set our status to dying and schedule another process.
      We will be destroyed during the call to schedule_tail(). */
   intr_disable ();
-  thread_current ()->status = THREAD_DYING;
   if(thread_mlfqs)
     list_remove(&thread_current()->thread_elem);
+  thread_current ()->status = THREAD_DYING;
   schedule ();
   NOT_REACHED ();
 }
@@ -579,11 +579,7 @@ next_thread_to_run (void)
   if (list_empty (&ready_list))
     return idle_thread;
   else /// need to modify
-    if(!thread_mlfqs)
-      return list_entry (list_pop_front (&ready_list), struct thread, elem);
-    else{
-      
-    }
+    return list_entry (list_pop_front (&ready_list), struct thread, elem);
 }
  
 /* Completes a thread switch by activating the new thread's page

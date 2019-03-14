@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #define fadd(X,Y) ((X)+(Y))
 #define fsub(X,Y) ((X)-(Y))
 #define fmul(X,Y) ((((int64_t) (X)) * (Y))/(1<<14))
