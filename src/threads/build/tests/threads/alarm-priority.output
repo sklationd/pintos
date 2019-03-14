@@ -1,10 +1,10 @@
-Writing command line to /tmp/XpURNAO_58.dsk...
+Writing command line to /tmp/wLizPqi2bc.dsk...
 warning: can't find squish-pty, so terminal input will fail
 bochs -q
 Kernel command line: -q run alarm-priority
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
-374 pages available in user pool.
+373 pages available in kernel pool.
+372 pages available in user pool.
 Calibrating timer...  204,600 loops/s.
 Boot complete.
 Executing 'alarm-priority':
@@ -21,13 +21,13 @@ Executing 'alarm-priority':
 (alarm-priority) Thread priority 21 woke up.
 (alarm-priority) end
 Execution of 'alarm-priority' complete.
-Timer: 608 ticks
-Thread: 468 idle ticks, 143 kernel ticks, 0 user ticks
+Timer: 594 ticks
+Thread: 469 idle ticks, 128 kernel ticks, 0 user ticks
 Console: 837 characters output
 Keyboard: 0 keys pressed
 Powering off...
 ========================================================================
                        Bochs x86 Emulator 2.6.2
                 Built from SVN snapshot on May 26, 2013
-                  Compiled on Feb 28 2019 at 20:58:15
+                  Compiled on Mar 14 2019 at 19:55:58
 ========================================================================
