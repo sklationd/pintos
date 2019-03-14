@@ -25,6 +25,8 @@ typedef int tid_t;      /* thread id */
 #define PRI_MAX 63                      /* Highest priority. */
  
 
+int32_t load_avg;
+
 /* A kernel thread or user process.
 
    Each thread structure is stored in its own 4 kB page.  The
@@ -89,12 +91,15 @@ struct thread
     char name[16];                      /* Name (for debugging purposes). */
     uint8_t *stack;                     /* Saved stack pointer. */
     int priority;                       /* Priority. */
-    int size;      
+    int size;                           /* size of priority_stack & lock_stack */
+    int nice;
+    int32_t recent_cpu;
     
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */  
     struct list_elem sleep_elem;        /* Sleep list element */
     struct list_elem sema_elem;         /* Semaphore->waiters list element */
+    struct list_elem thread_elem;
     struct list holding_lock_list;      /* list of lock that is holded by this thread */
     struct lock* desire_lock;           /* pointer of lock that this thread acquires */
     int64_t wakeup_time;                /* Timer_sleep wakeup time */

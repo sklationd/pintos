@@ -1,10 +1,13 @@
 FAIL
-Kernel panic in run: PANIC at ../../tests/threads/tests.c:93 in fail(): test failed
-Call stack: 0xc01073a9 0xc0109295 0xc010b05a 0xc01092db 0xc01000a0 0xc0100641
+Kernel panic in run: PANIC at ../../threads/thread.c:520 in is_thread(): assertion `t' failed.
+Call stack: 0xc0107a99 0xc01007a1 0xc0100d83 0xc0100e5d 0xc0102dde 0xc01030b6 0xc01011c1 0xc010175f 0xc01002ff
 Translation of call stack:
-0xc01073a9: debug_panic (.../../lib/kernel/debug.c:34)
-0xc0109295: run_test (.../tests/threads/tests.c:48)
-0xc010b05a: test_mlfqs_load_1 (...threads/mlfqs-load-1.c:41)
-0xc01092db: run_test (.../tests/threads/tests.c:57)
-0xc01000a0: run_task (.../../../threads/init.c:270)
-0xc0100641: run_actions (.../../../threads/init.c:319)
+0xc0107a99: debug_panic (.../../lib/kernel/debug.c:34)
+0xc01007a1: is_thread (..../../threads/thread.c:521)
+0xc0100d83: schedule (..../../threads/thread.c:653)
+0xc0100e5d: thread_yield (..../../threads/thread.c:373)
+0xc0102dde: sema_up (...../../threads/synch.c:126)
+0xc01030b6: lock_release (...../../threads/synch.c:287)
+0xc01011c1: allocate_tid (..../../threads/thread.c:673)
+0xc010175f: thread_init (..../../threads/thread.c:124)
+0xc01002ff: main (...d/../../threads/init.c:80)

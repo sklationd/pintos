@@ -1,24 +1,15 @@
-Writing command line to /tmp/YYUfNwrwx9.dsk...
+Writing command line to /tmp/9hEylraJyf.dsk...
 warning: can't find squish-pty, so terminal input will fail
 bochs -q
 Kernel command line: -q -mlfqs run mlfqs-nice-2
-Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
-374 pages available in user pool.
-Calibrating timer...  204,600 loops/s.
-Boot complete.
-Executing 'mlfqs-nice-2':
-(mlfqs-nice-2) begin
-(mlfqs-nice-2) Starting 2 threads...
-(mlfqs-nice-2) Starting threads took 10 ticks.
-(mlfqs-nice-2) Sleeping 40 seconds to let threads run, please wait...
-(mlfqs-nice-2) Thread 0 received 1501 ticks.
-(mlfqs-nice-2) Thread 1 received 1500 ticks.
-(mlfqs-nice-2) end
-Execution of 'mlfqs-nice-2' complete.
-Timer: 4072 ticks
-Thread: 999 idle ticks, 3076 kernel ticks, 0 user ticks
-Console: 630 characters output
+Kernel PANIC at ../../threads/thread.c:520 in is_thread(): assertion `t' failed.
+Call stack: 0xc0107a99 0xc01007a1 0xc0100d83 0xc0100e5d 0xc0102dde 0xc01030b6 0xc01011c1 0xc010175f 0xc01002ff.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 461 characters output
 Keyboard: 0 keys pressed
 Powering off...
 ========================================================================

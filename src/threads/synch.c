@@ -218,13 +218,16 @@ lock_acquire (struct lock *lock)
   ASSERT (!lock_held_by_current_thread (lock));
   enum intr_level old_level = intr_disable();
   struct thread *curr = thread_current();
-  curr->desire_lock = lock;
-  if(lock->holder != NULL){
-    priority_donation(curr, lock);
+  if(!thread_mlfqs){
+    curr->desire_lock = lock;
+    if(lock->holder != NULL){
+      priority_donation(curr, lock);
+    }
   }
   sema_down (&lock->semaphore);
   lock->holder = curr;
-  curr->desire_lock = NULL;
+  if(!thread_mlfqs)
+    curr->desire_lock = NULL;
   intr_set_level(old_level);
 }
 
@@ -261,27 +264,24 @@ lock_release (struct lock *lock)
   ASSERT (lock_held_by_current_thread (lock));
   enum intr_level old_level = intr_disable();
   struct thread *curr = thread_current();
-  ASSERT (curr->size > 0);
   lock->holder = NULL;
-  if(!list_empty(&lock->semaphore.waiters)){
-    if(curr->size > 1){
-      int remaining_priorities = 0;
-      int i;
-      for(i = 0; i < curr->size; i++){
-        if(curr->lock_stack[i] != lock){
-          curr->priority_stack[remaining_priorities] = curr->priority_stack[i];
-          curr->lock_stack[remaining_priorities] = curr->lock_stack[i];
-          remaining_priorities++;
+  if(!thread_mlfqs){
+    ASSERT (curr->size > 0);
+    if(!list_empty(&lock->semaphore.waiters)){
+      if(curr->size > 1){
+        int remaining_priorities = 0;
+        int i;
+        for(i = 0; i < curr->size; i++){
+          if(curr->lock_stack[i] != lock){
+            curr->priority_stack[remaining_priorities] = curr->priority_stack[i];
+            curr->lock_stack[remaining_priorities] = curr->lock_stack[i];
+            remaining_priorities++;
+          }
         }
+        curr->size = remaining_priorities;
+        curr->priority = curr->priority_stack[curr->size - 1];
       }
-      curr->size = remaining_priorities;
-      curr->priority = curr->priority_stack[curr->size - 1];
     }
-    //if(curr->size != 0){
-    //  curr->size--;
-    //  int temp = curr->priority_stack[curr->size];
-    //  curr->priority = temp;
-    //}
   }
   sema_up (&lock->semaphore);
   intr_set_level(old_level);
