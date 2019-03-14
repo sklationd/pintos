@@ -158,15 +158,6 @@ thread_tick (void)
   struct list_elem *e;
   if(thread_mlfqs){
     t->recent_cpu = fadd(t->recent_cpu,itof(1));
-    if(timer_ticks() % TIMER_FREQ == 0){
-      int not_idle = (t != idle_thread); 
-      load_avg = fmul(fdiv(itof(59),itof(60)),load_avg) +
-                 fmul(fdiv(itof(1), itof(60)),itof(list_size(&ready_list)+not_idle));
-      for(e=list_begin(&thread_list); e!=list_end(&thread_list); e=list_next(e)){
-        struct thread *e_thread = list_entry(e, struct thread, thread_elem);
-        e_thread->recent_cpu = fadd(fmul(fdiv(fmul(itof(2), load_avg),fadd(fmul(itof(2), load_avg),itof(1))), e_thread->recent_cpu),itof(e_thread->nice));
-      }
-    }
     if(timer_ticks() % 4 == 0){
       for(e=list_begin(&thread_list); e!=list_end(&thread_list); e=list_next(e)){
         struct thread *e_thread = list_entry(e, struct thread, thread_elem);
@@ -177,8 +168,16 @@ thread_tick (void)
           e_thread->priority = PRI_MIN;
       }
     }
+    if(timer_ticks() % TIMER_FREQ == 0){
+      int not_idle = (t != idle_thread); 
+      load_avg = fmul(fdiv(itof(59),itof(60)),load_avg) +
+                 fmul(fdiv(itof(1), itof(60)),itof(list_size(&ready_list)+not_idle));
+      for(e=list_begin(&thread_list); e!=list_end(&thread_list); e=list_next(e)){
+        struct thread *e_thread = list_entry(e, struct thread, thread_elem);
+        e_thread->recent_cpu = fadd(fmul(fdiv(fmul(itof(2), load_avg),fadd(fmul(itof(2), load_avg),itof(1))), e_thread->recent_cpu),itof(e_thread->nice));
+      }
+    }
   }
-
   /* Update statistics. */
   if (t == idle_thread)
     idle_ticks++;
