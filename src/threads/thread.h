@@ -26,7 +26,7 @@ typedef int tid_t;      /* thread id */
  
 
 int32_t load_avg;
-
+int is_thread_system_ready;
 /* A kernel thread or user process.
 
    Each thread structure is stored in its own 4 kB page.  The

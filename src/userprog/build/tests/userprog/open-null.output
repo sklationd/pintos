@@ -1,0 +1,28 @@
+Copying tests/userprog/open-null into /tmp/g74XyA9PGk.dsk...
+Writing command line to /tmp/cBf0R02NNN.dsk...
+qemu -hda /tmp/cBf0R02NNN.dsk -hdb /tmp/mfEapoMAa9.dsk -hdc /tmp/g74XyA9PGk.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put open-null run open-null
+Pintos booting with 4,096 kB RAM...
+374 pages available in kernel pool.
+374 pages available in user pool.
+Calibrating timer...  91,443,200 loops/s.
+hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 105 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+Formatting file system...done.
+Boot complete.
+Putting 'open-null' into the file system...
+Executing 'open-null':
+(open-null) begin
+(open-null) end
+open-null: exit(0)
+Execution of 'open-null' complete.
+Timer: 157 ticks
+Thread: 30 idle ticks, 127 kernel ticks, 0 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 62 reads, 218 writes
+hd1:0: 105 reads, 0 writes
+Console: 799 characters output
+Keyboard: 0 keys pressed
+Exception: 0 page faults
+Powering off...

@@ -128,6 +128,7 @@ thread_init (void)
     tick_counts = 0;
     initial_thread->recent_cpu = 0;
   }
+  
 }
 
 /* Starts preemptive thread scheduling by enabling interrupts.
@@ -349,7 +350,7 @@ thread_exit (void)
   /* Just set our status to dying and schedule another process.
      We will be destroyed during the call to schedule_tail(). */
   intr_disable ();
-  if(thread_mlfqs)
+  if(thread_mlfqs && is_thread_system_ready)
     list_remove(&thread_current()->thread_elem);
   thread_current ()->status = THREAD_DYING;
   schedule ();
@@ -367,7 +368,7 @@ thread_yield (void)
   ASSERT (!intr_context ());
   old_level = intr_disable ();
   if (curr != idle_thread)
-      list_insert_ordered(&ready_list, &curr->elem,priority_bigger,NULL);
+    list_insert_ordered(&ready_list, &curr->elem,priority_bigger,NULL);
   curr->status = THREAD_READY;
   schedule ();
   intr_set_level (old_level);

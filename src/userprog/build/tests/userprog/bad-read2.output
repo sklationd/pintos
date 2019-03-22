@@ -1,0 +1,33 @@
+Copying tests/userprog/bad-read2 into /tmp/BDJ1ya9UP1.dsk...
+Writing command line to /tmp/RR4Q4t333Z.dsk...
+qemu -hda /tmp/RR4Q4t333Z.dsk -hdb /tmp/IqJViu6JeD.dsk -hdc /tmp/BDJ1ya9UP1.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put bad-read2 run bad-read2
+Pintos booting with 4,096 kB RAM...
+374 pages available in kernel pool.
+374 pages available in user pool.
+Calibrating timer...  181,248,000 loops/s.
+hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 105 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+Formatting file system...done.
+Boot complete.
+Putting 'bad-read2' into the file system...
+Executing 'bad-read2':
+(bad-read2) begin
+Page fault at 0xc0000000: rights violation error reading page in user context.
+bad-read2: dying due to interrupt 0x0e (#PF Page-Fault Exception).
+Interrupt 0x0e (#PF Page-Fault Exception) at eip=0x80480e6
+ cr2=c0000000 error=00000005
+ eax=00000100 ebx=00000000 ecx=0804c02e edx=00000027
+ esi=00000000 edi=00000000 esp=bfffff80 ebp=bfffff98
+ cs=001b ds=0023 es=0023 ss=0023
+Execution of 'bad-read2' complete.
+Timer: 154 ticks
+Thread: 30 idle ticks, 122 kernel ticks, 2 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 62 reads, 218 writes
+hd1:0: 105 reads, 0 writes
+Console: 1138 characters output
+Keyboard: 0 keys pressed
+Exception: 1 page faults
+Powering off...

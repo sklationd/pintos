@@ -116,14 +116,18 @@ sema_up (struct semaphore *sema)
   ASSERT (sema != NULL);
 
   old_level = intr_disable ();
-  if (!list_empty (&sema->waiters)) {
+  if (!list_empty (&sema->waiters) && is_thread_system_ready) {
     list_sort(&sema->waiters,sema_bigger,NULL);
     thread_unblock (list_entry (list_pop_front (&sema->waiters),
                                 struct thread, sema_elem) );
+    sema->value++;
+    thread_yield();
+    intr_set_level (old_level);
   }
-  sema->value++;
-  thread_yield();
-  intr_set_level (old_level);
+  else{
+    sema->value++;
+    intr_set_level (old_level);
+  }
 }
  
 static void sema_test_helper (void *sema_);
@@ -264,7 +268,7 @@ lock_release (struct lock *lock)
   ASSERT (lock_held_by_current_thread (lock));
   enum intr_level old_level = intr_disable();
   struct thread *curr = thread_current();
-  if(!thread_mlfqs){
+  if(!thread_mlfqs && is_thread_system_ready){
     ASSERT (curr->size > 0);
     if(!list_empty(&lock->semaphore.waiters)){
       if(curr->size > 1){

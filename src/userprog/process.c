@@ -21,6 +21,21 @@
 static thread_func start_process NO_RETURN;
 static bool load (const char *cmdline, void (**eip) (void), void **esp);
 
+/* A function that parse the start_process()'s input */
+int
+parse_instruction(char *input ,char **output){
+  ASSERT(input!=NULL);
+  char *save_ptr;
+  char *token;
+  int index = 0;
+  for (token = strtok_r(input," ",&save_ptr); token != NULL;
+     token = strtok_r (NULL, " ", &save_ptr)){
+    output[index]=token;
+    index++;
+  }
+  return index;
+} 
+
 /* Starts a new thread running a user program loaded from
    FILENAME.  The new thread may be scheduled (and may even exit)
    before process_execute() returns.  Returns the new process's
@@ -30,6 +45,7 @@ process_execute (const char *file_name)
 {
   char *fn_copy;
   tid_t tid;
+  char** argv =(char **)malloc(sizeof(char*) * 50);
 
   /* Make a copy of FILE_NAME.
      Otherwise there's a race between the caller and load(). */
@@ -37,12 +53,60 @@ process_execute (const char *file_name)
   if (fn_copy == NULL)
     return TID_ERROR;
   strlcpy (fn_copy, file_name, PGSIZE);
-
+  parse_instruction(file_name,argv);
   /* Create a new thread to execute FILE_NAME. */
-  tid = thread_create (file_name, PRI_DEFAULT, start_process, fn_copy);
+  tid = thread_create (argv[0], PRI_DEFAULT, start_process, fn_copy);
   if (tid == TID_ERROR)
     palloc_free_page (fn_copy); 
+  free(argv);
   return tid;
+}
+
+
+
+/* A function that push argument into stack and modify esp */
+void
+stack_build(void **esp,char **argv,int argc){
+  int align_manage = 0;
+  int i;
+
+  /* push argv[max] argv[max-1] ... argv[1] */
+  for(i=argc-1;i>=0;i--){
+    int len = strlen(argv[i]) + 1;
+    *esp -= len;
+    align_manage += len;
+    strlcpy(*esp,argv[i],len);
+    argv[i] = *esp; // if this line doesn't exist, kernel panic occurs
+  }
+
+  /* push align zero */
+  align_manage = 4 - align_manage % 4;
+  if( align_manage != 4){
+    *esp -= align_manage;
+  }
+  /* NULL pointer */
+  *esp -= sizeof(char *);
+  memset(*esp,0,sizeof(char *));
+
+  /* push argv pointer */
+  for(i=argc-1;i>=0;i--){
+    *esp -= sizeof(char *);
+    **(char ***)esp = argv[i]; 
+  }
+
+  /* push argv itself */
+  *esp -= sizeof(char **);
+  **(char ****)esp = *esp + sizeof(char **);
+
+  /* push argc */
+  *esp -= sizeof(int);
+  **(int **)esp = argc;
+
+  /* push ret */
+  *esp -= sizeof(void *);
+  **(uint32_t **)esp = 0;
+  //printf("esp: %x\n",*esp);
+  //hex_dump(*esp,*esp,100,1);
 }
 
 /* A thread function that loads a user process and makes it start
@@ -53,16 +117,22 @@ start_process (void *f_name)
   char *file_name = f_name;
   struct intr_frame if_;
   bool success;
-
+  char** argv =(char **)malloc(sizeof(char*) * 50); //file names are limited to 14 characters + NULL
+  int argc;
   /* Initialize interrupt frame and load executable. */
   memset (&if_, 0, sizeof if_);
   if_.gs = if_.fs = if_.es = if_.ds = if_.ss = SEL_UDSEG;
   if_.cs = SEL_UCSEG;
   if_.eflags = FLAG_IF | FLAG_MBS;
-  success = load (file_name, &if_.eip, &if_.esp);
 
+  /* parse file_name */
+  argc = parse_instruction(file_name, argv);
+  success = load (argv[0], &if_.eip, &if_.esp);
+  if(success)
+    stack_build(&if_.esp,argv,argc);
   /* If load failed, quit. */
   palloc_free_page (file_name);
+  free(argv);
   if (!success) 
     thread_exit ();
 
@@ -306,6 +376,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
   /* Set up stack. */
   if (!setup_stack (esp))
     goto done;
+  
 
   /* Start address. */
   *eip = (void (*) (void)) ehdr.e_entry;
@@ -360,7 +431,7 @@ validate_segment (const struct Elf32_Phdr *phdr, struct file *file)
      it then user code that passed a null pointer to system calls
      could quite likely panic the kernel by way of null pointer
      assertions in memcpy(), etc. */
-  if (phdr->p_vaddr < PGSIZE)
+  if (phdr->p_offset < PGSIZE) /////MODIFIED!!!!!!!!!!!!!!! ORIGIN: phdr->p_vaddr
     return false;
 
   /* It's okay. */

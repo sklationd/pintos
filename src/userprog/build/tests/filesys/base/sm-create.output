@@ -1,0 +1,29 @@
+Copying tests/filesys/base/sm-create into /tmp/AvQu43BBxs.dsk...
+Writing command line to /tmp/1iHnzK8HPC.dsk...
+qemu -hda /tmp/1iHnzK8HPC.dsk -hdb /tmp/lUFhgHJ9Ku.dsk -hdc /tmp/AvQu43BBxs.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put sm-create run sm-create
+Pintos booting with 4,096 kB RAM...
+374 pages available in kernel pool.
+374 pages available in user pool.
+Calibrating timer...  117,760,000 loops/s.
+hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 109 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+Formatting file system...done.
+Boot complete.
+Putting 'sm-create' into the file system...
+Executing 'sm-create':
+(sm-create) begin
+(sm-create) create "blargle"
+(sm-create) create "blargle": FAILED
+sm-create: exit(1)
+Execution of 'sm-create' complete.
+Timer: 148 ticks
+Thread: 30 idle ticks, 117 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 63 reads, 226 writes
+hd1:0: 109 reads, 0 writes
+Console: 850 characters output
+Keyboard: 0 keys pressed
+Exception: 0 page faults
+Powering off...
