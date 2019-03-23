@@ -1,2 +1,25 @@
 FAIL
-run: open "child-rox": FAILED
+Kernel panic in run: PANIC at ../../userprog/exception.c:100 in kill(): Kernel bug - unexpected interrupt in kernel
+Call stack: 0xc0107b79 0xc010ada8 0xc010ae55 0xc0101e87 0xc0101fbf 0xc01072ba 0xc0109c8a 0xc0109d1c 0xc010aea5 0xc010b341 0xc0101e87 0xc0101fbf 0x804a282 0x80481ab 0x8048274 0x80488bc
+Translation of call stack:
+In kernel.o:
+0xc0107b79: debug_panic (.../../lib/kernel/debug.c:34)
+0xc010ada8: kill (.../userprog/exception.c:105)
+0xc010ae55: page_fault (.../userprog/exception.c:163)
+0xc0101e87: intr_handler (..../threads/interrupt.c:361)
+0xc0101fbf: intr_entry (threads/intr-stubs.S:38)
+0xc01072ba: strtok_r (...ld/../../lib/string.c:269)
+0xc0109c8a: parse_instruction (.../../userprog/process.c:31)
+0xc0109d1c: process_execute (.../../userprog/process.c:58)
+0xc010aea5: exec (.../../userprog/syscall.c:34)
+0xc010b341: syscall_handler (...../userprog/syscall.c:177)
+0xc0101e87: intr_handler (..../threads/interrupt.c:361)
+0xc0101fbf: intr_entry (threads/intr-stubs.S:38)
+In tests/userprog/rox-multichild:
+0x0804a282: exec (.../../lib/user/syscall.c:81)
+0x080481ab: test_main (...userprog/rox-child.inc:24)
+0x08048274: main (...ild/../../tests/main.c:13)
+0x080488bc: _start (.../../../lib/user/entry.c:9)
+Translations of user virtual addresses above are based on a guess at
+the binary to use.  If this guess is incorrect, then those
+translations will be misleading.

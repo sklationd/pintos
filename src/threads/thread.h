@@ -112,6 +112,8 @@ struct thread
 #ifdef USERPROG
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
+    struct file* fd[128];
+    int cl[128];
 #endif
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */

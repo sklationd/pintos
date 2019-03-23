@@ -1,9 +1,1 @@
-FAIL
-Kernel panic in run: PANIC at ../../lib/kernel/console.c:187 in putchar_have_lock(): assertion `console_locked_by_current_thread ()' failed.
-Call stack: 0xc0107b79 0xc0109911 0xc01099e0 0xc010005b 0xc01006f8
-Translation of call stack:
-0xc0107b79: debug_panic (.../../lib/kernel/debug.c:34)
-0xc0109911: vprintf_helper (.../lib/kernel/console.c:175)
-0xc01099e0: puts (.../lib/kernel/console.c:143)
-0xc010005b: power_off (.../../../threads/init.c:374)
-0xc01006f8: main (.../../../threads/init.c:125)
+PASS

@@ -53,8 +53,8 @@ Differences in `diff -u' format:
   (args) argv[17] = 'q'
   (args) argv[18] = 'r'
   (args) argv[19] = 's'
-  (args) argv[20] = 't'
-  (args) argv[21] = 'u'
+- (args) argv[20] = 't'
+- (args) argv[21] = 'u'
 - (args) argv[22] = 'v'
 - (args) argv[23] = null
 - (args) end

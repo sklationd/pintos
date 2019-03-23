@@ -1,12 +1,12 @@
-Copying tests/userprog/open-twice into /tmp/H6ECEHnvaM.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/H6ECEHnvaM.dsk...
-Writing command line to /tmp/JgFcOIhrwx.dsk...
-qemu -hda /tmp/JgFcOIhrwx.dsk -hdb /tmp/D7Vs8Q3vk7.dsk -hdc /tmp/H6ECEHnvaM.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/open-twice into /tmp/o5BT6NjZWb.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/o5BT6NjZWb.dsk...
+Writing command line to /tmp/h8n9N6XVPl.dsk...
+qemu -hda /tmp/h8n9N6XVPl.dsk -hdb /tmp/n8ozaJtelS.dsk -hdc /tmp/o5BT6NjZWb.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put open-twice put sample.txt run open-twice
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  116,940,800 loops/s.
+Calibrating timer...  209,100,800 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 108 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -17,15 +17,16 @@ Putting 'sample.txt' into the file system...
 Executing 'open-twice':
 (open-twice) begin
 (open-twice) open "sample.txt" once
-(open-twice) open "sample.txt" once: FAILED
-open-twice: exit(1)
+(open-twice) open "sample.txt" again
+(open-twice) end
+open-twice: exit(0)
 Execution of 'open-twice' complete.
-Timer: 153 ticks
-Thread: 30 idle ticks, 123 kernel ticks, 1 user ticks
+Timer: 149 ticks
+Thread: 30 idle ticks, 117 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 90 reads, 226 writes
+hd0:1: 108 reads, 226 writes
 hd1:0: 108 reads, 0 writes
-Console: 931 characters output
+Console: 942 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

@@ -1,11 +1,11 @@
-Copying tests/userprog/create-bad-ptr into /tmp/hFLNSW_R6p.dsk...
-Writing command line to /tmp/nfB0fToEYJ.dsk...
-qemu -hda /tmp/nfB0fToEYJ.dsk -hdb /tmp/3uxDtqN2Pl.dsk -hdc /tmp/hFLNSW_R6p.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-bad-ptr into /tmp/OPCXuoVW4a.dsk...
+Writing command line to /tmp/T6bqf1aRuI.dsk...
+qemu -hda /tmp/T6bqf1aRuI.dsk -hdb /tmp/4II5lP4Rae.dsk -hdc /tmp/OPCXuoVW4a.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-bad-ptr run create-bad-ptr
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  26,188,800 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 105 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -14,16 +14,23 @@ Boot complete.
 Putting 'create-bad-ptr' into the file system...
 Executing 'create-bad-ptr':
 (create-bad-ptr) begin
-(create-bad-ptr) create(0x20101234): 1
-(create-bad-ptr) end
-create-bad-ptr: exit(0)
-Execution of 'create-bad-ptr' complete.
-Timer: 141 ticks
-Thread: 30 idle ticks, 110 kernel ticks, 1 user ticks
+Page fault at 0x20101234: not present error reading page in kernel context.
+Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc010737e
+ cr2=20101234 error=00000000
+ eax=c011ceac ebx=00000000 ecx=20101234 edx=20101234
+ esi=c011702c edi=c011cea8 esp=00000003 ebp=c011ce64
+ cs=0008 ds=0010 es=0010 ss=820c
+Kernel PANIC at ../../userprog/exception.c:100 in kill(): Kernel bug - unexpected interrupt in kernel
+Call stack: 0xc0107b79 0xc010ada8 0xc010ae55 0xc0101e87 0xc0101fbf 0xc010737e 0xc010c18b 0xc010c37d 0xc010b2ac 0xc010b383 0xc0101e87 0xc0101fbf 0x804a173 0x80480fa 0x8048140 0x804878c.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 144 ticks
+Thread: 30 idle ticks, 112 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 62 reads, 218 writes
+hd0:1: 64 reads, 218 writes
 hd1:0: 105 reads, 0 writes
-Console: 878 characters output
+Console: 1500 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 1 page faults
 Powering off...

@@ -1,11 +1,11 @@
-Copying tests/userprog/bad-jump into /tmp/Og4WRkvvku.dsk...
-Writing command line to /tmp/XvR10W72mb.dsk...
-qemu -hda /tmp/XvR10W72mb.dsk -hdb /tmp/OC8Bxn0DFk.dsk -hdc /tmp/Og4WRkvvku.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/bad-jump into /tmp/mPjhyrKocz.dsk...
+Writing command line to /tmp/9Hek7x_6Je.dsk...
+qemu -hda /tmp/9Hek7x_6Je.dsk -hdb /tmp/wr7NXD6hD6.dsk -hdc /tmp/mPjhyrKocz.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put bad-jump run bad-jump
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  138,444,800 loops/s.
+Calibrating timer...  195,993,600 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 105 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -14,52 +14,14 @@ Boot complete.
 Putting 'bad-jump' into the file system...
 Executing 'bad-jump':
 (bad-jump) begin
-Page fault at 0: rights violation error writing page in user context.
-bad-jump: dying due to interrupt 0x0e (#PF Page-Fault Exception).
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0x2
+bad-jump: exit(-1)
 Execution of 'bad-jump' complete.
-Timer: 158 ticks
-Thread: 30 idle ticks, 124 kernel ticks, 4 user ticks
+Timer: 140 ticks
+Thread: 30 idle ticks, 109 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 62 reads, 218 writes
 hd1:0: 105 reads, 0 writes
-Console: 948 characters output
+Console: 778 characters output
 Keyboard: 0 keys pressed
 Exception: 1 page faults
-PoKernel PANIC at ../../lib/kernel/console.c:187 in putchar_have_lock(): assertion `console_locked_by_current_thread ()' failed.
-Call stack: 0xc0107b79 0xc0109911 0xc01099e0 0xc010005b 0xc01006f8.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Kernel PANIC recursion at ../../filesys/inode.c:336 in inode_allow_write().
-Page fault at 0xccccccd0: not present error writing page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc0107c87
- cr2=ccccccd0 error=00000002
- eax=c011701c ebx=c011701c ecx=cccccccc edx=c011701c
- esi=c01115c0 edi=c0117000 esp=c002f000 ebp=c002fcf8
- cs=0008 ds=0010 es=0010 ss=0000
-Page fault at 0xcccccce0: not present error reading page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc010bfff
- cr2=cccccce0 error=00000000
- eax=cccccccc ebx=c011701c ecx=00000000 edx=c002fb9b
- esi=c010d866 edi=c002fba4 esp=0000000a ebp=c002fafc
- cs=0008 ds=0010 es=0010 ss=fb80
-Page fault at 0xccccccd8: not present error reading page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc010c41f
- cr2=ccccccd8 error=00000000
- eax=cccccccc ebx=cccccccc ecx=00000000 edx=c002f99f
- esi=c010d866 edi=c002f9a8 esp=c002f95c ebp=c002f930
- cs=0008 ds=0010 es=0010 ss=f0e4
-Page fault at 0xccccccd8: not present error reading page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc010c41f
- cr2=ccccccd8 error=00000000
- eax=cccccccc ebx=cccccccc ecx=00000000 edx=c002f7e3
- esi=c010d866 edi=c002f7ec esp=c0111820 ebp=c002f774
- cs=0008 ds=0010 es=0010 ss=f0e4
-Page fault at 0xccccccd8: not present error reading page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc010c41f
- cr2=ccccccd8 error=00000000
- eax=cccccccc ebx=cccccccc ecx=00000000 edx=c002f627
- esi=c010d866 edi=c002f630 esp=c0111820 ebp=c002f5b8
- cs=0008 ds=0010 es=0010 ss=f0e4
-Page fault at 0xccccccd8: not present err
+Powering off...

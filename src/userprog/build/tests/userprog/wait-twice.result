@@ -15,7 +15,5 @@ Differences in `diff -u' format:
 - child-simple: exit(81)
 - (wait-twice) wait(exec()) = 81
 - (wait-twice) wait(exec()) = -1
-+ (wait-twice) wait(exec()) = 256
-+ (wait-twice) wait(exec()) = 0
-  (wait-twice) end
-  wait-twice: exit(0)
+- (wait-twice) end
+- wait-twice: exit(0)

@@ -1,11 +1,11 @@
-Copying tests/filesys/base/sm-seq-block into /tmp/wwheWXk_b3.dsk...
-Writing command line to /tmp/1IMWPDZaL3.dsk...
-qemu -hda /tmp/1IMWPDZaL3.dsk -hdb /tmp/_y44ikHVzK.dsk -hdc /tmp/wwheWXk_b3.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/sm-seq-block into /tmp/NiePohebZ0.dsk...
+Writing command line to /tmp/7qOCp617Ku.dsk...
+qemu -hda /tmp/7qOCp617Ku.dsk -hdb /tmp/YuUwnQrciU.dsk -hdc /tmp/NiePohebZ0.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put sm-seq-block run sm-seq-block
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  144,179,200 loops/s.
+Calibrating timer...  179,200,000 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 109 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -15,17 +15,13 @@ Putting 'sm-seq-block' into the file system...
 Executing 'sm-seq-block':
 (sm-seq-block) begin
 (sm-seq-block) create "noodle"
-(sm-seq-block) open "noodle"
-(sm-seq-block) writing "noodle"
-(sm-seq-block) write 513 bytes at offset 0 in "noodle" failed: FAILED
-sm-seq-block: exit(1)
 Execution of 'sm-seq-block' complete.
-Timer: 154 ticks
-Thread: 30 idle ticks, 123 kernel ticks, 1 user ticks
+Timer: 150 ticks
+Thread: 30 idle ticks, 116 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 63 reads, 226 writes
+hd0:1: 82 reads, 233 writes
 hd1:0: 109 reads, 0 writes
-Console: 967 characters output
+Console: 814 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

@@ -1,14 +1,14 @@
 FAIL
 Kernel panic in run: PANIC at ../../userprog/exception.c:100 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc0107b79 0xc010ada8 0xc010ae5a 0xc0101e87 0xc0101fbf 0xc010af03 0xc0101e87 0xc0101fbf 0x80480ed 0x804812c 0x804876c
+Call stack: 0xc0107b79 0xc010ada8 0xc010ae55 0xc0101e87 0xc0101fbf 0xc010b2db 0xc0101e87 0xc0101fbf 0x80480ed 0x804812c 0x804876c
 Translation of call stack:
 In kernel.o:
 0xc0107b79: debug_panic (.../../lib/kernel/debug.c:34)
 0xc010ada8: kill (.../userprog/exception.c:105)
-0xc010ae5a: page_fault (.../userprog/exception.c:160)
+0xc010ae55: page_fault (.../userprog/exception.c:163)
 0xc0101e87: intr_handler (..../threads/interrupt.c:361)
 0xc0101fbf: intr_entry (threads/intr-stubs.S:38)
-0xc010af03: syscall_handler (.../../userprog/syscall.c:24)
+0xc010b2db: syscall_handler (...../userprog/syscall.c:164)
 0xc0101e87: intr_handler (..../threads/interrupt.c:361)
 0xc0101fbf: intr_entry (threads/intr-stubs.S:38)
 In tests/userprog/sc-bad-sp:
