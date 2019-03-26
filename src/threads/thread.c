@@ -41,6 +41,11 @@ static struct thread *initial_thread;
 /* Lock used by allocate_tid(). */
 static struct lock tid_lock;
 
+struct list*
+all_thread(){
+  return &thread_list;
+}
+
 /* Compare priority of given two thread */
 bool 
 priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux) {
@@ -228,7 +233,7 @@ thread_create (const char *name, int priority,
   struct switch_entry_frame *ef;
   struct switch_threads_frame *sf;
   tid_t tid;
-
+  int i;
   ASSERT (function != NULL);
 
   /* Allocate thread. */
@@ -240,6 +245,13 @@ thread_create (const char *name, int priority,
   t->recent_cpu = thread_current()->recent_cpu;
   init_thread (t, name, priority);
   tid = t->tid = allocate_tid ();
+  for(i=0;i<128;i++){
+    if(thread_current()->child_pid[i] == 0){
+      thread_current()->child_pid[i] = tid;
+      break;
+    }
+  }
+  ASSERT(i<128);
 
   /* Stack frame for kernel_thread(). */
   kf = alloc_frame (t, sizeof *kf);
@@ -350,9 +362,12 @@ thread_exit (void)
   /* Just set our status to dying and schedule another process.
      We will be destroyed during the call to schedule_tail(). */
   intr_disable ();
-  if(thread_mlfqs && is_thread_system_ready)
-    list_remove(&thread_current()->thread_elem);
+  if(is_thread_system_ready){
+    struct thread *curr = thread_current();
+    list_remove(&curr->thread_elem);
+  }
   thread_current ()->status = THREAD_DYING;
+
   schedule ();
   NOT_REACHED ();
 }
@@ -548,10 +563,10 @@ init_thread (struct thread *t, const char *name, int priority)
   }
   else{
     t->priority = PRI_MAX - ftoi(fdiv((t->recent_cpu),itof(4))) - t->nice*2;
-    list_push_back(&thread_list, &t->thread_elem);
   }
-  
+  list_push_back(&thread_list, &t->thread_elem);
   t->magic = THREAD_MAGIC;
+  t->parent = running_thread();
 }
 
 /* Allocates a SIZE-byte frame at the top of thread T's stack and

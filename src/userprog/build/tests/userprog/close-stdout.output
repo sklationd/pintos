@@ -1,14 +1,14 @@
-Copying tests/userprog/close-stdout into /tmp/3iFivUplnV.dsk...
-Writing command line to /tmp/eE0dqNrvvr.dsk...
-qemu -hda /tmp/eE0dqNrvvr.dsk -hdb /tmp/YH0EcLiosv.dsk -hdc /tmp/3iFivUplnV.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/close-stdout into /tmp/zCxPOyHEFu.dsk...
+Writing command line to /tmp/KNH9TRlvYo.dsk...
+qemu -hda /tmp/KNH9TRlvYo.dsk -hdb /tmp/z2ysdjiSic.dsk -hdc /tmp/zCxPOyHEFu.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put close-stdout run close-stdout
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  208,896,000 loops/s.
+Calibrating timer...  130,867,200 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 105 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 Formatting file system...done.
 Boot complete.
 Putting 'close-stdout' into the file system...
@@ -16,12 +16,12 @@ Executing 'close-stdout':
 (close-stdout) begin
 close-stdout: exit(-1)
 Execution of 'close-stdout' complete.
-Timer: 144 ticks
-Thread: 30 idle ticks, 114 kernel ticks, 0 user ticks
+Timer: 135 ticks
+Thread: 30 idle ticks, 104 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 62 reads, 218 writes
-hd1:0: 105 reads, 0 writes
-Console: 806 characters output
+hd0:1: 59 reads, 202 writes
+hd1:0: 97 reads, 0 writes
+Console: 804 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

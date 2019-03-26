@@ -10,11 +10,12 @@ Acceptable output:
   exec-missing: exit(0)
 Differences in `diff -u' format:
   (exec-missing) begin
-- load: no-such-file: open failed
+  load: no-such-file: open failed
 - (exec-missing) exec("no-such-file"): -1
 - no-such-file: exit(-1)
-- (exec-missing) end
-- exec-missing: exit(0)
++ (exec-missing) exec("no-such-file"): 4
+  (exec-missing) end
+  exec-missing: exit(0)
 Acceptable output:
   (exec-missing) begin
   load: no-such-file: open failed
@@ -23,10 +24,11 @@ Acceptable output:
   exec-missing: exit(0)
 Differences in `diff -u' format:
   (exec-missing) begin
-- load: no-such-file: open failed
+  load: no-such-file: open failed
 - (exec-missing) exec("no-such-file"): -1
-- (exec-missing) end
-- exec-missing: exit(0)
++ (exec-missing) exec("no-such-file"): 4
+  (exec-missing) end
+  exec-missing: exit(0)
 Acceptable output:
   (exec-missing) begin
   load: no-such-file: open failed
@@ -36,11 +38,12 @@ Acceptable output:
   exec-missing: exit(0)
 Differences in `diff -u' format:
   (exec-missing) begin
-- load: no-such-file: open failed
+  load: no-such-file: open failed
 - no-such-file: exit(-1)
 - (exec-missing) exec("no-such-file"): -1
-- (exec-missing) end
-- exec-missing: exit(0)
++ (exec-missing) exec("no-such-file"): 4
+  (exec-missing) end
+  exec-missing: exit(0)
 Acceptable output:
   (exec-missing) begin
   (exec-missing) exec("no-such-file"): -1
@@ -49,5 +52,7 @@ Acceptable output:
 Differences in `diff -u' format:
   (exec-missing) begin
 - (exec-missing) exec("no-such-file"): -1
-- (exec-missing) end
-- exec-missing: exit(0)
++ load: no-such-file: open failed
++ (exec-missing) exec("no-such-file"): 4
+  (exec-missing) end
+  exec-missing: exit(0)

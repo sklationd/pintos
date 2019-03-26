@@ -1,14 +1,14 @@
-Copying tests/userprog/create-null into /tmp/08aO9mdOw3.dsk...
-Writing command line to /tmp/mkTzorztLA.dsk...
-qemu -hda /tmp/mkTzorztLA.dsk -hdb /tmp/a0aj_dByGf.dsk -hdc /tmp/08aO9mdOw3.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-null into /tmp/YJUznmkB9l.dsk...
+Writing command line to /tmp/kCFn1tCKyJ.dsk...
+qemu -hda /tmp/kCFn1tCKyJ.dsk -hdb /tmp/_AO27G7EA_.dsk -hdc /tmp/YJUznmkB9l.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-null run create-null
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  155,443,200 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 105 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 Formatting file system...done.
 Boot complete.
 Putting 'create-null' into the file system...
@@ -16,12 +16,12 @@ Executing 'create-null':
 (create-null) begin
 create-null: exit(-1)
 Execution of 'create-null' complete.
-Timer: 142 ticks
-Thread: 30 idle ticks, 111 kernel ticks, 1 user ticks
+Timer: 137 ticks
+Thread: 30 idle ticks, 106 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 63 reads, 218 writes
-hd1:0: 105 reads, 0 writes
-Console: 799 characters output
+hd0:1: 60 reads, 202 writes
+hd1:0: 97 reads, 0 writes
+Console: 797 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

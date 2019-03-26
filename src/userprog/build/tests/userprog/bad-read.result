@@ -1,2 +1,11 @@
 FAIL
-run: should have exited with -1: FAILED
+Test output failed to match any acceptable form.
+
+Acceptable output:
+  (bad-read) begin
+  bad-read: exit(-1)
+Differences in `diff -u' format:
+  (bad-read) begin
+- bad-read: exit(-1)
+
+(User fault messages are excluded for matching purposes.)

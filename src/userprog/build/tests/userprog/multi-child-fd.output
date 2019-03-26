@@ -1,16 +1,16 @@
-Copying tests/userprog/multi-child-fd into /tmp/GP_kLliAdw.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/GP_kLliAdw.dsk...
-Copying tests/userprog/child-close into /tmp/GP_kLliAdw.dsk...
-Writing command line to /tmp/fmM_1N9TxA.dsk...
-qemu -hda /tmp/fmM_1N9TxA.dsk -hdb /tmp/wpH7FLYsiv.dsk -hdc /tmp/GP_kLliAdw.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/multi-child-fd into /tmp/YFpwBZWCgn.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/YFpwBZWCgn.dsk...
+Copying tests/userprog/child-close into /tmp/YFpwBZWCgn.dsk...
+Writing command line to /tmp/HtxMFoAU3l.dsk...
+qemu -hda /tmp/HtxMFoAU3l.dsk -hdb /tmp/6ELuuBisD0.dsk -hdc /tmp/YFpwBZWCgn.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put multi-child-fd put sample.txt put child-close run multi-child-fd
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 225 sector (112 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:0: detected 207 sector (103 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 Formatting file system...done.
 Boot complete.
 Putting 'multi-child-fd' into the file system...
@@ -19,13 +19,19 @@ Putting 'child-close' into the file system...
 Executing 'multi-child-fd':
 (multi-child-fd) begin
 (multi-child-fd) open "sample.txt"
+(child-close) begin
+child-close: exit(-1)
+(multi-child-fd) wait(exec()) = -1
+(multi-child-fd) verified contents of "sample.txt"
+(multi-child-fd) end
+multi-child-fd: exit(0)
 Execution of 'multi-child-fd' complete.
-Timer: 242 ticks
-Thread: 30 idle ticks, 212 kernel ticks, 0 user ticks
+Timer: 224 ticks
+Thread: 30 idle ticks, 192 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 132 reads, 462 writes
-hd1:0: 225 reads, 0 writes
-Console: 954 characters output
+hd0:1: 170 reads, 426 writes
+hd1:0: 207 reads, 0 writes
+Console: 1127 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

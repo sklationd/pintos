@@ -1,27 +1,35 @@
-Copying tests/filesys/base/lg-full into /tmp/kn1ldoLB6E.dsk...
-Writing command line to /tmp/c0jsbVHvQy.dsk...
-qemu -hda /tmp/c0jsbVHvQy.dsk -hdb /tmp/3Qv1_5JQv5.dsk -hdc /tmp/kn1ldoLB6E.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/lg-full into /tmp/49nPIh_DaT.dsk...
+Writing command line to /tmp/khaCZVnSM2.dsk...
+qemu -hda /tmp/khaCZVnSM2.dsk -hdb /tmp/Uje58HQGG_.dsk -hdc /tmp/49nPIh_DaT.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put lg-full run lg-full
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  163,635,200 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 109 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:0: detected 101 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 Formatting file system...done.
 Boot complete.
 Putting 'lg-full' into the file system...
 Executing 'lg-full':
 (lg-full) begin
 (lg-full) create "quux"
+(lg-full) open "quux"
+(lg-full) writing "quux"
+(lg-full) close "quux"
+(lg-full) open "quux" for verification
+(lg-full) verified contents of "quux"
+(lg-full) close "quux"
+(lg-full) end
+lg-full: exit(0)
 Execution of 'lg-full' complete.
-Timer: 147 ticks
-Thread: 30 idle ticks, 113 kernel ticks, 4 user ticks
+Timer: 384 ticks
+Thread: 30 idle ticks, 232 kernel ticks, 122 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 82 reads, 231 writes
-hd1:0: 109 reads, 0 writes
-Console: 777 characters output
+hd0:1: 256 reads, 510 writes
+hd1:0: 101 reads, 0 writes
+Console: 981 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

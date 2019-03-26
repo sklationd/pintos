@@ -9,16 +9,20 @@
 #include "process.h"
 #include "filesys/filesys.h"
 #include "filesys/file.h"
-
+#include "filesys/directory.h"
 static void syscall_handler (struct intr_frame *);
 void exit (int status);
 int exec(const char *cmd_line);
+int wait(int pid);
 bool create(const char *file, unsigned initial_size);
 bool remove(const char *file);
 int open(const char *file);
+
 int filesize(int fd);
+
 int read(int fd, void *buffer, unsigned size);
 int write(int fd, const void *buffer, unsigned size);
+
 void seek(int fd, unsigned position);
 unsigned tell(int fd);
 void close(int fd);
@@ -26,16 +30,22 @@ void close(int fd);
 
 void exit(int status){
 	printf("%s: exit(%d)\n",thread_name(),status);
+    thread_current()->exit_status = status;
     thread_exit();
 }
 
-int exec(const char *cmd_line){
-	return process_execute(cmd_line);
+int exec(const char *cmd_line){ // return pid
+    int i = process_execute(cmd_line);
+    return i;
+}
+
+int wait(int pid){
+    return process_wait(pid);
 }
 
 bool create(const char *file, unsigned initial_size){
 	struct dir *dir = dir_open_root ();
-  	struct inode *inode = NULL;
+  	struct inode *inode;
 
 	/* if file is null, exit */
 	if(file == NULL)
@@ -75,7 +85,7 @@ int open(const char *file){
 	for(i=0;i<128;i++){
 		if(thread_current()->fd[i] == NULL){
 			thread_current()->fd[i] = filesys_open(file);
-			thread_current()->cl[i] = 0;
+			//thread_current()->cl[i] = 0;
 			return i+3;
 		}
 	}
@@ -139,15 +149,18 @@ unsigned tell(int fd){
 }
 
 void close(int fd){
+
 	if(fd > 130 || fd < 3)
 		exit(-1);
+
 	if(thread_current()->fd[fd-3] == NULL)
 		exit(-1);
-	if(thread_current()->cl[fd-3] == 1)
-		exit(-1);
+	//if(thread_current()->cl[fd-3] == 1)
+	//	exit(-1);
+
 	file_close(thread_current()->fd[fd-3]);
 	thread_current()->fd[fd-3] = NULL;
-	thread_current()->cl[fd-3] = 1;
+	//thread_current()->cl[fd-3] = 1;
 }
 
 
@@ -161,6 +174,8 @@ syscall_init (void)
 static void
 syscall_handler (struct intr_frame *f) 
 {
+  if(is_kernel_vaddr(f->esp))
+    exit(-1);
   switch(syscall_num(f)){
   	case SYS_HALT  		:
 		power_off();
@@ -171,12 +186,15 @@ syscall_handler (struct intr_frame *f)
     	exit(first_arg(f)); // status
     	break;
     case SYS_EXEC  		:
-    	if(is_kernel_vaddr(f->esp + 4) ||
-    	   is_kernel_vaddr((void *)first_arg(f)))
-    		exit(-1);
+        if(is_kernel_vaddr(f->esp + 4) ||
+           is_kernel_vaddr((void *)first_arg(f)))
+            exit(-1);
     	f->eax = exec((const char *)first_arg(f));
     	break;
     case SYS_WAIT  		:
+        if(is_kernel_vaddr(f->esp + 4))
+            exit(-1);
+        f->eax = wait((int)first_arg(f));
     	break;
     case SYS_CREATE		:
     	if(is_kernel_vaddr(f->esp + 4) || 

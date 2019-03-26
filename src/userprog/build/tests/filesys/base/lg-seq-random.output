@@ -1,27 +1,35 @@
-Copying tests/filesys/base/lg-seq-random into /tmp/3HnIMprBxL.dsk...
-Writing command line to /tmp/mh2xC7uxqG.dsk...
-qemu -hda /tmp/mh2xC7uxqG.dsk -hdb /tmp/aGlrGBKrBj.dsk -hdc /tmp/3HnIMprBxL.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/lg-seq-random into /tmp/DCgjlOJbzh.dsk...
+Writing command line to /tmp/bfZy7vQWxT.dsk...
+qemu -hda /tmp/bfZy7vQWxT.dsk -hdb /tmp/L73kdkhFu6.dsk -hdc /tmp/DCgjlOJbzh.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put lg-seq-random run lg-seq-random
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  133,324,800 loops/s.
+Calibrating timer...  147,456,000 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 109 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:0: detected 101 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 Formatting file system...done.
 Boot complete.
 Putting 'lg-seq-random' into the file system...
 Executing 'lg-seq-random':
 (lg-seq-random) begin
 (lg-seq-random) create "nibble"
+(lg-seq-random) open "nibble"
+(lg-seq-random) writing "nibble"
+(lg-seq-random) close "nibble"
+(lg-seq-random) open "nibble" for verification
+(lg-seq-random) verified contents of "nibble"
+(lg-seq-random) close "nibble"
+(lg-seq-random) end
+lg-seq-random: exit(0)
 Execution of 'lg-seq-random' complete.
-Timer: 158 ticks
-Thread: 30 idle ticks, 124 kernel ticks, 4 user ticks
+Timer: 500 ticks
+Thread: 30 idle ticks, 294 kernel ticks, 176 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 82 reads, 233 writes
-hd1:0: 109 reads, 0 writes
-Console: 821 characters output
+hd0:1: 519 reads, 662 writes
+hd1:0: 101 reads, 0 writes
+Console: 1085 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

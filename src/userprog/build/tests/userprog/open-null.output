@@ -1,14 +1,14 @@
-Copying tests/userprog/open-null into /tmp/zYpIOF9O7F.dsk...
-Writing command line to /tmp/APVPR8kpFb.dsk...
-qemu -hda /tmp/APVPR8kpFb.dsk -hdb /tmp/0LAD0WUj1p.dsk -hdc /tmp/zYpIOF9O7F.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/open-null into /tmp/Vm40iHCo6b.dsk...
+Writing command line to /tmp/TyPPpZrk4I.dsk...
+qemu -hda /tmp/TyPPpZrk4I.dsk -hdb /tmp/HdwlkExop4.dsk -hdc /tmp/Vm40iHCo6b.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put open-null run open-null
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  128,819,200 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 105 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 Formatting file system...done.
 Boot complete.
 Putting 'open-null' into the file system...
@@ -16,12 +16,12 @@ Executing 'open-null':
 (open-null) begin
 open-null: exit(-1)
 Execution of 'open-null' complete.
-Timer: 147 ticks
-Thread: 30 idle ticks, 116 kernel ticks, 1 user ticks
+Timer: 135 ticks
+Thread: 30 idle ticks, 106 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 62 reads, 218 writes
-hd1:0: 105 reads, 0 writes
-Console: 785 characters output
+hd0:1: 59 reads, 202 writes
+hd1:0: 97 reads, 0 writes
+Console: 783 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

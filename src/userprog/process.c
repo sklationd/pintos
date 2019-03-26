@@ -46,7 +46,7 @@ process_execute (const char *file_name)
   char *fn_copy;
   tid_t tid;
   char** argv =(char **)malloc(sizeof(char*) * 50);
-
+  int i;
   /* Make a copy of FILE_NAME.
      Otherwise there's a race between the caller and load(). */
   fn_copy = palloc_get_page (0);
@@ -105,8 +105,11 @@ stack_build(void **esp,char **argv,int argc){
   /* push ret */
   *esp -= sizeof(void *);
   **(uint32_t **)esp = 0;
-  //printf("esp: %x\n",*esp);
-  //hex_dump(*esp,*esp,100,1);
+
+  /* for debugging
+  printf("esp: %x\n",*esp);
+  hex_dump(*esp,*esp,100,1);
+  */
 }
 
 /* A thread function that loads a user process and makes it start
@@ -135,7 +138,6 @@ start_process (void *f_name)
   free(argv);
   if (!success) 
     thread_exit ();
-
   /* Start the user process by simulating a return from an
      interrupt, implemented by intr_exit (in
      threads/intr-stubs.S).  Because intr_exit takes all of its
@@ -158,9 +160,29 @@ start_process (void *f_name)
    This function will be implemented in problem 2-2.  For now, it
    does nothing. */
 int
-process_wait (tid_t child_tid UNUSED) 
+process_wait (tid_t child_tid) 
 {
-  return -1;
+  struct thread *curr = thread_current();
+  int i;
+  struct list_elem *e;
+  for(i=0;i<128;i++){
+    if(curr->child_pid[i] == child_tid){
+      while(1){
+        int flag = 0;
+        for (e = list_begin (all_thread()); e != list_end (all_thread());e = list_next (e))
+          if(list_entry(e, struct thread, thread_elem)->tid == child_tid){
+            flag = 1;
+            break;
+          }
+        if(!flag){
+          curr->child_pid[i] = 0;
+          return curr->child_exit_status[i];
+        }
+      }
+    }
+  }
+  if(i==128)
+    return -1;
 }
 
 /* Free the current process's resources. */
@@ -169,7 +191,11 @@ process_exit (void)
 {
   struct thread *curr = thread_current ();
   uint32_t *pd;
-
+  int i;
+  for(i=0;i<128;i++){
+    if(curr->parent->child_pid[i] == curr->tid)
+      curr->parent->child_exit_status[i] = curr->exit_status;
+  }
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
   pd = curr->pagedir;
@@ -431,7 +457,7 @@ validate_segment (const struct Elf32_Phdr *phdr, struct file *file)
      it then user code that passed a null pointer to system calls
      could quite likely panic the kernel by way of null pointer
      assertions in memcpy(), etc. */
-  if (phdr->p_offset < PGSIZE) /////MODIFIED!!!!!!!!!!!!!!! ORIGIN: phdr->p_vaddr
+  if (phdr->p_vaddr < PGSIZE) /////MODIFIED!!!!!!!!!!!!!!! ORIGIN: phdr->p_vaddr
     return false;
 
   /* It's okay. */

@@ -1,27 +1,2 @@
 FAIL
-Test output failed to match any acceptable form.
-
-Acceptable output:
-  (exec-multiple) begin
-  (child-simple) run
-  child-simple: exit(81)
-  (child-simple) run
-  child-simple: exit(81)
-  (child-simple) run
-  child-simple: exit(81)
-  (child-simple) run
-  child-simple: exit(81)
-  (exec-multiple) end
-  exec-multiple: exit(0)
-Differences in `diff -u' format:
-  (exec-multiple) begin
-- (child-simple) run
-- child-simple: exit(81)
-- (child-simple) run
-- child-simple: exit(81)
-- (child-simple) run
-- child-simple: exit(81)
-- (child-simple) run
-- child-simple: exit(81)
-- (exec-multiple) end
-- exec-multiple: exit(0)
+run: TIMEOUT after 61 seconds of wall-clock time - load average: 0.31, 0.35, 0.32

@@ -1,7 +1,7 @@
-Copying tests/userprog/write-bad-ptr into /tmp/KodLydocKv.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/KodLydocKv.dsk...
-Writing command line to /tmp/5Jd1SzH3g0.dsk...
-qemu -hda /tmp/5Jd1SzH3g0.dsk -hdb /tmp/G4XvV4ta0O.dsk -hdc /tmp/KodLydocKv.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/write-bad-ptr into /tmp/pHS5rvHnFM.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/pHS5rvHnFM.dsk...
+Writing command line to /tmp/WMrC_JbvL0.dsk...
+qemu -hda /tmp/WMrC_JbvL0.dsk -hdb /tmp/qiICnQyOVp.dsk -hdc /tmp/pHS5rvHnFM.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put write-bad-ptr put sample.txt run write-bad-ptr
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -9,7 +9,7 @@ Pintos booting with 4,096 kB RAM...
 Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:0: detected 99 sector (49 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 Formatting file system...done.
 Boot complete.
 Putting 'write-bad-ptr' into the file system...
@@ -17,23 +17,14 @@ Putting 'sample.txt' into the file system...
 Executing 'write-bad-ptr':
 (write-bad-ptr) begin
 (write-bad-ptr) open "sample.txt"
-Page fault at 0x10123420: not present error reading page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc0107687
- cr2=10123420 error=00000000
- eax=c011820c ebx=0000007b ecx=00000000 edx=00000000
- esi=10123420 edi=00000200 esp=c01115d8 ebp=c011cea4
- cs=0008 ds=0010 es=0010 ss=703c
-Kernel PANIC at ../../userprog/exception.c:100 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc0107b79 0xc010ada8 0xc010ae55 0xc0101e87 0xc0101fbf 0xc0107687 0xc010c8a2 0xc010bf6f 0xc010b0c0 0xc010b4ba 0xc0101e87 0xc0101fbf 0x804a1f4 0x8048127 0x8048164 0x80487ac.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 149 ticks
-Thread: 30 idle ticks, 117 kernel ticks, 2 user ticks
+write-bad-ptr: exit(-1)
+Execution of 'write-bad-ptr' complete.
+Timer: 138 ticks
+Thread: 30 idle ticks, 107 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 96 reads, 224 writes
-hd1:0: 107 reads, 0 writes
-Console: 1589 characters output
+hd0:1: 93 reads, 208 writes
+hd1:0: 99 reads, 0 writes
+Console: 905 characters output
 Keyboard: 0 keys pressed
 Exception: 1 page faults
 Powering off...

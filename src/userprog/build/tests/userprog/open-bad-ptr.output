@@ -1,6 +1,6 @@
-Copying tests/userprog/open-bad-ptr into /tmp/cews5r4Chx.dsk...
-Writing command line to /tmp/4u1VDI6Eoe.dsk...
-qemu -hda /tmp/4u1VDI6Eoe.dsk -hdb /tmp/eHSsZTlft9.dsk -hdc /tmp/cews5r4Chx.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/open-bad-ptr into /tmp/AF8pf64ZMX.dsk...
+Writing command line to /tmp/y4uF8fEEL0.dsk...
+qemu -hda /tmp/y4uF8fEEL0.dsk -hdb /tmp/pQ0BGX2aov.dsk -hdc /tmp/AF8pf64ZMX.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put open-bad-ptr run open-bad-ptr
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -8,29 +8,20 @@ Pintos booting with 4,096 kB RAM...
 Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 105 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 Formatting file system...done.
 Boot complete.
 Putting 'open-bad-ptr' into the file system...
 Executing 'open-bad-ptr':
 (open-bad-ptr) begin
-Page fault at 0x20101234: not present error reading page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc010737e
- cr2=20101234 error=00000000
- eax=c011ce9c ebx=00000000 ecx=20101234 edx=20101234
- esi=c011702c edi=c011ce98 esp=00000003 ebp=c011ce54
- cs=0008 ds=0010 es=0010 ss=820c
-Kernel PANIC at ../../userprog/exception.c:100 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc0107b79 0xc010ada8 0xc010ae55 0xc0101e87 0xc0101fbf 0xc010737e 0xc010c18b 0xc010c37d 0xc010b1eb 0xc010b3e9 0xc0101e87 0xc0101fbf 0x804a19b 0x80480f2 0x8048140 0x804878c.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 142 ticks
-Thread: 30 idle ticks, 110 kernel ticks, 2 user ticks
+open-bad-ptr: exit(-1)
+Execution of 'open-bad-ptr' complete.
+Timer: 138 ticks
+Thread: 30 idle ticks, 107 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 64 reads, 218 writes
-hd1:0: 105 reads, 0 writes
-Console: 1490 characters output
+hd0:1: 61 reads, 202 writes
+hd1:0: 97 reads, 0 writes
+Console: 804 characters output
 Keyboard: 0 keys pressed
 Exception: 1 page faults
 Powering off...

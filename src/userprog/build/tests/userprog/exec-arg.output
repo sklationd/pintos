@@ -1,7 +1,7 @@
-Copying tests/userprog/exec-arg into /tmp/pVlBPdNXrW.dsk...
-Copying tests/userprog/child-args into /tmp/pVlBPdNXrW.dsk...
-Writing command line to /tmp/s5urOW0q6c.dsk...
-qemu -hda /tmp/s5urOW0q6c.dsk -hdb /tmp/_vAWujccXY.dsk -hdc /tmp/pVlBPdNXrW.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-arg into /tmp/pZuzuelmPv.dsk...
+Copying tests/userprog/child-args into /tmp/pZuzuelmPv.dsk...
+Writing command line to /tmp/oZux674V4w.dsk...
+qemu -hda /tmp/oZux674V4w.dsk -hdb /tmp/JKnQ3kpGlw.dsk -hdc /tmp/pZuzuelmPv.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-arg put child-args run exec-arg
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -9,30 +9,21 @@ Pintos booting with 4,096 kB RAM...
 Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 210 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:0: detected 193 sector (96 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 Formatting file system...done.
 Boot complete.
 Putting 'exec-arg' into the file system...
 Putting 'child-args' into the file system...
 Executing 'exec-arg':
 (exec-arg) begin
-Page fault at 0x804a700: rights violation error writing page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc01072ba
- cr2=0804a700 error=00000003
- eax=c010f086 ebx=0804a700 ecx=00000020 edx=00000020
- esi=0804a6f6 edi=c010f086 esp=c010f086 ebp=c011ceb4
- cs=0008 ds=0010 es=0010 ss=0020
-Kernel PANIC at ../../userprog/exception.c:100 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc0107b79 0xc010ada8 0xc010ae55 0xc0101e87 0xc0101fbf 0xc01072ba 0xc0109c8a 0xc0109d1c 0xc010aea5 0xc010b341 0xc0101e87 0xc0101fbf 0x804a132 0x80480f2 0x804812c 0x804876c.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 234 ticks
-Thread: 30 idle ticks, 202 kernel ticks, 2 user ticks
+exec-arg: exit(-1)
+Execution of 'exec-arg' complete.
+Timer: 216 ticks
+Thread: 30 idle ticks, 186 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 89 reads, 430 writes
-hd1:0: 210 reads, 0 writes
-Console: 1535 characters output
+hd0:1: 86 reads, 396 writes
+hd1:0: 193 reads, 0 writes
+Console: 838 characters output
 Keyboard: 0 keys pressed
 Exception: 1 page faults
 Powering off...

@@ -113,13 +113,19 @@ struct thread
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
     struct file* fd[128];
-    int cl[128];
+    int child_pid[128];                 //same index
+    int child_exit_status[128];         //same index
+    int exit_status;
+    struct thread *parent;
+
+
 #endif
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */
 
   };
 
+struct list* all_thread();
 bool priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
 bool sema_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
 bool cond_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
