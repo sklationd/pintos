@@ -1,12 +1,12 @@
-Copying tests/userprog/exec-arg into /tmp/pZuzuelmPv.dsk...
-Copying tests/userprog/child-args into /tmp/pZuzuelmPv.dsk...
-Writing command line to /tmp/oZux674V4w.dsk...
-qemu -hda /tmp/oZux674V4w.dsk -hdb /tmp/JKnQ3kpGlw.dsk -hdc /tmp/pZuzuelmPv.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-arg into /tmp/QRkKxQJwLj.dsk...
+Copying tests/userprog/child-args into /tmp/QRkKxQJwLj.dsk...
+Writing command line to /tmp/rJMTSQEs6E.dsk...
+qemu -hda /tmp/rJMTSQEs6E.dsk -hdb /tmp/UdpdL3yDr3.dsk -hdc /tmp/QRkKxQJwLj.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-arg put child-args run exec-arg
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  208,691,200 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 193 sector (96 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -16,14 +16,22 @@ Putting 'exec-arg' into the file system...
 Putting 'child-args' into the file system...
 Executing 'exec-arg':
 (exec-arg) begin
-exec-arg: exit(-1)
+(args) begin
+(args) argc = 2
+(args) argv[0] = 'child-args'
+(args) argv[1] = 'childarg'
+(args) argv[2] = null
+(args) end
+child-args: exit(0)
+(exec-arg) end
+exec-arg: exit(0)
 Execution of 'exec-arg' complete.
-Timer: 216 ticks
-Thread: 30 idle ticks, 186 kernel ticks, 0 user ticks
+Timer: 214 ticks
+Thread: 30 idle ticks, 183 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 86 reads, 396 writes
+hd0:1: 116 reads, 396 writes
 hd1:0: 193 reads, 0 writes
-Console: 838 characters output
+Console: 993 characters output
 Keyboard: 0 keys pressed
-Exception: 1 page faults
+Exception: 0 page faults
 Powering off...

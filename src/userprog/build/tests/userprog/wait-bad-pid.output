@@ -1,11 +1,11 @@
-Copying tests/userprog/wait-bad-pid into /tmp/Gohe6EHhpl.dsk...
-Writing command line to /tmp/u8dh8H6fjX.dsk...
-qemu -hda /tmp/u8dh8H6fjX.dsk -hdb /tmp/yc75fFWIXu.dsk -hdc /tmp/Gohe6EHhpl.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/wait-bad-pid into /tmp/uMZR4Eep4u.dsk...
+Writing command line to /tmp/qyrCbHP9Mh.dsk...
+qemu -hda /tmp/qyrCbHP9Mh.dsk -hdb /tmp/l473YMa7Ym.dsk -hdc /tmp/uMZR4Eep4u.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put wait-bad-pid run wait-bad-pid
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  104,652,800 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -17,8 +17,8 @@ Executing 'wait-bad-pid':
 (wait-bad-pid) end
 wait-bad-pid: exit(0)
 Execution of 'wait-bad-pid' complete.
-Timer: 135 ticks
-Thread: 30 idle ticks, 105 kernel ticks, 0 user ticks
+Timer: 131 ticks
+Thread: 30 idle ticks, 101 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 59 reads, 202 writes
 hd1:0: 97 reads, 0 writes

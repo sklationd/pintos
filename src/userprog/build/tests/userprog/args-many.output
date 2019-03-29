@@ -1,6 +1,6 @@
-Copying tests/userprog/args-many into /tmp/R8NPklk_zw.dsk...
-Writing command line to /tmp/eOsbhLwgHF.dsk...
-qemu -hda /tmp/eOsbhLwgHF.dsk -hdb /tmp/iPxkVMdW1z.dsk -hdc /tmp/R8NPklk_zw.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/args-many into /tmp/AMOEMnATJ7.dsk...
+Writing command line to /tmp/2d0GnzydOO.dsk...
+qemu -hda /tmp/2d0GnzydOO.dsk -hdb /tmp/bFAUwGFu26.dsk -hdc /tmp/AMOEMnATJ7.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put args-many run 'args-many a b c d e f g h i j k l m n o p q r s t u v'
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -41,13 +41,13 @@ Executing 'args-many a b c d e f g h i j k l m n o p q r s t u v':
 (args) argv[23] = null
 (args) end
 args-many: exit(0)
-Execution of 'args-many' complete.
-Timer: 133 ticks
-Thread: 30 idle ticks, 100 kernel ticks, 3 user ticks
+Execution of 'args-many a b c d e f g h i j k l m n o p q r s t u v' complete.
+Timer: 137 ticks
+Thread: 30 idle ticks, 104 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 59 reads, 200 writes
 hd1:0: 96 reads, 0 writes
-Console: 1422 characters output
+Console: 1466 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

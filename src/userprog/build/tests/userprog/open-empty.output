@@ -1,6 +1,6 @@
-Copying tests/userprog/open-empty into /tmp/T718V0REEV.dsk...
-Writing command line to /tmp/ncyheeKZQa.dsk...
-qemu -hda /tmp/ncyheeKZQa.dsk -hdb /tmp/6C65B7KVuP.dsk -hdc /tmp/T718V0REEV.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/open-empty into /tmp/PaOqgGQM3s.dsk...
+Writing command line to /tmp/FczxEVAiYY.dsk...
+qemu -hda /tmp/FczxEVAiYY.dsk -hdb /tmp/WqiWXG2Po5.dsk -hdc /tmp/PaOqgGQM3s.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put open-empty run open-empty
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -17,8 +17,8 @@ Executing 'open-empty':
 (open-empty) end
 open-empty: exit(0)
 Execution of 'open-empty' complete.
-Timer: 138 ticks
-Thread: 30 idle ticks, 107 kernel ticks, 1 user ticks
+Timer: 137 ticks
+Thread: 30 idle ticks, 106 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 76 reads, 202 writes
 hd1:0: 97 reads, 0 writes

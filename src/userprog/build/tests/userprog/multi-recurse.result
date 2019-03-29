@@ -1,1 +1,2 @@
-PASS
+FAIL
+run: wait(exec("multi-recurse 9")) returned -1: FAILED

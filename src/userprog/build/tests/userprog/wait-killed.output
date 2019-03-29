@@ -1,12 +1,12 @@
-Copying tests/userprog/wait-killed into /tmp/33JBU23KOn.dsk...
-Copying tests/userprog/child-bad into /tmp/33JBU23KOn.dsk...
-Writing command line to /tmp/1gHClL1IWa.dsk...
-qemu -hda /tmp/1gHClL1IWa.dsk -hdb /tmp/NkYqvVA2i9.dsk -hdc /tmp/33JBU23KOn.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/wait-killed into /tmp/5MTEiTpVjS.dsk...
+Copying tests/userprog/child-bad into /tmp/5MTEiTpVjS.dsk...
+Writing command line to /tmp/1pXw3GPxPw.dsk...
+qemu -hda /tmp/1pXw3GPxPw.dsk -hdb /tmp/SAEzMsX1WM.dsk -hdc /tmp/5MTEiTpVjS.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put wait-killed put child-bad run wait-killed
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  122,675,200 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 194 sector (97 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,8 +22,8 @@ child-bad: exit(-1)
 (wait-killed) end
 wait-killed: exit(0)
 Execution of 'wait-killed' complete.
-Timer: 219 ticks
-Thread: 30 idle ticks, 188 kernel ticks, 1 user ticks
+Timer: 223 ticks
+Thread: 30 idle ticks, 192 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 116 reads, 398 writes
 hd1:0: 194 reads, 0 writes

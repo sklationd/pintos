@@ -1,11 +1,11 @@
-Copying tests/userprog/multi-recurse into /tmp/v7Gr7lDXfg.dsk...
-Writing command line to /tmp/IjwO8jac_p.dsk...
-qemu -hda /tmp/IjwO8jac_p.dsk -hdb /tmp/PS4Z7jcNoS.dsk -hdc /tmp/v7Gr7lDXfg.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/multi-recurse into /tmp/6jYbTIEyZb.dsk...
+Writing command line to /tmp/7NJQAQ_ogF.dsk...
+qemu -hda /tmp/7NJQAQ_ogF.dsk -hdb /tmp/APLVP0CaYG.dsk -hdc /tmp/6jYbTIEyZb.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put multi-recurse run 'multi-recurse 15'
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
+Calibrating timer...  209,715,200 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 108 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -62,27 +62,18 @@ multi-recurse: exit(6)
 multi-recurse: exit(7)
 (multi-recurse) end 8
 multi-recurse: exit(8)
-(multi-recurse) end 9
-multi-recurse: exit(9)
-(multi-recurse) end 10
-multi-recurse: exit(10)
-(multi-recurse) end 11
-multi-recurse: exit(11)
-(multi-recurse) end 12
-multi-recurse: exit(12)
-(multi-recurse) end 13
-multi-recurse: exit(13)
-(multi-recurse) end 14
-multi-recurse: exit(14)
-(multi-recurse) end 15
-multi-recurse: exit(15)
-Execution of 'multi-recurse' complete.
-Timer: 627 ticks
-Thread: 30 idle ticks, 172 kernel ticks, 425 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 558 reads, 224 writes
-hd1:0: 108 reads, 0 writes
-Console: 2505 characters output
-Keyboard: 0 keys pressed
-Exception: 0 page faults
-Powering off...
+multi-recurse: exit(-1)
+(multi-recurse) wait(exec("multi-recurse 9")) returned -1: FAILED
+multi-recurse: exit(1)
+(multi-recurse) wait(exec("multi-recurse 10")) returned 1: FAILED
+multi-recurse: exit(1)
+(multi-recurse) wait(exec("multi-recurse 11")) returned 1: FAILED
+multi-recurse: exit(1)
+(multi-recurse) wait(exec("multi-recurse 12")) returned 1: FAILED
+multi-recurse: exit(1)
+(multi-recurse) wait(exec("multi-recurse 13")) returned 1: FAILED
+multi-recurse: exit(1)
+(multi-recurse) wait(exec("multi-recurse 14")) returned 1: FAILED
+multi-recurse: exit(1)
+main: exit(-1)
+Simulation terminated due to test failure.

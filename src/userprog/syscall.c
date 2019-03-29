@@ -11,18 +11,18 @@
 #include "filesys/file.h"
 #include "filesys/directory.h"
 static void syscall_handler (struct intr_frame *);
+
+struct lock filesys_lock;
+
 void exit (int status);
 int exec(const char *cmd_line);
 int wait(int pid);
 bool create(const char *file, unsigned initial_size);
 bool remove(const char *file);
 int open(const char *file);
-
 int filesize(int fd);
-
 int read(int fd, void *buffer, unsigned size);
 int write(int fd, const void *buffer, unsigned size);
-
 void seek(int fd, unsigned position);
 unsigned tell(int fd);
 void close(int fd);
@@ -35,8 +35,7 @@ void exit(int status){
 }
 
 int exec(const char *cmd_line){ // return pid
-    int i = process_execute(cmd_line);
-    return i;
+    return process_execute(cmd_line);  
 }
 
 int wait(int pid){
@@ -44,59 +43,74 @@ int wait(int pid){
 }
 
 bool create(const char *file, unsigned initial_size){
+    lock_acquire(&filesys_lock);
 	struct dir *dir = dir_open_root ();
-  	struct inode *inode;
+    struct inode *inode;
+    bool b;
 
-	/* if file is null, exit */
-	if(file == NULL)
-		exit(-1);
+    /* if file is null, exit */
+    if(file == NULL)
+        exit(-1);
 
-	/* if file already exists, fail */
-  	if (dir != NULL)
-    	if(dir_lookup (dir, file, &inode))
-    		return false;
+    /* if file already exists, fail */
+    if (dir != NULL)
+        if(dir_lookup (dir, file, &inode)){
+            lock_release(&filesys_lock);
+            return false;
+        }
 
 
-	return filesys_create(file,initial_size);
-
-
+    b = filesys_create(file,initial_size);
+    lock_release(&filesys_lock);
+    return b;
 }
 
 bool remove(const char *file){
 	/* if file is null, exit */
 	if(file == NULL)
 		exit(-1);
-	return filesys_remove(file);
+    lock_acquire(&filesys_lock);
+    bool b = filesys_remove(file);
+    lock_release(&filesys_lock);
+    return b;
 }
 
 int open(const char *file){
 	/* if file is null, exit */
 	if(file==NULL)
 		exit(-1);
-
-	/* is file exist? */
-	struct dir *dir = dir_open_root ();
- 	struct inode *inode = NULL;
-  	if (dir != NULL)
-    	if(!dir_lookup (dir, file, &inode))
-    		return -1;
-
-	int i;
-	for(i=0;i<128;i++){
-		if(thread_current()->fd[i] == NULL){
-			thread_current()->fd[i] = filesys_open(file);
-			//thread_current()->cl[i] = 0;
-			return i+3;
-		}
-	}
+    lock_acquire(&filesys_lock);
+    /* is file exist? */
+    struct dir *dir = dir_open_root ();
+    struct inode *inode = NULL;
+    if (dir != NULL)
+        if(!dir_lookup (dir, file, &inode)){
+            lock_release(&filesys_lock);
+            return -1;
+        }
+    int i;
+    for(i=0;i<128;i++){
+        if(thread_current()->fd[i] == NULL){
+            thread_current()->fd[i] = filesys_open(file);
+            //thread_current()->cl[i] = 0;
+            lock_release(&filesys_lock);
+            return i+3;
+        }
+    }
 }
 
 int filesize(int fd){
 	if(fd > 130 || fd < 3)
 		exit(-1);
+
 	if(thread_current()->fd[fd-3]==NULL)
 		return -1;
-	return file_length(thread_current()->fd[fd-3]);
+
+    lock_acquire(&filesys_lock);
+    int len = file_length(thread_current()->fd[fd-3]);
+    lock_release(&filesys_lock);
+
+    return len;
 }
 
 int read(int fd, void *buffer, unsigned size){
@@ -108,7 +122,10 @@ int read(int fd, void *buffer, unsigned size){
 		;
 	else if(fd == 1 || fd ==2)
 		exit(-1);
-	return file_read(thread_current()->fd[fd-3],buffer,size);
+    lock_acquire(&filesys_lock);
+	int len = file_read(thread_current()->fd[fd-3],buffer,size);
+    lock_release(&filesys_lock);
+    return len;
 }
 
 int write(int fd, const void *buffer, unsigned size){
@@ -128,7 +145,10 @@ int write(int fd, const void *buffer, unsigned size){
 		exit(-1);
 
 	else{
-		return file_write(thread_current()->fd[fd-3],buffer,size);
+        lock_acquire(&filesys_lock);
+        int len = file_write(thread_current()->fd[fd-3],buffer,size);
+        lock_release(&filesys_lock);
+        return len;
 	}
 }
 
@@ -137,7 +157,9 @@ void seek(int fd, unsigned position){
 		exit(-1);
 	if(thread_current()->fd[fd-3] == NULL)
 		exit(-1);
-	file_seek(thread_current()->fd[fd-3],position);
+    lock_acquire(&filesys_lock);
+    file_seek(thread_current()->fd[fd-3],position);
+    lock_release(&filesys_lock);
 }
 
 unsigned tell(int fd){
@@ -145,7 +167,10 @@ unsigned tell(int fd){
 		exit(-1);
 	if(thread_current()->fd[fd-3] == NULL)
 		exit(-1);
-	return file_tell(thread_current()->fd[fd-3]);
+    lock_acquire(&filesys_lock);
+    unsigned pos = file_tell(thread_current()->fd[fd-3]);
+    lock_release(&filesys_lock);
+    return pos;
 }
 
 void close(int fd){
@@ -155,18 +180,17 @@ void close(int fd){
 
 	if(thread_current()->fd[fd-3] == NULL)
 		exit(-1);
-	//if(thread_current()->cl[fd-3] == 1)
-	//	exit(-1);
-
-	file_close(thread_current()->fd[fd-3]);
+    lock_acquire(&filesys_lock);
+    file_close(thread_current()->fd[fd-3]);
+    lock_release(&filesys_lock);
 	thread_current()->fd[fd-3] = NULL;
-	//thread_current()->cl[fd-3] = 1;
 }
 
 
 void
 syscall_init (void) 
 {
+  lock_init(&filesys_lock);
   intr_register_int (0x30, 3, INTR_ON, syscall_handler, "syscall");
 }
 

@@ -1,6 +1,6 @@
-Copying tests/userprog/exec-bad-ptr into /tmp/MIJ2NAKH6M.dsk...
-Writing command line to /tmp/DUtcZztOdJ.dsk...
-qemu -hda /tmp/DUtcZztOdJ.dsk -hdb /tmp/Pxrl6r_F1_.dsk -hdc /tmp/MIJ2NAKH6M.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-bad-ptr into /tmp/qTtKz9OmUd.dsk...
+Writing command line to /tmp/b9GQiz2zKa.dsk...
+qemu -hda /tmp/b9GQiz2zKa.dsk -hdb /tmp/DfGDLTqQLo.dsk -hdc /tmp/qTtKz9OmUd.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-bad-ptr run exec-bad-ptr
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -16,8 +16,8 @@ Executing 'exec-bad-ptr':
 (exec-bad-ptr) begin
 exec-bad-ptr: exit(-1)
 Execution of 'exec-bad-ptr' complete.
-Timer: 137 ticks
-Thread: 30 idle ticks, 106 kernel ticks, 1 user ticks
+Timer: 139 ticks
+Thread: 30 idle ticks, 108 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 59 reads, 202 writes
 hd1:0: 97 reads, 0 writes

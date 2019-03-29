@@ -12,6 +12,7 @@ main (int argc, char *argv[])
   if (argc != 4) 
     {
       printf ("usage: recursor <string> <depth> <waitp>\n");
+      printf("rere");
       exit (1);
     }
 

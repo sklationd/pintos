@@ -17,9 +17,15 @@
 #include "threads/palloc.h"
 #include "threads/thread.h"
 #include "threads/vaddr.h"
+#include "threads/synch.h"
 
 static thread_func start_process NO_RETURN;
 static bool load (const char *cmdline, void (**eip) (void), void **esp);
+
+struct lock_and_name {
+  struct lock lock;
+  char *file_name;
+};
 
 /* A function that parse the start_process()'s input */
 int
@@ -44,20 +50,54 @@ tid_t
 process_execute (const char *file_name) 
 {
   char *fn_copy;
+  char *fn_copy_2;
   tid_t tid;
   char** argv =(char **)malloc(sizeof(char*) * 50);
   int i;
+  struct lock_and_name lan;
+  lock_init(&lan.lock);
   /* Make a copy of FILE_NAME.
      Otherwise there's a race between the caller and load(). */
   fn_copy = palloc_get_page (0);
+  fn_copy_2 = palloc_get_page(0);
   if (fn_copy == NULL)
     return TID_ERROR;
+  if (fn_copy_2 == NULL)
+    return TID_ERROR;
   strlcpy (fn_copy, file_name, PGSIZE);
-  parse_instruction(file_name,argv);
+  strlcpy (fn_copy_2, file_name, PGSIZE);
+  lan.file_name = fn_copy;
+
+  parse_instruction(fn_copy_2,argv);
+
+  //if((file = filesys_open(argv[0]))==NULL)
+  //  return TID_ERROR;
+  //file_close(file);
+
   /* Create a new thread to execute FILE_NAME. */
-  tid = thread_create (argv[0], PRI_DEFAULT, start_process, fn_copy);
-  if (tid == TID_ERROR)
-    palloc_free_page (fn_copy); 
+  tid = thread_create (argv[0], PRI_DEFAULT, start_process, &lan);
+  palloc_free_page (fn_copy_2); 
+
+  /* thread create fail */
+  if (tid == TID_ERROR){
+    palloc_free_page (fn_copy);
+    free(argv);
+    return tid; 
+  }
+
+
+  /* wait child thread to finish load */
+  while(thread_current()->load_success == -1)
+    ;
+
+  lock_acquire(&lan.lock);
+
+  /* lock check*/
+  lock_release(&lan.lock);
+  if(!thread_current()->load_success){
+    return TID_ERROR;
+  }
+
   free(argv);
   return tid;
 }
@@ -69,7 +109,6 @@ void
 stack_build(void **esp,char **argv,int argc){
   int align_manage = 0;
   int i;
-
   /* push argv[max] argv[max-1] ... argv[1] */
   for(i=argc-1;i>=0;i--){
     int len = strlen(argv[i]) + 1;
@@ -115,13 +154,18 @@ stack_build(void **esp,char **argv,int argc){
 /* A thread function that loads a user process and makes it start
    running. */
 static void
-start_process (void *f_name)
+start_process (void *lan_)
 {
-  char *file_name = f_name;
+  struct lock_and_name *lan = lan_;
+  char *file_name = lan->file_name;
   struct intr_frame if_;
   bool success;
   char** argv =(char **)malloc(sizeof(char*) * 50); //file names are limited to 14 characters + NULL
   int argc;
+
+  /* acquire lock */
+  lock_acquire(&lan->lock);
+
   /* Initialize interrupt frame and load executable. */
   memset (&if_, 0, sizeof if_);
   if_.gs = if_.fs = if_.es = if_.ds = if_.ss = SEL_UDSEG;
@@ -136,8 +180,12 @@ start_process (void *f_name)
   /* If load failed, quit. */
   palloc_free_page (file_name);
   free(argv);
+  thread_current()->parent->load_success = success;
+  lock_release(&lan->lock);
+
   if (!success) 
     thread_exit ();
+
   /* Start the user process by simulating a return from an
      interrupt, implemented by intr_exit (in
      threads/intr-stubs.S).  Because intr_exit takes all of its
@@ -165,6 +213,9 @@ process_wait (tid_t child_tid)
   struct thread *curr = thread_current();
   int i;
   struct list_elem *e;
+  if(child_tid == TID_ERROR)
+    return -1;
+
   for(i=0;i<128;i++){
     if(curr->child_pid[i] == child_tid){
       while(1){
@@ -181,8 +232,8 @@ process_wait (tid_t child_tid)
       }
     }
   }
-  if(i==128)
-    return -1;
+  //if(i==128)
+  return -1;
 }
 
 /* Free the current process's resources. */
@@ -193,8 +244,10 @@ process_exit (void)
   uint32_t *pd;
   int i;
   for(i=0;i<128;i++){
-    if(curr->parent->child_pid[i] == curr->tid)
+    if(curr->parent->child_pid[i] == curr->tid){
       curr->parent->child_exit_status[i] = curr->exit_status;
+      break;
+    }
   }
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
@@ -326,6 +379,8 @@ load (const char *file_name, void (**eip) (void), void **esp)
       printf ("load: %s: open failed\n", file_name);
       goto done; 
     }
+  //file_deny_write(file);
+
 
   /* Read and verify executable header. */
   if (file_read (file, &ehdr, sizeof ehdr) != sizeof ehdr

@@ -565,6 +565,7 @@ init_thread (struct thread *t, const char *name, int priority)
     t->priority = PRI_MAX - ftoi(fdiv((t->recent_cpu),itof(4))) - t->nice*2;
   }
   list_push_back(&thread_list, &t->thread_elem);
+  t->load_success = -1;
   t->magic = THREAD_MAGIC;
   t->parent = running_thread();
 }

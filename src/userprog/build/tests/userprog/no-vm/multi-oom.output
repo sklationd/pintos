@@ -1,11 +1,11 @@
-Copying tests/userprog/no-vm/multi-oom into /tmp/xRxnzmnPXs.dsk...
-Writing command line to /tmp/R4fVg8ogZS.dsk...
-qemu -hda /tmp/R4fVg8ogZS.dsk -hdb /tmp/fcFIOIfX_G.dsk -hdc /tmp/xRxnzmnPXs.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/no-vm/multi-oom into /tmp/JvBELBoaqt.dsk...
+Writing command line to /tmp/ZWpiekZhWz.dsk...
+qemu -hda /tmp/ZWpiekZhWz.dsk -hdb /tmp/b4MJq4R_Cd.dsk -hdc /tmp/JvBELBoaqt.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put multi-oom run multi-oom
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  207,872,000 loops/s.
+Calibrating timer...  209,305,600 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 112 sector (56 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -18,14 +18,90 @@ multi-oom: exit(-1)
 multi-oom: exit(-1)
 multi-oom: exit(-1)
 multi-oom: exit(-1)
-Page fault at 0xc0000000: rights violation error reading page in user context.
-multi-oom: dying due to interrupt 0x0e (#PF Page-Fault Exception).
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0x8048115
- cr2=c0000000 error=00000005
- eax=a73db9f2 ebx=00000015 ecx=00000002 edx=2172beca
- esi=c0000000 edi=0804b04f esp=bfffff50 ebp=bfffff68
- cs=001b ds=0023 es=0023 ss=0023
-(multi-oom) crashed child should return -1.: FAILED
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(-1)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(61)
+multi-oom: exit(-1)
+(multi-oom) wait returned -1.: FAILED
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
+multi-oom: exit(1)
 multi-oom: exit(1)
 multi-oom: exit(1)
 multi-oom: exit(1)
@@ -46,5 +122,6 @@ multi-oom: exit(1)
 multi-oom: exit(-1)
 (multi-oom) wait returned -1.: FAILED
 multi-oom: exit(1)
-multi-oom: exit(1)
+multi-oom: exit(-1)
+main: exit(-1)
 Simulation terminated due to test failure.

@@ -5,6 +5,7 @@
 #include <list.h>
 #include <stdint.h>
 #include "threads/synch.h"
+#include "filesys/file.h"
 /* States in a thread's life cycle. */
 enum thread_status
   {
@@ -105,7 +106,9 @@ struct thread
     int64_t wakeup_time;                /* Timer_sleep wakeup time */
     int priority_stack[10];             /* Priority before receiving donation. default value is -1 */
     struct lock* lock_stack[10];        /* Stack that stores lock that caused donation */
-                         /* size of priority_stack */
+    int child_pid[128];                 //same index
+    struct thread *parent;
+    int load_success;
 
 
 
@@ -113,10 +116,8 @@ struct thread
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
     struct file* fd[128];
-    int child_pid[128];                 //same index
     int child_exit_status[128];         //same index
     int exit_status;
-    struct thread *parent;
 
 
 #endif
