@@ -18,6 +18,7 @@
 #include "threads/thread.h"
 #include "threads/vaddr.h"
 #include "threads/synch.h"
+#include "userprog/syscall.h"
 
 static thread_func start_process NO_RETURN;
 static bool load (const char *cmdline, void (**eip) (void), void **esp);
@@ -69,10 +70,9 @@ process_execute (const char *file_name)
   lan.file_name = fn_copy;
 
   parse_instruction(fn_copy_2,argv);
-
-  //if((file = filesys_open(argv[0]))==NULL)
-  //  return TID_ERROR;
-  //file_close(file);
+  
+  if (!filesys_open (argv[0]))
+    return TID_ERROR;
 
   /* Create a new thread to execute FILE_NAME. */
   tid = thread_create (argv[0], PRI_DEFAULT, start_process, &lan);
@@ -85,13 +85,11 @@ process_execute (const char *file_name)
     return tid; 
   }
 
-
   /* wait child thread to finish load */
   while(thread_current()->load_success == -1)
     ;
 
   lock_acquire(&lan.lock);
-
   /* lock check*/
   lock_release(&lan.lock);
   if(!thread_current()->load_success){
@@ -162,7 +160,6 @@ start_process (void *lan_)
   bool success;
   char** argv =(char **)malloc(sizeof(char*) * 50); //file names are limited to 14 characters + NULL
   int argc;
-
   /* acquire lock */
   lock_acquire(&lan->lock);
 
@@ -171,8 +168,7 @@ start_process (void *lan_)
   if_.gs = if_.fs = if_.es = if_.ds = if_.ss = SEL_UDSEG;
   if_.cs = SEL_UCSEG;
   if_.eflags = FLAG_IF | FLAG_MBS;
-
-  /* parse file_name */
+   /* parse file_name */
   argc = parse_instruction(file_name, argv);
   success = load (argv[0], &if_.eip, &if_.esp);
   if(success)
@@ -180,11 +176,11 @@ start_process (void *lan_)
   /* If load failed, quit. */
   palloc_free_page (file_name);
   free(argv);
+  //list_entry(&thread_current()->child_elem, struct thread, child_elem)->load_success = success;
   thread_current()->parent->load_success = success;
-  lock_release(&lan->lock);
-
   if (!success) 
     thread_exit ();
+  lock_release(&lan->lock);
 
   /* Start the user process by simulating a return from an
      interrupt, implemented by intr_exit (in
@@ -211,18 +207,33 @@ int
 process_wait (tid_t child_tid) 
 {
   struct thread *curr = thread_current();
-  int i;
+  int exit_status;
   struct list_elem *e;
   if(child_tid == TID_ERROR)
     return -1;
-
+  for (e = list_begin (&curr->child_list); e != list_end (&curr->child_list);e = list_next (e)){
+    struct thread *t = list_entry(e, struct thread, child_elem);
+    if(t->tid == child_tid){
+        if(t->exit_status == -1)
+          return exit_status;
+        sema_down(&t->wait_lock);
+        exit_status = t->exit_status;
+        list_remove(&t->child_elem);
+        sema_up(&t->wait_memory);
+        if(exit_status == -1)
+          return exit_status;
+        return exit_status;
+    }
+  }
+  /*
   for(i=0;i<128;i++){
     if(curr->child_pid[i] == child_tid){
       while(1){
         int flag = 0;
         for (e = list_begin (all_thread()); e != list_end (all_thread());e = list_next (e))
           if(list_entry(e, struct thread, thread_elem)->tid == child_tid){
-            flag = 1;
+            if(list_entry(e,struct thread, thread_elem)->exit_status != -1)
+              flag = 1;
             break;
           }
         if(!flag){
@@ -231,8 +242,7 @@ process_wait (tid_t child_tid)
         }
       }
     }
-  }
-  //if(i==128)
+  }*/
   return -1;
 }
 
@@ -242,13 +252,15 @@ process_exit (void)
 {
   struct thread *curr = thread_current ();
   uint32_t *pd;
-  int i;
+  sema_up(&curr->wait_lock); 
+  sema_down(&curr->wait_memory);
+  /*int i;
   for(i=0;i<128;i++){
     if(curr->parent->child_pid[i] == curr->tid){
       curr->parent->child_exit_status[i] = curr->exit_status;
       break;
     }
-  }
+  }*/
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
   pd = curr->pagedir;
@@ -365,7 +377,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
   off_t file_ofs;
   bool success = false;
   int i;
-
+  lock_acquire(&filesys_lock);
   /* Allocate and activate page directory. */
   t->pagedir = pagedir_create ();
   if (t->pagedir == NULL) 
@@ -467,6 +479,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
  done:
   /* We arrive here whether the load is successful or not. */
   file_close (file);
+  lock_release(&filesys_lock);
   return success;
 }
 
@@ -482,11 +495,9 @@ validate_segment (const struct Elf32_Phdr *phdr, struct file *file)
   /* p_offset and p_vaddr must have the same page offset. */
   if ((phdr->p_offset & PGMASK) != (phdr->p_vaddr & PGMASK)) 
     return false; 
-
   /* p_offset must point within FILE. */
   if (phdr->p_offset > (Elf32_Off) file_length (file)) 
     return false;
-
   /* p_memsz must be at least as big as p_filesz. */
   if (phdr->p_memsz < phdr->p_filesz) 
     return false; 
@@ -540,7 +551,6 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
   ASSERT ((read_bytes + zero_bytes) % PGSIZE == 0);
   ASSERT (pg_ofs (upage) == 0);
   ASSERT (ofs % PGSIZE == 0);
-
   file_seek (file, ofs);
   while (read_bytes > 0 || zero_bytes > 0) 
     {
@@ -552,8 +562,9 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
 
       /* Get a page of memory. */
       uint8_t *kpage = palloc_get_page (PAL_USER);
-      if (kpage == NULL)
+      if (kpage == NULL){
         return false;
+      }
 
       /* Load this page. */
       if (file_read (file, kpage, page_read_bytes) != (int) page_read_bytes)

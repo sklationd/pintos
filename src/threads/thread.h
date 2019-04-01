@@ -106,7 +106,12 @@ struct thread
     int64_t wakeup_time;                /* Timer_sleep wakeup time */
     int priority_stack[10];             /* Priority before receiving donation. default value is -1 */
     struct lock* lock_stack[10];        /* Stack that stores lock that caused donation */
-    int child_pid[128];                 //same index
+    
+    //int child_pid[128];                 //same index
+    struct list child_list;
+    struct list_elem child_elem;
+    struct semaphore wait_lock;
+    struct semaphore wait_memory;
     struct thread *parent;
     int load_success;
 

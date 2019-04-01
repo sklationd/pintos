@@ -1,7 +1,7 @@
-Copying tests/userprog/close-normal into /tmp/ECJMJ0Z3rd.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/ECJMJ0Z3rd.dsk...
-Writing command line to /tmp/Wi8_5WX4MM.dsk...
-qemu -hda /tmp/Wi8_5WX4MM.dsk -hdb /tmp/OBB1DlAkLf.dsk -hdc /tmp/ECJMJ0Z3rd.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/close-normal into /tmp/NicF4H9fTo.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/NicF4H9fTo.dsk...
+Writing command line to /tmp/wWV89VeMtZ.dsk...
+qemu -hda /tmp/wWV89VeMtZ.dsk -hdb /tmp/qYK7Dijkq_.dsk -hdc /tmp/NicF4H9fTo.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put close-normal put sample.txt run close-normal
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -21,10 +21,10 @@ Executing 'close-normal':
 (close-normal) end
 close-normal: exit(0)
 Execution of 'close-normal' complete.
-Timer: 140 ticks
-Thread: 30 idle ticks, 109 kernel ticks, 1 user ticks
+Timer: 136 ticks
+Thread: 30 idle ticks, 105 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 92 reads, 208 writes
+hd0:1: 94 reads, 208 writes
 hd1:0: 99 reads, 0 writes
 Console: 949 characters output
 Keyboard: 0 keys pressed

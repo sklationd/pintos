@@ -1,2 +1,2 @@
 FAIL
-run: wait returned -1.: FAILED
+run: TIMEOUT after 440 seconds of wall-clock time - load average: 0.17, 0.32, 0.36

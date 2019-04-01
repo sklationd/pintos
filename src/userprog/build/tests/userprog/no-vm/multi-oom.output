@@ -1,11 +1,11 @@
-Copying tests/userprog/no-vm/multi-oom into /tmp/JvBELBoaqt.dsk...
-Writing command line to /tmp/ZWpiekZhWz.dsk...
-qemu -hda /tmp/ZWpiekZhWz.dsk -hdb /tmp/b4MJq4R_Cd.dsk -hdc /tmp/JvBELBoaqt.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/no-vm/multi-oom into /tmp/XCiYzvDDOs.dsk...
+Writing command line to /tmp/7ftbCr_KOH.dsk...
+qemu -hda /tmp/7ftbCr_KOH.dsk -hdb /tmp/mg4iFhTs3Z.dsk -hdc /tmp/XCiYzvDDOs.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put multi-oom run multi-oom
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  209,305,600 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 112 sector (56 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -59,69 +59,5 @@ multi-oom: exit(-1)
 multi-oom: exit(-1)
 multi-oom: exit(-1)
 multi-oom: exit(-1)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(61)
-multi-oom: exit(-1)
-(multi-oom) wait returned -1.: FAILED
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(1)
-multi-oom: exit(-1)
-(multi-oom) wait returned -1.: FAILED
-multi-oom: exit(1)
-multi-oom: exit(-1)
-main: exit(-1)
-Simulation terminated due to test failure.
+
+TIMEOUT after 440 seconds of wall-clock time - load average: 0.17, 0.32, 0.36

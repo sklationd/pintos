@@ -1,6 +1,6 @@
-Copying tests/filesys/base/sm-seq-random into /tmp/8EL5R2Nsin.dsk...
-Writing command line to /tmp/IJcMiTI6s7.dsk...
-qemu -hda /tmp/IJcMiTI6s7.dsk -hdb /tmp/r7lSTGndwI.dsk -hdc /tmp/8EL5R2Nsin.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/sm-seq-random into /tmp/3pF2cDK0Wy.dsk...
+Writing command line to /tmp/bd8G5hcNX1.dsk...
+qemu -hda /tmp/bd8G5hcNX1.dsk -hdb /tmp/CkO0JmrTmQ.dsk -hdc /tmp/3pF2cDK0Wy.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put sm-seq-random run sm-seq-random
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -24,10 +24,10 @@ Executing 'sm-seq-random':
 (sm-seq-random) end
 sm-seq-random: exit(0)
 Execution of 'sm-seq-random' complete.
-Timer: 172 ticks
-Thread: 30 idle ticks, 124 kernel ticks, 18 user ticks
+Timer: 155 ticks
+Thread: 30 idle ticks, 109 kernel ticks, 16 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 134 reads, 246 writes
+hd0:1: 136 reads, 246 writes
 hd1:0: 101 reads, 0 writes
 Console: 1084 characters output
 Keyboard: 0 keys pressed

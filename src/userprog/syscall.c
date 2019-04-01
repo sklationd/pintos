@@ -12,7 +12,6 @@
 #include "filesys/directory.h"
 static void syscall_handler (struct intr_frame *);
 
-struct lock filesys_lock;
 
 void exit (int status);
 int exec(const char *cmd_line);
@@ -58,7 +57,6 @@ bool create(const char *file, unsigned initial_size){
             lock_release(&filesys_lock);
             return false;
         }
-
 
     b = filesys_create(file,initial_size);
     lock_release(&filesys_lock);
@@ -182,8 +180,8 @@ void close(int fd){
 		exit(-1);
     lock_acquire(&filesys_lock);
     file_close(thread_current()->fd[fd-3]);
+    thread_current()->fd[fd-3] = NULL;
     lock_release(&filesys_lock);
-	thread_current()->fd[fd-3] = NULL;
 }
 
 
