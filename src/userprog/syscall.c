@@ -3,14 +3,24 @@
 #include <stdbool.h>
 #include <syscall-nr.h>
 #include <list.h>
+#include <string.h>
+#include "threads/init.h"
+#include "devices/input.h"
 #include "threads/interrupt.h"
 #include "threads/thread.h"
 #include "threads/vaddr.h"
 #include "process.h"
+#include "filesys/directory.h"
 #include "filesys/filesys.h"
 #include "filesys/file.h"
-#include "filesys/directory.h"
 static void syscall_handler (struct intr_frame *);
+
+struct file 
+  {
+    struct inode *inode;        /* File's inode. */
+    off_t pos;                  /* Current position. */
+    bool deny_write;            /* Has file_deny_write() been called? */
+  };
 
 
 void exit (int status);
@@ -83,18 +93,21 @@ int open(const char *file){
     struct inode *inode = NULL;
     if (dir != NULL)
         if(!dir_lookup (dir, file, &inode)){
+            dir_close(dir);
             lock_release(&filesys_lock);
             return -1;
         }
+    dir_close(dir);
     int i;
     for(i=0;i<128;i++){
         if(thread_current()->fd[i] == NULL){
             thread_current()->fd[i] = filesys_open(file);
-            //thread_current()->cl[i] = 0;
+            //file_deny_write(thread_current()->fd[i]);
             lock_release(&filesys_lock);
             return i+3;
         }
     }
+    return -1;
 }
 
 int filesize(int fd){
@@ -112,42 +125,50 @@ int filesize(int fd){
 }
 
 int read(int fd, void *buffer, unsigned size){
-	if(fd > 130)
-		exit(-1);
-	if(thread_current()->fd[fd-3] == NULL)
-		exit(-1);
-	if(fd == 0)
-		;
-	else if(fd == 1 || fd ==2)
-		exit(-1);
+    if(fd > 130)
+        exit(-1);
+    if(thread_current()->fd[fd-3] == NULL)
+        exit(-1);
+    if(fd == 0){
+        unsigned i;
+        for(i=0;i<size;i++){
+            memset(buffer+i,input_getc(),1);
+        }
+        return size;
+    }
+    else if(fd == 1 || fd ==2)
+        exit(-1);
     lock_acquire(&filesys_lock);
 	int len = file_read(thread_current()->fd[fd-3],buffer,size);
     lock_release(&filesys_lock);
     return len;
 }
-
 int write(int fd, const void *buffer, unsigned size){
-	if(fd > 130)
-		exit(-1);
-	if(buffer == NULL)
-		exit(-1);
+    if(fd > 130)
+        exit(-1);
+    if(buffer == NULL)
+        exit(-1);
+    if(fd == 1){ // console write
+        putbuf(buffer,size);
+        return size;
+    }
+    else if (fd == 0){ //std input
+        return -1;
+    }
+    else if(thread_current()->fd[fd-3] == NULL){
+        exit(-1);
+    }
 
-	if(fd == 1){ // console write
-		putbuf(buffer,size);
-		return size;
-	}
-	else if (fd == 0) //std input
-		return -1;
-
-	else if(thread_current()->fd[fd-3] == NULL)
-		exit(-1);
-
-	else{
-        lock_acquire(&filesys_lock);
-        int len = file_write(thread_current()->fd[fd-3],buffer,size);
-        lock_release(&filesys_lock);
-        return len;
-	}
+    else{
+        if(!thread_current()->fd[fd-3]->deny_write){
+            lock_acquire(&filesys_lock);
+            int len = file_write(thread_current()->fd[fd-3],buffer,size);
+            lock_release(&filesys_lock);
+            return len;
+        }
+        return 0;
+       
+    }
 }
 
 void seek(int fd, unsigned position){
@@ -175,13 +196,12 @@ void close(int fd){
 
 	if(fd > 130 || fd < 3)
 		exit(-1);
-
 	if(thread_current()->fd[fd-3] == NULL)
 		exit(-1);
     lock_acquire(&filesys_lock);
     file_close(thread_current()->fd[fd-3]);
-    thread_current()->fd[fd-3] = NULL;
     lock_release(&filesys_lock);
+    thread_current()->fd[fd-3] = NULL;
 }
 
 

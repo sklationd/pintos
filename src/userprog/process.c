@@ -56,24 +56,29 @@ process_execute (const char *file_name)
   char* argv[50];
   struct lock_and_name lan;
   lock_init(&lan.lock);
+  struct file* file;
   /* Make a copy of FILE_NAME.
      Otherwise there's a race between the caller and load(). */
   fn_copy = palloc_get_page (0);
   fn_copy_2 = palloc_get_page(0);
-  if (fn_copy == NULL)
+  if (fn_copy == NULL || fn_copy_2 == NULL){
+    palloc_free_page(fn_copy_2);
+    palloc_free_page(fn_copy);
     return TID_ERROR;
-  if (fn_copy_2 == NULL)
-    return TID_ERROR;
+  }
   strlcpy (fn_copy, file_name, PGSIZE);
   strlcpy (fn_copy_2, file_name, PGSIZE);
   lan.file_name = fn_copy;
 
   parse_instruction(fn_copy_2,argv);
-  
-  if (!filesys_open (argv[0])){
+  lock_acquire(&filesys_lock);
+  if (!(file = filesys_open (argv[0]))) {
+    palloc_free_page(fn_copy);
+    palloc_free_page (fn_copy_2); 
     return TID_ERROR;
   }
-
+  file_close(file);
+  lock_release(&filesys_lock);
   /* Create a new thread to execute FILE_NAME. */
   tid = thread_create (argv[0], PRI_DEFAULT, start_process, &lan);
   palloc_free_page (fn_copy_2); 
@@ -87,8 +92,8 @@ process_execute (const char *file_name)
   /* wait child thread to finish load */
   sema_down(&thread_current()->wait_load);
   if(!thread_current()->process_started){
-    process_wait(tid); // returns -1
     palloc_free_page (fn_copy);
+    process_wait(tid); // returns -1
     return TID_ERROR;
   }
   
@@ -229,20 +234,24 @@ process_exit (void)
 {
   struct thread *curr = thread_current ();
   uint32_t *pd;
+  file_close(curr->current_executable);
   sema_up(&curr->wait_lock); 
   sema_down(&curr->wait_memory);
 
   if(lock_held_by_current_thread(&filesys_lock))
     lock_release(&filesys_lock);
+
   int i;
   for(i = 0; i < 128; ++i){
     if(curr->fd[i]){
       close(i+3);
     }
   }
+  //file_allow_write(curr->current_executable);
 
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
+
   pd = curr->pagedir;
   if (pd != NULL) 
     {
@@ -371,8 +380,8 @@ load (const char *file_name, void (**eip) (void), void **esp)
       printf ("load: %s: open failed\n", file_name);
       goto done; 
     }
-  //file_deny_write(file);
 
+  t->current_executable = file;
 
   /* Read and verify executable header. */
   if (file_read (file, &ehdr, sizeof ehdr) != sizeof ehdr
@@ -458,7 +467,9 @@ load (const char *file_name, void (**eip) (void), void **esp)
 
  done:
   /* We arrive here whether the load is successful or not. */
-  file_close (file);
+  if(file != NULL)
+    file_deny_write(file);  
+  //file_close (file);
   lock_release(&filesys_lock);
   return success;
 }

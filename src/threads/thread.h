@@ -121,6 +121,7 @@ struct thread
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
     struct file* fd[128];
+    struct file *current_executable;
     int child_exit_status[128];         //same index
     int exit_status;
 

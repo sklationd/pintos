@@ -1,18 +1,1 @@
-FAIL
-Kernel panic in run: PANIC at ../../threads/synch.c:268 in lock_release(): assertion `lock_held_by_current_thread (lock)' failed.
-Call stack: 0xc0107bf9 0xc0103151 0xc010b3f1 0xc010b7c6 0xc0101f07 0xc010203f 0x804a75f 0x8048179 0x8048950
-Translation of call stack:
-In kernel.o:
-0xc0107bf9: debug_panic (.../../lib/kernel/debug.c:34)
-0xc0103151: lock_release (...../../threads/synch.c:269)
-0xc010b3f1: read (...../userprog/syscall.c:127)
-0xc010b7c6: syscall_handler (...../userprog/syscall.c:251)
-0xc0101f07: intr_handler (..../threads/interrupt.c:361)
-0xc010203f: intr_entry (threads/intr-stubs.S:38)
-0x0804a75f: (unknown)
-In tests/filesys/base/syn-read:
-0x08048179: test_main (...ilesys/base/syn-read.c:25)
-0x08048950: main (...ild/../../tests/main.c:11)
-Translations of user virtual addresses above are based on a guess at
-the binary to use.  If this guess is incorrect, then those
-translations will be misleading.
+PASS
