@@ -245,13 +245,6 @@ thread_create (const char *name, int priority,
   t->recent_cpu = thread_current()->recent_cpu;
   init_thread (t, name, priority);
   tid = t->tid = allocate_tid ();
-  /*for(i=0;i<128;i++){
-    if(thread_current()->child_pid[i] == 0){
-      thread_current()->child_pid[i] = tid;
-      break;
-    }
-  }*/
-  ASSERT(i<128);
 
   /* Stack frame for kernel_thread(). */
   kf = alloc_frame (t, sizeof *kf);
@@ -567,9 +560,9 @@ init_thread (struct thread *t, const char *name, int priority)
   list_init(&t->child_list);
   sema_init(&t->wait_lock,0);
   sema_init(&t->wait_memory,0);
+  sema_init(&t->wait_load, 0);
   list_push_back(&running_thread()->child_list,&t->child_elem);
   list_push_back(&thread_list, &t->thread_elem);
-  t->load_success = -1;
   t->magic = THREAD_MAGIC;
   t->parent = running_thread();
 }

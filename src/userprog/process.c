@@ -53,8 +53,7 @@ process_execute (const char *file_name)
   char *fn_copy;
   char *fn_copy_2;
   tid_t tid;
-  char** argv =(char **)malloc(sizeof(char*) * 50);
-  int i;
+  char* argv[50];
   struct lock_and_name lan;
   lock_init(&lan.lock);
   /* Make a copy of FILE_NAME.
@@ -71,8 +70,9 @@ process_execute (const char *file_name)
 
   parse_instruction(fn_copy_2,argv);
   
-  if (!filesys_open (argv[0]))
+  if (!filesys_open (argv[0])){
     return TID_ERROR;
+  }
 
   /* Create a new thread to execute FILE_NAME. */
   tid = thread_create (argv[0], PRI_DEFAULT, start_process, &lan);
@@ -81,22 +81,22 @@ process_execute (const char *file_name)
   /* thread create fail */
   if (tid == TID_ERROR){
     palloc_free_page (fn_copy);
-    free(argv);
     return tid; 
   }
 
   /* wait child thread to finish load */
-  while(thread_current()->load_success == -1)
-    ;
-
-  lock_acquire(&lan.lock);
-  /* lock check*/
-  lock_release(&lan.lock);
-  if(!thread_current()->load_success){
+  sema_down(&thread_current()->wait_load);
+  if(!thread_current()->process_started){
+    process_wait(tid); // returns -1
+    palloc_free_page (fn_copy);
     return TID_ERROR;
   }
+  
+  lock_acquire(&lan.lock);
+  palloc_free_page (fn_copy);
+  /* lock check*/
+  lock_release(&lan.lock);
 
-  free(argv);
   return tid;
 }
 
@@ -158,7 +158,7 @@ start_process (void *lan_)
   char *file_name = lan->file_name;
   struct intr_frame if_;
   bool success;
-  char** argv =(char **)malloc(sizeof(char*) * 50); //file names are limited to 14 characters + NULL
+  char* argv[50]; //file names are limited to 14 characters + NULL
   int argc;
   /* acquire lock */
   lock_acquire(&lan->lock);
@@ -171,16 +171,15 @@ start_process (void *lan_)
    /* parse file_name */
   argc = parse_instruction(file_name, argv);
   success = load (argv[0], &if_.eip, &if_.esp);
+  sema_up(&thread_current()->parent->wait_load);
   if(success)
     stack_build(&if_.esp,argv,argc);
   /* If load failed, quit. */
-  palloc_free_page (file_name);
-  free(argv);
-  //list_entry(&thread_current()->child_elem, struct thread, child_elem)->load_success = success;
-  thread_current()->parent->load_success = success;
-  if (!success) 
-    thread_exit ();
   lock_release(&lan->lock);
+  if (!success) {
+    thread_exit ();
+  }
+  thread_current()->parent->process_started = 1;
 
   /* Start the user process by simulating a return from an
      interrupt, implemented by intr_exit (in
@@ -214,35 +213,13 @@ process_wait (tid_t child_tid)
   for (e = list_begin (&curr->child_list); e != list_end (&curr->child_list);e = list_next (e)){
     struct thread *t = list_entry(e, struct thread, child_elem);
     if(t->tid == child_tid){
-        if(t->exit_status == -1)
-          return exit_status;
         sema_down(&t->wait_lock);
         exit_status = t->exit_status;
         list_remove(&t->child_elem);
         sema_up(&t->wait_memory);
-        if(exit_status == -1)
-          return exit_status;
         return exit_status;
     }
   }
-  /*
-  for(i=0;i<128;i++){
-    if(curr->child_pid[i] == child_tid){
-      while(1){
-        int flag = 0;
-        for (e = list_begin (all_thread()); e != list_end (all_thread());e = list_next (e))
-          if(list_entry(e, struct thread, thread_elem)->tid == child_tid){
-            if(list_entry(e,struct thread, thread_elem)->exit_status != -1)
-              flag = 1;
-            break;
-          }
-        if(!flag){
-          curr->child_pid[i] = 0;
-          return curr->child_exit_status[i];
-        }
-      }
-    }
-  }*/
   return -1;
 }
 
@@ -254,13 +231,16 @@ process_exit (void)
   uint32_t *pd;
   sema_up(&curr->wait_lock); 
   sema_down(&curr->wait_memory);
-  /*int i;
-  for(i=0;i<128;i++){
-    if(curr->parent->child_pid[i] == curr->tid){
-      curr->parent->child_exit_status[i] = curr->exit_status;
-      break;
+
+  if(lock_held_by_current_thread(&filesys_lock))
+    lock_release(&filesys_lock);
+  int i;
+  for(i = 0; i < 128; ++i){
+    if(curr->fd[i]){
+      close(i+3);
     }
-  }*/
+  }
+
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
   pd = curr->pagedir;

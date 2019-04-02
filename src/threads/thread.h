@@ -113,9 +113,9 @@ struct thread
     struct semaphore wait_lock;
     struct semaphore wait_memory;
     struct thread *parent;
-    int load_success;
-
-
+    struct semaphore wait_load;
+    //struct semaphore wait_process_start;
+    int process_started;
 
 #ifdef USERPROG
     /* Owned by userprog/process.c. */

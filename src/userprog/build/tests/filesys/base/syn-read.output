@@ -1,12 +1,12 @@
-Copying tests/filesys/base/syn-read into /tmp/fCxedjKddj.dsk...
-Copying tests/filesys/base/child-syn-read into /tmp/fCxedjKddj.dsk...
-Writing command line to /tmp/yNvs68XUB3.dsk...
-qemu -hda /tmp/yNvs68XUB3.dsk -hdb /tmp/7zw4UUpJLe.dsk -hdc /tmp/fCxedjKddj.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/syn-read into /tmp/fHiyHaEwLR.dsk...
+Copying tests/filesys/base/child-syn-read into /tmp/fHiyHaEwLR.dsk...
+Writing command line to /tmp/MXKQxd8s6J.dsk...
+qemu -hda /tmp/MXKQxd8s6J.dsk -hdb /tmp/XGju0ZHb6m.dsk -hdc /tmp/fHiyHaEwLR.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put syn-read put child-syn-read run syn-read
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  191,078,400 loops/s.
+Calibrating timer...  105,062,400 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 213 sector (106 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -24,19 +24,29 @@ Executing 'syn-read':
 (syn-read) exec child 2 of 10: "child-syn-read 1"
 child-syn-read: exit(0)
 (syn-read) exec child 3 of 10: "child-syn-read 2"
+child-syn-read: exit(1)
 (syn-read) exec child 4 of 10: "child-syn-read 3"
+child-syn-read: exit(2)
 (syn-read) exec child 5 of 10: "child-syn-read 4"
+child-syn-read: exit(3)
+(syn-read) exec child 6 of 10: "child-syn-read 5"
+child-syn-read: exit(4)
+(syn-read) exec child 7 of 10: "child-syn-read 6"
+child-syn-read: exit(5)
+(syn-read) exec child 8 of 10: "child-syn-read 7"
+(syn-read) exec child 9 of 10: "child-syn-read 8"
+(syn-read) exec child 10 of 10: "child-syn-read 9"
 Kernel PANIC at ../../threads/synch.c:268 in lock_release(): assertion `lock_held_by_current_thread (lock)' failed.
-Call stack: 0xc0107be9 0xc0103141 0xc010b3a1 0xc010b776 0xc0101ef7 0xc010202f 0x804a75f 0x8048179 0x8048950.
+Call stack: 0xc0107bf9 0xc0103151 0xc010b3f1 0xc010b7c6 0xc0101f07 0xc010203f 0x804a75f 0x8048179 0x8048950.
 The `backtrace' program can make call stacks useful.
 Read "Backtraces" in the "Debugging Tools" chapter
 of the Pintos documentation for more information.
-Timer: 253 ticks
-Thread: 30 idle ticks, 199 kernel ticks, 24 user ticks
+Timer: 149 ticks
+Thread: 30 idle ticks, 52 kernel ticks, 67 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 2544 reads, 444 writes
+hd0:1: 7883 reads, 444 writes
 hd1:0: 213 reads, 0 writes
-Console: 1546 characters output
+Console: 1916 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

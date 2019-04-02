@@ -1,7 +1,7 @@
-Copying tests/userprog/open-twice into /tmp/4DcT8SJ9IS.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/4DcT8SJ9IS.dsk...
-Writing command line to /tmp/Xwd1KnIBKM.dsk...
-qemu -hda /tmp/Xwd1KnIBKM.dsk -hdb /tmp/2XOe_ZfzgT.dsk -hdc /tmp/4DcT8SJ9IS.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/open-twice into /tmp/fedkQnOv3V.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/fedkQnOv3V.dsk...
+Writing command line to /tmp/ieS7fDKIgv.dsk...
+qemu -hda /tmp/ieS7fDKIgv.dsk -hdb /tmp/opoADTePJZ.dsk -hdc /tmp/fedkQnOv3V.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put open-twice put sample.txt run open-twice
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -21,12 +21,12 @@ Executing 'open-twice':
 (open-twice) end
 open-twice: exit(0)
 Execution of 'open-twice' complete.
-Timer: 138 ticks
-Thread: 30 idle ticks, 108 kernel ticks, 0 user ticks
+Timer: 78 ticks
+Thread: 30 idle ticks, 46 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 107 reads, 208 writes
 hd1:0: 99 reads, 0 writes
-Console: 940 characters output
+Console: 938 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...
