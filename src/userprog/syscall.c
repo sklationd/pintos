@@ -14,6 +14,7 @@
 #include "filesys/filesys.h"
 #include "filesys/file.h"
 static void syscall_handler (struct intr_frame *);
+struct lock filesys_lock;
 
 struct file 
   {
@@ -88,6 +89,8 @@ int open(const char *file){
 	if(file==NULL)
 		exit(-1);
     lock_acquire(&filesys_lock);
+
+    
     /* is file exist? */
     struct dir *dir = dir_open_root ();
     struct inode *inode = NULL;
@@ -102,11 +105,11 @@ int open(const char *file){
     for(i=0;i<128;i++){
         if(thread_current()->fd[i] == NULL){
             thread_current()->fd[i] = filesys_open(file);
-            //file_deny_write(thread_current()->fd[i]);
             lock_release(&filesys_lock);
             return i+3;
         }
     }
+    lock_release(&filesys_lock);
     return -1;
 }
 
@@ -127,9 +130,9 @@ int filesize(int fd){
 int read(int fd, void *buffer, unsigned size){
     if(fd > 130)
         exit(-1);
-    if(thread_current()->fd[fd-3] == NULL)
+    else if(thread_current()->fd[fd-3] == NULL)
         exit(-1);
-    if(fd == 0){
+    else if(fd == 0){
         unsigned i;
         for(i=0;i<size;i++){
             memset(buffer+i,input_getc(),1);
@@ -138,10 +141,18 @@ int read(int fd, void *buffer, unsigned size){
     }
     else if(fd == 1 || fd ==2)
         exit(-1);
-    lock_acquire(&filesys_lock);
-	int len = file_read(thread_current()->fd[fd-3],buffer,size);
-    lock_release(&filesys_lock);
-    return len;
+    else{
+        lock_acquire(&filesys_lock);
+        //printf("lock acquire read at tid: %d\n",thread_current()->tid);
+	    int len = file_read(thread_current()->fd[fd-3],buffer,size);
+        //printf("lock try release read at tid: %d\n",thread_current()->tid);
+        //printf("lock holder %d\n",filesys_lock.holder -> tid);
+        //if(lock_held_by_current_thread(&filesys_lock))
+        //    printf("ahahahahhahahahahahah\n");
+        lock_release(&filesys_lock);
+        //printf("lock release read at tid: %d\n",thread_current()->tid);
+        return len;
+    }   
 }
 int write(int fd, const void *buffer, unsigned size){
     if(fd > 130)
@@ -167,7 +178,6 @@ int write(int fd, const void *buffer, unsigned size){
             return len;
         }
         return 0;
-       
     }
 }
 

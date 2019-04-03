@@ -17,6 +17,8 @@
 #include "userprog/process.h"
 #endif
 
+int32_t load_avg;
+int is_thread_system_ready;
 
 /* Random value for struct thread's `magic' member.
    Used to detect stack overflow.  See the big comment at the top
@@ -41,14 +43,10 @@ static struct thread *initial_thread;
 /* Lock used by allocate_tid(). */
 static struct lock tid_lock;
 
-struct list*
-all_thread(){
-  return &thread_list;
-}
 
 /* Compare priority of given two thread */
 bool 
-priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux) {
+priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux UNUSED) {
 	return (list_entry(a, struct thread, elem)->priority) > (list_entry(b, struct thread, elem)->priority);
 };
 
@@ -233,7 +231,6 @@ thread_create (const char *name, int priority,
   struct switch_entry_frame *ef;
   struct switch_threads_frame *sf;
   tid_t tid;
-  int i;
   ASSERT (function != NULL);
 
   /* Allocate thread. */

@@ -26,8 +26,8 @@ typedef int tid_t;      /* thread id */
 #define PRI_MAX 63                      /* Highest priority. */
  
 
-int32_t load_avg;
-int is_thread_system_ready;
+extern int32_t load_avg;
+extern int is_thread_system_ready;
 /* A kernel thread or user process.
 
    Each thread structure is stored in its own 4 kB page.  The
@@ -132,7 +132,6 @@ struct thread
 
   };
 
-struct list* all_thread();
 bool priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
 bool sema_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
 bool cond_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);

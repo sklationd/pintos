@@ -17,7 +17,7 @@ struct semaphore_elem
     struct semaphore semaphore;         /* This semaphore. */
     int priority;
   };
-  
+
 void sema_init (struct semaphore *, unsigned value);
 void sema_down (struct semaphore *);
 bool sema_try_down (struct semaphore *);
@@ -33,7 +33,6 @@ struct lock
 
 void lock_init (struct lock *);
 void lock_acquire (struct lock *);
-void priority_donation(struct thread * req_thread, struct lock * lock);
 bool lock_try_acquire (struct lock *);
 void lock_release (struct lock *);
 bool lock_held_by_current_thread (const struct lock *);

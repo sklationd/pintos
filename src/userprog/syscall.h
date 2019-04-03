@@ -6,7 +6,7 @@
 #define second_arg(f) (*(uint32_t *)((f)->esp + 8))
 #define third_arg(f) (*(uint32_t *)((f)->esp + 12))
 void syscall_init (void);
-struct lock filesys_lock;
+extern struct lock filesys_lock;
 /*
 void exit(int status);
 int exec(const char *cmd_line);

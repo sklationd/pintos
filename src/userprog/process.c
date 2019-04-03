@@ -75,6 +75,7 @@ process_execute (const char *file_name)
   if (!(file = filesys_open (argv[0]))) {
     palloc_free_page(fn_copy);
     palloc_free_page (fn_copy_2); 
+    lock_release(&filesys_lock);
     return TID_ERROR;
   }
   file_close(file);
@@ -366,7 +367,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
   off_t file_ofs;
   bool success = false;
   int i;
-  lock_acquire(&filesys_lock);
+  //lock_acquire(&filesys_lock);
   /* Allocate and activate page directory. */
   t->pagedir = pagedir_create ();
   if (t->pagedir == NULL) 
@@ -470,7 +471,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
   if(file != NULL)
     file_deny_write(file);  
   //file_close (file);
-  lock_release(&filesys_lock);
+  //lock_release(&filesys_lock);
   return success;
 }
 
