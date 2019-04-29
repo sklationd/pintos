@@ -5,6 +5,8 @@
 #include "threads/init.h"
 #include "threads/pte.h"
 #include "threads/palloc.h"
+#include "vm/frame.h"
+#include "vm/page.h"
 
 static uint32_t *active_pd (void);
 static void invalidate_pagedir (uint32_t *);
@@ -16,9 +18,12 @@ static void invalidate_pagedir (uint32_t *);
 uint32_t *
 pagedir_create (void) 
 {
+  //frame table 
   uint32_t *pd = palloc_get_page (0);
-  if (pd != NULL)
+  if (pd != NULL){
     memcpy (pd, base_page_dir, PGSIZE);
+    allocate_frame(pd);
+  }
   return pd;
 }
 
@@ -29,6 +34,7 @@ pagedir_create (void)
 void
 pagedir_destroy (uint32_t *pd) 
 {
+  //frame table remove
   uint32_t *pde;
 
   if (pd == NULL)
