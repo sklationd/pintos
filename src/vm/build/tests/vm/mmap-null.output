@@ -1,0 +1,35 @@
+Copying tests/vm/mmap-null into /tmp/I1Uzc10atq.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/I1Uzc10atq.dsk...
+Writing command line to /tmp/2tlUAocmjO.dsk...
+qemu -hda /tmp/2tlUAocmjO.dsk -hdb /tmp/oQHyt81l6H.dsk -hdc /tmp/I1Uzc10atq.dsk -hdd /tmp/2InBY4SXOe.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put mmap-null put sample.txt run mmap-null
+Pintos booting with 4,096 kB RAM...
+374 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  157,081,600 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 100 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'mmap-null' into the file system...
+Putting 'sample.txt' into the file system...
+Executing 'mmap-null':
+(mmap-null) begin
+(mmap-null) open "sample.txt"
+(mmap-null) try to mmap at address 0
+unknown system call! 
+(mmap-null) try to mmap at address 0: FAILED
+mmap-null: exit(1)
+Execution of 'mmap-null' complete.
+Timer: 142 ticks
+Thread: 30 idle ticks, 111 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 96 reads, 210 writes
+hd1:0: 100 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1085 characters output
+Keyboard: 0 keys pressed
+Exception: 0 page faults
+Powering off...

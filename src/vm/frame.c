@@ -2,7 +2,9 @@
 #include "threads/palloc.h"
 #include "threads/synch.h"
 #include "threads/thread.h"
+#include "threads/malloc.h"
 #include "devices/timer.h"
+#include "vm/page.h"
 
 /*
  * Initialize frame table
@@ -25,7 +27,7 @@ void
 frame_init (void)
 {
 	lock_init(&frame_table_lock);
-	hash_init(&frame_table,hash_int,hash_less, NULL);
+	hash_init(&frame_table,hash_function,hash_less, NULL);
 }
 
 
@@ -34,15 +36,32 @@ frame_init (void)
  */
 bool
 allocate_frame (void *addr)
-{
+{	
 	struct frame_table_entry *fte = (struct frame_table_entry*)malloc(sizeof(struct frame_table_entry));
-	fte->hash_elem = (struct hash_elem*)malloc(sizeof(struct hash_elem));
+	if(fte == NULL)
+		return false;
 	fte->frame = addr;
-	fte->owner = running_thread();
-	//spte
-	fte->last_used_time = timer_ticks();
+	fte->owner = thread_current();
+	//fte->sup_page_table_entry = allocate_page();
+	//fte->sup_page_table_entry->access_time = timer_ticks();
 	lock_acquire(&frame_table_lock);
-	hash_insert(&frame_table,fte->hash_elem);
+	hash_insert(&frame_table,&fte->hash_elem);
 	lock_release(&frame_table_lock);
+
+	return true;
 }
+
+bool
+deallocate_frame(void *addr){
+	struct frame_table_entry fte;
+	struct hash_elem *e;
+	fte.frame = addr;
+	lock_acquire(&frame_table_lock);
+	e= hash_find(&frame_table, &fte.hash_elem);
+	hash_delete(&frame_table,e);
+	lock_release(&frame_table_lock);
+	free(hash_entry(e, struct frame_table_entry, hash_elem));
+}
+
+
 

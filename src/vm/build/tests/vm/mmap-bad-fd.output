@@ -1,0 +1,32 @@
+Copying tests/vm/mmap-bad-fd into /tmp/MYKgWMhgMv.dsk...
+Writing command line to /tmp/5ui2uE4LIy.dsk...
+qemu -hda /tmp/5ui2uE4LIy.dsk -hdb /tmp/cIOv0tgGay.dsk -hdc /tmp/MYKgWMhgMv.dsk -hdd /tmp/68HRjwanrJ.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put mmap-bad-fd run mmap-bad-fd
+Pintos booting with 4,096 kB RAM...
+374 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  209,510,400 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'mmap-bad-fd' into the file system...
+Executing 'mmap-bad-fd':
+(mmap-bad-fd) begin
+(mmap-bad-fd) try to mmap invalid fd
+unknown system call! 
+(mmap-bad-fd) try to mmap invalid fd: FAILED
+mmap-bad-fd: exit(1)
+Execution of 'mmap-bad-fd' complete.
+Timer: 137 ticks
+Thread: 30 idle ticks, 106 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 62 reads, 202 writes
+hd1:0: 97 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1007 characters output
+Keyboard: 0 keys pressed
+Exception: 0 page faults
+Powering off...

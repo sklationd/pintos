@@ -22,7 +22,7 @@ pagedir_create (void)
   uint32_t *pd = palloc_get_page (0);
   if (pd != NULL){
     memcpy (pd, base_page_dir, PGSIZE);
-    allocate_frame(pd);
+    //allocate_frame(pd);
   }
   return pd;
 }
@@ -48,10 +48,13 @@ pagedir_destroy (uint32_t *pd)
         uint32_t *pte;
         
         for (pte = pt; pte < pt + PGSIZE / sizeof *pte; pte++)
-          if (*pte & PTE_P) 
+          if (*pte & PTE_P) {
+            deallocate_frame(pte_get_page(*pte)); // add
             palloc_free_page (pte_get_page (*pte));
+          }
         palloc_free_page (pt);
       }
+  //deallocate_frame(pd);
   palloc_free_page (pd);
 }
 

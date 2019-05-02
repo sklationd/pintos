@@ -124,7 +124,7 @@ struct thread
     struct file *current_executable;
     int child_exit_status[128];         //same index
     int exit_status;
-
+    uint32_t *sup_page_dir;
 
 #endif
     /* Owned by thread.c. */

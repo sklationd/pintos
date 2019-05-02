@@ -3,7 +3,6 @@
 #include "threads/synch.h"
 #include <bitmap.h>
 
-
 /* The swap device */
 static struct disk *swap_device;
 

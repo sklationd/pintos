@@ -4,6 +4,12 @@
 #include "userprog/gdt.h"
 #include "threads/interrupt.h"
 #include "threads/thread.h"
+#include "threads/pte.h"
+#include "userprog/pagedir.h"
+#include "threads/palloc.h"
+#include "threads/vaddr.h"
+#include "vm/frame.h"
+#include "vm/page.h"
 
 /* Number of page faults processed. */
 static long long page_fault_cnt;
@@ -147,19 +153,37 @@ page_fault (struct intr_frame *f)
   not_present = (f->error_code & PF_P) == 0;
   write = (f->error_code & PF_W) != 0;
   user = (f->error_code & PF_U) != 0;
-  
+  if(user && is_kernel_vaddr(fault_addr)){
+    exit(-1);
+  }
+  uint32_t *pd = thread_current()->pagedir;
+  if(!pagedir_get_page(pd,fault_addr))
+    exit(-1);
+  uint32_t *pde = pd + pd_no(fault_addr);
+  uint32_t *pte = pde_get_pt(*pde)+pt_no(fault_addr);
+  if(!((uint32_t)pte & PTE_W) && write){
+    exit(-1);
+  }
+  void *kpage = palloc_get_page(PAL_USER|PAL_ZERO);
+  //allocate_page();
+  if(!allocate_frame(vtop(kpage))) {
+    //swap table check
+  }
+  else 
+    pagedir_set_page(pd, pte_get_page(*pte), kpage, !!((uint32_t)pte & PTE_W) );
 
-  //if(!user)
-  exit(-1);
   
   /* To implement virtual memory, delete the rest of the function
      body, and replace it with code that brings in the page to
      which fault_addr refers. */
+  /*
   printf ("Page fault at %p: %s error %s page in %s context.\n",
           fault_addr,
           not_present ? "not present" : "rights violation",
           write ? "writing" : "reading",
           user ? "user" : "kernel");
   kill (f);
+  */
+  
 }
 
