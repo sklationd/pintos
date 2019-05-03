@@ -11,13 +11,13 @@ struct sup_page_table_entry
 {
 	uint32_t* user_vaddr;
 	uint64_t access_time;
-
 	bool dirty; //swap
 	bool accessed; 
 };
 
 void page_init (void);
 struct sup_page_table_entry *allocate_page (void *addr);
+void deallocate_page(void *addr);
 
 #endif /* vm/page.h */
 

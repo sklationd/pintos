@@ -20,16 +20,30 @@ page_init (void)
 struct sup_page_table_entry *
 allocate_page (void *addr)
 {
+	struct sup_page_table_entry *ent;
 	uint32_t *pd = thread_current()->sup_page_dir;
 	uint32_t *pde = pd + pd_no(addr);
 	struct sup_page_table_entry **pte;
 	if(*pde == 0){ //not mapped
-		*pde = palloc_get_page(PAL_ZERO);
-		pte = *pde + pt_no(addr);
-		*pte = palloc_get_page(PAL_ZERO);
+		*pde = vtop(palloc_get_page(PAL_ZERO));
 	}
-	(*pte)->user_vaddr = addr;
-	(*pte)->access_time = timer_ticks();
-	return *pte;
+	pte = ptov(*pde) + pt_no(addr);
+	ASSERT(*pte == 0);
+	*pte = vtop(palloc_get_page(PAL_ZERO));
+	ent = (struct sup_page_table_entry *)ptov(*pte);
+	ent->user_vaddr = addr;
+	ent->access_time = timer_ticks();
+	ent->accessed = 0;
+	ent->dirty = 0;
+	return ptov(*pte);
 }
+
+void deallocate_page(void *addr){
+	uint32_t *pd = thread_current()->sup_page_dir;
+	uint32_t *pde = pd + pd_no(addr);
+	struct sup_page_table_entry **pte;
+	pte = ptov(*pde) + pt_no(addr);
+	palloc_free_page(*pte);
+}
+
 

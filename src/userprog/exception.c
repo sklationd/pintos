@@ -124,7 +124,7 @@ kill (struct intr_frame *f)
    example code here shows how to parse that information.  You
    can find more information about both of these in the
    description of "Interrupt 14--Page Fault Exception (#PF)" in
-   [IA32-v3a] section 5.15 "Exception and Interrupt Reference". */
+   [IA32-v3a] section 5.15 "Exception aand Interrupt Reference". */
 static void
 page_fault (struct intr_frame *f) 
 {
@@ -153,24 +153,24 @@ page_fault (struct intr_frame *f)
   not_present = (f->error_code & PF_P) == 0;
   write = (f->error_code & PF_W) != 0;
   user = (f->error_code & PF_U) != 0;
+  
   if(user && is_kernel_vaddr(fault_addr)){
     exit(-1);
   }
+
   uint32_t *pd = thread_current()->pagedir;
   if(!pagedir_get_page(pd,fault_addr))
     exit(-1);
+
   uint32_t *pde = pd + pd_no(fault_addr);
   uint32_t *pte = pde_get_pt(*pde)+pt_no(fault_addr);
+
   if(!((uint32_t)pte & PTE_W) && write){
     exit(-1);
   }
+
   void *kpage = palloc_get_page(PAL_USER|PAL_ZERO);
-  //allocate_page();
-  if(!allocate_frame(vtop(kpage))) {
-    //swap table check
-  }
-  else 
-    pagedir_set_page(pd, pte_get_page(*pte), kpage, !!((uint32_t)pte & PTE_W) );
+  pagedir_set_page(pd, fault_addr, kpage, !!((uint32_t)pte & PTE_W) );
 
   
   /* To implement virtual memory, delete the rest of the function
