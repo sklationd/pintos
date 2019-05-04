@@ -1,11 +1,11 @@
-Copying tests/vm/page-linear into /tmp/bLUB5aJtoA.dsk...
-Writing command line to /tmp/AIy0ecnNBy.dsk...
-qemu -hda /tmp/AIy0ecnNBy.dsk -hdb /tmp/x0f9BUt5Gi.dsk -hdc /tmp/bLUB5aJtoA.dsk -hdd /tmp/_Tm4TFqMRO.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-linear into /tmp/9E4T4i2F3r.dsk...
+Writing command line to /tmp/MouxmtIlu4.dsk...
+qemu -hda /tmp/MouxmtIlu4.dsk -hdb /tmp/m5wgR_QvgU.dsk -hdc /tmp/9E4T4i2F3r.dsk -hdd /tmp/P5flX4YCku.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-linear run page-linear
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,715,200 loops/s.
+Calibrating timer...  104,755,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 102 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -14,14 +14,18 @@ Formatting file system...done.
 Boot complete.
 Putting 'page-linear' into the file system...
 Executing 'page-linear':
-Execution of 'page-linear' complete.
-Timer: 151 ticks
-Thread: 30 idle ticks, 118 kernel ticks, 3 user ticks
+Kernel PANIC at ../../threads/vaddr.h:84 in vtop(): assertion `is_kernel_vaddr (vaddr)' failed.
+Call stack: 0xc0107a69 0xc010d812 0xc01036d4 0xc010370a 0xc010a1aa 0xc01013f6.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 143 ticks
+Thread: 30 idle ticks, 109 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 62 reads, 212 writes
 hd1:0: 102 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 864 characters output
+Console: 1156 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

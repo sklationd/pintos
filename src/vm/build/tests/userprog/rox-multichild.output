@@ -1,12 +1,12 @@
-Copying tests/userprog/rox-multichild into /tmp/rzxoIyJQaP.dsk...
-Copying tests/userprog/child-rox into /tmp/rzxoIyJQaP.dsk...
-Writing command line to /tmp/K2hwh2ypL5.dsk...
-qemu -hda /tmp/K2hwh2ypL5.dsk -hdb /tmp/qb3TZzRFd7.dsk -hdc /tmp/rzxoIyJQaP.dsk -hdd /tmp/6LgGwzXG7C.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/rox-multichild into /tmp/crpvwmbw9J.dsk...
+Copying tests/userprog/child-rox into /tmp/crpvwmbw9J.dsk...
+Writing command line to /tmp/ygnARyJN6E.dsk...
+qemu -hda /tmp/ygnARyJN6E.dsk -hdb /tmp/JG1VJAyurX.dsk -hdc /tmp/crpvwmbw9J.dsk -hdd /tmp/djrjyb70Ci.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put rox-multichild put child-rox run rox-multichild
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  207,872,000 loops/s.
+Calibrating timer...  104,755,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 207 sector (103 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -41,26 +41,15 @@ child-rox: exit(12)
 (child-rox) try to write "child-rox"
 (child-rox) end
 child-rox: exit(12)
-(child-rox) try to write "child-rox"
-(child-rox) end
-child-rox: exit(12)
-(child-rox) try to write "child-rox"
-(child-rox) end
-child-rox: exit(12)
-(child-rox) try to write "child-rox"
-(child-rox) end
-child-rox: exit(12)
-(rox-multichild) write "child-rox"
-(rox-multichild) end
-rox-multichild: exit(0)
-Execution of 'rox-multichild' complete.
-Timer: 236 ticks
-Thread: 30 idle ticks, 199 kernel ticks, 7 user ticks
+Kernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
+Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a749Kernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
+Timer: 232 ticks
+Thread: 30 idle ticks, 196 kernel ticks, 6 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 340 reads, 426 writes
+hd0:1: 321 reads, 425 writes
 hd1:0: 207 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1945 characters output
+Console: 1968 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 2 page faults
 Powering off...

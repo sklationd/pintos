@@ -1,13 +1,13 @@
-Copying tests/vm/mmap-inherit into /tmp/j4oz9vrmaF.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/j4oz9vrmaF.dsk...
-Copying tests/vm/child-inherit into /tmp/j4oz9vrmaF.dsk...
-Writing command line to /tmp/77JAhu1LCt.dsk...
-qemu -hda /tmp/77JAhu1LCt.dsk -hdb /tmp/nWh_jI4k_N.dsk -hdc /tmp/j4oz9vrmaF.dsk -hdd /tmp/_V88NeZWz2.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-inherit into /tmp/SAp0yG5nSI.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/SAp0yG5nSI.dsk...
+Copying tests/vm/child-inherit into /tmp/SAp0yG5nSI.dsk...
+Writing command line to /tmp/FidZS3yNcY.dsk...
+qemu -hda /tmp/FidZS3yNcY.dsk -hdb /tmp/cTrz3wba4C.dsk -hdc /tmp/SAp0yG5nSI.dsk -hdd /tmp/kyeL1mGzRI.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-inherit put sample.txt put child-inherit run mmap-inherit
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  210,124,800 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 202 sector (101 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -24,8 +24,8 @@ Executing 'mmap-inherit':
 unknown system call! 
 mmap-inherit: exit(-1)
 Execution of 'mmap-inherit' complete.
-Timer: 232 ticks
-Thread: 30 idle ticks, 201 kernel ticks, 1 user ticks
+Timer: 225 ticks
+Thread: 30 idle ticks, 193 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 135 reads, 416 writes
 hd1:0: 202 reads, 0 writes

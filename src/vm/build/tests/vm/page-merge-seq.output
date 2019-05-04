@@ -1,12 +1,12 @@
-Copying tests/vm/page-merge-seq into /tmp/kLFccD1kzt.dsk...
-Copying tests/vm/child-sort into /tmp/kLFccD1kzt.dsk...
-Writing command line to /tmp/kJb6PhPNVf.dsk...
-qemu -hda /tmp/kJb6PhPNVf.dsk -hdb /tmp/jLggrVkNdx.dsk -hdc /tmp/kLFccD1kzt.dsk -hdd /tmp/YVJn6py0Ch.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-seq into /tmp/sfclU_HWlD.dsk...
+Copying tests/vm/child-sort into /tmp/sfclU_HWlD.dsk...
+Writing command line to /tmp/S12nm4mjHn.dsk...
+qemu -hda /tmp/S12nm4mjHn.dsk -hdb /tmp/gEO1PZz1x6.dsk -hdc /tmp/sfclU_HWlD.dsk -hdd /tmp/538kEvkJa_.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-seq put child-sort run page-merge-seq
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  152,166,400 loops/s.
+Calibrating timer...  143,974,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 204 sector (102 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -16,14 +16,18 @@ Boot complete.
 Putting 'page-merge-seq' into the file system...
 Putting 'child-sort' into the file system...
 Executing 'page-merge-seq':
-Execution of 'page-merge-seq' complete.
-Timer: 230 ticks
-Thread: 30 idle ticks, 197 kernel ticks, 3 user ticks
+Kernel PANIC at ../../threads/vaddr.h:84 in vtop(): assertion `is_kernel_vaddr (vaddr)' failed.
+Call stack: 0xc0107a69 0xc010d812 0xc01036d4 0xc010370a 0xc010a1aa 0xc01013f6.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 229 ticks
+Thread: 30 idle ticks, 195 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 91 reads, 418 writes
 hd1:0: 204 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 940 characters output
+Console: 1229 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

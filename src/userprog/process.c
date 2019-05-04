@@ -19,6 +19,8 @@
 #include "threads/vaddr.h"
 #include "threads/synch.h"
 #include "userprog/syscall.h"
+#include "vm/frame.h"
+#include "vm/page.h"
 
 static thread_func start_process NO_RETURN;
 static bool load (const char *cmdline, void (**eip) (void), void **esp);
@@ -176,6 +178,7 @@ start_process (void *lan_)
   if_.eflags = FLAG_IF | FLAG_MBS;
    /* parse file_name */
   argc = parse_instruction(file_name, argv);
+  page_init();
   success = load (argv[0], &if_.eip, &if_.esp);
   sema_up(&thread_current()->parent->wait_load);
   if(success)
@@ -455,7 +458,6 @@ load (const char *file_name, void (**eip) (void), void **esp)
           break;
         }
     }
-
   /* Set up stack. */
   if (!setup_stack (esp))
     goto done;
@@ -557,15 +559,12 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
       uint8_t *kpage = palloc_get_page (PAL_USER);
       if (kpage == NULL){
         return false;
-      }
-      //allocate_frame(pa);
-      
+      }      
 
       /* Load this page. */
       if (file_read (file, kpage, page_read_bytes) != (int) page_read_bytes)
         {
-          //deallocate_frame(kpage);
-          //palloc_free_page (kpage);
+          palloc_free_page (kpage);
           return false; 
         }
       memset (kpage + page_read_bytes, 0, page_zero_bytes);
@@ -573,7 +572,6 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
       /* Add the page to the process's address space. */
       if (!install_page (upage, kpage, writable)) 
         {
-          //deallocate_frame(kpage);
           palloc_free_page (kpage);
           return false; 
         }
@@ -595,14 +593,12 @@ setup_stack (void **esp)
   bool success = false;
 
   kpage = palloc_get_page (PAL_USER | PAL_ZERO);
-  //allocate_frame(kpage);
   if (kpage != NULL) 
     {
       success = install_page (((uint8_t *) PHYS_BASE) - PGSIZE, kpage, true);
       if (success)
         *esp = PHYS_BASE;
       else{
-        //deallocate_frame(kpage);
         palloc_free_page (kpage);
       }
     }

@@ -1,12 +1,12 @@
-Copying tests/userprog/rox-child into /tmp/FcV6Pl7w4N.dsk...
-Copying tests/userprog/child-rox into /tmp/FcV6Pl7w4N.dsk...
-Writing command line to /tmp/yne9ARVLFO.dsk...
-qemu -hda /tmp/yne9ARVLFO.dsk -hdb /tmp/ooMATe6rcF.dsk -hdc /tmp/FcV6Pl7w4N.dsk -hdd /tmp/3Ffg4Ir4GL.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/rox-child into /tmp/M9vKKv2V34.dsk...
+Copying tests/userprog/child-rox into /tmp/M9vKKv2V34.dsk...
+Writing command line to /tmp/DMFcpCL41S.dsk...
+qemu -hda /tmp/DMFcpCL41S.dsk -hdb /tmp/10u8fEz2zf.dsk -hdc /tmp/M9vKKv2V34.dsk -hdd /tmp/zVojQ2hP_y.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put rox-child put child-rox run rox-child
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  129,228,800 loops/s.
+Calibrating timer...  143,769,600 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 207 sector (103 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -29,14 +29,15 @@ child-rox: exit(12)
 (rox-child) write "child-rox"
 (rox-child) end
 rox-child: exit(0)
-Execution of 'rox-child' complete.
-Timer: 233 ticks
-Thread: 30 idle ticks, 199 kernel ticks, 4 user ticks
+Kernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
+Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a749Kernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
+Timer: 234 ticks
+Thread: 30 idle ticks, 201 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 148 reads, 426 writes
 hd1:0: 207 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1244 characters output
+Console: 1571 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 2 page faults
 Powering off...

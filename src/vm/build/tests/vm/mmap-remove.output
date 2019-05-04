@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-remove into /tmp/hjTC14BWkb.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/hjTC14BWkb.dsk...
-Writing command line to /tmp/fQ9GXRnzgo.dsk...
-qemu -hda /tmp/fQ9GXRnzgo.dsk -hdb /tmp/8fiAAEFzLS.dsk -hdc /tmp/hjTC14BWkb.dsk -hdd /tmp/VGyU_QvYMS.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-remove into /tmp/vbV4v2pMOG.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/vbV4v2pMOG.dsk...
+Writing command line to /tmp/dU0Cc4FaR6.dsk...
+qemu -hda /tmp/dU0Cc4FaR6.dsk -hdb /tmp/NGNijyEjGo.dsk -hdc /tmp/vbV4v2pMOG.dsk -hdd /tmp/iYjy4OdNkC.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-remove put sample.txt run mmap-remove
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,652,800 loops/s.
+Calibrating timer...  52,377,600 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -25,13 +25,13 @@ unknown system call!
 (mmap-remove) create "another"
 mmap-remove: exit(-1)
 Execution of 'mmap-remove' complete.
-Timer: 182 ticks
-Thread: 30 idle ticks, 115 kernel ticks, 37 user ticks
+Timer: 175 ticks
+Thread: 30 idle ticks, 107 kernel ticks, 38 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 165 reads, 301 writes
 hd1:0: 103 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1158 characters output
+Console: 1157 characters output
 Keyboard: 0 keys pressed
 Exception: 1 page faults
 Powering off...

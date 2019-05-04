@@ -157,13 +157,13 @@ page_fault (struct intr_frame *f)
   if(user && is_kernel_vaddr(fault_addr)){
     exit(-1);
   }
-
+  
   uint32_t *pd = thread_current()->pagedir;
   if(!pagedir_get_page(pd,fault_addr))
     exit(-1);
 
   uint32_t *pde = pd + pd_no(fault_addr);
-  uint32_t *pte = pde_get_pt(*pde)+pt_no(fault_addr);
+  uint32_t *pte = pde_get_pt(ptov(*pde)) + pt_no(fault_addr);
 
   if(!((uint32_t)pte & PTE_W) && write){
     exit(-1);

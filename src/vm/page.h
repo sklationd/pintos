@@ -9,6 +9,7 @@
 
 struct sup_page_table_entry 
 {
+	uint32_t* kernel_vaddr;
 	uint32_t* user_vaddr;
 	uint64_t access_time;
 	bool dirty; //swap

@@ -1,12 +1,12 @@
-Copying tests/userprog/wait-simple into /tmp/RQqn7jjM_E.dsk...
-Copying tests/userprog/child-simple into /tmp/RQqn7jjM_E.dsk...
-Writing command line to /tmp/o8xO19E9a7.dsk...
-qemu -hda /tmp/o8xO19E9a7.dsk -hdb /tmp/WwmZBlKgoT.dsk -hdc /tmp/RQqn7jjM_E.dsk -hdd /tmp/qyvbJ2gF2O.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/wait-simple into /tmp/yg0GSO4PzL.dsk...
+Copying tests/userprog/child-simple into /tmp/yg0GSO4PzL.dsk...
+Writing command line to /tmp/DjmtnKJPky.dsk...
+qemu -hda /tmp/DjmtnKJPky.dsk -hdb /tmp/yDxDcrNj2B.dsk -hdc /tmp/yg0GSO4PzL.dsk -hdd /tmp/6ivgz14Qgx.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put wait-simple put child-simple run wait-simple
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  182,886,400 loops/s.
+Calibrating timer...  142,745,600 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 193 sector (96 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,14 +22,15 @@ child-simple: exit(81)
 (wait-simple) wait(exec()) = 81
 (wait-simple) end
 wait-simple: exit(0)
-Execution of 'wait-simple' complete.
-Timer: 216 ticks
-Thread: 30 idle ticks, 185 kernel ticks, 1 user ticks
+Kernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
+Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a1f9Kernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
+Timer: 218 ticks
+Thread: 30 idle ticks, 187 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 129 reads, 396 writes
 hd1:0: 193 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1062 characters output
+Console: 1387 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 2 page faults
 Powering off...

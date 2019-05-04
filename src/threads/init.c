@@ -107,7 +107,7 @@ main (void)
 
   /* Start thread scheduler and enable interrupts. */
   is_thread_system_ready = 1;
-  page_init();
+  //page_init();
   frame_init();
   thread_start ();
   serial_init_queue ();

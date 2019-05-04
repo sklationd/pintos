@@ -1,7 +1,7 @@
-Copying tests/userprog/wait-twice into /tmp/mZQfBPhJeS.dsk...
-Copying tests/userprog/child-simple into /tmp/mZQfBPhJeS.dsk...
-Writing command line to /tmp/5heeiBovRE.dsk...
-qemu -hda /tmp/5heeiBovRE.dsk -hdb /tmp/b6DMbrc2jb.dsk -hdc /tmp/mZQfBPhJeS.dsk -hdd /tmp/S_fxxCopZ4.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/wait-twice into /tmp/Hrl1pi2OeZ.dsk...
+Copying tests/userprog/child-simple into /tmp/Hrl1pi2OeZ.dsk...
+Writing command line to /tmp/srAN2CaINa.dsk...
+qemu -hda /tmp/srAN2CaINa.dsk -hdb /tmp/0JS7pN84yy.dsk -hdc /tmp/Hrl1pi2OeZ.dsk -hdd /tmp/Pv84ASjWqz.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put wait-twice put child-simple run wait-twice
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -23,14 +23,15 @@ child-simple: exit(81)
 (wait-twice) wait(exec()) = -1
 (wait-twice) end
 wait-twice: exit(0)
-Execution of 'wait-twice' complete.
-Timer: 222 ticks
-Thread: 30 idle ticks, 190 kernel ticks, 2 user ticks
+Kernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
+Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a1f9Kernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
+Timer: 215 ticks
+Thread: 30 idle ticks, 184 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 129 reads, 396 writes
 hd1:0: 193 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1084 characters output
+Console: 1410 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 2 page faults
 Powering off...

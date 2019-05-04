@@ -1,11 +1,11 @@
-Copying tests/userprog/multi-recurse into /tmp/WkYOIyEnMP.dsk...
-Writing command line to /tmp/gWcaaT_jue.dsk...
-qemu -hda /tmp/gWcaaT_jue.dsk -hdb /tmp/4FoyVtfZ__.dsk -hdc /tmp/WkYOIyEnMP.dsk -hdd /tmp/mAmnwgzcJT.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/multi-recurse into /tmp/YTZV2Hfj8a.dsk...
+Writing command line to /tmp/yrbghEMIZ2.dsk...
+qemu -hda /tmp/yrbghEMIZ2.dsk -hdb /tmp/rb0iLEhOjC.dsk -hdc /tmp/YTZV2Hfj8a.dsk -hdd /tmp/cqUp10OrWd.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put multi-recurse run 'multi-recurse 15'
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  156,467,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 108 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -49,42 +49,15 @@ Executing 'multi-recurse 15':
 multi-recurse: exit(0)
 (multi-recurse) end 1
 multi-recurse: exit(1)
-(multi-recurse) end 2
-multi-recurse: exit(2)
-(multi-recurse) end 3
-multi-recurse: exit(3)
-(multi-recurse) end 4
-multi-recurse: exit(4)
-(multi-recurse) end 5
-multi-recurse: exit(5)
-(multi-recurse) end 6
-multi-recurse: exit(6)
-(multi-recurse) end 7
-multi-recurse: exit(7)
-(multi-recurse) end 8
-multi-recurse: exit(8)
-(multi-recurse) end 9
-multi-recurse: exit(9)
-(multi-recurse) end 10
-multi-recurse: exit(10)
-(multi-recurse) end 11
-multi-recurse: exit(11)
-(multi-recurse) end 12
-multi-recurse: exit(12)
-(multi-recurse) end 13
-multi-recurse: exit(13)
-(multi-recurse) end 14
-multi-recurse: exit(14)
-(multi-recurse) end 15
-multi-recurse: exit(15)
-Execution of 'multi-recurse 15' complete.
-Timer: 160 ticks
-Thread: 30 idle ticks, 115 kernel ticks, 15 user ticks
+Kernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
+Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a6a9Kernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
+Timer: 162 ticks
+Thread: 30 idle ticks, 121 kernel ticks, 11 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 576 reads, 224 writes
 hd1:0: 108 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 2614 characters output
+Console: 2292 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 2 page faults
 Powering off...

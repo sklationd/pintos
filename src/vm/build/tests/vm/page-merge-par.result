@@ -1,2 +1,10 @@
 FAIL
-Run didn't produce any output
+Kernel panic in run: PANIC at ../../threads/vaddr.h:84 in vtop(): assertion `is_kernel_vaddr (vaddr)' failed.
+Call stack: 0xc0107a69 0xc010d812 0xc01036d4 0xc010370a 0xc010a1aa 0xc01013f6
+Translation of call stack:
+0xc0107a69: debug_panic (.../../lib/kernel/debug.c:34)
+0xc010d812: allocate_page (.../build/../../vm/page.c:30)
+0xc01036d4: palloc_get_multiple (..../../threads/palloc.c:111)
+0xc010370a: palloc_get_page (..../../threads/palloc.c:133)
+0xc010a1aa: load_segment (...../userprog/process.c:559)
+0xc01013f6: kernel_thread (..../../threads/thread.c:503)

@@ -28,14 +28,14 @@ allocate_page (void *addr)
 		*pde = vtop(palloc_get_page(PAL_ZERO));
 	}
 	pte = ptov(*pde) + pt_no(addr);
-	ASSERT(*pte == 0);
 	*pte = vtop(palloc_get_page(PAL_ZERO));
 	ent = (struct sup_page_table_entry *)ptov(*pte);
+	ent->kernel_vaddr = pte;
 	ent->user_vaddr = addr;
 	ent->access_time = timer_ticks();
 	ent->accessed = 0;
 	ent->dirty = 0;
-	return ptov(*pte);
+	return ent;
 }
 
 void deallocate_page(void *addr){
@@ -43,7 +43,7 @@ void deallocate_page(void *addr){
 	uint32_t *pde = pd + pd_no(addr);
 	struct sup_page_table_entry **pte;
 	pte = ptov(*pde) + pt_no(addr);
-	palloc_free_page(*pte);
+	palloc_free_page((*pte)->kernel_vaddr);
 }
 
 

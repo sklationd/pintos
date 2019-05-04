@@ -1,12 +1,12 @@
-Copying tests/filesys/base/syn-read into /tmp/6kdFneANAj.dsk...
-Copying tests/filesys/base/child-syn-read into /tmp/6kdFneANAj.dsk...
-Writing command line to /tmp/kJOcE6rZ4t.dsk...
-qemu -hda /tmp/kJOcE6rZ4t.dsk -hdb /tmp/9a6YW_6rqx.dsk -hdc /tmp/6kdFneANAj.dsk -hdd /tmp/XjtVSElTJd.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/syn-read into /tmp/_pJOlu9Qkv.dsk...
+Copying tests/filesys/base/child-syn-read into /tmp/_pJOlu9Qkv.dsk...
+Writing command line to /tmp/4NccyqzeeM.dsk...
+qemu -hda /tmp/4NccyqzeeM.dsk -hdb /tmp/gVCDP8ohvf.dsk -hdc /tmp/_pJOlu9Qkv.dsk -hdd /tmp/nI4LeY9_3r.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put syn-read put child-syn-read run syn-read
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  183,296,000 loops/s.
+Calibrating timer...  143,974,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 213 sector (106 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -50,17 +50,15 @@ child-syn-read: exit(8)
 (syn-read) wait for child 8 of 10 returned 7 (expected 7)
 (syn-read) wait for child 9 of 10 returned 8 (expected 8)
 child-syn-read: exit(9)
-(syn-read) wait for child 10 of 10 returned 9 (expected 9)
-(syn-read) end
-syn-read: exit(0)
-Execution of 'syn-read' complete.
-Timer: 304 ticks
-Thread: 30 idle ticks, 203 kernel ticks, 71 user ticks
+Kernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
+Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a839Kernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
+Timer: 301 ticks
+Thread: 30 idle ticks, 207 kernel ticks, 64 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 10817 reads, 444 writes
 hd1:0: 213 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 2390 characters output
+Console: 2626 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 2 page faults
 Powering off...

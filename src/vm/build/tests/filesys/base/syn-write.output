@@ -1,12 +1,12 @@
-Copying tests/filesys/base/syn-write into /tmp/PIVNxa512C.dsk...
-Copying tests/filesys/base/child-syn-wrt into /tmp/PIVNxa512C.dsk...
-Writing command line to /tmp/I4YYyXKtxQ.dsk...
-qemu -hda /tmp/I4YYyXKtxQ.dsk -hdb /tmp/Bva6td_8Fo.dsk -hdc /tmp/PIVNxa512C.dsk -hdd /tmp/1EXC7R1_yJ.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/syn-write into /tmp/J5T8sEJlKE.dsk...
+Copying tests/filesys/base/child-syn-wrt into /tmp/J5T8sEJlKE.dsk...
+Writing command line to /tmp/6wrh9ubIXQ.dsk...
+qemu -hda /tmp/6wrh9ubIXQ.dsk -hdb /tmp/6YdEIQeC2s.dsk -hdc /tmp/J5T8sEJlKE.dsk -hdd /tmp/9N2vhnTWPS.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put syn-write put child-syn-wrt run syn-write
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  104,755,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 213 sector (106 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -47,19 +47,15 @@ child-syn-wrt: exit(9)
 (syn-write) wait for child 7 of 10 returned 6 (expected 6)
 (syn-write) wait for child 8 of 10 returned 7 (expected 7)
 (syn-write) wait for child 9 of 10 returned 8 (expected 8)
-(syn-write) wait for child 10 of 10 returned 9 (expected 9)
-(syn-write) open "stuff"
-(syn-write) read "stuff"
-(syn-write) end
-syn-write: exit(0)
-Execution of 'syn-write' complete.
-Timer: 252 ticks
-Thread: 30 idle ticks, 203 kernel ticks, 19 user ticks
+(syn-write) wait for child 10 of 10 returned 9 (expeKernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
+Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a829Kernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
+Timer: 257 ticks
+Thread: 30 idle ticks, 204 kernel ticks, 23 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 557 reads, 460 writes
+hd0:1: 541 reads, 460 writes
 hd1:0: 213 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 2375 characters output
+Console: 2609 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 2 page faults
 Powering off...

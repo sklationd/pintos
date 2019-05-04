@@ -1,11 +1,11 @@
-Copying tests/filesys/base/lg-seq-block into /tmp/_I8t5aBdFx.dsk...
-Writing command line to /tmp/XH5_OtI4JE.dsk...
-qemu -hda /tmp/XH5_OtI4JE.dsk -hdb /tmp/z3eTTbFPqi.dsk -hdc /tmp/_I8t5aBdFx.dsk -hdd /tmp/orxKDRjJfM.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/lg-seq-block into /tmp/2YNXuezvZw.dsk...
+Writing command line to /tmp/BPmaCAqYUm.dsk...
+qemu -hda /tmp/BPmaCAqYUm.dsk -hdb /tmp/dwjYJ5xud3.dsk -hdc /tmp/2YNXuezvZw.dsk -hdd /tmp/wEuP_AUPd7.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put lg-seq-block run lg-seq-block
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  183,296,000 loops/s.
+Calibrating timer...  196,403,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 101 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -25,8 +25,8 @@ Executing 'lg-seq-block':
 (lg-seq-block) end
 lg-seq-block: exit(0)
 Execution of 'lg-seq-block' complete.
-Timer: 317 ticks
-Thread: 30 idle ticks, 108 kernel ticks, 179 user ticks
+Timer: 327 ticks
+Thread: 30 idle ticks, 111 kernel ticks, 186 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 552 reads, 657 writes
 hd1:0: 101 reads, 0 writes

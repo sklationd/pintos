@@ -1,12 +1,12 @@
-Copying tests/userprog/exec-multiple into /tmp/g5IoUFE2_B.dsk...
-Copying tests/userprog/child-simple into /tmp/g5IoUFE2_B.dsk...
-Writing command line to /tmp/CbkC3VKlbF.dsk...
-qemu -hda /tmp/CbkC3VKlbF.dsk -hdb /tmp/jh5RsHW7Ui.dsk -hdc /tmp/g5IoUFE2_B.dsk -hdd /tmp/v56eF_MYIk.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-multiple into /tmp/qrU7BfmNvq.dsk...
+Copying tests/userprog/child-simple into /tmp/qrU7BfmNvq.dsk...
+Writing command line to /tmp/0LJox6NjyS.dsk...
+qemu -hda /tmp/0LJox6NjyS.dsk -hdb /tmp/qIrAOTvKa6.dsk -hdc /tmp/qrU7BfmNvq.dsk -hdd /tmp/tk0Y3pjSdU.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-multiple put child-simple run exec-multiple
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  183,296,000 loops/s.
+Calibrating timer...  150,528,000 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 193 sector (96 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,22 +19,15 @@ Executing 'exec-multiple':
 (exec-multiple) begin
 (child-simple) run
 child-simple: exit(81)
-(child-simple) run
-child-simple: exit(81)
-(child-simple) run
-child-simple: exit(81)
-(child-simple) run
-child-simple: exit(81)
-(exec-multiple) end
-exec-multiple: exit(0)
-Execution of 'exec-multiple' complete.
-Timer: 220 ticks
-Thread: 30 idle ticks, 188 kernel ticks, 2 user ticks
+Kernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
+Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a1f9Kernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
+Timer: 222 ticks
+Thread: 30 idle ticks, 191 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 249 reads, 396 writes
+hd0:1: 133 reads, 396 writes
 hd1:0: 193 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1172 characters output
+Console: 1326 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 2 page faults
 Powering off...

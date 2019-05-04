@@ -1,1 +1,26 @@
-PASS
+FAIL
+Kernel panic in run: PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
+Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a1f9
+Translation of call stack:
+In kernel.o:
+0xc0107a69: debug_panic (.../../lib/kernel/debug.c:34)
+0xc010a408: lookup_page (.../../userprog/pagedir.c:74)
+0xc010a609: pagedir_get_page (...../userprog/pagedir.c:143)
+0xc010ae27: page_fault (.../userprog/exception.c:162)
+0xc0101f07: intr_handler (..../threads/interrupt.c:361)
+0xc010203f: intr_entry (threads/intr-stubs.S:38)
+0xc010d6eb: deallocate_page (.../build/../../vm/page.c:46)
+0xc01035b3: palloc_free_multiple (..../../threads/palloc.c:164)
+0xc01035e7: palloc_free_page (..../../threads/palloc.c:176)
+0xc010ab2e: pagedir_destroy (.../../userprog/pagedir.c:50)
+0xc0109a2f: process_exit (...../userprog/process.c:273)
+0xc010100c: thread_exit (..../../threads/thread.c:354)
+0xc010b079: close (...../userprog/syscall.c:205)
+0xc010b5fb: syscall_handler (...../userprog/syscall.c:241)
+0xc0101f07: intr_handler (..../threads/interrupt.c:361)
+0xc010203f: intr_entry (threads/intr-stubs.S:38)
+In tests/userprog/wait-twice:
+0x0804a1f9: munmap (...../lib/user/syscall.c:154)
+Translations of user virtual addresses above are based on a guess at
+the binary to use.  If this guess is incorrect, then those
+translations will be misleading.

@@ -1,12 +1,12 @@
-Copying tests/vm/page-merge-mm into /tmp/SqmrpRpEi3.dsk...
-Copying tests/vm/child-qsort-mm into /tmp/SqmrpRpEi3.dsk...
-Writing command line to /tmp/BNBu1C2my9.dsk...
-qemu -hda /tmp/BNBu1C2my9.dsk -hdb /tmp/eVcCeIDsAB.dsk -hdc /tmp/SqmrpRpEi3.dsk -hdd /tmp/9m6LvEUlzq.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-mm into /tmp/g7Xo2ry2S7.dsk...
+Copying tests/vm/child-qsort-mm into /tmp/g7Xo2ry2S7.dsk...
+Writing command line to /tmp/VOxNOWZey4.dsk...
+qemu -hda /tmp/VOxNOWZey4.dsk -hdb /tmp/psZ_4sv3rb.dsk -hdc /tmp/g7Xo2ry2S7.dsk -hdd /tmp/sUeEkjNLDe.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-mm put child-qsort-mm run page-merge-mm
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  208,691,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 211 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -16,14 +16,18 @@ Boot complete.
 Putting 'page-merge-mm' into the file system...
 Putting 'child-qsort-mm' into the file system...
 Executing 'page-merge-mm':
-Execution of 'page-merge-mm' complete.
-Timer: 234 ticks
-Thread: 30 idle ticks, 202 kernel ticks, 2 user ticks
+Kernel PANIC at ../../threads/vaddr.h:84 in vtop(): assertion `is_kernel_vaddr (vaddr)' failed.
+Call stack: 0xc0107a69 0xc010d812 0xc01036d4 0xc010370a 0xc010a1aa 0xc01013f6.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 236 ticks
+Thread: 30 idle ticks, 203 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 91 reads, 432 writes
 hd1:0: 211 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 943 characters output
+Console: 1233 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

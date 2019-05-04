@@ -1,11 +1,11 @@
-Copying tests/userprog/create-long into /tmp/FCye5U3zG3.dsk...
-Writing command line to /tmp/kpg7indvks.dsk...
-qemu -hda /tmp/kpg7indvks.dsk -hdb /tmp/ObRwfrBmz4.dsk -hdc /tmp/FCye5U3zG3.dsk -hdd /tmp/QE7jvMOJaK.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-long into /tmp/9hSRFOfRzD.dsk...
+Writing command line to /tmp/V2qiug3hYZ.dsk...
+qemu -hda /tmp/V2qiug3hYZ.dsk -hdb /tmp/GSHuhq20jU.dsk -hdc /tmp/9hSRFOfRzD.dsk -hdd /tmp/CHnloVB4BU.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-long run create-long
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  105,676,800 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,8 +19,8 @@ Executing 'create-long':
 (create-long) end
 create-long: exit(0)
 Execution of 'create-long' complete.
-Timer: 140 ticks
-Thread: 30 idle ticks, 107 kernel ticks, 3 user ticks
+Timer: 147 ticks
+Thread: 30 idle ticks, 114 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 82 reads, 206 writes
 hd1:0: 97 reads, 0 writes

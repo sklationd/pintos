@@ -1,12 +1,12 @@
-Copying tests/userprog/close-twice into /tmp/SC_zeSZbKL.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/SC_zeSZbKL.dsk...
-Writing command line to /tmp/GRBNepYPZB.dsk...
-qemu -hda /tmp/GRBNepYPZB.dsk -hdb /tmp/lISuqoMtcI.dsk -hdc /tmp/SC_zeSZbKL.dsk -hdd /tmp/zMTbGlElbl.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/close-twice into /tmp/ARuPnguIId.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/ARuPnguIId.dsk...
+Writing command line to /tmp/W7iRT16mJr.dsk...
+qemu -hda /tmp/W7iRT16mJr.dsk -hdb /tmp/3_LC8ee24X.dsk -hdc /tmp/ARuPnguIId.dsk -hdd /tmp/s85apWwQRc.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put close-twice put sample.txt run close-twice
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 99 sector (49 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,8 +22,8 @@ Executing 'close-twice':
 (close-twice) close "sample.txt" again
 close-twice: exit(-1)
 Execution of 'close-twice' complete.
-Timer: 141 ticks
-Thread: 30 idle ticks, 110 kernel ticks, 1 user ticks
+Timer: 142 ticks
+Thread: 30 idle ticks, 111 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 96 reads, 208 writes
 hd1:0: 99 reads, 0 writes
