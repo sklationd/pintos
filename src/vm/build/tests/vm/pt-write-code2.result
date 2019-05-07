@@ -1,24 +1,8 @@
 FAIL
-Kernel panic in run: PANIC at ../../threads/vaddr.h:74 in ptov(): assertion `(void *) paddr < PHYS_BASE' failed.
-Call stack: 0xc0107a69 0xc010aedf 0xc0101f07 0xc010203f 0xc010757b 0xc010cceb 0xc010c2db 0xc010b378 0xc010b771 0xc0101f07 0xc010203f 0x804a19f 0x80480e7 0x8048744 0x8048770
+Kernel panic in run: PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
+Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de
 Translation of call stack:
-In kernel.o:
-0xc0107a69: debug_panic (.../../lib/kernel/debug.c:34)
-0xc010aedf: page_fault (.../userprog/exception.c:168)
-0xc0101f07: intr_handler (..../threads/interrupt.c:361)
-0xc010203f: intr_entry (threads/intr-stubs.S:38)
-0xc010757b: memcpy (...ild/../../lib/string.c:16)
-0xc010cceb: inode_read_at (...../../filesys/inode.c:243)
-0xc010c2db: file_read (...d/../../filesys/file.c:72)
-0xc010b378: read (...../userprog/syscall.c:147)
-0xc010b771: syscall_handler (...../userprog/syscall.c:281)
-0xc0101f07: intr_handler (..../threads/interrupt.c:361)
-0xc010203f: intr_entry (threads/intr-stubs.S:38)
-In tests/vm/pt-write-code2:
-0x0804a19f: read (...../lib/user/syscall.c:117)
-0x080480e7: test_main (...s/vm/pt-write-code-2.c:14)
-0x08048744: main (...ild/../../tests/main.c:13)
-0x08048770: _start (.../../../lib/user/entry.c:9)
-Translations of user virtual addresses above are based on a guess at
-the binary to use.  If this guess is incorrect, then those
-translations will be misleading.
+0xc01079f9: debug_panic (.../../lib/kernel/debug.c:34)
+0xc0104ac1: disk_size (.../../../devices/disk.c:210)
+0xc010dc2c: swap_init (.../build/../../vm/swap.c:26)
+0xc01005de: main (.../../../threads/init.c:113)

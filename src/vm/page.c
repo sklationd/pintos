@@ -4,14 +4,21 @@
  * Initialize supplementary page table
  */
 
-void create_sup_pd() {
-	thread_current()->sup_page_dir = palloc_get_page(PAL_ZERO);
+unsigned page_hash_function(const struct hash_elem *e, void *aux){
+	uint32_t* user_vaddr = hash_entry(e, struct sup_page_table_entry, hash_elem)->user_vaddr;
+	return hash_int((int)user_vaddr);
+}
+
+bool page_hash_less(const struct hash_elem *a, const struct hash_elem *b, void *aux UNUSED){
+	return hash_entry(a, struct sup_page_table_entry, hash_elem)->user_vaddr < 
+		   hash_entry(b, struct sup_page_table_entry, hash_elem)->user_vaddr;
 }
 
 void 
 page_init (void)
 {
-	create_sup_pd();
+	thread_current()->sup_page_dir = malloc(sizeof(struct hash));
+	hash_init(thread_current()->sup_page_dir, page_hash_function, page_hash_less, NULL);
 }
 
 /*
@@ -20,30 +27,66 @@ page_init (void)
 struct sup_page_table_entry *
 allocate_page (void *addr)
 {
-	struct sup_page_table_entry *ent;
-	uint32_t *pd = thread_current()->sup_page_dir;
-	uint32_t *pde = pd + pd_no(addr);
-	struct sup_page_table_entry **pte;
-	if(*pde == 0){ //not mapped
-		*pde = vtop(palloc_get_page(PAL_ZERO));
-	}
-	pte = ptov(*pde) + pt_no(addr);
-	*pte = vtop(palloc_get_page(PAL_ZERO));
-	ent = (struct sup_page_table_entry *)ptov(*pte);
-	ent->kernel_vaddr = pte;
-	ent->user_vaddr = addr;
-	ent->access_time = timer_ticks();
-	ent->accessed = 0;
-	ent->dirty = 0;
-	return ent;
+	struct sup_page_table_entry *spte = malloc(sizeof(struct sup_page_table_entry));
+//	spte->kernel_vaddr = NULL;
+	spte->user_vaddr = addr;
+	hash_insert(thread_current()->sup_page_dir, &spte->hash_elem);
+	spte->state = SPTE_MAPPED;
+	return spte;
 }
 
 void deallocate_page(void *addr){
-	uint32_t *pd = thread_current()->sup_page_dir;
-	uint32_t *pde = pd + pd_no(addr);
-	struct sup_page_table_entry **pte;
-	pte = ptov(*pde) + pt_no(addr);
-	palloc_free_page((*pte)->kernel_vaddr);
+	struct sup_page_table_entry spte;
+	spte.user_vaddr = addr;
+	struct hash_elem *e;
+
+	e = hash_find(thread_current()->sup_page_dir, &spte.hash_elem);
+	hash_delete(thread_current()->sup_page_dir, e);
+	free(hash_entry(e, struct sup_page_table_entry, hash_elem));
+}
+      //file, kpage, upage, page_read_bytes, page_zero_bytes, writable
+
+void lazy_load(struct file *file, void *kpage, void *upage, size_t page_read_bytes, 
+			   size_t page_zero_bytes, bool writable){
+    struct frame_table_entry *fte = find_fte(upage);
+    struct sup_page_table_entry *spte = fte->spte;
+    spte->file = file;
+    spte->kpage = kpage;
+    spte->page_read_bytes = page_read_bytes;
+    spte->page_zero_bytes = page_zero_bytes;
+    spte->writable = writable;
+    spte->state = SPTE_LOAD; 
+
 }
 
+struct sup_page_table_entry* find_spte(void *addr){ //user page address
+	struct sup_page_table_entry spte;
 
+	struct hash_elem *e;
+	spte.user_vaddr = addr;
+	e = hash_find(&thread_current()->sup_page_dir, &spte.hash_elem);
+	if(e==NULL)
+		return NULL;
+	return hash_entry(e, struct sup_page_table_entry, hash_elem);
+}
+
+void destroy_sup_page_table(){
+	struct hash *spt = thread_current()->sup_page_dir;
+	size_t i;
+
+    for (i = 0; i < spt->bucket_cnt; i++) 
+    {
+        struct list *bucket = &spt->buckets[i];
+        struct list_elem *elem, *next;
+
+        for (elem = list_begin (bucket); elem != list_end (bucket); elem = next) 
+        {
+            next = list_next (elem);
+            struct sup_page_table_entry *spte;
+            spte = hash_entry(list_entry(elem, struct hash_elem, list_elem), 
+                              struct sup_page_table_entry, hash_elem);
+            free(spte);
+        }
+    }
+    hash_destroy(spt, NULL);
+}

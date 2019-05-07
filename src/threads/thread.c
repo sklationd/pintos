@@ -51,12 +51,12 @@ priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux 
 };
 
 bool
-sema_bigger(const struct list_elem *a, const struct list_elem *b, void *aux UNUSED) {
+sema_bigger(const struct list_elem *a, const struct list_elem *b, void *aux) {
   return (list_entry(a, struct thread, sema_elem)->priority) > (list_entry(b, struct thread, sema_elem)->priority);
 };
 
 bool
-cond_bigger(const struct list_elem *a, const struct list_elem *b, void *aux UNUSED) {
+cond_bigger(const struct list_elem *a, const struct list_elem *b, void *aux) {
   return (list_entry(a, struct semaphore_elem, elem)->priority) > (list_entry(b, struct semaphore_elem, elem)->priority);
 };
 

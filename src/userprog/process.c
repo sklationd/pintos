@@ -19,7 +19,6 @@
 #include "threads/vaddr.h"
 #include "threads/synch.h"
 #include "userprog/syscall.h"
-#include "vm/frame.h"
 #include "vm/page.h"
 
 static thread_func start_process NO_RETURN;
@@ -178,7 +177,9 @@ start_process (void *lan_)
   if_.eflags = FLAG_IF | FLAG_MBS;
    /* parse file_name */
   argc = parse_instruction(file_name, argv);
+
   page_init();
+
   success = load (argv[0], &if_.eip, &if_.esp);
   sema_up(&thread_current()->parent->wait_load);
   if(success)
@@ -458,6 +459,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
           break;
         }
     }
+
   /* Set up stack. */
   if (!setup_stack (esp))
     goto done;
@@ -479,7 +481,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
 
 /* load() helpers. */
 
-static bool install_page (void *upage, void *kpage, bool writable);
+bool install_page (void *upage, void *kpage, bool writable);
 
 /* Checks whether PHDR describes a valid, loadable segment in
    FILE and returns true if so, false otherwise. */
@@ -553,28 +555,19 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
          and zero the final PAGE_ZERO_BYTES bytes. */
       size_t page_read_bytes = read_bytes < PGSIZE ? read_bytes : PGSIZE;
       size_t page_zero_bytes = PGSIZE - page_read_bytes;
+      uint8_t *kpage = allocate_frame(upage);
+      lazy_load(file, kpage, upage, page_read_bytes, page_zero_bytes, writable);
+      //file, kpage, upage, page_read_bytes, page_zero_bytes, writable
 
       /* Get a page of memory. */
-      
+      /*
       uint8_t *kpage = palloc_get_page (PAL_USER);
       if (kpage == NULL){
         return false;
-      }      
+      }
+      */
 
-      /* Load this page. */
-      if (file_read (file, kpage, page_read_bytes) != (int) page_read_bytes)
-        {
-          palloc_free_page (kpage);
-          return false; 
-        }
-      memset (kpage + page_read_bytes, 0, page_zero_bytes);
-
-      /* Add the page to the process's address space. */
-      if (!install_page (upage, kpage, writable)) 
-        {
-          palloc_free_page (kpage);
-          return false; 
-        }
+  
 
       /* Advance. */
       read_bytes -= page_read_bytes;
@@ -598,9 +591,8 @@ setup_stack (void **esp)
       success = install_page (((uint8_t *) PHYS_BASE) - PGSIZE, kpage, true);
       if (success)
         *esp = PHYS_BASE;
-      else{
+      else
         palloc_free_page (kpage);
-      }
     }
   return success;
 }
@@ -614,7 +606,7 @@ setup_stack (void **esp)
    with palloc_get_page().
    Returns true on success, false if UPAGE is already mapped or
    if memory allocation fails. */
-static bool
+bool
 install_page (void *upage, void *kpage, bool writable)
 {
   struct thread *t = thread_current ();

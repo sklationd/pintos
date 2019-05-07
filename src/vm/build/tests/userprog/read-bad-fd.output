@@ -1,29 +1,18 @@
-Copying tests/userprog/read-bad-fd into /tmp/CBeEx7psG_.dsk...
-Writing command line to /tmp/87PmHyiMMP.dsk...
-qemu -hda /tmp/87PmHyiMMP.dsk -hdb /tmp/gkCrgHT65k.dsk -hdc /tmp/CBeEx7psG_.dsk -hdd /tmp/7MZIoKuefh.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/read-bad-fd into /tmp/mNJxLXYXRf.dsk...
+Writing command line to /tmp/XfHRjlCijd.dsk...
+qemu -hda /tmp/XfHRjlCijd.dsk -hdb /tmp/WQaPyLA0A4.dsk -hdc /tmp/mNJxLXYXRf.dsk -hdd /tmp/SBhObljtYv.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put read-bad-fd run read-bad-fd
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'read-bad-fd' into the file system...
-Executing 'read-bad-fd':
-(read-bad-fd) begin
-read-bad-fd: exit(-1)
-Execution of 'read-bad-fd' complete.
-Timer: 137 ticks
-Thread: 30 idle ticks, 107 kernel ticks, 0 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 62 reads, 202 writes
-hd1:0: 97 reads, 0 writes
-hd1:1: 0 reads, 0 writes
-Console: 904 characters output
+Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
+Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 529 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

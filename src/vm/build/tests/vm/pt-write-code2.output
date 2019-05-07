@@ -1,35 +1,19 @@
-Copying tests/vm/pt-write-code2 into /tmp/GOoSpF7aCj.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/GOoSpF7aCj.dsk...
-Writing command line to /tmp/9lPoq372sJ.dsk...
-qemu -hda /tmp/9lPoq372sJ.dsk -hdb /tmp/UXOudr7Q5C.dsk -hdc /tmp/GOoSpF7aCj.dsk -hdd /tmp/wLVs0jx0SS.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-write-code2 into /tmp/CE8Y_xeO9_.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/CE8Y_xeO9_.dsk...
+Writing command line to /tmp/a1Oc_JonCq.dsk...
+qemu -hda /tmp/a1Oc_JonCq.dsk -hdb /tmp/FbHDNEdQ6L.dsk -hdc /tmp/CE8Y_xeO9_.dsk -hdd /tmp/uh9hxnSnl3.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-write-code2 put sample.txt run pt-write-code2
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  130,867,200 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 100 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'pt-write-code2' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'pt-write-code2':
-(pt-write-code2) begin
-(pt-write-code2) open "sample.txt"
-Kernel PANIC at ../../threads/vaddr.h:74 in ptov(): assertion `(void *) paddr < PHYS_BASE' failed.
-Call stack: 0xc0107a69 0xc010aedf 0xc0101f07 0xc010203f 0xc010757b 0xc010cceb 0xc010c2db 0xc010b378 0xc010b771 0xc0101f07 0xc010203f 0x804a19f 0x80480e7 0x8048744 0x8048770.
+Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
+Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
 The `backtrace' program can make call stacks useful.
 Read "Backtraces" in the "Debugging Tools" chapter
 of the Pintos documentation for more information.
-Timer: 144 ticks
-Thread: 30 idle ticks, 113 kernel ticks, 1 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 97 reads, 210 writes
-hd1:0: 100 reads, 0 writes
-hd1:1: 0 reads, 0 writes
-Console: 1384 characters output
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 550 characters output
 Keyboard: 0 keys pressed
-Exception: 1 page faults
+Exception: 0 page faults
 Powering off...

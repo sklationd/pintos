@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include "threads/synch.h"
 #include "filesys/file.h"
+#include <hash.h>
 /* States in a thread's life cycle. */
 enum thread_status
   {
@@ -124,9 +125,12 @@ struct thread
     struct file *current_executable;
     int child_exit_status[128];         //same index
     int exit_status;
-    uint32_t *sup_page_dir;
+
+    struct hash *sup_page_dir;
 
 #endif
+
+
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */
 

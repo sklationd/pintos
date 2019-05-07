@@ -1,11 +1,11 @@
-Copying tests/userprog/create-exists into /tmp/4qYt5ej3uX.dsk...
-Writing command line to /tmp/6pr1Wa5XJF.dsk...
-qemu -hda /tmp/6pr1Wa5XJF.dsk -hdb /tmp/Nj0uOsCq1O.dsk -hdc /tmp/4qYt5ej3uX.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-exists into /tmp/e3dSefE1oH.dsk...
+Writing command line to /tmp/n5znrt8NJb.dsk...
+qemu -hda /tmp/n5znrt8NJb.dsk -hdb /tmp/w30Rn_ByKx.dsk -hdc /tmp/e3dSefE1oH.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-exists run create-exists
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 374 pages available in user pool.
-Calibrating timer...  199,270,400 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 137 sector (68 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,12 +22,12 @@ Executing 'create-exists':
 (create-exists) end
 create-exists: exit(0)
 Execution of 'create-exists' complete.
-Timer: 147 ticks
-Thread: 30 idle ticks, 111 kernel ticks, 7 user ticks
+Timer: 74 ticks
+Thread: 30 idle ticks, 41 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 185 reads, 214 writes
 hd1:0: 97 reads, 0 writes
-Console: 1015 characters output
+Console: 1013 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

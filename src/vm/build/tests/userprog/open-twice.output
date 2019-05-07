@@ -1,34 +1,19 @@
-Copying tests/userprog/open-twice into /tmp/cqqreaxnEW.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/cqqreaxnEW.dsk...
-Writing command line to /tmp/wnnAwnPWrF.dsk...
-qemu -hda /tmp/wnnAwnPWrF.dsk -hdb /tmp/hJEvi_RRM_.dsk -hdc /tmp/cqqreaxnEW.dsk -hdd /tmp/7zoTS64Fgk.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/open-twice into /tmp/MFe0CiEUlE.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/MFe0CiEUlE.dsk...
+Writing command line to /tmp/WrQo4VSEBq.dsk...
+qemu -hda /tmp/WrQo4VSEBq.dsk -hdb /tmp/01E6Kz5PEU.dsk -hdc /tmp/MFe0CiEUlE.dsk -hdd /tmp/OlJxOmL43z.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put open-twice put sample.txt run open-twice
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 99 sector (49 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'open-twice' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'open-twice':
-(open-twice) begin
-(open-twice) open "sample.txt" once
-(open-twice) open "sample.txt" again
-(open-twice) end
-open-twice: exit(0)
-Execution of 'open-twice' complete.
-Timer: 143 ticks
-Thread: 30 idle ticks, 111 kernel ticks, 2 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 115 reads, 208 writes
-hd1:0: 99 reads, 0 writes
-hd1:1: 0 reads, 0 writes
-Console: 1047 characters output
+Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
+Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 542 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

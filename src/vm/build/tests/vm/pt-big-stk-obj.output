@@ -1,29 +1,18 @@
-Copying tests/vm/pt-big-stk-obj into /tmp/lmbOCGWpPg.dsk...
-Writing command line to /tmp/duZI2tCeUb.dsk...
-qemu -hda /tmp/duZI2tCeUb.dsk -hdb /tmp/9oU0h6zfZl.dsk -hdc /tmp/lmbOCGWpPg.dsk -hdd /tmp/vZBQfFrVRO.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-big-stk-obj into /tmp/Odj3x8vt8p.dsk...
+Writing command line to /tmp/jxMg35FFnC.dsk...
+qemu -hda /tmp/jxMg35FFnC.dsk -hdb /tmp/gq0HAblbab.dsk -hdc /tmp/Odj3x8vt8p.dsk -hdd /tmp/BSox4bMyjh.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-big-stk-obj run pt-big-stk-obj
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 106 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'pt-big-stk-obj' into the file system...
-Executing 'pt-big-stk-obj':
-(pt-big-stk-obj) begin
-pt-big-stk-obj: exit(-1)
-Execution of 'pt-big-stk-obj' complete.
-Timer: 147 ticks
-Thread: 30 idle ticks, 116 kernel ticks, 1 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 65 reads, 220 writes
-hd1:0: 106 reads, 0 writes
-hd1:1: 0 reads, 0 writes
-Console: 927 characters output
+Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
+Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 535 characters output
 Keyboard: 0 keys pressed
-Exception: 1 page faults
+Exception: 0 page faults
 Powering off...

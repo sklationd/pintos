@@ -1,29 +1,18 @@
-Copying tests/userprog/bad-write into /tmp/4xvNLz3CSZ.dsk...
-Writing command line to /tmp/Wqri48ymLY.dsk...
-qemu -hda /tmp/Wqri48ymLY.dsk -hdb /tmp/d36f0LTBK7.dsk -hdc /tmp/4xvNLz3CSZ.dsk -hdd /tmp/05g3bKuGZf.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/bad-write into /tmp/qA9WLxN7IP.dsk...
+Writing command line to /tmp/_7Z_pNaaW0.dsk...
+qemu -hda /tmp/_7Z_pNaaW0.dsk -hdb /tmp/6ClYOJybij.dsk -hdc /tmp/qA9WLxN7IP.dsk -hdd /tmp/fQBnCmX2e3.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put bad-write run bad-write
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  166,502,400 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'bad-write' into the file system...
-Executing 'bad-write':
-(bad-write) begin
-bad-write: exit(-1)
-Execution of 'bad-write' complete.
-Timer: 144 ticks
-Thread: 30 idle ticks, 113 kernel ticks, 1 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 62 reads, 202 writes
-hd1:0: 97 reads, 0 writes
-hd1:1: 0 reads, 0 writes
-Console: 890 characters output
+Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
+Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 525 characters output
 Keyboard: 0 keys pressed
-Exception: 1 page faults
+Exception: 0 page faults
 Powering off...

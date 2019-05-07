@@ -11,8 +11,6 @@
 #include "threads/loader.h"
 #include "threads/synch.h"
 #include "threads/vaddr.h"
-#include "vm/frame.h"
-#include "vm/page.h"
 
 /* Page allocator.  Hands out memory in page-size (or
    page-multiple) chunks.  See malloc.h for an allocator that
@@ -82,7 +80,6 @@ palloc_get_multiple (enum palloc_flags flags, size_t page_cnt)
   struct pool *pool = flags & PAL_USER ? &user_pool : &kernel_pool;
   void *pages;
   size_t page_idx;
-  int i;
 
   if (page_cnt == 0)
     return NULL;
@@ -107,15 +104,6 @@ palloc_get_multiple (enum palloc_flags flags, size_t page_cnt)
         PANIC ("palloc_get: out of pages");
     }
 
-  if(flags & PAL_USER){
-    for(i=0;i<page_cnt;i++){
-      if(!allocate_frame(pages+i*PGSIZE)){
-        //swaptable anjtlrl
-      }
-      allocate_page(pages+i*PGSIZE);
-    }
-  }
-
   return pages;
 }
 
@@ -138,7 +126,6 @@ palloc_free_multiple (void *pages, size_t page_cnt)
 {
   struct pool *pool;
   size_t page_idx;
-  int i;
 
   ASSERT (pg_ofs (pages) == 0);
   if (pages == NULL || page_cnt == 0)
@@ -159,13 +146,6 @@ palloc_free_multiple (void *pages, size_t page_cnt)
 
   ASSERT (bitmap_all (pool->used_map, page_idx, page_cnt));
   bitmap_set_multiple (pool->used_map, page_idx, page_cnt, false);
-
-  if(pool==&user_pool){
-    for(i=0;i<page_cnt;i++){
-      deallocate_frame(pages+i*PGSIZE);
-      deallocate_page(pages+i*PGSIZE);
-    }
-  }
 }
 
 /* Frees the page at PAGE. */

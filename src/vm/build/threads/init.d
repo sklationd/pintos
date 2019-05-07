@@ -9,7 +9,8 @@ threads/init.o: ../../threads/init.c ../../threads/init.h \
  ../../threads/malloc.h ../../threads/palloc.h ../../threads/pte.h \
  ../../threads/vaddr.h ../../threads/thread.h ../../lib/kernel/list.h \
  ../../threads/synch.h ../../filesys/file.h ../../filesys/off_t.h \
- ../../userprog/process.h ../../userprog/exception.h ../../userprog/gdt.h \
- ../../userprog/syscall.h ../../userprog/tss.h ../../devices/disk.h \
- ../../lib/inttypes.h ../../filesys/filesys.h ../../filesys/fsutil.h \
- ../../vm/frame.h ../../lib/kernel/hash.h ../../lib/kernel/list.h
+ ../../lib/kernel/hash.h ../../lib/kernel/list.h ../../userprog/process.h \
+ ../../userprog/exception.h ../../userprog/gdt.h ../../userprog/syscall.h \
+ ../../userprog/tss.h ../../devices/disk.h ../../lib/inttypes.h \
+ ../../filesys/filesys.h ../../filesys/fsutil.h ../../vm/frame.h \
+ ../../vm/swap.h

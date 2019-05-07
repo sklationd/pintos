@@ -1,36 +1,19 @@
-Copying tests/userprog/wait-killed into /tmp/iuj_g59n9L.dsk...
-Copying tests/userprog/child-bad into /tmp/iuj_g59n9L.dsk...
-Writing command line to /tmp/7hrw_697UL.dsk...
-qemu -hda /tmp/7hrw_697UL.dsk -hdb /tmp/oKSiJoQ_0B.dsk -hdc /tmp/iuj_g59n9L.dsk -hdd /tmp/ZXcn2KimCf.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/wait-killed into /tmp/dA_4HdhPPi.dsk...
+Copying tests/userprog/child-bad into /tmp/dA_4HdhPPi.dsk...
+Writing command line to /tmp/ZdEgtzB6FD.dsk...
+qemu -hda /tmp/ZdEgtzB6FD.dsk -hdb /tmp/DZPo26u4VJ.dsk -hdc /tmp/dA_4HdhPPi.dsk -hdd /tmp/MCgymgFnRt.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put wait-killed put child-bad run wait-killed
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 194 sector (97 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'wait-killed' into the file system...
-Putting 'child-bad' into the file system...
-Executing 'wait-killed':
-(wait-killed) begin
-(child-bad) begin
-child-bad: exit(-1)
-(wait-killed) wait(exec()) = -1
-(wait-killed) end
-wait-killed: exit(0)
-Kernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
-Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010ae37 0xc0101f07 0xc010203f 0xc010b5c3 0xc0101f07 0xc010203f 0x80480adKernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
-Timer: 221 ticks
-Thread: 30 idle ticks, 189 kernel ticks, 2 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 123 reads, 398 writes
-hd1:0: 194 reads, 0 writes
-hd1:1: 0 reads, 0 writes
-Console: 1410 characters output
+Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
+Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 543 characters output
 Keyboard: 0 keys pressed
-Exception: 3 page faults
+Exception: 0 page faults
 Powering off...

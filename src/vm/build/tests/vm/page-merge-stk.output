@@ -1,33 +1,19 @@
-Copying tests/vm/page-merge-stk into /tmp/dTCzXJ0XgG.dsk...
-Copying tests/vm/child-qsort into /tmp/dTCzXJ0XgG.dsk...
-Writing command line to /tmp/OSuLMU9L2s.dsk...
-qemu -hda /tmp/OSuLMU9L2s.dsk -hdb /tmp/c1d88TMOfO.dsk -hdc /tmp/dTCzXJ0XgG.dsk -hdd /tmp/cv_B_MDtSN.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-stk into /tmp/goQzERliJr.dsk...
+Copying tests/vm/child-qsort into /tmp/goQzERliJr.dsk...
+Writing command line to /tmp/bcHe4Jzh1H.dsk...
+qemu -hda /tmp/bcHe4Jzh1H.dsk -hdb /tmp/HR3aWml0fs.dsk -hdc /tmp/goQzERliJr.dsk -hdd /tmp/dnmexkglkL.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-stk put child-qsort run page-merge-stk
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 211 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'page-merge-stk' into the file system...
-Putting 'child-qsort' into the file system...
-Executing 'page-merge-stk':
-Kernel PANIC at ../../threads/vaddr.h:84 in vtop(): assertion `is_kernel_vaddr (vaddr)' failed.
-Call stack: 0xc0107a69 0xc010d812 0xc01036d4 0xc010370a 0xc010a1aa 0xc01013f6.
+Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
+Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
 The `backtrace' program can make call stacks useful.
 Read "Backtraces" in the "Debugging Tools" chapter
 of the Pintos documentation for more information.
-Timer: 233 ticks
-Thread: 30 idle ticks, 199 kernel ticks, 4 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 91 reads, 432 writes
-hd1:0: 211 reads, 0 writes
-hd1:1: 0 reads, 0 writes
-Console: 1231 characters output
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 551 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

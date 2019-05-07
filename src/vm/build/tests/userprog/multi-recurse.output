@@ -1,63 +1,18 @@
-Copying tests/userprog/multi-recurse into /tmp/YTZV2Hfj8a.dsk...
-Writing command line to /tmp/yrbghEMIZ2.dsk...
-qemu -hda /tmp/yrbghEMIZ2.dsk -hdb /tmp/rb0iLEhOjC.dsk -hdc /tmp/YTZV2Hfj8a.dsk -hdd /tmp/cqUp10OrWd.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/multi-recurse into /tmp/dG46cZyxsG.dsk...
+Writing command line to /tmp/1IS0yATBuq.dsk...
+qemu -hda /tmp/1IS0yATBuq.dsk -hdb /tmp/oeYi92oPSo.dsk -hdc /tmp/dG46cZyxsG.dsk -hdd /tmp/z0yPL0Iakk.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put multi-recurse run 'multi-recurse 15'
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  156,467,200 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 108 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'multi-recurse' into the file system...
-Executing 'multi-recurse 15':
-(multi-recurse) begin 15
-(multi-recurse) exec("multi-recurse 14")
-(multi-recurse) begin 14
-(multi-recurse) exec("multi-recurse 13")
-(multi-recurse) begin 13
-(multi-recurse) exec("multi-recurse 12")
-(multi-recurse) begin 12
-(multi-recurse) exec("multi-recurse 11")
-(multi-recurse) begin 11
-(multi-recurse) exec("multi-recurse 10")
-(multi-recurse) begin 10
-(multi-recurse) exec("multi-recurse 9")
-(multi-recurse) begin 9
-(multi-recurse) exec("multi-recurse 8")
-(multi-recurse) begin 8
-(multi-recurse) exec("multi-recurse 7")
-(multi-recurse) begin 7
-(multi-recurse) exec("multi-recurse 6")
-(multi-recurse) begin 6
-(multi-recurse) exec("multi-recurse 5")
-(multi-recurse) begin 5
-(multi-recurse) exec("multi-recurse 4")
-(multi-recurse) begin 4
-(multi-recurse) exec("multi-recurse 3")
-(multi-recurse) begin 3
-(multi-recurse) exec("multi-recurse 2")
-(multi-recurse) begin 2
-(multi-recurse) exec("multi-recurse 1")
-(multi-recurse) begin 1
-(multi-recurse) exec("multi-recurse 0")
-(multi-recurse) begin 0
-(multi-recurse) end 0
-multi-recurse: exit(0)
-(multi-recurse) end 1
-multi-recurse: exit(1)
-Kernel PANIC at ../../userprog/pagedir.c:71 in lookup_page(): assertion `pd != NULL' failed.
-Call stack: 0xc0107a69 0xc010a408 0xc010a609 0xc010ae27 0xc0101f07 0xc010203f 0xc010d6eb 0xc01035b3 0xc01035e7 0xc010ab2e 0xc0109a2f 0xc010100c 0xc010b079 0xc010b5fb 0xc0101f07 0xc010203f 0x804a6a9Kernel PANIC recursion at ../../userprog/pagedir.c:71 in lookup_page().
-Timer: 162 ticks
-Thread: 30 idle ticks, 121 kernel ticks, 11 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 576 reads, 224 writes
-hd1:0: 108 reads, 0 writes
-hd1:1: 0 reads, 0 writes
-Console: 2292 characters output
+Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
+Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 538 characters output
 Keyboard: 0 keys pressed
-Exception: 2 page faults
+Exception: 0 page faults
 Powering off...

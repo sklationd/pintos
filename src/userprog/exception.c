@@ -5,12 +5,10 @@
 #include "threads/interrupt.h"
 #include "threads/thread.h"
 #include "threads/pte.h"
-#include "userprog/pagedir.h"
-#include "threads/palloc.h"
-#include "threads/vaddr.h"
+#include "userprog/process.h"
 #include "vm/frame.h"
 #include "vm/page.h"
-
+#include "vm/swap.h"
 /* Number of page faults processed. */
 static long long page_fault_cnt;
 
@@ -124,7 +122,7 @@ kill (struct intr_frame *f)
    example code here shows how to parse that information.  You
    can find more information about both of these in the
    description of "Interrupt 14--Page Fault Exception (#PF)" in
-   [IA32-v3a] section 5.15 "Exception aand Interrupt Reference". */
+   [IA32-v3a] section 5.15 "Exception and Interrupt Reference". */
 static void
 page_fault (struct intr_frame *f) 
 {
@@ -132,6 +130,7 @@ page_fault (struct intr_frame *f)
   bool write;        /* True: access was write, false: access was read. */
   bool user;         /* True: access by user, false: access by kernel. */
   void *fault_addr;  /* Fault address. */
+  void* fault_page = pg_round_down(fault_addr);
 
   /* Obtain faulting address, the virtual address that was
      accessed to cause the fault.  It may point to code or to
@@ -154,29 +153,51 @@ page_fault (struct intr_frame *f)
   write = (f->error_code & PF_W) != 0;
   user = (f->error_code & PF_U) != 0;
   
+  if(!not_present)
+    exit(-1);
+
   if(user && is_kernel_vaddr(fault_addr)){
     exit(-1);
   }
   
   uint32_t *pd = thread_current()->pagedir;
-  if(!pagedir_get_page(pd,fault_addr))
+  if(!pagedir_get_page(pd, fault_addr))
     exit(-1);
 
-  uint32_t *pde = pd + pd_no(fault_addr);
-  uint32_t *pte = pde_get_pt(ptov(*pde)) + pt_no(fault_addr);
+  //spte->state
+  struct sup_page_table_entry *spte = find_spte(fault_page);
+  if(spte == NULL){
+    void *kernel = allocate_frame(fault_page);
+    pagedir_set_page(pd,fault_page, kernel, true); 
+  }
+  else if(spte->state == SPTE_EVICTED){
+    swap_in(fault_page);
+  }
+  else if(spte->state == SPTE_LOAD){
+      if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
+        {
+          palloc_free_page (spte->kpage);
+          return false; 
+        }
+      memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
 
-  if(!((uint32_t)pte & PTE_W) && write){
+      if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
+        {
+          palloc_free_page (spte->kpage);
+          return false; 
+        }
+  }
+  /*
+  if(!((uint32_t)(*pte) & PTE_W) && write){
     exit(-1);
   }
-
-  void *kpage = palloc_get_page(PAL_USER|PAL_ZERO);
-  pagedir_set_page(pd, fault_addr, kpage, !!((uint32_t)pte & PTE_W) );
+  */
 
   
   /* To implement virtual memory, delete the rest of the function
      body, and replace it with code that brings in the page to
      which fault_addr refers. */
-  /*
+/*
   printf ("Page fault at %p: %s error %s page in %s context.\n",
           fault_addr,
           not_present ? "not present" : "rights violation",
@@ -184,6 +205,5 @@ page_fault (struct intr_frame *f)
           user ? "user" : "kernel");
   kill (f);
   */
-  
 }
 
