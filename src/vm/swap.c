@@ -23,6 +23,7 @@ void
 swap_init (void)
 {
 	swap_device = disk_get(1,1);
+	ASSERT(swap_device != NULL);
 	swap_table = bitmap_create(disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE);
 	lock_init(&swap_lock);
 }

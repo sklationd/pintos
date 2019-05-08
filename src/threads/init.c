@@ -109,9 +109,6 @@ main (void)
   /* Start thread scheduler and enable interrupts. */
   is_thread_system_ready = 1;
   frame_init();
-#ifdef VM
-  swap_init();
-#endif
   thread_start ();
   serial_init_queue ();
   timer_calibrate ();
@@ -120,6 +117,8 @@ main (void)
   /* Initialize file system. */
   disk_init ();
   filesys_init (format_filesys);
+  
+  swap_init();
 #endif
   printf ("Boot complete.\n");
   /* Run actions specified on kernel command line. */

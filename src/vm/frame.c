@@ -42,9 +42,8 @@ frame_init (void)
  * Make a new frame table entry for addr.
  */
 uint32_t *
-_allocate_frame (void *_addr) // user virtual address
+_allocate_frame (void *addr) // user virtual address
 {	
-	void *addr = pg_round_down(_addr);
 	struct frame_table_entry *fte = malloc(sizeof(struct frame_table_entry));
 	if(fte == NULL)
 		return NULL;
@@ -70,12 +69,14 @@ _allocate_frame (void *_addr) // user virtual address
 	return fte->kernel;
 }
 uint32_t *
-allocate_frame (void *addr){
+allocate_frame (void *_addr){
+	void *addr = pg_round_down(_addr);
 	uint32_t *kernel = _allocate_frame(addr);
 	if(kernel == NULL) {
 		if(!swap_out())
 			exit(-1); // TODO panic
 		kernel = _allocate_frame(addr);
+		ASSERT(kernel!=NULL);
 	}
 	return kernel;
 }
@@ -107,7 +108,8 @@ struct frame_table_entry* find_fte(void *addr){ //user
 	return hash_entry(e, struct frame_table_entry, hash_elem);
 }
 
-void free_frame(void *addr){
+void free_frame(void *_addr){
+	void *addr = pg_round_down(_addr);
 	struct frame_table_entry fte;
 	struct hash_elem *e;
 
@@ -115,6 +117,8 @@ void free_frame(void *addr){
 	fte.owner = thread_current();
 	lock_acquire(&frame_table_lock);
 	e = hash_find(&frame_table, &fte.hash_elem);
+	hash_delete(&frame_table,e);
+	list_remove(&hash_entry(e, struct frame_table_entry, hash_elem)->list_elem);
 	lock_release(&frame_table_lock);
 
 	palloc_free_page(hash_entry(e, struct frame_table_entry, hash_elem)->kernel);

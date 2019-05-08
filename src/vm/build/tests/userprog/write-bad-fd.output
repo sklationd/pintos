@@ -1,18 +1,29 @@
-Copying tests/userprog/write-bad-fd into /tmp/mnrPPPIiAE.dsk...
-Writing command line to /tmp/55fUBD3f4L.dsk...
-qemu -hda /tmp/55fUBD3f4L.dsk -hdb /tmp/0Z6ANpAEXy.dsk -hdc /tmp/mnrPPPIiAE.dsk -hdd /tmp/oD9t_cBODI.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/write-bad-fd into /tmp/ahly8Ft5yT.dsk...
+Writing command line to /tmp/aNiFV3C97P.dsk...
+qemu -hda /tmp/aNiFV3C97P.dsk -hdb /tmp/5s1joV472G.dsk -hdc /tmp/ahly8Ft5yT.dsk -hdd /tmp/O5imiSYN5w.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put write-bad-fd run write-bad-fd
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 531 characters output
+Calibrating timer...  209,510,400 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'write-bad-fd' into the file system...
+Executing 'write-bad-fd':
+(write-bad-fd) begin
+write-bad-fd: exit(-1)
+Execution of 'write-bad-fd' complete.
+Timer: 139 ticks
+Thread: 30 idle ticks, 108 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 62 reads, 202 writes
+hd1:0: 97 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 911 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

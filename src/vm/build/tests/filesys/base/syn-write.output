@@ -1,12 +1,12 @@
-Copying tests/filesys/base/syn-write into /tmp/6nmEU0Ntzq.dsk...
-Copying tests/filesys/base/child-syn-wrt into /tmp/6nmEU0Ntzq.dsk...
-Writing command line to /tmp/nCMNFIv4__.dsk...
-qemu -hda /tmp/nCMNFIv4__.dsk -hdb /tmp/9eeyOsG6bE.dsk -hdc /tmp/6nmEU0Ntzq.dsk -hdd /tmp/IIfZYAl98d.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/syn-write into /tmp/cvM0JKB5gm.dsk...
+Copying tests/filesys/base/child-syn-wrt into /tmp/cvM0JKB5gm.dsk...
+Writing command line to /tmp/0Jr7_I1Pa3.dsk...
+qemu -hda /tmp/0Jr7_I1Pa3.dsk -hdb /tmp/pqeBVlVEiD.dsk -hdc /tmp/cvM0JKB5gm.dsk -hdd /tmp/WVlevPV5O4.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put syn-write put child-syn-wrt run syn-write
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  130,867,200 loops/s.
+Calibrating timer...  78,233,600 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 213 sector (106 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -53,13 +53,13 @@ child-syn-wrt: exit(9)
 (syn-write) end
 syn-write: exit(0)
 Execution of 'syn-write' complete.
-Timer: 90 ticks
-Thread: 30 idle ticks, 43 kernel ticks, 17 user ticks
+Timer: 255 ticks
+Thread: 30 idle ticks, 207 kernel ticks, 18 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 557 reads, 460 writes
 hd1:0: 213 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 2373 characters output
+Console: 2374 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

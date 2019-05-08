@@ -1,8 +1,13 @@
 FAIL
-Kernel panic in run: PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de
+Kernel panic in run: PANIC at ../../lib/kernel/list.c:84 in list_next(): assertion `is_head (elem) || is_interior (elem)' failed.
+Call stack: 0xc01079f9 0xc0107e43 0xc0109289 0xc01092d0 0xc010d535 0xc010db16 0xc010d6b4 0xc010a15a 0xc01013f6
 Translation of call stack:
 0xc01079f9: debug_panic (.../../lib/kernel/debug.c:34)
-0xc0104ac1: disk_size (.../../../devices/disk.c:210)
-0xc010dc2c: swap_init (.../build/../../vm/swap.c:26)
-0xc01005de: main (.../../../threads/init.c:113)
+0xc0107e43: is_sorted (.../../lib/kernel/list.c:352)
+0xc0109289: find_elem (.../../lib/kernel/hash.c:319)
+0xc01092d0: hash_find (.../../lib/kernel/hash.c:135)
+0xc010d535: free_frame (...uild/../../vm/frame.c:117)
+0xc010db16: swap_out (...build/../../vm/swap.c:118)
+0xc010d6b4: allocate_frame (...build/../../vm/frame.c:76)
+0xc010a15a: load_segment (...../userprog/process.c:558)
+0xc01013f6: kernel_thread (..../../threads/thread.c:503)

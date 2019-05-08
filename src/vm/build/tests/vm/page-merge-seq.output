@@ -1,19 +1,33 @@
-Copying tests/vm/page-merge-seq into /tmp/06RtP8pgtv.dsk...
-Copying tests/vm/child-sort into /tmp/06RtP8pgtv.dsk...
-Writing command line to /tmp/Dn475wquKO.dsk...
-qemu -hda /tmp/Dn475wquKO.dsk -hdb /tmp/eo_OzF_RxX.dsk -hdc /tmp/06RtP8pgtv.dsk -hdd /tmp/s00sLBGgpU.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-seq into /tmp/mkK1ycwURg.dsk...
+Copying tests/vm/child-sort into /tmp/mkK1ycwURg.dsk...
+Writing command line to /tmp/Din3lMiGE8.dsk...
+qemu -hda /tmp/Din3lMiGE8.dsk -hdb /tmp/UeNafQWShh.dsk -hdc /tmp/mkK1ycwURg.dsk -hdd /tmp/MbBKJ_IDHG.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-seq put child-sort run page-merge-seq
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
+Calibrating timer...  153,600,000 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 204 sector (102 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'page-merge-seq' into the file system...
+Putting 'child-sort' into the file system...
+Executing 'page-merge-seq':
+Kernel PANIC at ../../lib/string.c:283 in memset(): assertion `dst != NULL || size == 0' failed.
+Call stack: 0xc01079f9 0xc0106f03 0xc010a1a9 0xc01013f6.
 The `backtrace' program can make call stacks useful.
 Read "Backtraces" in the "Debugging Tools" chapter
 of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 550 characters output
+Timer: 241 ticks
+Thread: 30 idle ticks, 201 kernel ticks, 10 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 91 reads, 418 writes
+hd1:0: 204 reads, 0 writes
+hd1:1: 0 reads, 16 writes
+Console: 1210 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

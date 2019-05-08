@@ -1,19 +1,36 @@
-Copying tests/userprog/wait-twice into /tmp/IweHafRtl4.dsk...
-Copying tests/userprog/child-simple into /tmp/IweHafRtl4.dsk...
-Writing command line to /tmp/_9uwZ1SzXB.dsk...
-qemu -hda /tmp/_9uwZ1SzXB.dsk -hdb /tmp/a2arKHJRsb.dsk -hdc /tmp/IweHafRtl4.dsk -hdd /tmp/yW4s46ee_I.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/wait-twice into /tmp/xoHKaAS8Zt.dsk...
+Copying tests/userprog/child-simple into /tmp/xoHKaAS8Zt.dsk...
+Writing command line to /tmp/32s1jbrj7H.dsk...
+qemu -hda /tmp/32s1jbrj7H.dsk -hdb /tmp/l7tm8Rgutx.dsk -hdc /tmp/xoHKaAS8Zt.dsk -hdd /tmp/VuS6OmOY9h.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put wait-twice put child-simple run wait-twice
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 544 characters output
+Calibrating timer...  209,510,400 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 193 sector (96 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'wait-twice' into the file system...
+Putting 'child-simple' into the file system...
+Executing 'wait-twice':
+(wait-twice) begin
+(child-simple) run
+child-simple: exit(81)
+(wait-twice) wait(exec()) = 81
+(wait-twice) wait(exec()) = -1
+(wait-twice) end
+wait-twice: exit(0)
+Execution of 'wait-twice' complete.
+Timer: 212 ticks
+Thread: 30 idle ticks, 180 kernel ticks, 2 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 129 reads, 396 writes
+hd1:0: 193 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1084 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

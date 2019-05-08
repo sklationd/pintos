@@ -1,19 +1,34 @@
-Copying tests/userprog/exec-once into /tmp/XMdbaq5Xvo.dsk...
-Copying tests/userprog/child-simple into /tmp/XMdbaq5Xvo.dsk...
-Writing command line to /tmp/yVmv_VIhVc.dsk...
-qemu -hda /tmp/yVmv_VIhVc.dsk -hdb /tmp/lJBb4kLfO8.dsk -hdc /tmp/XMdbaq5Xvo.dsk -hdd /tmp/7BpzU7Di2l.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-once into /tmp/pQItRmFY8X.dsk...
+Copying tests/userprog/child-simple into /tmp/pQItRmFY8X.dsk...
+Writing command line to /tmp/Acdbe6sab7.dsk...
+qemu -hda /tmp/Acdbe6sab7.dsk -hdb /tmp/080AGz8fOe.dsk -hdc /tmp/pQItRmFY8X.dsk -hdd /tmp/ECwaIvcAlf.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-once put child-simple run exec-once
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 542 characters output
+Calibrating timer...  52,377,600 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 193 sector (96 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'exec-once' into the file system...
+Putting 'child-simple' into the file system...
+Executing 'exec-once':
+(exec-once) begin
+(child-simple) run
+child-simple: exit(81)
+(exec-once) end
+exec-once: exit(0)
+Execution of 'exec-once' complete.
+Timer: 218 ticks
+Thread: 30 idle ticks, 186 kernel ticks, 2 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 129 reads, 396 writes
+hd1:0: 193 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1013 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

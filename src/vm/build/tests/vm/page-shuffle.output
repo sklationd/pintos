@@ -1,18 +1,41 @@
-Copying tests/vm/page-shuffle into /tmp/xiZc3ZtZl_.dsk...
-Writing command line to /tmp/Bl5CxjXiQI.dsk...
-qemu -hda /tmp/Bl5CxjXiQI.dsk -hdb /tmp/QcFaI2HiZX.dsk -hdc /tmp/xiZc3ZtZl_.dsk -hdd /tmp/u3AlA9JWqR.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-shuffle into /tmp/9Cddqgmmwo.dsk...
+Writing command line to /tmp/MLIL6loywa.dsk...
+qemu -hda /tmp/MLIL6loywa.dsk -hdb /tmp/cJnsPeB4Pn.dsk -hdc /tmp/9Cddqgmmwo.dsk -hdd /tmp/zhCfU98uA0.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-shuffle run page-shuffle
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 531 characters output
+Calibrating timer...  130,662,400 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 106 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'page-shuffle' into the file system...
+Executing 'page-shuffle':
+(page-shuffle) begin
+(page-shuffle) init: cksum=3115322833
+(page-shuffle) shuffle 0: cksum=1691062564
+(page-shuffle) shuffle 1: cksum=1973575879
+(page-shuffle) shuffle 2: cksum=1647619479
+(page-shuffle) shuffle 3: cksum=96566261
+(page-shuffle) shuffle 4: cksum=3885786467
+(page-shuffle) shuffle 5: cksum=3022003332
+(page-shuffle) shuffle 6: cksum=3614934266
+(page-shuffle) shuffle 7: cksum=2704001777
+(page-shuffle) shuffle 8: cksum=735775156
+(page-shuffle) shuffle 9: cksum=1864109763
+(page-shuffle) end
+page-shuffle: exit(0)
+Execution of 'page-shuffle' complete.
+Timer: 206 ticks
+Thread: 30 idle ticks, 117 kernel ticks, 59 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 65 reads, 220 writes
+hd1:0: 106 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1397 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

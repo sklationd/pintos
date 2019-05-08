@@ -1,18 +1,29 @@
-Copying tests/userprog/sc-boundary into /tmp/4yBaROmlgl.dsk...
-Writing command line to /tmp/RN8MQYyOO8.dsk...
-qemu -hda /tmp/RN8MQYyOO8.dsk -hdb /tmp/6JPNK83E2r.dsk -hdc /tmp/4yBaROmlgl.dsk -hdd /tmp/iWNZtb3_LJ.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/sc-boundary into /tmp/BHN5yPQ2IK.dsk...
+Writing command line to /tmp/JrOR1YaRhD.dsk...
+qemu -hda /tmp/JrOR1YaRhD.dsk -hdb /tmp/HFHePdsOvu.dsk -hdc /tmp/BHN5yPQ2IK.dsk -hdd /tmp/7_f6hktirN.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put sc-boundary run sc-boundary
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 529 characters output
+Calibrating timer...  98,201,600 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 100 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'sc-boundary' into the file system...
+Executing 'sc-boundary':
+(sc-boundary) begin
+sc-boundary: exit(42)
+Execution of 'sc-boundary' complete.
+Timer: 139 ticks
+Thread: 30 idle ticks, 108 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 63 reads, 208 writes
+hd1:0: 100 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 905 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

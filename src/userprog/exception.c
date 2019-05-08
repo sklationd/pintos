@@ -9,6 +9,7 @@
 #include "vm/frame.h"
 #include "vm/page.h"
 #include "vm/swap.h"
+#include "threads/vaddr.h"
 /* Number of page faults processed. */
 static long long page_fault_cnt;
 
@@ -164,6 +165,7 @@ page_fault (struct intr_frame *f)
   if(!pagedir_get_page(pd, fault_addr))
     exit(-1);
 
+
   //spte->state
   struct sup_page_table_entry *spte = find_spte(fault_page);
   if(spte == NULL){
@@ -173,7 +175,9 @@ page_fault (struct intr_frame *f)
   else if(spte->state == SPTE_EVICTED){
     swap_in(fault_page);
   }
+  /*
   else if(spte->state == SPTE_LOAD){
+
       if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
         {
           palloc_free_page (spte->kpage);
@@ -187,6 +191,7 @@ page_fault (struct intr_frame *f)
           return false; 
         }
   }
+  */
   /*
   if(!((uint32_t)(*pte) & PTE_W) && write){
     exit(-1);

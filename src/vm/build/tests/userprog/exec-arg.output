@@ -1,19 +1,39 @@
-Copying tests/userprog/exec-arg into /tmp/xWleDg2WWV.dsk...
-Copying tests/userprog/child-args into /tmp/xWleDg2WWV.dsk...
-Writing command line to /tmp/iae7cUbkvw.dsk...
-qemu -hda /tmp/iae7cUbkvw.dsk -hdb /tmp/1WPVm23wcN.dsk -hdc /tmp/xWleDg2WWV.dsk -hdd /tmp/yzjzlwpNVW.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-arg into /tmp/gJxzFAcBjB.dsk...
+Copying tests/userprog/child-args into /tmp/gJxzFAcBjB.dsk...
+Writing command line to /tmp/6CBNkFm6M9.dsk...
+qemu -hda /tmp/6CBNkFm6M9.dsk -hdb /tmp/_DiE2gInkA.dsk -hdc /tmp/gJxzFAcBjB.dsk -hdd /tmp/ClwFzrjqmk.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-arg put child-args run exec-arg
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 538 characters output
+Calibrating timer...  157,081,600 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 193 sector (96 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'exec-arg' into the file system...
+Putting 'child-args' into the file system...
+Executing 'exec-arg':
+(exec-arg) begin
+(args) begin
+(args) argc = 2
+(args) argv[0] = 'child-args'
+(args) argv[1] = 'childarg'
+(args) argv[2] = null
+(args) end
+child-args: exit(0)
+(exec-arg) end
+exec-arg: exit(0)
+Execution of 'exec-arg' complete.
+Timer: 220 ticks
+Thread: 30 idle ticks, 189 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 123 reads, 396 writes
+hd1:0: 193 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1100 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

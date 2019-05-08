@@ -1,8 +1,8 @@
 FAIL
-Kernel panic in run: PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de
+Kernel panic in run: PANIC at ../../lib/string.c:283 in memset(): assertion `dst != NULL || size == 0' failed.
+Call stack: 0xc01079f9 0xc0106f03 0xc010a1a9 0xc01013f6
 Translation of call stack:
 0xc01079f9: debug_panic (.../../lib/kernel/debug.c:34)
-0xc0104ac1: disk_size (.../../../devices/disk.c:210)
-0xc010dc2c: swap_init (.../build/../../vm/swap.c:26)
-0xc01005de: main (.../../../threads/init.c:113)
+0xc0106f03: memset (...ld/../../lib/string.c:286)
+0xc010a1a9: load_segment (...../userprog/process.c:578)
+0xc01013f6: kernel_thread (..../../threads/thread.c:503)

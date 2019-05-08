@@ -1,19 +1,33 @@
-Copying tests/userprog/read-boundary into /tmp/lN65jcBKd7.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/lN65jcBKd7.dsk...
-Writing command line to /tmp/BksodUNtlg.dsk...
-qemu -hda /tmp/BksodUNtlg.dsk -hdb /tmp/m6_yfuDyht.dsk -hdc /tmp/lN65jcBKd7.dsk -hdd /tmp/aou9LiJjRj.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/read-boundary into /tmp/19wg0VF4vG.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/19wg0VF4vG.dsk...
+Writing command line to /tmp/FJXL7oCL_q.dsk...
+qemu -hda /tmp/FJXL7oCL_q.dsk -hdb /tmp/cpSQEXxdlC.dsk -hdc /tmp/19wg0VF4vG.dsk -hdd /tmp/78PCQ5u16Z.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put read-boundary put sample.txt run read-boundary
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Kernel PANIC at ../../devices/disk.c:210 in disk_size(): assertion `d != NULL' failed.
-Call stack: 0xc01079f9 0xc0104ac1 0xc010dc2c 0xc01005de.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 0 ticks
-Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
-Console: 548 characters output
+Calibrating timer...  202,956,800 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'read-boundary' into the file system...
+Putting 'sample.txt' into the file system...
+Executing 'read-boundary':
+(read-boundary) begin
+(read-boundary) open "sample.txt"
+(read-boundary) end
+read-boundary: exit(0)
+Execution of 'read-boundary' complete.
+Timer: 144 ticks
+Thread: 30 idle ticks, 113 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 106 reads, 216 writes
+hd1:0: 103 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1034 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...
