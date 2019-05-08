@@ -154,9 +154,9 @@ page_fault (struct intr_frame *f)
   write = (f->error_code & PF_W) != 0;
   user = (f->error_code & PF_U) != 0;
   
-  if(!not_present)
+  if(!not_present){
     exit(-1);
-
+  }
   if(user && is_kernel_vaddr(fault_addr)){
     exit(-1);
   }
@@ -181,7 +181,7 @@ page_fault (struct intr_frame *f)
   }
   
   else if(spte->state == SPTE_LOAD){
-    printf("LOAD\n");
+    file_seek(spte->file, spte->ofs);
       if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
         {
           deallocate_frame (spte->user_vaddr);
@@ -189,13 +189,12 @@ page_fault (struct intr_frame *f)
         }
       spte->state == SPTE_MAPPED;
       memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
-      /*
       if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
         {
           palloc_free_page (spte->kpage);
           return false; 
         }
-        */
+      
   }
   
   /*

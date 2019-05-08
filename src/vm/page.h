@@ -24,6 +24,7 @@ struct sup_page_table_entry
 	enum SPTE_STATE state;
 	//for lazy load
 	struct file *file;
+	off_t ofs;
 	void *kpage;
 	size_t page_read_bytes;
 	size_t page_zero_bytes;
@@ -36,7 +37,7 @@ struct sup_page_table_entry
 void page_init (void);
 struct sup_page_table_entry *allocate_page (void *addr);
 void deallocate_page(void *addr);
-bool lazy_load(struct file *file, void *kpage, void *upage, size_t page_read_bytes, 
+bool lazy_load(struct file *file, off_t ofs, void *kpage, void *upage, size_t page_read_bytes, 
 			   size_t page_zero_bytes, bool writable);
 struct sup_page_table_entry* find_spte(void *addr); //user page address
 

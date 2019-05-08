@@ -71,7 +71,7 @@ _allocate_frame (void *addr) // user virtual address
 }
 uint32_t *
 allocate_frame (void *_addr){
-	void *addr = pg_round_down(_addr);
+	void *addr = (void*)pg_round_down(_addr);
 	uint32_t *kernel = _allocate_frame(addr);
 	if(kernel == NULL) {
 		if(!swap_out())

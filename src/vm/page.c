@@ -46,7 +46,7 @@ void deallocate_page(void *addr){
 }
       //file, kpage, upage, page_read_bytes, page_zero_bytes, writable
 
-bool lazy_load(struct file *file, void *kpage, void *upage, size_t page_read_bytes, 
+bool lazy_load(struct file *file, off_t ofs, void *kpage, void *upage, size_t page_read_bytes, 
 			   size_t page_zero_bytes, bool writable){
     struct frame_table_entry *fte = find_fte(upage);
     if(fte == NULL)
@@ -54,6 +54,7 @@ bool lazy_load(struct file *file, void *kpage, void *upage, size_t page_read_byt
     struct sup_page_table_entry *spte = fte->spte;
     spte->user_vaddr = upage;
     spte->file = file;
+    spte->ofs = ofs;
     spte->kpage = kpage;
     spte->page_read_bytes = page_read_bytes;
     spte->page_zero_bytes = page_zero_bytes;
