@@ -184,10 +184,10 @@ page_fault (struct intr_frame *f)
     printf("LOAD\n");
       if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
         {
-          printf("asdf\n");
           deallocate_frame (spte->user_vaddr);
           exit(-1);
         }
+      spte->state == SPTE_MAPPED;
       memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
       /*
       if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
