@@ -473,7 +473,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
  done:
   /* We arrive here whether the load is successful or not. */
   if(file != NULL)
-    file_deny_write(file);  
+    file_deny_write(file);
   //file_close (file);
   //lock_release(&filesys_lock);
   return success;
@@ -556,7 +556,9 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
       size_t page_read_bytes = read_bytes < PGSIZE ? read_bytes : PGSIZE;
       size_t page_zero_bytes = PGSIZE - page_read_bytes;
       uint8_t *kpage = allocate_frame(upage);
-      //lazy_load(file, kpage, upage, page_read_bytes, page_zero_bytes, writable);
+      
+      if(!lazy_load(file, kpage, upage, page_read_bytes, page_zero_bytes, writable))
+        return false;
       
       //file, kpage, upage, page_read_bytes, page_zero_bytes, writable
 
@@ -567,7 +569,7 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
         return false;
       }
       */
-
+      /*
       if (file_read (file, kpage, page_read_bytes) != (int) page_read_bytes)
         {
           palloc_free_page (kpage);
@@ -580,7 +582,7 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
           palloc_free_page (kpage);
           return false; 
         }
-
+      */
       /* Advance. */
       read_bytes -= page_read_bytes;
       zero_bytes -= page_zero_bytes;
@@ -598,14 +600,14 @@ setup_stack (void **esp)
   bool success = false;
 
   //kpage = palloc_get_page (PAL_USER | PAL_ZERO);
-  kpage = allocate_frame(*esp);
+  kpage = allocate_frame(PHYS_BASE - PGSIZE);
   if (kpage != NULL) 
     {
       success = install_page (((uint8_t *) PHYS_BASE) - PGSIZE, kpage, true);
       if (success)
         *esp = PHYS_BASE;
       else
-        palloc_free_page (kpage);
+        deallocate_frame(PHYS_BASE - PGSIZE);
     }
   return success;
 }

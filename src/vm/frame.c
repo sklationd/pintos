@@ -48,6 +48,8 @@ _allocate_frame (void *addr) // user virtual address
 	if(fte == NULL)
 		return NULL;
 	fte->kernel = palloc_get_page(PAL_USER | PAL_ZERO);
+	if(fte->kernel == NULL)
+		return NULL;
 	fte->user = addr;
 	fte->owner = thread_current();
 	lock_acquire(&frame_table_lock);
@@ -55,16 +57,15 @@ _allocate_frame (void *addr) // user virtual address
 	hash_insert(&frame_table, &fte->hash_elem);
 	lock_release(&frame_table_lock);
 
-	allocate_page(addr);
-
 	struct sup_page_table_entry spte;
 	spte.user_vaddr = addr;
 	struct hash_elem *e;
 	if((e = hash_find(thread_current()->sup_page_dir, &spte.hash_elem)) == NULL){
 		fte->spte = allocate_page(addr);
 	}
-	else
+	else{
 		fte->spte = hash_entry(e, struct sup_page_table_entry, hash_elem);
+	}
 
 	return fte->kernel;
 }
@@ -105,22 +106,7 @@ struct frame_table_entry* find_fte(void *addr){ //user
 	lock_acquire(&frame_table_lock);
 	e = hash_find(&frame_table, &fte.hash_elem);
 	lock_release(&frame_table_lock);
+	if(e==NULL)
+		return NULL;
 	return hash_entry(e, struct frame_table_entry, hash_elem);
-}
-
-void free_frame(void *_addr){
-	void *addr = pg_round_down(_addr);
-	struct frame_table_entry fte;
-	struct hash_elem *e;
-
-	fte.user = addr;
-	fte.owner = thread_current();
-	lock_acquire(&frame_table_lock);
-	e = hash_find(&frame_table, &fte.hash_elem);
-	hash_delete(&frame_table,e);
-	list_remove(&hash_entry(e, struct frame_table_entry, hash_elem)->list_elem);
-	lock_release(&frame_table_lock);
-
-	palloc_free_page(hash_entry(e, struct frame_table_entry, hash_elem)->kernel);
-	free(hash_entry(e, struct frame_table_entry, hash_elem));
 }

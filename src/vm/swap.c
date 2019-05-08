@@ -44,7 +44,9 @@ bool
 swap_in (void *addr)
 {
 	struct thread *curr = thread_current();
+	lock_acquire(&swap_lock);
 	const int swap_table_size = disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE;
+	lock_release(&swap_lock);
 
 	// 1
 	struct sup_page_table_entry _spte, *spte;
@@ -63,10 +65,14 @@ swap_in (void *addr)
 	struct frame_table_entry _fte, *fte;
 	_fte.user = addr;
 	_fte.owner = thread_current();
+	lock_acquire(&frame_table_lock);
+	lock_acquire(&swap_lock);
 	e = hash_find(&frame_table, &_fte.hash_elem);
 	fte = hash_entry(e, struct frame_table_entry, hash_elem);
+	lock_release(&frame_table_lock);
 	read_from_disk(fte->kernel, spte->swap_offset);
-
+	bitmap_set(swap_table,spte->swap_offset,0);
+	lock_release(&swap_lock);
 }
 
 /* 
@@ -86,18 +92,22 @@ swap_in (void *addr)
 bool
 swap_out (void)
 {
+	lock_acquire(&swap_lock);
 	const int swap_table_size = disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE;
 	if(bitmap_all(swap_table,0,swap_table_size)){
 		exit(-1);
 		return false;
 	}
+	lock_release(&swap_lock);
 
+	lock_acquire(&frame_table_lock);
 	if(eviction_ptr == NULL){
 		eviction_ptr = list_begin(&frame_list);
 	}
-	struct frame_table_entry *fte= list_entry(eviction_ptr, struct frame_table_entry, list_elem);
+	struct frame_table_entry *fte; 
 	struct thread *curr = thread_current();
 	while(1){
+		fte = list_entry(eviction_ptr, struct frame_table_entry, list_elem);
 		if(pagedir_is_accessed(curr->pagedir,fte->user)){
 			pagedir_set_accessed(curr->pagedir,fte->user, 0);
 			if((eviction_ptr = list_next(&(fte->list_elem))) == list_tail(&frame_list)){
@@ -107,13 +117,19 @@ swap_out (void)
 		else 
 			break;
 	}
+	lock_release(&frame_table_lock);
 
+	lock_acquire(&swap_lock);
 	size_t index = bitmap_scan(swap_table, 0, 1, 0);
+	bitmap_set(swap_table, index,1);
 	fte->spte->state = SPTE_EVICTED;
 	fte->spte->swap_offset = index;
 	write_to_disk(fte->kernel, index);
-	free_frame(fte->user);
-
+	if((eviction_ptr = list_next(&(fte->list_elem))) == list_tail(&frame_list)){
+		eviction_ptr = list_begin(&frame_list);
+	}
+	lock_release(&swap_lock);
+	deallocate_frame(fte->user);
 	return true;
 }
 

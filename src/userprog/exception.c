@@ -131,8 +131,6 @@ page_fault (struct intr_frame *f)
   bool write;        /* True: access was write, false: access was read. */
   bool user;         /* True: access by user, false: access by kernel. */
   void *fault_addr;  /* Fault address. */
-  void* fault_page = pg_round_down(fault_addr);
-
   /* Obtain faulting address, the virtual address that was
      accessed to cause the fault.  It may point to code or to
      data.  It is not necessarily the address of the instruction
@@ -141,7 +139,9 @@ page_fault (struct intr_frame *f)
      [IA32-v3a] 5.15 "Interrupt 14--Page Fault Exception
      (#PF)". */
   asm ("movl %%cr2, %0" : "=r" (fault_addr));
+  void* fault_page = (void *) pg_round_down(fault_addr);
 
+  //printf("fault_address 0x%x\n", fault_addr);
   /* Turn interrupts back on (they were only off so that we could
      be assured of reading CR2 before it changed). */
   intr_enable ();
@@ -162,36 +162,42 @@ page_fault (struct intr_frame *f)
   }
   
   uint32_t *pd = thread_current()->pagedir;
-  if(!pagedir_get_page(pd, fault_addr))
-    exit(-1);
+  //if(!pagedir_get_page(pd, fault_page))
+  //  exit(-1);
 
 
   //spte->state
+
   struct sup_page_table_entry *spte = find_spte(fault_page);
+  
   if(spte == NULL){
     void *kernel = allocate_frame(fault_page);
     pagedir_set_page(pd,fault_page, kernel, true); 
+    spte = find_spte(fault_page);
   }
-  else if(spte->state == SPTE_EVICTED){
+  
+  if(spte->state == SPTE_EVICTED){
     swap_in(fault_page);
   }
-  /*
+  
   else if(spte->state == SPTE_LOAD){
-
+    printf("LOAD\n");
       if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
         {
-          palloc_free_page (spte->kpage);
-          return false; 
+          printf("asdf\n");
+          deallocate_frame (spte->user_vaddr);
+          exit(-1);
         }
       memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
-
+      /*
       if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
         {
           palloc_free_page (spte->kpage);
           return false; 
         }
+        */
   }
-  */
+  
   /*
   if(!((uint32_t)(*pte) & PTE_W) && write){
     exit(-1);
@@ -210,5 +216,6 @@ page_fault (struct intr_frame *f)
           user ? "user" : "kernel");
   kill (f);
   */
+
 }
 

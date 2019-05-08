@@ -46,25 +46,28 @@ void deallocate_page(void *addr){
 }
       //file, kpage, upage, page_read_bytes, page_zero_bytes, writable
 
-void lazy_load(struct file *file, void *kpage, void *upage, size_t page_read_bytes, 
+bool lazy_load(struct file *file, void *kpage, void *upage, size_t page_read_bytes, 
 			   size_t page_zero_bytes, bool writable){
     struct frame_table_entry *fte = find_fte(upage);
+    if(fte == NULL)
+    	return false;
     struct sup_page_table_entry *spte = fte->spte;
+    spte->user_vaddr = upage;
     spte->file = file;
     spte->kpage = kpage;
     spte->page_read_bytes = page_read_bytes;
     spte->page_zero_bytes = page_zero_bytes;
     spte->writable = writable;
     spte->state = SPTE_LOAD; 
-
+    return true;
 }
 
-struct sup_page_table_entry* find_spte(void *addr){ //user page address
+struct sup_page_table_entry *find_spte(void *addr){ //user page address
 	struct sup_page_table_entry spte;
 
 	struct hash_elem *e;
 	spte.user_vaddr = addr;
-	e = hash_find(&thread_current()->sup_page_dir, &spte.hash_elem);
+	e = hash_find(thread_current()->sup_page_dir, &spte.hash_elem);
 	if(e==NULL)
 		return NULL;
 	return hash_entry(e, struct sup_page_table_entry, hash_elem);
