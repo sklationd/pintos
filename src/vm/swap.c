@@ -91,7 +91,7 @@ swap_in (void *addr)
  */
 bool
 swap_out (void)
-{
+{	
 	lock_acquire(&swap_lock);
 	const int swap_table_size = disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE;
 	if(bitmap_all(swap_table,0,swap_table_size)){
@@ -152,3 +152,9 @@ void write_to_disk (uint8_t *frame, int index)
 		disk_write(swap_device, index * PGSIZE / DISK_SECTOR_SIZE + i, frame + DISK_SECTOR_SIZE*i);
 }
 
+void swap_free(int ofs){
+	lock_acquire(&swap_lock);
+	ASSERT(bitmap_test(swap_table,ofs));
+	bitmap_set(swap_table,ofs,0);
+	lock_release(&swap_lock);
+}

@@ -1,12 +1,12 @@
-Copying tests/vm/page-parallel into /tmp/vDnnQOsVL0.dsk...
-Copying tests/vm/child-linear into /tmp/vDnnQOsVL0.dsk...
-Writing command line to /tmp/0KOyfaoqwQ.dsk...
-qemu -hda /tmp/0KOyfaoqwQ.dsk -hdb /tmp/cA5t7_232U.dsk -hdc /tmp/vDnnQOsVL0.dsk -hdd /tmp/1UZn3UzXmJ.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-parallel into /tmp/jNagCkak0U.dsk...
+Copying tests/vm/child-linear into /tmp/jNagCkak0U.dsk...
+Writing command line to /tmp/VIuayIBduU.dsk...
+qemu -hda /tmp/VIuayIBduU.dsk -hdb /tmp/lf45mUVvsF.dsk -hdc /tmp/jNagCkak0U.dsk -hdd /tmp/Vjyx4mzo3x.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-parallel put child-linear run page-parallel
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  37,427,200 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 198 sector (99 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,18 +19,19 @@ Executing 'page-parallel':
 (page-parallel) begin
 (page-parallel) exec "child-linear"
 (page-parallel) exec "child-linear"
-Kernel PANIC at ../../lib/kernel/list.c:84 in list_next(): assertion `is_head (elem) || is_interior (elem)' failed.
-Call stack: 0xc01079f9 0xc0107e43 0xc0109289 0xc01092d0 0xc010d535 0xc010db16 0xc010d6b4 0xc010a15a 0xc01013f6.
+child-linear: exit(66)
+Kernel PANIC at ../../userprog/exception.c:178 in page_fault(): assertion `fault_page' failed.
+Call stack: 0xc01079f9 0xc010ae48 0xc0101f07 0xc010203f 0xc010d8e3 0xc0109009 0xc01094f3 0xc010d726 0xc010de12 0xc010d83d 0xc010a165 0xc01013f6.
 The `backtrace' program can make call stacks useful.
 Read "Backtraces" in the "Debugging Tools" chapter
 of the Pintos documentation for more information.
-Timer: 235 ticks
-Thread: 30 idle ticks, 186 kernel ticks, 19 user ticks
+Timer: 255 ticks
+Thread: 30 idle ticks, 189 kernel ticks, 36 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 170 reads, 406 writes
+hd0:1: 132 reads, 406 writes
 hd1:0: 198 reads, 0 writes
-hd1:1: 0 reads, 16 writes
-Console: 1377 characters output
+hd1:1: 0 reads, 48 writes
+Console: 1413 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 265 page faults
 Powering off...

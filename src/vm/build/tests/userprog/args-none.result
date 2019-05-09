@@ -1,10 +1,1 @@
-FAIL
-Kernel panic in run: PANIC at ../../threads/thread.c:527 in is_thread(): assertion `t->magic == THREAD_MAGIC' failed.
-Call stack: 0xc01079f9 0xc0100879 0xc0100893 0xc010ad8b 0xc0101f07 0xc010203f
-Translation of call stack:
-0xc01079f9: debug_panic (.../../lib/kernel/debug.c:34)
-0xc0100879: is_thread (..../../threads/thread.c:529)
-0xc0100893: thread_current (..../../threads/thread.c:326)
-0xc010ad8b: page_fault (.../userprog/exception.c:164)
-0xc0101f07: intr_handler (..../threads/interrupt.c:361)
-0xc010203f: intr_entry (threads/intr-stubs.S:38)
+PASS

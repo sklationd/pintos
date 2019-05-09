@@ -225,9 +225,12 @@ syscall_init (void)
 
 static void
 syscall_handler (struct intr_frame *f) 
-{
+{   
+  /*  
   if(is_kernel_vaddr(f->esp))
     exit(-1);
+  */
+  thread_current()->esp = f->esp;
   switch(syscall_num(f)){
   	case SYS_HALT  		:
 		power_off();

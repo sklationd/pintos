@@ -1,13 +1,16 @@
 FAIL
-Kernel panic in run: PANIC at ../../lib/kernel/list.c:84 in list_next(): assertion `is_head (elem) || is_interior (elem)' failed.
-Call stack: 0xc01079f9 0xc0107e43 0xc0109289 0xc01092d0 0xc010d535 0xc010db16 0xc010d6b4 0xc010a15a 0xc01013f6
+Kernel panic in run: PANIC at ../../userprog/exception.c:178 in page_fault(): assertion `fault_page' failed.
+Call stack: 0xc01079f9 0xc010ae48 0xc0101f07 0xc010203f 0xc010d8e3 0xc0109009 0xc01094f3 0xc010d726 0xc010de12 0xc010d83d 0xc010a165 0xc01013f6
 Translation of call stack:
 0xc01079f9: debug_panic (.../../lib/kernel/debug.c:34)
-0xc0107e43: is_sorted (.../../lib/kernel/list.c:352)
-0xc0109289: find_elem (.../../lib/kernel/hash.c:319)
-0xc01092d0: hash_find (.../../lib/kernel/hash.c:135)
-0xc010d535: free_frame (...uild/../../vm/frame.c:117)
-0xc010db16: swap_out (...build/../../vm/swap.c:118)
-0xc010d6b4: allocate_frame (...build/../../vm/frame.c:76)
-0xc010a15a: load_segment (...../userprog/process.c:558)
+0xc010ae48: page_fault (.../userprog/exception.c:179)
+0xc0101f07: intr_handler (..../threads/interrupt.c:361)
+0xc010203f: intr_entry (threads/intr-stubs.S:38)
+0xc010d8e3: frame_hash_function (...build/../../vm/frame.c:20)
+0xc0109009: find_bucket (.../../lib/kernel/hash.c:308)
+0xc01094f3: hash_delete (.../../lib/kernel/hash.c:147)
+0xc010d726: deallocate_frame (...build/../../vm/frame.c:96)
+0xc010de12: swap_out (...build/../../vm/swap.c:134)
+0xc010d83d: allocate_frame (...build/../../vm/frame.c:77)
+0xc010a165: load_segment (...../userprog/process.c:563)
 0xc01013f6: kernel_thread (..../../threads/thread.c:503)

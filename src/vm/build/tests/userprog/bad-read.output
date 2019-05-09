@@ -1,11 +1,11 @@
-Copying tests/userprog/bad-read into /tmp/32kyPiJQ3m.dsk...
-Writing command line to /tmp/sKmCU0fWTy.dsk...
-qemu -hda /tmp/sKmCU0fWTy.dsk -hdb /tmp/oT1dlfhMUg.dsk -hdc /tmp/32kyPiJQ3m.dsk -hdd /tmp/5M7ALDr8Ff.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/bad-read into /tmp/N8ZjmXYJlr.dsk...
+Writing command line to /tmp/dCzg93WRYn.dsk...
+qemu -hda /tmp/dCzg93WRYn.dsk -hdb /tmp/VvINgBhENz.dsk -hdc /tmp/N8ZjmXYJlr.dsk -hdd /tmp/9aIUkuiv3O.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put bad-read run bad-read
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  209,305,600 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -15,15 +15,18 @@ Boot complete.
 Putting 'bad-read' into the file system...
 Executing 'bad-read':
 (bad-read) begin
-bad-read: exit(-1)
-Execution of 'bad-read' complete.
-Timer: 136 ticks
-Thread: 30 idle ticks, 105 kernel ticks, 1 user ticks
+Kernel PANIC at ../../userprog/exception.c:178 in page_fault(): assertion `fault_page' failed.
+Call stack: 0xc01079f9 0xc010ae48 0xc0101f07 0xc010203f 0x80480a6 0x80480f8 0x804873c.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 138 ticks
+Thread: 30 idle ticks, 108 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 62 reads, 202 writes
 hd1:0: 97 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 883 characters output
+Console: 1166 characters output
 Keyboard: 0 keys pressed
-Exception: 1 page faults
+Exception: 6 page faults
 Powering off...

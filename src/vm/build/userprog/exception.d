@@ -6,6 +6,6 @@ userprog/exception.o: ../../userprog/exception.c \
  ../../threads/thread.h ../../lib/kernel/list.h ../../threads/synch.h \
  ../../filesys/file.h ../../filesys/off_t.h ../../lib/kernel/hash.h \
  ../../lib/kernel/list.h ../../threads/pte.h ../../threads/vaddr.h \
- ../../userprog/process.h ../../vm/frame.h ../../vm/page.h \
- ../../threads/palloc.h ../../devices/timer.h ../../lib/round.h \
- ../../vm/swap.h
+ ../../userprog/process.h ../../userprog/syscall.h ../../vm/frame.h \
+ ../../vm/page.h ../../threads/palloc.h ../../devices/timer.h \
+ ../../lib/round.h ../../vm/swap.h

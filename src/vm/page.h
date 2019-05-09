@@ -20,7 +20,6 @@ struct sup_page_table_entry
 	//uint32_t* kernel_vaddr;
 	uint32_t* user_vaddr;
 	struct hash_elem hash_elem;
-
 	enum SPTE_STATE state;
 	//for lazy load
 	struct file *file;
@@ -40,6 +39,6 @@ void deallocate_page(void *addr);
 bool lazy_load(struct file *file, off_t ofs, void *kpage, void *upage, size_t page_read_bytes, 
 			   size_t page_zero_bytes, bool writable);
 struct sup_page_table_entry* find_spte(void *addr); //user page address
-
+void destroy_sup_page_table(void);
 #endif /* vm/page.h */
 

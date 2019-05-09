@@ -83,19 +83,40 @@ allocate_frame (void *_addr){
 }
 
 void deallocate_frame(void *addr){
-	struct frame_table_entry fte;
+	struct frame_table_entry _fte;
 	struct hash_elem *e;
+	struct frame_table_entry *fte;
+	_fte.user = addr;
+	_fte.owner = thread_current();
 
-	fte.user = addr;
-	fte.owner = thread_current();
 	lock_acquire(&frame_table_lock);
-	e = hash_find(&frame_table, &fte.hash_elem);
+	e = hash_find(&frame_table, &_fte.hash_elem);
+	fte = hash_entry(e, struct frame_table_entry, hash_elem);
 	hash_delete(&frame_table,e);
-	list_remove(&hash_entry(e, struct frame_table_entry, hash_elem)->list_elem);
+	list_remove(&fte->list_elem);
 	lock_release(&frame_table_lock);
 
-	palloc_free_page(hash_entry(e, struct frame_table_entry, hash_elem)->kernel);
-	free(hash_entry(e, struct frame_table_entry, hash_elem));
+	palloc_free_page(fte->kernel);
+	free(fte);
+}
+
+void deallocate_frame_owned_by_thread(void){
+	struct thread *t = thread_current();
+	struct list_elem *e;
+	lock_acquire(&frame_table_lock);
+    for(e = list_begin(&frame_list);e!=list_end(&frame_list);e = list_next(e)){
+    	struct frame_table_entry *fte = list_entry(e,struct frame_table_entry, list_elem);
+    	if(fte->owner == t){
+    		hash_delete(&frame_table,&fte->hash_elem);
+    		ASSERT(list_head(&frame_list)!=e);
+    		e=list_prev(e);
+    		list_remove(&fte->list_elem);
+    		free(fte);
+    	}
+    }
+
+    lock_release(&frame_table_lock);
+
 }
 
 struct frame_table_entry* find_fte(void *addr){ //user

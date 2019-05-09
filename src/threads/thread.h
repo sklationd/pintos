@@ -127,7 +127,7 @@ struct thread
     int exit_status;
 
     struct hash *sup_page_dir;
-
+    uint8_t *esp;
 #endif
 
 

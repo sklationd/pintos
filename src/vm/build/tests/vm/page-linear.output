@@ -1,11 +1,11 @@
-Copying tests/vm/page-linear into /tmp/C8rPlxlvfp.dsk...
-Writing command line to /tmp/u43noLR9WY.dsk...
-qemu -hda /tmp/u43noLR9WY.dsk -hdb /tmp/EbTYWDsBet.dsk -hdc /tmp/C8rPlxlvfp.dsk -hdd /tmp/l23RRXi2FT.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-linear into /tmp/xFFsw5ujmJ.dsk...
+Writing command line to /tmp/vOCBnJ8DSM.dsk...
+qemu -hda /tmp/vOCBnJ8DSM.dsk -hdb /tmp/eUjEgiDC6W.dsk -hdc /tmp/xFFsw5ujmJ.dsk -hdd /tmp/yJMBk4VkZc.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-linear run page-linear
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  179,609,600 loops/s.
+Calibrating timer...  213,401,600 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 102 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -14,18 +14,18 @@ Formatting file system...done.
 Boot complete.
 Putting 'page-linear' into the file system...
 Executing 'page-linear':
-Kernel PANIC at ../../lib/string.c:283 in memset(): assertion `dst != NULL || size == 0' failed.
-Call stack: 0xc01079f9 0xc0106f03 0xc010a1a9 0xc01013f6.
+Kernel PANIC at ../../userprog/exception.c:178 in page_fault(): assertion `fault_page' failed.
+Call stack: 0xc01079f9 0xc010ae48 0xc0101f07 0xc010203f.
 The `backtrace' program can make call stacks useful.
 Read "Backtraces" in the "Debugging Tools" chapter
 of the Pintos documentation for more information.
-Timer: 153 ticks
-Thread: 30 idle ticks, 113 kernel ticks, 10 user ticks
+Timer: 646 ticks
+Thread: 30 idle ticks, 127 kernel ticks, 489 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 62 reads, 212 writes
+hd0:1: 40 reads, 212 writes
 hd1:0: 102 reads, 0 writes
-hd1:1: 0 reads, 16 writes
-Console: 1137 characters output
+hd1:1: 8 reads, 1168 writes
+Console: 1138 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 2 page faults
 Powering off...

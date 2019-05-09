@@ -25,5 +25,6 @@ void frame_init (void);
 uint32_t* allocate_frame (void *addr);
 void deallocate_frame(void *addr);
 struct frame_table_entry* find_fte(void *addr); //user
+void deallocate_frame_owned_by_thread(void);
 
 #endif /* vm/frame.h */

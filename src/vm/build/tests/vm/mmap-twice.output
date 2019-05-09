@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-twice into /tmp/axm8lPWSHz.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/axm8lPWSHz.dsk...
-Writing command line to /tmp/deenU331hI.dsk...
-qemu -hda /tmp/deenU331hI.dsk -hdb /tmp/UV6S9ggQKM.dsk -hdc /tmp/axm8lPWSHz.dsk -hdd /tmp/X0efahnw37.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-twice into /tmp/LzenpXeqdF.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/LzenpXeqdF.dsk...
+Writing command line to /tmp/kjk5FAfXgE.dsk...
+qemu -hda /tmp/kjk5FAfXgE.dsk -hdb /tmp/p8HgcLro4b.dsk -hdc /tmp/LzenpXeqdF.dsk -hdd /tmp/RnsjeFj_jm.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-twice put sample.txt run mmap-twice
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  26,188,800 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -26,13 +26,13 @@ unknown system call!
 (mmap-twice) compare mmap'd file 0 against data
 mmap-twice: exit(-1)
 Execution of 'mmap-twice' complete.
-Timer: 139 ticks
-Thread: 30 idle ticks, 107 kernel ticks, 2 user ticks
+Timer: 142 ticks
+Thread: 30 idle ticks, 109 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 112 reads, 216 writes
 hd1:0: 103 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1216 characters output
+Console: 1215 characters output
 Keyboard: 0 keys pressed
-Exception: 1 page faults
+Exception: 6 page faults
 Powering off...

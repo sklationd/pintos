@@ -1,11 +1,11 @@
-Copying tests/userprog/args-none into /tmp/TGw0HSS_Js.dsk...
-Writing command line to /tmp/ZfeJOCbHqE.dsk...
-qemu -hda /tmp/ZfeJOCbHqE.dsk -hdb /tmp/swbkmM714a.dsk -hdc /tmp/TGw0HSS_Js.dsk -hdd /tmp/4Hsl_d0CXy.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/args-none into /tmp/hOzAn2mI14.dsk...
+Writing command line to /tmp/yscNv7xMPI.dsk...
+qemu -hda /tmp/yscNv7xMPI.dsk -hdb /tmp/wdGHUIaocw.dsk -hdc /tmp/hOzAn2mI14.dsk -hdd /tmp/atV8MWG2bq.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put args-none run args-none
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  189,849,600 loops/s.
+Calibrating timer...  130,867,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 96 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -14,71 +14,20 @@ Formatting file system...done.
 Boot complete.
 Putting 'args-none' into the file system...
 Executing 'args-none':
-Kernel PANIC at ../../threads/thread.c:527 in is_thread(): assertion `t->magic == THREAD_MAGIC' failed.
-Call stack: 0xc01079f9 0xc0100879 0xc0100893 0xc010ad8b 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Kernel PANIC recursion at ../../threads/thread.c:527 in is_thread().
-Kernel command line: -q -f put args-none run args-none
-Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
-373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 96 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'args-none' into the file system...
-Executing 'args-none':
-Kernel PANIC at ../../threads/thread.c:527 in is_thread(): assertion `t->magic == THREAD_MAGIC' failed.
-Call stack: 0xc01079f9 0xc0100879 0xc0100893 0xc010ad8b 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Kernel PANIC recursion at ../../threads/thread.c:527 in is_thread().
-Kernel command line: -q -f put args-none run args-none
-Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
-373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 96 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'args-none' into the file system...
-Executing 'args-none':
-Kernel PANIC at ../../threads/thread.c:527 in is_thread(): assertion `t->magic == THREAD_MAGIC' failed.
-Call stack: 0xc01079f9 0xc0100879 0xc0100893 0xc010ad8b 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Kernel PANIC recursion at ../../threads/thread.c:527 in is_thread().
-Kernel command line: -q -f put args-none run args-none
-Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
-373 pages available in user pool.
-Calibrating timer...  141,721,600 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 96 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'args-none' into the file system...
-Executing 'args-none':
-Kernel PANIC at ../../threads/thread.c:527 in is_thread(): assertion `t->magic == THREAD_MAGIC' failed.
-Call stack: 0xc01079f9 0xc0100879 0xc0100893 0xc010ad8b 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f 0 0xc01092c5 0xc010d7fa 0xc010ad99 0xc0101f07 0xc010203f.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Kernel PANIC recursion at ../../threads/thread.c:527 in is_thread().
-Kernel command line: -q -f put args-none run args-none
-Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
-373 pages available in user pool.
-Calibrating timer...  Simulation terminated due to kernel panic.
+(args) begin
+(args) argc = 1
+(args) argv[0] = 'args-none'
+(args) argv[1] = null
+(args) end
+args-none: exit(0)
+Execution of 'args-none' complete.
+Timer: 138 ticks
+Thread: 30 idle ticks, 107 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 62 reads, 200 writes
+hd1:0: 96 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 962 characters output
+Keyboard: 0 keys pressed
+Exception: 5 page faults
+Powering off...

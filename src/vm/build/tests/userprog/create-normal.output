@@ -1,11 +1,11 @@
-Copying tests/userprog/create-normal into /tmp/JoA00cAQ5G.dsk...
-Writing command line to /tmp/kfKbFihiVG.dsk...
-qemu -hda /tmp/kfKbFihiVG.dsk -hdb /tmp/VHRYWSx6L7.dsk -hdc /tmp/JoA00cAQ5G.dsk -hdd /tmp/7XD5eo4Y0y.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-normal into /tmp/i_PaENGw9T.dsk...
+Writing command line to /tmp/2iIyqVT_ca.dsk...
+qemu -hda /tmp/2iIyqVT_ca.dsk -hdb /tmp/DnntOGhBLZ.dsk -hdc /tmp/i_PaENGw9T.dsk -hdd /tmp/FsBWQ83K6H.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-normal run create-normal
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
+Calibrating timer...  196,403,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,13 +19,13 @@ Executing 'create-normal':
 (create-normal) end
 create-normal: exit(0)
 Execution of 'create-normal' complete.
-Timer: 145 ticks
-Thread: 30 idle ticks, 112 kernel ticks, 3 user ticks
+Timer: 139 ticks
+Thread: 30 idle ticks, 106 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 100 reads, 206 writes
 hd1:0: 97 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 970 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 5 page faults
 Powering off...

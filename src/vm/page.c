@@ -89,7 +89,12 @@ void destroy_sup_page_table(){
             struct sup_page_table_entry *spte;
             spte = hash_entry(list_entry(elem, struct hash_elem, list_elem), 
                               struct sup_page_table_entry, hash_elem);
+            if(spte->state == SPTE_EVICTED){
+            	swap_free(spte->swap_offset);
+            }
+
             free(spte);
+
         }
     }
     hash_destroy(spt, NULL);

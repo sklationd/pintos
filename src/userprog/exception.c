@@ -6,6 +6,7 @@
 #include "threads/thread.h"
 #include "threads/pte.h"
 #include "userprog/process.h"
+#include "userprog/syscall.h"
 #include "vm/frame.h"
 #include "vm/page.h"
 #include "vm/swap.h"
@@ -160,42 +161,51 @@ page_fault (struct intr_frame *f)
   if(user && is_kernel_vaddr(fault_addr)){
     exit(-1);
   }
-  
+  //esp handling
+  void *esp = user ? f->esp : thread_current()->esp;
   uint32_t *pd = thread_current()->pagedir;
-  //if(!pagedir_get_page(pd, fault_page))
-  //  exit(-1);
+  struct sup_page_table_entry *spte;
 
-
-  //spte->state
-
-  struct sup_page_table_entry *spte = find_spte(fault_page);
+  if(((fault_addr < PHYS_BASE) && (PHYS_BASE - STACK_SIZE <= fault_addr)) && // USER AREA ??
+     ((esp <= fault_addr) || // ordinary case
+     (fault_addr == esp-4) || (fault_addr == esp-32)) // pusha instruction
+  ){ //stack growth
+    void *kernel = allocate_frame(fault_page);
+    pagedir_set_page(pd,fault_page, kernel, true);
+    spte = find_spte(fault_page);
+  }
+  //ASSERT(fault_page);
+  spte = find_spte(fault_page);
   
   if(spte == NULL){
-    void *kernel = allocate_frame(fault_page);
-    pagedir_set_page(pd,fault_page, kernel, true); 
-    spte = find_spte(fault_page);
+    exit(-1);
   }
   
   if(spte->state == SPTE_EVICTED){
     swap_in(fault_page);
+    if(!install_page(spte->user_vaddr, spte->kpage, spte->writable)){
+      deallocate_frame(spte->kpage);
+      exit(-1);
+    }
   }
   
   else if(spte->state == SPTE_LOAD){
-    file_seek(spte->file, spte->ofs);
+      file_seek(spte->file, spte->ofs);
       if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
         {
           deallocate_frame (spte->user_vaddr);
           exit(-1);
         }
-      spte->state == SPTE_MAPPED;
+      spte->state = SPTE_MAPPED;
       memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
       if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
         {
-          palloc_free_page (spte->kpage);
-          return false; 
+          deallocate_frame (spte->kpage);
+          exit(-1);
         }
-      
   }
+  //if(!pagedir_get_page(pd, fault_page))
+  //  exit(-1);
   
   /*
   if(!((uint32_t)(*pte) & PTE_W) && write){
