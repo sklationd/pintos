@@ -54,11 +54,11 @@ pass tests/userprog/multi-child-fd
 pass tests/userprog/rox-simple
 pass tests/userprog/rox-child
 pass tests/userprog/rox-multichild
-FAIL tests/userprog/bad-read
-FAIL tests/userprog/bad-write
+pass tests/userprog/bad-read
+pass tests/userprog/bad-write
 pass tests/userprog/bad-read2
 pass tests/userprog/bad-write2
-FAIL tests/userprog/bad-jump
+pass tests/userprog/bad-jump
 pass tests/userprog/bad-jump2
 pass tests/vm/pt-grow-stack
 pass tests/vm/pt-grow-pusha

@@ -74,11 +74,13 @@ allocate_frame (void *_addr){
 	void *addr = (void*)pg_round_down(_addr);
 	uint32_t *kernel = _allocate_frame(addr);
 	if(kernel == NULL) {
+		printf("full\n");
 		if(!swap_out())
 			exit(-1); // TODO panic
 		kernel = _allocate_frame(addr);
 		ASSERT(kernel!=NULL);
 	}
+	printf("allocate frame\n");
 	return kernel;
 }
 

@@ -13,4 +13,4 @@ threads/init.o: ../../threads/init.c ../../threads/init.h \
  ../../userprog/exception.h ../../userprog/gdt.h ../../userprog/syscall.h \
  ../../userprog/tss.h ../../devices/disk.h ../../lib/inttypes.h \
  ../../filesys/filesys.h ../../filesys/fsutil.h ../../vm/frame.h \
- ../../vm/swap.h
+ ../../vm/swap.h ../../vm/page.h

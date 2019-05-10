@@ -1,11 +1,11 @@
-Copying tests/userprog/exit into /tmp/Keftw57N5D.dsk...
-Writing command line to /tmp/Ph1Mchk1Y6.dsk...
-qemu -hda /tmp/Ph1Mchk1Y6.dsk -hdb /tmp/Qh0jXreRvw.dsk -hdc /tmp/Keftw57N5D.dsk -hdd /tmp/rKAS0QtwDS.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exit into /tmp/T1x1nDFxVe.dsk...
+Writing command line to /tmp/SggAJpYaqB.dsk...
+qemu -hda /tmp/SggAJpYaqB.dsk -hdb /tmp/U1pEZAmK75.dsk -hdc /tmp/T1x1nDFxVe.dsk -hdd /tmp/OR194hPGln.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exit run exit
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  143,974,400 loops/s.
+Calibrating timer...  104,755,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -17,8 +17,8 @@ Executing 'exit':
 (exit) begin
 exit: exit(57)
 Execution of 'exit' complete.
-Timer: 144 ticks
-Thread: 30 idle ticks, 114 kernel ticks, 0 user ticks
+Timer: 134 ticks
+Thread: 30 idle ticks, 103 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 62 reads, 202 writes
 hd1:0: 97 reads, 0 writes

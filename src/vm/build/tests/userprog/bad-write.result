@@ -1,16 +1,1 @@
-FAIL
-Kernel panic in run: PANIC at ../../userprog/exception.c:178 in page_fault(): assertion `fault_page' failed.
-Call stack: 0xc01079f9 0xc010ae48 0xc0101f07 0xc010203f 0x80480a6 0x80480ec 0x804872c
-Translation of call stack:
-In kernel.o:
-0xc01079f9: debug_panic (.../../lib/kernel/debug.c:34)
-0xc010ae48: page_fault (.../userprog/exception.c:179)
-0xc0101f07: intr_handler (..../threads/interrupt.c:361)
-0xc010203f: intr_entry (threads/intr-stubs.S:38)
-In tests/userprog/bad-write:
-0x080480a6: test_main (...s/userprog/bad-write.c:10)
-0x080480ec: main (...ild/../../tests/main.c:13)
-0x0804872c: _start (.../../../lib/user/entry.c:9)
-Translations of user virtual addresses above are based on a guess at
-the binary to use.  If this guess is incorrect, then those
-translations will be misleading.
+PASS

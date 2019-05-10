@@ -1,8 +1,21 @@
 FAIL
-Kernel panic in run: PANIC at ../../userprog/exception.c:178 in page_fault(): assertion `fault_page' failed.
-Call stack: 0xc01079f9 0xc010ae48 0xc0101f07 0xc010203f
-Translation of call stack:
-0xc01079f9: debug_panic (.../../lib/kernel/debug.c:34)
-0xc010ae48: page_fault (.../userprog/exception.c:179)
-0xc0101f07: intr_handler (..../threads/interrupt.c:361)
-0xc010203f: intr_entry (threads/intr-stubs.S:38)
+Test output failed to match any acceptable form.
+
+Acceptable output:
+  (page-linear) begin
+  (page-linear) initialize
+  (page-linear) read pass
+  (page-linear) read/modify/write pass one
+  (page-linear) read/modify/write pass two
+  (page-linear) read pass
+  (page-linear) end
+Differences in `diff -u' format:
+- (page-linear) begin
+- (page-linear) initialize
+- (page-linear) read pass
+- (page-linear) read/modify/write pass one
+- (page-linear) read/modify/write pass two
+- (page-linear) read pass
+- (page-linear) end
+
+(Process exit codes are excluded for matching purposes.)

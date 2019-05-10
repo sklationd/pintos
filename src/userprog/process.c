@@ -604,7 +604,8 @@ setup_stack (void **esp)
   bool success = false;
 
   //kpage = palloc_get_page (PAL_USER | PAL_ZERO);
-  kpage = allocate_frame(PHYS_BASE - PGSIZE);
+  printf("try allocate kpage\n");
+  kpage = allocate_frame(((uint8_t *)PHYS_BASE) - PGSIZE);
   if (kpage != NULL) 
     {
       success = install_page (((uint8_t *) PHYS_BASE) - PGSIZE, kpage, true);

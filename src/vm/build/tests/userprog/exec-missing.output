@@ -1,11 +1,11 @@
-Copying tests/userprog/exec-missing into /tmp/RVB4d8DTRk.dsk...
-Writing command line to /tmp/JII0tt3RuC.dsk...
-qemu -hda /tmp/JII0tt3RuC.dsk -hdb /tmp/6h4ICTLxx5.dsk -hdc /tmp/RVB4d8DTRk.dsk -hdd /tmp/0GIxyds6bK.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-missing into /tmp/NK9CmX5yqm.dsk...
+Writing command line to /tmp/U0ptgvtCGF.dsk...
+qemu -hda /tmp/U0ptgvtCGF.dsk -hdb /tmp/fbT9a4yy_9.dsk -hdc /tmp/NK9CmX5yqm.dsk -hdd /tmp/LdOwU89sKG.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-missing run exec-missing
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  143,155,200 loops/s.
+Calibrating timer...  209,100,800 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,8 +19,8 @@ Executing 'exec-missing':
 (exec-missing) end
 exec-missing: exit(0)
 Execution of 'exec-missing' complete.
-Timer: 131 ticks
-Thread: 30 idle ticks, 100 kernel ticks, 1 user ticks
+Timer: 140 ticks
+Thread: 30 idle ticks, 109 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 79 reads, 202 writes
 hd1:0: 97 reads, 0 writes

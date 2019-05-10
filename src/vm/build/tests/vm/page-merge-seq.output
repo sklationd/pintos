@@ -1,7 +1,7 @@
-Copying tests/vm/page-merge-seq into /tmp/bA4504yxkq.dsk...
-Copying tests/vm/child-sort into /tmp/bA4504yxkq.dsk...
-Writing command line to /tmp/HhLvKSYdyI.dsk...
-qemu -hda /tmp/HhLvKSYdyI.dsk -hdb /tmp/QWzPhbno9o.dsk -hdc /tmp/bA4504yxkq.dsk -hdd /tmp/5XdW6_En_v.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-seq into /tmp/hbe9bq3lv7.dsk...
+Copying tests/vm/child-sort into /tmp/hbe9bq3lv7.dsk...
+Writing command line to /tmp/PXxZga6veu.dsk...
+qemu -hda /tmp/PXxZga6veu.dsk -hdb /tmp/sbUv_lcDkn.dsk -hdc /tmp/hbe9bq3lv7.dsk -hdd /tmp/xgL1kKZ0dZ.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-seq put child-sort run page-merge-seq
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -16,18 +16,15 @@ Boot complete.
 Putting 'page-merge-seq' into the file system...
 Putting 'child-sort' into the file system...
 Executing 'page-merge-seq':
-Kernel PANIC at ../../userprog/exception.c:178 in page_fault(): assertion `fault_page' failed.
-Call stack: 0xc01079f9 0xc010ae48 0xc0101f07 0xc010203f.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 683 ticks
-Thread: 30 idle ticks, 188 kernel ticks, 465 user ticks
+page-merge-seq: exit(-1)
+Execution of 'page-merge-seq' complete.
+Timer: 682 ticks
+Thread: 30 idle ticks, 191 kernel ticks, 461 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 67 reads, 418 writes
 hd1:0: 204 reads, 0 writes
 hd1:1: 8 reads, 1104 writes
-Console: 1211 characters output
+Console: 970 characters output
 Keyboard: 0 keys pressed
 Exception: 2 page faults
 Powering off...

@@ -41,26 +41,24 @@ swap_init (void)
  * of the disk into the frame. 
  */ 
 bool 
-swap_in (void *addr)
-{
+swap_in (void *addr, struct sup_page_table_entry *spte)
+{	
+	ASSERT(addr <= PHYS_BASE);
 	struct thread *curr = thread_current();
 	lock_acquire(&swap_lock);
 	const int swap_table_size = disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE;
 	lock_release(&swap_lock);
-
-	// 1
-	struct sup_page_table_entry _spte, *spte;
-	_spte.user_vaddr = addr;
 	struct hash_elem *e;
-	e = hash_find(curr->sup_page_dir, &_spte.hash_elem);
-	spte = hash_entry(e, struct sup_page_table_entry, hash_elem);
+
 	ASSERT(spte->state == SPTE_EVICTED);
 
 	// 2, 3
-	allocate_frame(addr);
+	uint8_t *kpage = allocate_frame(addr);
+	ASSERT(kpage);
 
+	spte->kpage = kpage;
+	spte->user_vaddr = addr;
 	spte->state = SPTE_MAPPED;
-
 	// 5
 	struct frame_table_entry _fte, *fte;
 	_fte.user = addr;
@@ -68,6 +66,9 @@ swap_in (void *addr)
 	lock_acquire(&frame_table_lock);
 	lock_acquire(&swap_lock);
 	e = hash_find(&frame_table, &_fte.hash_elem);
+
+	ASSERT(e!=NULL);
+
 	fte = hash_entry(e, struct frame_table_entry, hash_elem);
 	lock_release(&frame_table_lock);
 	read_from_disk(fte->kernel, spte->swap_offset);
@@ -128,6 +129,7 @@ swap_out (void)
 	if((eviction_ptr = list_next(&(fte->list_elem))) == list_tail(&frame_list)){
 		eviction_ptr = list_begin(&frame_list);
 	}
+	//printf("bitmap_count: %d\n",bitmap_count(swap_table, 0, bitmap_size(swap_table),0));
 	lock_release(&swap_lock);
 	deallocate_frame(fte->user);
 	return true;
@@ -140,16 +142,16 @@ swap_out (void)
 void read_from_disk (uint8_t *frame, int index)
 {
 	int i;
-	for(i = 0; i < PGSIZE / DISK_SECTOR_SIZE; ++i) // i < 8
-		disk_read(swap_device, index * PGSIZE / DISK_SECTOR_SIZE  + i, frame + DISK_SECTOR_SIZE*i);
+	for(i = 0; i < (PGSIZE / DISK_SECTOR_SIZE); ++i) // i < 8
+		disk_read(swap_device, index * (PGSIZE / DISK_SECTOR_SIZE) + i, frame + (DISK_SECTOR_SIZE*i));
 }
 
 /* Write data to swap device from frame */
 void write_to_disk (uint8_t *frame, int index)
 {
 	int i;
-	for(i = 0; i < PGSIZE / DISK_SECTOR_SIZE; ++i) // i < 8
-		disk_write(swap_device, index * PGSIZE / DISK_SECTOR_SIZE + i, frame + DISK_SECTOR_SIZE*i);
+	for(i = 0; i < (PGSIZE / DISK_SECTOR_SIZE); ++i) // i < 8
+		disk_write(swap_device, index * (PGSIZE / DISK_SECTOR_SIZE) + i, frame + (DISK_SECTOR_SIZE*i));
 }
 
 void swap_free(int ofs){

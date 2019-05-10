@@ -1,12 +1,12 @@
-Copying tests/vm/page-merge-par into /tmp/RVzRY2pkjn.dsk...
-Copying tests/vm/child-sort into /tmp/RVzRY2pkjn.dsk...
-Writing command line to /tmp/PW9eXjCP72.dsk...
-qemu -hda /tmp/PW9eXjCP72.dsk -hdb /tmp/gER0WjlAPB.dsk -hdc /tmp/RVzRY2pkjn.dsk -hdd /tmp/C4swYOUMxV.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-par into /tmp/zphQ9e7v67.dsk...
+Copying tests/vm/child-sort into /tmp/zphQ9e7v67.dsk...
+Writing command line to /tmp/f0wiIqcVkB.dsk...
+qemu -hda /tmp/f0wiIqcVkB.dsk -hdb /tmp/p55GkwTZ_A.dsk -hdc /tmp/zphQ9e7v67.dsk -hdd /tmp/7X5GV5ZHl9.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  153,804,800 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 206 sector (103 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -16,18 +16,15 @@ Boot complete.
 Putting 'page-merge-par' into the file system...
 Putting 'child-sort' into the file system...
 Executing 'page-merge-par':
-Kernel PANIC at ../../userprog/exception.c:178 in page_fault(): assertion `fault_page' failed.
-Call stack: 0xc01079f9 0xc010ae48 0xc0101f07 0xc010203f.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 737 ticks
-Thread: 30 idle ticks, 207 kernel ticks, 500 user ticks
+page-merge-par: exit(-1)
+Execution of 'page-merge-par' complete.
+Timer: 748 ticks
+Thread: 30 idle ticks, 193 kernel ticks, 525 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 67 reads, 422 writes
 hd1:0: 206 reads, 0 writes
 hd1:1: 8 reads, 1168 writes
-Console: 1211 characters output
+Console: 970 characters output
 Keyboard: 0 keys pressed
 Exception: 2 page faults
 Powering off...

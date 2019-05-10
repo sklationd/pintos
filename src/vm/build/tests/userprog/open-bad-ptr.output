@@ -1,11 +1,11 @@
-Copying tests/userprog/open-bad-ptr into /tmp/nx3VGGOPtM.dsk...
-Writing command line to /tmp/7e2mAbTUkx.dsk...
-qemu -hda /tmp/7e2mAbTUkx.dsk -hdb /tmp/WjDf2vXuOs.dsk -hdc /tmp/nx3VGGOPtM.dsk -hdd /tmp/wpPG7VcpvL.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/open-bad-ptr into /tmp/lZLoQqMjlL.dsk...
+Writing command line to /tmp/u6S0RrkVYq.dsk...
+qemu -hda /tmp/u6S0RrkVYq.dsk -hdb /tmp/ZlHj2Lcp8Z.dsk -hdc /tmp/lZLoQqMjlL.dsk -hdd /tmp/UyyWVDRYh8.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put open-bad-ptr run open-bad-ptr
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  71,987,200 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -17,13 +17,13 @@ Executing 'open-bad-ptr':
 (open-bad-ptr) begin
 open-bad-ptr: exit(-1)
 Execution of 'open-bad-ptr' complete.
-Timer: 135 ticks
-Thread: 30 idle ticks, 106 kernel ticks, 0 user ticks
+Timer: 139 ticks
+Thread: 30 idle ticks, 108 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 64 reads, 202 writes
 hd1:0: 97 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 910 characters output
+Console: 911 characters output
 Keyboard: 0 keys pressed
 Exception: 6 page faults
 Powering off...

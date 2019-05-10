@@ -140,8 +140,9 @@ page_fault (struct intr_frame *f)
      [IA32-v3a] 5.15 "Interrupt 14--Page Fault Exception
      (#PF)". */
   asm ("movl %%cr2, %0" : "=r" (fault_addr));
+  ASSERT(fault_addr);
   void* fault_page = (void *) pg_round_down(fault_addr);
-
+ // printf("fault_addr: %p\n",fault_page);
   //printf("fault_address 0x%x\n", fault_addr);
   /* Turn interrupts back on (they were only off so that we could
      be assured of reading CR2 before it changed). */
@@ -182,13 +183,13 @@ page_fault (struct intr_frame *f)
   }
   
   if(spte->state == SPTE_EVICTED){
-    swap_in(fault_page);
-    if(!install_page(spte->user_vaddr, spte->kpage, spte->writable)){
+    swap_in(fault_page, spte);
+    if(!pagedir_set_page(pd,spte->user_vaddr, spte->kpage, spte->writable)){
       deallocate_frame(spte->kpage);
       exit(-1);
     }
   }
-  
+
   else if(spte->state == SPTE_LOAD){
       file_seek(spte->file, spte->ofs);
       if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
@@ -201,30 +202,21 @@ page_fault (struct intr_frame *f)
       if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
         {
           deallocate_frame (spte->kpage);
-          exit(-1);
+          exit(-1);         
         }
   }
-  //if(!pagedir_get_page(pd, fault_page))
-  //  exit(-1);
-  
-  /*
-  if(!((uint32_t)(*pte) & PTE_W) && write){
-    exit(-1);
-  }
-  */
 
-  
+
   /* To implement virtual memory, delete the rest of the function
      body, and replace it with code that brings in the page to
      which fault_addr refers. */
-/*
+/*FAIL:
   printf ("Page fault at %p: %s error %s page in %s context.\n",
           fault_addr,
           not_present ? "not present" : "rights violation",
           write ? "writing" : "reading",
           user ? "user" : "kernel");
-  kill (f);
-  */
+  kill (f);*/
 
 }
 

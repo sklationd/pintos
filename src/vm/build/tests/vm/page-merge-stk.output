@@ -1,12 +1,12 @@
-Copying tests/vm/page-merge-stk into /tmp/SCmoDV6r0p.dsk...
-Copying tests/vm/child-qsort into /tmp/SCmoDV6r0p.dsk...
-Writing command line to /tmp/83gi7ATOAC.dsk...
-qemu -hda /tmp/83gi7ATOAC.dsk -hdb /tmp/GbBObnVK25.dsk -hdc /tmp/SCmoDV6r0p.dsk -hdd /tmp/pVFbxlsgxC.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-stk into /tmp/RNtTGGzfPm.dsk...
+Copying tests/vm/child-qsort into /tmp/RNtTGGzfPm.dsk...
+Writing command line to /tmp/nDAQV9QDDe.dsk...
+qemu -hda /tmp/nDAQV9QDDe.dsk -hdb /tmp/MaIkOnIzdG.dsk -hdc /tmp/RNtTGGzfPm.dsk -hdd /tmp/_eKgh5OQrQ.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-stk put child-qsort run page-merge-stk
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,715,200 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 211 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -16,18 +16,15 @@ Boot complete.
 Putting 'page-merge-stk' into the file system...
 Putting 'child-qsort' into the file system...
 Executing 'page-merge-stk':
-Kernel PANIC at ../../userprog/exception.c:178 in page_fault(): assertion `fault_page' failed.
-Call stack: 0xc01079f9 0xc010ae48 0xc0101f07 0xc010203f.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 715 ticks
-Thread: 30 idle ticks, 207 kernel ticks, 478 user ticks
+page-merge-stk: exit(-1)
+Execution of 'page-merge-stk' complete.
+Timer: 755 ticks
+Thread: 30 idle ticks, 196 kernel ticks, 529 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 67 reads, 432 writes
 hd1:0: 211 reads, 0 writes
 hd1:1: 8 reads, 1168 writes
-Console: 1213 characters output
+Console: 972 characters output
 Keyboard: 0 keys pressed
 Exception: 2 page faults
 Powering off...
