@@ -36,8 +36,8 @@ struct sup_page_table_entry
 void page_init (void);
 struct sup_page_table_entry *allocate_page (void *addr);
 void deallocate_page(void *addr);
-bool lazy_load(struct file *file, off_t ofs, void *kpage, void *upage, size_t page_read_bytes, 
-			   size_t page_zero_bytes, bool writable);
+bool lazy_load(struct file *file, off_t ofs, void *upage, size_t page_read_bytes, 
+			   size_t page_zero_bytes, bool writable, struct sup_page_table_entry *spte);
 struct sup_page_table_entry* find_spte(void *addr); //user page address
 void destroy_sup_page_table(void);
 #endif /* vm/page.h */

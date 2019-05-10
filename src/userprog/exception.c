@@ -191,12 +191,16 @@ page_fault (struct intr_frame *f)
   }
 
   else if(spte->state == SPTE_LOAD){
+      uint8_t *kpage = allocate_frame(spte->user_vaddr);
+      spte->kpage = kpage;
+      lock_acquire(&filesys_lock);
       file_seek(spte->file, spte->ofs);
       if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
         {
           deallocate_frame (spte->user_vaddr);
           exit(-1);
         }
+      lock_release(&filesys_lock);
       spte->state = SPTE_MAPPED;
       memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
       if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 

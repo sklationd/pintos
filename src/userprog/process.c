@@ -197,6 +197,7 @@ start_process (void *lan_)
      arguments on the stack in the form of a `struct intr_frame',
      we just point the stack pointer (%esp) to our stack frame
      and jump to it. */
+
   asm volatile ("movl %0, %%esp; jmp intr_exit" : : "g" (&if_) : "memory");
   NOT_REACHED ();
 }
@@ -473,7 +474,6 @@ load (const char *file_name, void (**eip) (void), void **esp)
   *eip = (void (*) (void)) ehdr.e_entry;
 
   success = true;
-
  done:
   /* We arrive here whether the load is successful or not. */
   if(file != NULL)
@@ -559,8 +559,9 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
          and zero the final PAGE_ZERO_BYTES bytes. */
       size_t page_read_bytes = read_bytes < PGSIZE ? read_bytes : PGSIZE;
       size_t page_zero_bytes = PGSIZE - page_read_bytes;
-      uint8_t *kpage = allocate_frame(upage);
-      if(!lazy_load(file, ofs, kpage, upage, page_read_bytes, page_zero_bytes, writable))
+      //uint8_t *kpage = allocate_frame(upage);
+      struct sup_page_table_entry *spte = allocate_page(upage);
+      if(!lazy_load(file, ofs, upage, page_read_bytes, page_zero_bytes, writable, spte))
         return false;
       ofs += PGSIZE;
       
@@ -604,7 +605,6 @@ setup_stack (void **esp)
   bool success = false;
 
   //kpage = palloc_get_page (PAL_USER | PAL_ZERO);
-  printf("try allocate kpage\n");
   kpage = allocate_frame(((uint8_t *)PHYS_BASE) - PGSIZE);
   if (kpage != NULL) 
     {
