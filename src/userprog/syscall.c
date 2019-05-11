@@ -13,6 +13,8 @@
 #include "filesys/directory.h"
 #include "filesys/filesys.h"
 #include "filesys/file.h"
+#include "vm/frame.h"
+
 static void syscall_handler (struct intr_frame *);
 struct lock filesys_lock;
 
@@ -142,15 +144,11 @@ int read(int fd, void *buffer, unsigned size){
     else if(fd == 1 || fd ==2)
         exit(-1);
     else{
+        swap_prevention_buffer(buffer, size, true);
         lock_acquire(&filesys_lock);
-        //printf("lock acquire read at tid: %d\n",thread_current()->tid);
 	    int len = file_read(thread_current()->fd[fd-3],buffer,size);
-        //printf("lock try release read at tid: %d\n",thread_current()->tid);
-        //printf("lock holder %d\n",filesys_lock.holder -> tid);
-        //if(lock_held_by_current_thread(&filesys_lock))
-        //    printf("ahahahahhahahahahahah\n");
         lock_release(&filesys_lock);
-        //printf("lock release read at tid: %d\n",thread_current()->tid);
+        swap_prevention_buffer(buffer, size, false);
         return len;
     }   
 }
@@ -160,7 +158,7 @@ int write(int fd, const void *buffer, unsigned size){
     if(buffer == NULL)
         exit(-1);
     if(fd == 1){ // console write
-        putbuf(buffer,size);
+        putbuf(buffer, size);
         return size;
     }
     else if (fd == 0){ //std input
@@ -172,9 +170,11 @@ int write(int fd, const void *buffer, unsigned size){
 
     else{
         if(!thread_current()->fd[fd-3]->deny_write){
+            swap_prevention_buffer(buffer, size, true);
             lock_acquire(&filesys_lock);
             int len = file_write(thread_current()->fd[fd-3],buffer,size);
             lock_release(&filesys_lock);
+            swap_prevention_buffer(buffer, size, false);
             return len;
         }
         return 0;

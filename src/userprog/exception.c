@@ -140,7 +140,7 @@ page_fault (struct intr_frame *f)
      [IA32-v3a] 5.15 "Interrupt 14--Page Fault Exception
      (#PF)". */
   asm ("movl %%cr2, %0" : "=r" (fault_addr));
-  ASSERT(fault_addr);
+  //printf("fault %p\n", fault_addr);
   void* fault_page = (void *) pg_round_down(fault_addr);
  // printf("fault_addr: %p\n",fault_page);
   //printf("fault_address 0x%x\n", fault_addr);
@@ -157,59 +157,47 @@ page_fault (struct intr_frame *f)
   user = (f->error_code & PF_U) != 0;
   
   if(!not_present){
-    exit(-1);
+    exit(-2);
   }
   if(user && is_kernel_vaddr(fault_addr)){
-    exit(-1);
+    exit(-3);
   }
   //esp handling
   void *esp = user ? f->esp : thread_current()->esp;
   uint32_t *pd = thread_current()->pagedir;
   struct sup_page_table_entry *spte;
 
-  if(((fault_addr < PHYS_BASE) && (PHYS_BASE - STACK_SIZE <= fault_addr)) && // USER AREA ??
-     ((esp <= fault_addr) || // ordinary case
-     (fault_addr == esp-4) || (fault_addr == esp-32)) // pusha instruction
-  ){ //stack growth
-    void *kernel = allocate_frame(fault_page);
-    pagedir_set_page(pd,fault_page, kernel, true);
-    spte = find_spte(fault_page);
-  }
-  //ASSERT(fault_page);
   spte = find_spte(fault_page);
   
+
   if(spte == NULL){
-    exit(-1);
+    if(((fault_addr < PHYS_BASE) && (PHYS_BASE - STACK_SIZE <= fault_addr)) && // USER AREA ??
+       ((esp <= fault_addr) || // ordinary case
+       (fault_addr == esp-4) || (fault_addr == esp-32)) // pusha instruction
+    ){ //stack growth
+      void *kernel = allocate_frame(fault_page);
+      pagedir_set_page(pd,fault_page, kernel, true);
+      spte = find_spte(fault_page);
+    }
+
+    else{
+      printf("%p %p\n", esp, fault_addr);
+      ASSERT(0);
+      exit(-4);
+    }
   }
   
   if(spte->state == SPTE_EVICTED){
     swap_in(fault_page, spte);
-    if(!pagedir_set_page(pd,spte->user_vaddr, spte->kpage, spte->writable)){
-      deallocate_frame(spte->kpage);
-      exit(-1);
-    }
   }
 
   else if(spte->state == SPTE_LOAD){
-      uint8_t *kpage = allocate_frame(spte->user_vaddr);
-      spte->kpage = kpage;
-      lock_acquire(&filesys_lock);
-      file_seek(spte->file, spte->ofs);
-      if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
-        {
-          deallocate_frame (spte->user_vaddr);
-          exit(-1);
-        }
-      lock_release(&filesys_lock);
-      spte->state = SPTE_MAPPED;
-      memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
-      if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
-        {
-          deallocate_frame (spte->kpage);
-          exit(-1);         
-        }
+    printf("addr: %p\n", fault_addr);
+    printf("Before: %p\n", find_fte(spte->user_vaddr));
+    lazy_load_page(spte);
+    printf("After: %p\n\n", find_fte(spte->user_vaddr));
   }
-
+}
 
   /* To implement virtual memory, delete the rest of the function
      body, and replace it with code that brings in the page to
@@ -221,6 +209,3 @@ page_fault (struct intr_frame *f)
           write ? "writing" : "reading",
           user ? "user" : "kernel");
   kill (f);*/
-
-}
-

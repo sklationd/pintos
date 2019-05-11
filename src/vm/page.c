@@ -28,7 +28,6 @@ struct sup_page_table_entry *
 allocate_page (void *addr)
 {
 	struct sup_page_table_entry *spte = malloc(sizeof(struct sup_page_table_entry));
-//	spte->kernel_vaddr = NULL;
 	spte->user_vaddr = addr;
 	hash_insert(thread_current()->sup_page_dir, &spte->hash_elem);
 	spte->state = SPTE_MAPPED;
@@ -51,11 +50,10 @@ bool lazy_load(struct file *file, off_t ofs, void *upage, size_t page_read_bytes
     spte->user_vaddr = upage;
     spte->file = file;
     spte->ofs = ofs;
-    //spte->kpage = kpage;
     spte->page_read_bytes = page_read_bytes;
     spte->page_zero_bytes = page_zero_bytes;
     spte->writable = writable;
-    spte->state = SPTE_LOAD; 
+    spte->state = SPTE_LOAD;
     return true;
 }
 

@@ -19,6 +19,8 @@ struct frame_table_entry
 	uint32_t *kernel;
 	struct thread *owner;
 	struct sup_page_table_entry *spte;
+
+	bool swap_prevention;
 };
 
 void frame_init (void);
@@ -26,5 +28,6 @@ uint32_t* allocate_frame (void *addr);
 void deallocate_frame(void *addr);
 struct frame_table_entry* find_fte(void *addr); //user
 void deallocate_frame_owned_by_thread(void);
+void swap_prevention_buffer(const void *buf, size_t size, bool onoff);
 
 #endif /* vm/frame.h */

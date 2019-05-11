@@ -152,7 +152,7 @@ stack_build(void **esp,char **argv,int argc){
 
   /* for debugging
   printf("esp: %x\n",*esp);
-  hex_dump(*esp,*esp,100,1);
+  hex_dump(*esp,*esp,100,1);a
   */
 }
 
@@ -635,4 +635,23 @@ install_page (void *upage, void *kpage, bool writable)
      address, then map our page there. */
   return (pagedir_get_page (t->pagedir, upage) == NULL
           && pagedir_set_page (t->pagedir, upage, kpage, writable));
+}
+
+bool lazy_load_page(struct sup_page_table_entry *spte){
+    printf("user: %p\n",spte->user_vaddr);
+    allocate_frame(spte->user_vaddr);
+    lock_acquire(&filesys_lock);
+    file_seek(spte->file, spte->ofs);
+    if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
+    {
+      deallocate_frame (spte->user_vaddr);
+      exit(-1);
+    }
+    lock_release(&filesys_lock);
+    memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
+    if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
+    {
+      deallocate_frame (spte->kpage);
+      exit(-1);         
+    }
 }
