@@ -1,11 +1,11 @@
-Copying tests/userprog/sc-boundary into /tmp/LUNml_EwgP.dsk...
-Writing command line to /tmp/fueBy8uB1x.dsk...
-qemu -hda /tmp/fueBy8uB1x.dsk -hdb /tmp/27VSWBMj2x.dsk -hdc /tmp/LUNml_EwgP.dsk -hdd /tmp/br2h937Co4.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/sc-boundary into /tmp/Sh2bUojC85.dsk...
+Writing command line to /tmp/5wEnUiXdKH.dsk...
+qemu -hda /tmp/5wEnUiXdKH.dsk -hdb /tmp/6erF7uuzfB.dsk -hdc /tmp/Sh2bUojC85.dsk -hdd /tmp/UG7sB7_fMx.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put sc-boundary run sc-boundary
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  130,867,200 loops/s.
+Calibrating timer...  196,403,200 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 100 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -17,8 +17,8 @@ Executing 'sc-boundary':
 (sc-boundary) begin
 sc-boundary: exit(42)
 Execution of 'sc-boundary' complete.
-Timer: 143 ticks
-Thread: 30 idle ticks, 113 kernel ticks, 0 user ticks
+Timer: 142 ticks
+Thread: 30 idle ticks, 112 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 63 reads, 208 writes
 hd1:0: 100 reads, 0 writes

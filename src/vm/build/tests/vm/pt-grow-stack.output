@@ -1,11 +1,11 @@
-Copying tests/vm/pt-grow-stack into /tmp/LUWZMGfSnN.dsk...
-Writing command line to /tmp/0tidq8Rjx5.dsk...
-qemu -hda /tmp/0tidq8Rjx5.dsk -hdb /tmp/kdQHcVkNRm.dsk -hdc /tmp/LUWZMGfSnN.dsk -hdd /tmp/hYm1Kt5p5y.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-grow-stack into /tmp/n6_O0vybGl.dsk...
+Writing command line to /tmp/vJvi_n_SPy.dsk...
+qemu -hda /tmp/vJvi_n_SPy.dsk -hdb /tmp/CY_J4snFRq.dsk -hdc /tmp/n6_O0vybGl.dsk -hdd /tmp/m3i2kXoibO.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-grow-stack run pt-grow-stack
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  182,886,400 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 106 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -20,7 +20,7 @@ Executing 'pt-grow-stack':
 pt-grow-stack: exit(0)
 Execution of 'pt-grow-stack' complete.
 Timer: 144 ticks
-Thread: 30 idle ticks, 113 kernel ticks, 1 user ticks
+Thread: 30 idle ticks, 114 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 64 reads, 220 writes
 hd1:0: 106 reads, 0 writes

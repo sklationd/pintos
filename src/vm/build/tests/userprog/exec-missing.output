@@ -1,6 +1,6 @@
-Copying tests/userprog/exec-missing into /tmp/4UiPAqLgu9.dsk...
-Writing command line to /tmp/szbWsChzOB.dsk...
-qemu -hda /tmp/szbWsChzOB.dsk -hdb /tmp/7cvmSPyWg2.dsk -hdc /tmp/4UiPAqLgu9.dsk -hdd /tmp/Gu1YI7M9wt.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-missing into /tmp/g1gDTMMFrL.dsk...
+Writing command line to /tmp/YHacy_X5CJ.dsk...
+qemu -hda /tmp/YHacy_X5CJ.dsk -hdb /tmp/AC_qX14eq5.dsk -hdc /tmp/g1gDTMMFrL.dsk -hdd /tmp/yWwdMbkoYG.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-missing run exec-missing
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -19,8 +19,8 @@ Executing 'exec-missing':
 (exec-missing) end
 exec-missing: exit(0)
 Execution of 'exec-missing' complete.
-Timer: 137 ticks
-Thread: 30 idle ticks, 107 kernel ticks, 0 user ticks
+Timer: 136 ticks
+Thread: 30 idle ticks, 106 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 79 reads, 202 writes
 hd1:0: 97 reads, 0 writes

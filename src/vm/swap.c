@@ -45,10 +45,7 @@ swap_in (void *addr, struct sup_page_table_entry *spte)
 {	
 	//printf("swap in %p\n", addr);
 	ASSERT(addr < PHYS_BASE);
-	struct thread *curr = thread_current();
-	lock_acquire(&swap_lock);
 	const int swap_table_size = disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE;
-	lock_release(&swap_lock);
 	struct hash_elem *e;
 
 	ASSERT(spte->state == SPTE_EVICTED);
@@ -58,13 +55,14 @@ swap_in (void *addr, struct sup_page_table_entry *spte)
 	ASSERT(kpage);
 	// 5
 	struct frame_table_entry *fte;
+	lock_acquire(&frame_table_lock);
 	fte = find_fte(addr);
-
+	
 	if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) {
       exit(-1);
     }
 	read_from_disk(fte->kernel, spte->swap_offset);
-
+	lock_release(&frame_table_lock);
 	lock_acquire(&swap_lock);
 	bitmap_set(swap_table,spte->swap_offset,0);
 	lock_release(&swap_lock);
@@ -88,23 +86,22 @@ bool
 swap_out (void)
 {	
 	lock_acquire(&swap_lock);
+	lock_acquire(&frame_table_lock);
 	const int swap_table_size = disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE;
 	if(bitmap_all(swap_table,0,swap_table_size)){
 		exit(-1);
 	}
-	lock_release(&swap_lock);
-
-	lock_acquire(&frame_table_lock);
 	if(eviction_ptr == NULL){
 		eviction_ptr = list_begin(&frame_list);
 	}
 	struct frame_table_entry *fte; 
-	struct thread *curr = thread_current();
+
 	while(1){
 		fte = list_entry(eviction_ptr, struct frame_table_entry, list_elem);
+		struct thread *t = fte->owner;
 		if(!fte->swap_prevention){
-			if(pagedir_is_accessed(curr->pagedir,fte->user)){
-				pagedir_set_accessed(curr->pagedir,fte->user, 0);
+			if(pagedir_is_accessed(t->pagedir,fte->user)){
+				pagedir_set_accessed(t->pagedir,fte->user, 0);
 			}
 			else 
 				break;
@@ -113,13 +110,11 @@ swap_out (void)
 			eviction_ptr = list_begin(&frame_list);
 		}
 	}
-	lock_release(&frame_table_lock);
-
-	lock_acquire(&swap_lock);
 	size_t index = bitmap_scan(swap_table, 0, 1, 0);
 	if(index == BITMAP_ERROR)
 		PANIC("swap full\n");
 	bitmap_set(swap_table, index,1);
+	ASSERT(fte);
 	fte->spte->state = SPTE_EVICTED;
 	fte->spte->swap_offset = index;
 	struct sup_page_table_entry *spte = fte->spte;
@@ -127,6 +122,7 @@ swap_out (void)
 	if((eviction_ptr = list_next(&(fte->list_elem))) == list_tail(&frame_list)){
 		eviction_ptr = list_begin(&frame_list);
 	}
+	lock_release(&frame_table_lock);
 	lock_release(&swap_lock);
 	deallocate_fte(fte);
 	spte->kpage = NULL;

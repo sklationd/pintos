@@ -257,6 +257,10 @@ process_exit (void)
 
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
+  
+  /* destroy spt */
+  destroy_sup_page_table();
+  deallocate_frame_owned_by_thread();
 
   pd = curr->pagedir;
   if (pd != NULL) 
@@ -273,9 +277,6 @@ process_exit (void)
       pagedir_destroy (pd);
     }
 
-  /* destroy spt */
-  destroy_sup_page_table();
-  deallocate_frame_owned_by_thread();
 }
 
 /* Sets up the CPU for running user code in the current

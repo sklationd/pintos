@@ -1,2 +1,22 @@
 FAIL
-run: byte 1045248 != 0: FAILED
+Kernel panic in run: PANIC at ../../vm/swap.c:157 in swap_free(): assertion `bitmap_test(swap_table,ofs)' failed.
+Call stack: 0xc01079f9 0xc010de43 0xc010dc79 0xc0109abd 0xc010100c 0xc010b079 0xc010b64e 0xc0101f07 0xc010203f 0x804a3d9 0x804841f 0x8048163 0x80488cc
+Translation of call stack:
+In kernel.o:
+0xc01079f9: debug_panic (.../../lib/kernel/debug.c:34)
+0xc010de43: swap_free (...build/../../vm/swap.c:158)
+0xc010dc79: destroy_sup_page_table (.../build/../../vm/page.c:90)
+0xc0109abd: process_exit (...../userprog/process.c:263)
+0xc010100c: thread_exit (..../../threads/thread.c:354)
+0xc010b079: close (...../userprog/syscall.c:205)
+0xc010b64e: syscall_handler (...../userprog/syscall.c:244)
+0xc0101f07: intr_handler (..../threads/interrupt.c:361)
+0xc010203f: intr_entry (threads/intr-stubs.S:38)
+In tests/vm/page-parallel:
+0x0804a3d9: putchar (.../../lib/user/console.c:43)
+0x0804841f: compare_bytes (...ild/../../tests/lib.c:193)
+0x08048163: shuffle (...uild/../../tests/lib.c:75)
+0x080488cc: random_bytes (...ild/../../lib/random.c:61)
+Translations of user virtual addresses above are based on a guess at
+the binary to use.  If this guess is incorrect, then those
+translations will be misleading.

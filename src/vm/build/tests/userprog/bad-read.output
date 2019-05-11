@@ -1,6 +1,6 @@
-Copying tests/userprog/bad-read into /tmp/4r7LxxQn7f.dsk...
-Writing command line to /tmp/0tpkh729ae.dsk...
-qemu -hda /tmp/0tpkh729ae.dsk -hdb /tmp/5c6YdpLwUq.dsk -hdc /tmp/4r7LxxQn7f.dsk -hdd /tmp/Nn8qwgeaG5.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/bad-read into /tmp/nA8cE65Ad3.dsk...
+Writing command line to /tmp/qNi9gWAT2V.dsk...
+qemu -hda /tmp/qNi9gWAT2V.dsk -hdb /tmp/56z2VABcWO.dsk -hdc /tmp/nA8cE65Ad3.dsk -hdd /tmp/TqPCZtFxQc.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put bad-read run bad-read
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -17,8 +17,8 @@ Executing 'bad-read':
 (bad-read) begin
 bad-read: exit(-1)
 Execution of 'bad-read' complete.
-Timer: 139 ticks
-Thread: 30 idle ticks, 108 kernel ticks, 1 user ticks
+Timer: 136 ticks
+Thread: 30 idle ticks, 106 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 62 reads, 202 writes
 hd1:0: 97 reads, 0 writes

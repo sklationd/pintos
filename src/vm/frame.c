@@ -57,20 +57,22 @@ uint32_t *
 _allocate_frame (void *addr) // user virtual address
 {	
 	struct frame_table_entry *fte = malloc(sizeof(struct frame_table_entry));
-	if(fte == NULL)
+	lock_acquire(&frame_table_lock);
+	if(fte == NULL){
+		lock_release(&frame_table_lock);
 		return NULL;
+	}
 	fte->swap_prevention = true;
 	fte->kernel = palloc_get_page(PAL_USER | PAL_ZERO);
 	if(fte->kernel == NULL){
 		free(fte);
+		lock_release(&frame_table_lock);
 		return NULL;
 	}
 	fte->user = addr;
 	fte->owner = thread_current();
-	lock_acquire(&frame_table_lock);
 	list_push_front(&frame_list, &fte->list_elem);
 	hash_insert(&frame_table, &fte->hash_elem);
-	lock_release(&frame_table_lock);
 
 	struct sup_page_table_entry spte;
 	spte.user_vaddr = addr;
@@ -87,6 +89,7 @@ _allocate_frame (void *addr) // user virtual address
 	fte->spte->state = SPTE_MAPPED;
 	
 	fte->swap_prevention = false;
+	lock_release(&frame_table_lock);
 
 	return fte->kernel;
 }
@@ -94,37 +97,35 @@ _allocate_frame (void *addr) // user virtual address
 uint32_t *
 allocate_frame (void *_addr){
 	void *addr = (void*)pg_round_down(_addr);
-	uint32_t *kernel = _allocate_frame(addr);
-	if(kernel == NULL) {
+	uint32_t *kernel;// = _allocate_frame(addr);
+	while((kernel = _allocate_frame(addr)) == NULL) {
 		if(!swap_out())
 			exit(-1); // TODO panic
-		kernel = _allocate_frame(addr);
-		ASSERT(kernel != NULL);
 	}
 	return kernel;
 }
 
 void deallocate_frame(void *addr){
-	struct frame_table_entry *fte = find_fte(addr);
 	lock_acquire(&frame_table_lock);
+	struct frame_table_entry *fte = find_fte(addr);
 	hash_delete(&frame_table, &fte->hash_elem);
 	eviction_ptr_push(&fte->list_elem);
 	list_remove(&fte->list_elem);
-	lock_release(&frame_table_lock);
 	pagedir_clear_page(thread_current()->pagedir, addr);
 
 	palloc_free_page(fte->kernel);
 	free(fte);
+	lock_release(&frame_table_lock);
 }
 void deallocate_fte(struct frame_table_entry *fte){
 	lock_acquire(&frame_table_lock);
 	hash_delete(&frame_table, &fte->hash_elem);
 	eviction_ptr_push(&fte->list_elem);
 	list_remove(&fte->list_elem);
-	lock_release(&frame_table_lock);
 	pagedir_clear_page(fte->owner->pagedir, fte->user);
 	palloc_free_page(fte->kernel);
 	free(fte);
+	lock_release(&frame_table_lock);
 }
 
 void deallocate_frame_owned_by_thread(void){
@@ -147,8 +148,9 @@ void deallocate_frame_owned_by_thread(void){
 
 struct frame_table_entry *find_fte(void *addr){ //user
 	struct sup_page_table_entry *spte = find_spte(addr);
-	if(spte == NULL)
+	if(spte == NULL){
 		return NULL;
+	}
 	struct frame_table_entry fte;
 	struct hash_elem *e;
 	if(!spte->kpage){ // NOT LOADED YET
@@ -156,12 +158,11 @@ struct frame_table_entry *find_fte(void *addr){ //user
 	}
 	fte.kernel = spte->kpage;
 	fte.owner = thread_current();
-	lock_acquire(&frame_table_lock);
 	e = hash_find(&frame_table, &fte.hash_elem);
-	lock_release(&frame_table_lock);
 
-	if(e == NULL)
+	if(e == NULL){
 		return NULL;
+	}
 	return hash_entry(e, struct frame_table_entry, hash_elem);
 }
 
@@ -170,7 +171,9 @@ void swap_prevent_on(void *addr){
 	if(spte == NULL)
 		return;
 	struct frame_table_entry *fte;
+	lock_acquire(&frame_table_lock);
 	fte = find_fte(addr);
+	lock_release(&frame_table_lock);
 	if(fte == NULL){
 		ASSERT(spte->state != SPTE_MAPPED);
 		if(spte->state == SPTE_EVICTED)
@@ -178,9 +181,12 @@ void swap_prevent_on(void *addr){
 		else if(spte->state == SPTE_LOAD)
 			lazy_load_page(spte);
 	}
+	lock_acquire(&frame_table_lock);
 	fte = find_fte(addr);
+	lock_release(&frame_table_lock);
 	ASSERT(fte);
 	fte->swap_prevention = true;
+
 }
 
 void swap_prevent_off(void *addr){
@@ -188,7 +194,9 @@ void swap_prevent_off(void *addr){
 	if(spte == NULL)
 		return;
 	struct frame_table_entry *fte;
+	lock_acquire(&frame_table_lock);
 	fte = find_fte(addr);
+	lock_release(&frame_table_lock);
 	if(fte == NULL){
 		ASSERT(spte->state != SPTE_MAPPED);
 		if(spte->state == SPTE_EVICTED)
@@ -196,9 +204,12 @@ void swap_prevent_off(void *addr){
 		else if(spte->state == SPTE_LOAD)
 			lazy_load_page(spte);
 	}
+	lock_acquire(&frame_table_lock);
 	fte = find_fte(addr);
+	lock_release(&frame_table_lock);
 	ASSERT(fte);
 	fte->swap_prevention = false;
+
 }
 
 void swap_prevention_buffer(const void *buf, size_t size, bool onoff){

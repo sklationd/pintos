@@ -1,7 +1,7 @@
-Copying tests/vm/page-merge-stk into /tmp/pgR12ZB3ZZ.dsk...
-Copying tests/vm/child-qsort into /tmp/pgR12ZB3ZZ.dsk...
-Writing command line to /tmp/UYazyP8CIa.dsk...
-qemu -hda /tmp/UYazyP8CIa.dsk -hdb /tmp/4fXSgFPJU5.dsk -hdc /tmp/pgR12ZB3ZZ.dsk -hdd /tmp/b9voD2d5LP.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-stk into /tmp/a3gNJ02Hq4.dsk...
+Copying tests/vm/child-qsort into /tmp/a3gNJ02Hq4.dsk...
+Writing command line to /tmp/ZmLpXcr1RR.dsk...
+qemu -hda /tmp/ZmLpXcr1RR.dsk -hdb /tmp/buplm7869x.dsk -hdc /tmp/a3gNJ02Hq4.dsk -hdd /tmp/DETXrzD9I6.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-stk put child-qsort run page-merge-stk
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -25,140 +25,36 @@ child-qsort: exit(72)
 child-qsort: exit(72)
 (page-merge-stk) sort chunk 3
 child-qsort: exit(72)
-spte->addr: 0x804c000
-spte->state: 2
-fte->addr: 0x804c000
-fte->spte->user_vaddr: 0x804c000
-fte->spte->state: 1
-addr: 0x804c000
-fte->addr: 0xbfffe000
-fte->spte->user_vaddr: 0xbfffe000
-fte->spte->state: 1
-addr: 0xbfffe000
 (page-merge-stk) sort chunk 4
-fte->addr: 0xbfffd000
-fte->spte->user_vaddr: 0xbfffd000
-fte->spte->state: 1
-addr: 0xbfffd000
-fte->addr: 0xbfffc000
-fte->spte->user_vaddr: 0xbfffc000
-fte->spte->state: 1
-addr: 0xbfffc000
-fte->addr: 0xbfffb000
-fte->spte->user_vaddr: 0xbfffb000
-fte->spte->state: 1
-addr: 0xbfffb000
-fte->addr: 0xbfffa000
-fte->spte->user_vaddr: 0xbfffa000
-fte->spte->state: 1
-addr: 0xbfffa000
 (page-merge-stk) sort chunk 5
-fte->addr: 0xbfff9000
-fte->spte->user_vaddr: 0xbfff9000
-fte->spte->state: 1
-addr: 0xbfff9000
-fte->addr: 0xbfff8000
-fte->spte->user_vaddr: 0xbfff8000
-fte->spte->state: 1
-addr: 0xbfff8000
-fte->addr: 0xbfff7000
-fte->spte->user_vaddr: 0xbfff7000
-fte->spte->state: 1
-addr: 0xbfff7000
-fte->addr: 0xbfff6000
-fte->spte->user_vaddr: 0xbfff6000
-fte->spte->state: 1
-addr: 0xbfff6000
-fte->addr: 0xbfff5000
-fte->spte->user_vaddr: 0xbfff5000
-fte->spte->state: 1
-addr: 0xbfff5000
-fte->addr: 0xbfff4000
-fte->spte->user_vaddr: 0xbfff4000
-fte->spte->state: 1
-addr: 0xbfff4000
-fte->addr: 0xbfff3000
-fte->spte->user_vaddr: 0xbfff3000
-fte->spte->state: 1
-addr: 0xbfff3000
-fte->addr: 0xbfff2000
-fte->spte->user_vaddr: 0xbfff2000
-fte->spte->state: 1
-addr: 0xbfff2000
-fte->addr: 0xbfff1000
-fte->spte->user_vaddr: 0xbfff1000
-fte->spte->state: 1
-addr: 0xbfff1000
-fte->addr: 0xbfff0000
-fte->spte->user_vaddr: 0xbfff0000
-fte->spte->state: 1
-addr: 0xbfff0000
-fte->addr: 0xbffef000
-fte->spte->user_vaddr: 0xbffef000
-fte->spte->state: 1
-addr: 0xbffef000
-fte->addr: 0xbffee000
-fte->spte->user_vaddr: 0xbffee000
-fte->spte->state: 1
-addr: 0xbffee000
-fte->addr: 0xbffed000
-fte->spte->user_vaddr: 0xbffed000
-fte->spte->state: 1
-addr: 0xbffed000
-spte->addr: 0x804c000
-spte->state: 2
-fte->addr: 0x804c000
-fte->spte->user_vaddr: 0x804c000
-fte->spte->state: 1
-addr: 0x804c000
-fte->addr: 0xbfffe000
-fte->spte->user_vaddr: 0xbfffe000
-fte->spte->state: 0
-addr: 0xbfffe000
-fte->addr: 0xbfffd000
-fte->spte->user_vaddr: 0xbfffd000
-fte->spte->state: 0
-addr: 0xbfffd000
-fte->addr: 0xbfffc000
-fte->spte->user_vaddr: 0xbfffc000
-fte->spte->state: 0
-addr: 0xbfffc000
-fte->addr: 0xbfffb000
-fte->spte->user_vaddr: 0xbfffb000
-fte->spte->state: 0
-addr: 0xbfffb000
-fte->addr: 0xbfffa000
-fte->spte->user_vaddr: 0xbfffa000
-fte->spte->state: 0
-addr: 0xbfffa000
-fte->addr: 0xbfff9000
-fte->spte->user_vaddr: 0xbfff9000
-fte->spte->state: 0
-addr: 0xbfff9000
-fte->addr: 0xbfff8000
-fte->spte->user_vaddr: 0xbfff8000
-fte->spte->state: 0
-addr: 0xbfff8000
-fte->addr: 0xbfff7000
-fte->spte->user_vaddr: 0xbfff7000
-fte->spte->state: 0
-addr: 0xbfff7000
-fte->addr: 0xbfff6000
-fte->spte->user_vaddr: 0xbfff6000
-fte->spte->state: 0
-addr: 0xbfff6000
-Kernel PANIC at ../../vm/frame.c:200 in swap_prevent_off(): assertion `spte->state != SPTE_MAPPED' failed.
-Call stack: 0xc01079f9 0xc010d692 0xc010d7fa 0xc010b3e0 0xc010b7c4 0xc0101f07 0xc010203f 0x804a41f 0x804811b 0x80489ec.
-The `backtrace' program can make call stacks useful.
-Read "Backtraces" in the "Debugging Tools" chapter
-of the Pintos documentation for more information.
-Timer: 1732 ticks
-Thread: 30 idle ticks, 200 kernel ticks, 1502 user ticks
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 6
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 7
+child-qsort: exit(72)
+(page-merge-stk) wait for child 0
+child-qsort: exit(72)
+(page-merge-stk) wait for child 1
+(page-merge-stk) wait for child 2
+(page-merge-stk) wait for child 3
+(page-merge-stk) wait for child 4
+(page-merge-stk) wait for child 5
+(page-merge-stk) wait for child 6
+(page-merge-stk) wait for child 7
+child-qsort: exit(72)
+(page-merge-stk) merge
+(page-merge-stk) verify
+(page-merge-stk) success, buf_idx=1,048,576
+(page-merge-stk) end
+page-merge-stk: exit(0)
+Execution of 'page-merge-stk' complete.
+Timer: 4319 ticks
+Thread: 30 idle ticks, 200 kernel ticks, 4089 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 1548 reads, 3780 writes
+hd0:1: 5101 reads, 6608 writes
 hd1:0: 211 reads, 0 writes
-hd1:1: 0 reads, 296 writes
-Console: 4348 characters output
+hd1:1: 1688 reads, 3848 writes
+Console: 1824 characters output
 Keyboard: 0 keys pressed
-Exception: 405 page faults
+Exception: 931 page faults
 Powering off...
