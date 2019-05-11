@@ -157,10 +157,10 @@ page_fault (struct intr_frame *f)
   user = (f->error_code & PF_U) != 0;
   
   if(!not_present){
-    exit(-2);
+    exit(-1);
   }
   if(user && is_kernel_vaddr(fault_addr)){
-    exit(-3);
+    exit(-1);
   }
   //esp handling
   void *esp = user ? f->esp : thread_current()->esp;
@@ -181,9 +181,7 @@ page_fault (struct intr_frame *f)
     }
 
     else{
-      printf("%p %p\n", esp, fault_addr);
-      ASSERT(0);
-      exit(-4);
+      exit(-1);
     }
   }
   
@@ -192,10 +190,7 @@ page_fault (struct intr_frame *f)
   }
 
   else if(spte->state == SPTE_LOAD){
-    printf("addr: %p\n", fault_addr);
-    printf("Before: %p\n", find_fte(spte->user_vaddr));
     lazy_load_page(spte);
-    printf("After: %p\n\n", find_fte(spte->user_vaddr));
   }
 }
 

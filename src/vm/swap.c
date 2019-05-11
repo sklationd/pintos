@@ -56,7 +56,6 @@ swap_in (void *addr, struct sup_page_table_entry *spte)
 	// 2, 3
 	uint8_t *kpage = allocate_frame(addr);
 	ASSERT(kpage);
-
 	// 5
 	struct frame_table_entry *fte;
 	fte = find_fte(addr);
@@ -116,7 +115,6 @@ swap_out (void)
 		}
 	}
 	lock_release(&frame_table_lock);
-	printf("find %p\n", find_fte(fte->user));
 
 	lock_acquire(&swap_lock);
 	size_t index = bitmap_scan(swap_table, 0, 1, 0);

@@ -1,12 +1,12 @@
-Copying tests/vm/page-parallel into /tmp/7gjvZ9L26n.dsk...
-Copying tests/vm/child-linear into /tmp/7gjvZ9L26n.dsk...
-Writing command line to /tmp/1EoLBfV9C5.dsk...
-qemu -hda /tmp/1EoLBfV9C5.dsk -hdb /tmp/tzaSE0eiw0.dsk -hdc /tmp/7gjvZ9L26n.dsk -hdd /tmp/cuyreFHNsA.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-parallel into /tmp/amkMAoULxu.dsk...
+Copying tests/vm/child-linear into /tmp/amkMAoULxu.dsk...
+Writing command line to /tmp/DOJ3EKepMc.dsk...
+qemu -hda /tmp/DOJ3EKepMc.dsk -hdb /tmp/j24khastM9.dsk -hdc /tmp/amkMAoULxu.dsk -hdd /tmp/r1aft1vnhL.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-parallel put child-linear run page-parallel
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 198 sector (99 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,7 +19,115 @@ Executing 'page-parallel':
 (page-parallel) begin
 (page-parallel) exec "child-linear"
 (page-parallel) exec "child-linear"
-child-linear: exit(66)
-child-linear: exit(-1)
-
-TIMEOUT after 61 seconds of wall-clock time - load average: 0.38, 0.37, 0.23
+(page-parallel) exec "child-linear"
+spte->addr: 0x814b000
+spte->state: 2
+fte->addr: 0x814b000
+fte->spte->user_vaddr: 0x814b000
+fte->spte->state: 0
+addr: 0x814b000
+spte->addr: 0x814a000
+spte->state: 2
+fte->addr: 0x814a000
+fte->spte->user_vaddr: 0x814a000
+fte->spte->state: 0
+addr: 0x814a000
+spte->addr: 0x8149000
+spte->state: 2
+fte->addr: 0x8149000
+fte->spte->user_vaddr: 0x8149000
+fte->spte->state: 0
+addr: 0x8149000
+spte->addr: 0x8148000
+spte->state: 2
+fte->addr: 0x8148000
+fte->spte->user_vaddr: 0x8148000
+fte->spte->state: 0
+addr: 0x8148000
+(page-parallel) exec "child-linear"
+spte->addr: 0x8147000
+spte->state: 2
+fte->addr: 0x8147000
+fte->spte->user_vaddr: 0x8147000
+fte->spte->state: 0
+addr: 0x8147000
+spte->addr: 0x8146000
+spte->state: 2
+fte->addr: 0x8146000
+fte->spte->user_vaddr: 0x8146000
+fte->spte->state: 0
+addr: 0x8146000
+spte->addr: 0x8145000
+spte->state: 2
+fte->addr: 0x8145000
+fte->spte->user_vaddr: 0x8145000
+fte->spte->state: 0
+addr: 0x8145000
+spte->addr: 0x8144000
+spte->state: 2
+fte->addr: 0x8144000
+fte->spte->user_vaddr: 0x8144000
+fte->spte->state: 0
+addr: 0x8144000
+spte->addr: 0x8143000
+spte->state: 2
+fte->addr: 0x8143000
+fte->spte->user_vaddr: 0x8143000
+fte->spte->state: 0
+addr: 0x8143000
+spte->addr: 0x8142000
+spte->state: 2
+fte->addr: 0x8142000
+fte->spte->user_vaddr: 0x8142000
+fte->spte->state: 0
+addr: 0x8142000
+spte->addr: 0x8141000
+spte->state: 2
+fte->addr: 0x8141000
+fte->spte->user_vaddr: 0x8141000
+fte->spte->state: 0
+addr: 0x8141000
+spte->addr: 0x804a000
+spte->state: 2
+fte->addr: 0x804a000
+fte->spte->user_vaddr: 0x804a000
+fte->spte->state: 0
+addr: 0x804a000
+spte->addr: 0x8049000
+spte->state: 2
+fte->addr: 0x8049000
+fte->spte->user_vaddr: 0x8049000
+fte->spte->state: 0
+addr: 0x8049000
+(child-linear) byte 1045248 != 0: FAILED
+child-linear: exit(1)
+spte->addr: 0x80bf000
+spte->state: 2
+fte->addr: 0x80bf000
+fte->spte->user_vaddr: 0x80bf000
+fte->spte->state: 1
+addr: 0x80bf000
+spte->addr: 0x80c0000
+spte->state: 2
+fte->addr: 0x80c0000
+fte->spte->user_vaddr: 0x80c0000
+fte->spte->state: 1
+addr: 0x80c0000
+page-parallel: exit(-1)
+spte->addr: 0x8049000
+spte->state: 2
+fte->addr: 0x8049000
+fte->spte->user_vaddr: 0x8049000
+fte->spte->state: 0
+addr: 0x8049000
+Execution of 'page-parallel' complete.
+Timer: 323 ticks
+Thread: 30 idle ticks, 192 kernel ticks, 101 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 192 reads, 406 writes
+hd1:0: 198 reads, 0 writes
+hd1:1: 0 reads, 158 writes
+Console: 3228 characters output
+Keyboard: 0 keys pressed
+Exception: 391 page faults
+Powering off...

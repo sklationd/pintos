@@ -1,7 +1,7 @@
-Copying tests/vm/page-merge-par into /tmp/zphQ9e7v67.dsk...
-Copying tests/vm/child-sort into /tmp/zphQ9e7v67.dsk...
-Writing command line to /tmp/f0wiIqcVkB.dsk...
-qemu -hda /tmp/f0wiIqcVkB.dsk -hdb /tmp/p55GkwTZ_A.dsk -hdc /tmp/zphQ9e7v67.dsk -hdd /tmp/7X5GV5ZHl9.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-par into /tmp/j3tTuL9NL5.dsk...
+Copying tests/vm/child-sort into /tmp/j3tTuL9NL5.dsk...
+Writing command line to /tmp/V3q2HbnE5R.dsk...
+qemu -hda /tmp/V3q2HbnE5R.dsk -hdb /tmp/nPnZjsVmTp.dsk -hdc /tmp/j3tTuL9NL5.dsk -hdd /tmp/s1NzDBln5O.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
@@ -16,15 +16,173 @@ Boot complete.
 Putting 'page-merge-par' into the file system...
 Putting 'child-sort' into the file system...
 Executing 'page-merge-par':
-page-merge-par: exit(-1)
-Execution of 'page-merge-par' complete.
-Timer: 748 ticks
-Thread: 30 idle ticks, 193 kernel ticks, 525 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 67 reads, 422 writes
-hd1:0: 206 reads, 0 writes
-hd1:1: 8 reads, 1168 writes
-Console: 970 characters output
-Keyboard: 0 keys pressed
-Exception: 2 page faults
-Powering off...
+(page-merge-par) begin
+(page-merge-par) init
+(page-merge-par) sort chunk 0
+(page-merge-par) sort chunk 1
+child-sort: exit(123)
+(page-merge-par) sort chunk 2
+child-sort: exit(123)
+(page-merge-par) sort chunk 3
+child-sort: exit(123)
+spte->addr: 0x806c000
+spte->state: 2
+fte->addr: 0x806c000
+fte->spte->user_vaddr: 0x806c000
+fte->spte->state: 1
+addr: 0x806c000
+(page-merge-par) sort chunk 4
+spte->addr: 0x806b000
+spte->state: 2
+fte->addr: 0x806b000
+fte->spte->user_vaddr: 0x806b000
+fte->spte->state: 1
+addr: 0x806b000
+spte->addr: 0x806a000
+spte->state: 2
+fte->addr: 0x806a000
+fte->spte->user_vaddr: 0x806a000
+fte->spte->state: 1
+addr: 0x806a000
+spte->addr: 0x8069000
+spte->state: 2
+fte->addr: 0x8069000
+fte->spte->user_vaddr: 0x8069000
+fte->spte->state: 1
+addr: 0x8069000
+spte->addr: 0x8068000
+spte->state: 2
+fte->addr: 0x8068000
+fte->spte->user_vaddr: 0x8068000
+fte->spte->state: 1
+addr: 0x8068000
+spte->addr: 0x8067000
+spte->state: 2
+fte->addr: 0x8067000
+fte->spte->user_vaddr: 0x8067000
+fte->spte->state: 1
+addr: 0x8067000
+spte->addr: 0x8066000
+spte->state: 2
+fte->addr: 0x8066000
+fte->spte->user_vaddr: 0x8066000
+fte->spte->state: 1
+addr: 0x8066000
+spte->addr: 0x8065000
+spte->state: 2
+fte->addr: 0x8065000
+fte->spte->user_vaddr: 0x8065000
+fte->spte->state: 1
+addr: 0x8065000
+spte->addr: 0x8064000
+spte->state: 2
+fte->addr: 0x8064000
+fte->spte->user_vaddr: 0x8064000
+fte->spte->state: 1
+addr: 0x8064000
+spte->addr: 0x8063000
+spte->state: 2
+fte->addr: 0x8063000
+fte->spte->user_vaddr: 0x8063000
+fte->spte->state: 1
+addr: 0x8063000
+spte->addr: 0x8062000
+spte->state: 2
+fte->addr: 0x8062000
+fte->spte->user_vaddr: 0x8062000
+fte->spte->state: 1
+addr: 0x8062000
+spte->addr: 0x8060000
+spte->state: 2
+fte->addr: 0x8060000
+fte->spte->user_vaddr: 0x8060000
+fte->spte->state: 1
+addr: 0x8060000
+spte->addr: 0x805f000
+spte->state: 2
+fte->addr: 0x805f000
+fte->spte->user_vaddr: 0x805f000
+fte->spte->state: 1
+addr: 0x805f000
+spte->addr: 0x8061000
+spte->state: 2
+fte->addr: 0x8061000
+fte->spte->user_vaddr: 0x8061000
+fte->spte->state: 1
+addr: 0x8061000
+spte->addr: 0x805e000
+spte->state: 2
+fte->addr: 0x805e000
+fte->spte->user_vaddr: 0x805e000
+fte->spte->state: 1
+addr: 0x805e000
+(page-merge-par) sort chunk 5
+spte->addr: 0x805d000
+spte->state: 2
+fte->addr: 0x805d000
+fte->spte->user_vaddr: 0x805d000
+fte->spte->state: 1
+addr: 0x805d000
+spte->addr: 0x805c000
+spte->state: 2
+fte->addr: 0x805c000
+fte->spte->user_vaddr: 0x805c000
+fte->spte->state: 1
+addr: 0x805c000
+spte->addr: 0x805b000
+spte->state: 2
+fte->addr: 0x805b000
+fte->spte->user_vaddr: 0x805b000
+fte->spte->state: 1
+addr: 0x805b000
+spte->addr: 0x805a000
+spte->state: 2
+fte->addr: 0x805a000
+fte->spte->user_vaddr: 0x805a000
+fte->spte->state: 1
+addr: 0x805a000
+spte->addr: 0x8059000
+spte->state: 2
+fte->addr: 0x8059000
+fte->spte->user_vaddr: 0x8059000
+fte->spte->state: 1
+addr: 0x8059000
+spte->addr: 0x806c000
+spte->state: 2
+fte->addr: 0x806c000
+fte->spte->user_vaddr: 0x806c000
+fte->spte->state: 1
+addr: 0x806c000
+spte->addr: 0x806b000
+spte->state: 2
+fte->addr: 0x806b000
+fte->spte->user_vaddr: 0x806b000
+fte->spte->state: 1
+addr: 0x806b000
+spte->addr: 0x806a000
+spte->state: 2
+fte->addr: 0x806a000
+fte->spte->user_vaddr: 0x806a000
+fte->spte->state: 1
+addr: 0x806a000
+spte->addr: 0x8066000
+spte->state: 2
+fte->addr: 0x8066000
+fte->spte->user_vaddr: 0x8066000
+fte->spte->state: 1
+addr: 0x8066000
+spte->addr: 0x8065000
+spte->state: 2
+fte->addr: 0x8065000
+fte->spte->user_vaddr: 0x8065000
+fte->spte->state: 1
+addr: 0x8065000
+(page-merge-par) sort chunk 6
+spte->addr: 0x8064000
+spte->state: 2
+fte->addr: 0x8064000
+fte->spte->user_vaddr: 0x8064000
+fte->spte->state: 1
+addr: 0x8064000
+
+TIMEOUT after 601 seconds of wall-clock time - load average: 1.81, 1.41, 0.89

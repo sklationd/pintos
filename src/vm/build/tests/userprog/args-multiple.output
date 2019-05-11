@@ -1,11 +1,11 @@
-Copying tests/userprog/args-multiple into /tmp/pd6bgqKH8E.dsk...
-Writing command line to /tmp/rF_F_wIiIb.dsk...
-qemu -hda /tmp/rF_F_wIiIb.dsk -hdb /tmp/116HKnWy2U.dsk -hdc /tmp/pd6bgqKH8E.dsk -hdd /tmp/ItXVt8NBU4.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/args-multiple into /tmp/AYT3ayDDT7.dsk...
+Writing command line to /tmp/2Gjfv53s3F.dsk...
+qemu -hda /tmp/2Gjfv53s3F.dsk -hdb /tmp/lpwqANz1Q4.dsk -hdc /tmp/AYT3ayDDT7.dsk -hdd /tmp/LpRNoNx4Lr.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put args-multiple run 'args-multiple some arguments for you!'
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  176,742,400 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 96 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -25,8 +25,8 @@ Executing 'args-multiple some arguments for you!':
 (args) end
 args-multiple: exit(0)
 Execution of 'args-multiple some arguments for you!' complete.
-Timer: 139 ticks
-Thread: 30 idle ticks, 108 kernel ticks, 1 user ticks
+Timer: 140 ticks
+Thread: 30 idle ticks, 109 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 62 reads, 200 writes
 hd1:0: 96 reads, 0 writes

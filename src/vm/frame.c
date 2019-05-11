@@ -4,6 +4,7 @@
 #include "threads/thread.h"
 #include "threads/malloc.h"
 #include "devices/timer.h"
+#include "userprog/process.h"
 #include "vm/page.h"
 #include "vm/swap.h"
 
@@ -104,22 +105,31 @@ allocate_frame (void *_addr){
 }
 
 void deallocate_frame(void *addr){
-	//printf("hash %d\nlist %d\n", hash_size(&frame_table), list_size(&frame_list));
-	printf("%p\n", addr);
-	struct hash_elem *e;
+	//struct hash_elem *e;
 	struct frame_table_entry *fte = find_fte(addr);
+	
 	struct sup_page_table_entry *spte;
 
 	if(fte == NULL){
+		struct frame_table_entry *_fte;
 		spte = find_spte(addr);
-		ASSERT(spte);
-		ASSERT(spte->state == SPTE_EVICTED)
-		//TODO swap table delete
-
+		struct list_elem *le;
+		for(le=list_begin(&frame_list); le!=list_end(&frame_list); le=list_next(le)){
+			_fte = list_entry(le, struct frame_table_entry, list_elem);
+			if(_fte->user == addr)
+				fte = _fte; 
+		}
+		if(spte!=NULL){
+			printf("spte->addr: %p\n",spte->user_vaddr);
+			printf("spte->state: %d\n",spte->state);
+		}
+		printf("fte->addr: %p\n",fte->user);
+		printf("fte->spte->user_vaddr: %p\n",fte->spte->user_vaddr);
+		printf("fte->spte->state: %d\n",fte->spte->state);
+		printf("addr: %p\n",addr);
 	}
 
 	lock_acquire(&frame_table_lock);
-	printf("fte %p\n", fte);
 	hash_delete(&frame_table, &fte->hash_elem);
 	eviction_ptr_push(&fte->list_elem);
 	list_remove(&fte->list_elem);
@@ -155,18 +165,6 @@ struct frame_table_entry *find_fte(void *addr){ //user
 	fte.owner = thread_current();
 	lock_acquire(&frame_table_lock);
 	e = hash_find(&frame_table, &fte.hash_elem);
-/*	struct list_elem *le;
-	printf("find %d = %d\n", list_size(&frame_list), hash_size(&frame_table));
-
-	for(le=list_begin(&frame_list);le!=list_end(&frame_list);le=list_next(le)){
-		if(&(list_entry(le, struct frame_table_entry, list_elem)->hash_elem) == e){
-			printf("%p = %p\n", addr, list_entry(le, struct frame_table_entry, list_elem)->user);
-			break;
-		}
-	}
-	if(le == list_end(&frame_list) && le != list_begin(&frame_list))
-		ASSERT("FFFFFFFFFFFFFF" && 0);*/
-
 	lock_release(&frame_table_lock);
 
 	if(e == NULL)

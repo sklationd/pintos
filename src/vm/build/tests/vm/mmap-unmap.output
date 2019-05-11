@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-unmap into /tmp/VaIxw74J7w.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/VaIxw74J7w.dsk...
-Writing command line to /tmp/lXN2C_ENW3.dsk...
-qemu -hda /tmp/lXN2C_ENW3.dsk -hdb /tmp/UcrTZa5Zhs.dsk -hdc /tmp/VaIxw74J7w.dsk -hdd /tmp/2Pic2bVRJY.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-unmap into /tmp/kwaiJhWBf3.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/kwaiJhWBf3.dsk...
+Writing command line to /tmp/8i3gPUNyNv.dsk...
+qemu -hda /tmp/8i3gPUNyNv.dsk -hdb /tmp/viQn9XM5wq.dsk -hdc /tmp/kwaiJhWBf3.dsk -hdd /tmp/OYLw9CGLDM.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-unmap put sample.txt run mmap-unmap
 Pintos booting with 4,096 kB RAM...
 374 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 102 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -23,8 +23,8 @@ unknown system call!
 unknown system call! 
 mmap-unmap: exit(-1)
 Execution of 'mmap-unmap' complete.
-Timer: 143 ticks
-Thread: 30 idle ticks, 112 kernel ticks, 1 user ticks
+Timer: 144 ticks
+Thread: 30 idle ticks, 113 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 104 reads, 214 writes
 hd1:0: 102 reads, 0 writes
