@@ -26,6 +26,7 @@ struct frame_table_entry
 void frame_init (void);
 uint32_t* allocate_frame (void *addr);
 void deallocate_frame(void *addr);
+void deallocate_fte(struct frame_table_entry *fte);
 struct frame_table_entry* find_fte(void *addr); //user
 void deallocate_frame_owned_by_thread(void);
 void swap_prevention_buffer(const void *buf, size_t size, bool onoff);

@@ -17,17 +17,17 @@ struct lock frame_table_lock;
  */
 
 unsigned frame_hash_function(const struct hash_elem *e, void *aux){
-	uint32_t* user = hash_entry(e, struct frame_table_entry, hash_elem)->user;
-	return hash_int((int)user);
+	uint32_t* kernel = hash_entry(e, struct frame_table_entry, hash_elem)->kernel;
+	return hash_int((int)kernel);
 }
 
 bool frame_hash_less(const struct hash_elem *a, const struct hash_elem *b, void *aux UNUSED){
-	struct thread *thread_a = hash_entry(a, struct frame_table_entry, hash_elem)->owner;
-	struct thread *thread_b = hash_entry(b, struct frame_table_entry, hash_elem)->owner;
-	if(thread_a != thread_b)
-		return thread_a < thread_b;
-	return hash_entry(a, struct frame_table_entry, hash_elem)->user < 
-		   hash_entry(b, struct frame_table_entry, hash_elem)->user;
+	//struct thread *thread_a = hash_entry(a, struct frame_table_entry, hash_elem)->owner;
+	//struct thread *thread_b = hash_entry(b, struct frame_table_entry, hash_elem)->owner;
+	//if(thread_a != thread_b)
+	//	return thread_a < thread_b;
+	return hash_entry(a, struct frame_table_entry, hash_elem)->kernel < 
+		   hash_entry(b, struct frame_table_entry, hash_elem)->kernel;
 }
 
 void eviction_ptr_push(struct list_elem *list_elem){
@@ -105,30 +105,7 @@ allocate_frame (void *_addr){
 }
 
 void deallocate_frame(void *addr){
-	//struct hash_elem *e;
 	struct frame_table_entry *fte = find_fte(addr);
-	
-	struct sup_page_table_entry *spte;
-
-	if(fte == NULL){
-		struct frame_table_entry *_fte;
-		spte = find_spte(addr);
-		struct list_elem *le;
-		for(le=list_begin(&frame_list); le!=list_end(&frame_list); le=list_next(le)){
-			_fte = list_entry(le, struct frame_table_entry, list_elem);
-			if(_fte->user == addr)
-				fte = _fte; 
-		}
-		if(spte!=NULL){
-			printf("spte->addr: %p\n",spte->user_vaddr);
-			printf("spte->state: %d\n",spte->state);
-		}
-		printf("fte->addr: %p\n",fte->user);
-		printf("fte->spte->user_vaddr: %p\n",fte->spte->user_vaddr);
-		printf("fte->spte->state: %d\n",fte->spte->state);
-		printf("addr: %p\n",addr);
-	}
-
 	lock_acquire(&frame_table_lock);
 	hash_delete(&frame_table, &fte->hash_elem);
 	eviction_ptr_push(&fte->list_elem);
@@ -136,6 +113,16 @@ void deallocate_frame(void *addr){
 	lock_release(&frame_table_lock);
 	pagedir_clear_page(thread_current()->pagedir, addr);
 
+	palloc_free_page(fte->kernel);
+	free(fte);
+}
+void deallocate_fte(struct frame_table_entry *fte){
+	lock_acquire(&frame_table_lock);
+	hash_delete(&frame_table, &fte->hash_elem);
+	eviction_ptr_push(&fte->list_elem);
+	list_remove(&fte->list_elem);
+	lock_release(&frame_table_lock);
+	pagedir_clear_page(fte->owner->pagedir, fte->user);
 	palloc_free_page(fte->kernel);
 	free(fte);
 }
@@ -159,9 +146,15 @@ void deallocate_frame_owned_by_thread(void){
 }
 
 struct frame_table_entry *find_fte(void *addr){ //user
+	struct sup_page_table_entry *spte = find_spte(addr);
+	if(spte == NULL)
+		return NULL;
 	struct frame_table_entry fte;
 	struct hash_elem *e;
-	fte.user = addr;
+	if(!spte->kpage){ // NOT LOADED YET
+		return NULL;
+	}
+	fte.kernel = spte->kpage;
 	fte.owner = thread_current();
 	lock_acquire(&frame_table_lock);
 	e = hash_find(&frame_table, &fte.hash_elem);

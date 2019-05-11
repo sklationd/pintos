@@ -61,7 +61,6 @@ swap_in (void *addr, struct sup_page_table_entry *spte)
 	fte = find_fte(addr);
 
 	if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) {
-      deallocate_frame(spte->kpage);
       exit(-1);
     }
 	read_from_disk(fte->kernel, spte->swap_offset);
@@ -123,12 +122,14 @@ swap_out (void)
 	bitmap_set(swap_table, index,1);
 	fte->spte->state = SPTE_EVICTED;
 	fte->spte->swap_offset = index;
+	struct sup_page_table_entry *spte = fte->spte;
 	write_to_disk(fte->kernel, index);
 	if((eviction_ptr = list_next(&(fte->list_elem))) == list_tail(&frame_list)){
 		eviction_ptr = list_begin(&frame_list);
 	}
 	lock_release(&swap_lock);
-	deallocate_frame(fte->user);
+	deallocate_fte(fte);
+	spte->kpage = NULL;
 	return true;
 }
 
