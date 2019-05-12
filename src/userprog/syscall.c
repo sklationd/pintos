@@ -28,7 +28,7 @@ struct mmap_header{
     struct list_elem list_elem;
     struct file *file;
     void *user; 
-    int fd;
+    //int fd;
     size_t filesize;
     mapid_t mapid;
 };
@@ -230,21 +230,32 @@ mapid_t mmap(int fd, void *addr){
         return MAP_FAILED;
     void *tmp;
     struct thread *t = thread_current();
-    for(tmp = addr; tmp < addr + filesize(fd); tmp += PGSIZE){
-        if(pagedir_get_page(t->pagedir, tmp))
-            return MAP_FAILED;
-    }
-    for(tmp = addr; tmp < addr + filesize(fd); tmp += PGSIZE){
-        if(tmp == pg_round_down(addr+filesize(fd)))
-            lazy_load(t->fd[fd-3],tmp-addr, tmp, filesize(fd)+addr-tmp,
-                      PGSIZE-(filesize(fd)+addr-tmp), true, allocate_page(addr));
-        else
-            lazy_load(t->fd[fd-3],tmp-addr,tmp, PGSIZE, 0, true, allocate_page(addr));
-    }
     struct mmap_header *mh = (struct mmap_header *)malloc(sizeof(struct mmap_header)); //TODO: freeeeeeeeeeeeeee
-    mh->file = t->fd[fd-3];
-    mh->fd = fd;
-    mh->filesize = filesize(fd);
+    lock_acquire(&filesys_lock);
+    mh->file = file_reopen(t->fd[fd-3]);
+    lock_release(&filesys_lock);
+    size_t filesize = file_length(mh->file);
+
+    for(tmp = addr; tmp < addr + filesize; tmp += PGSIZE){
+        if(find_spte(tmp)){
+            file_close(mh->file);
+            free(mh);
+            return MAP_FAILED;
+        }
+    }
+
+
+
+    for(tmp = addr; tmp < addr + filesize; tmp += PGSIZE){
+        if(tmp == pg_round_down(addr+filesize))
+            lazy_load(mh->file,tmp-addr, tmp, filesize+addr-tmp,
+                      PGSIZE-(filesize+addr-tmp), true, allocate_page(addr));
+        else
+            lazy_load(mh->file,tmp-addr,tmp, PGSIZE, 0, true, allocate_page(addr));
+    }
+    
+    //mh->fd = fd;
+    mh->filesize = filesize;
     mh->user = addr;
     mh->mapid = (int)addr>>3;
     list_push_back(&t->mmap_list, &mh->list_elem);
@@ -269,7 +280,9 @@ void munmap(mapid_t mapping){
                 struct sup_page_table_entry *spte = find_spte(tmp);
                 if(spte->state == SPTE_EVICTED){
                     if(spte->dirty){
-                        write(mh->fd, tmp, spte->page_read_bytes);
+                        lock_acquire(&filesys_lock);
+                        file_write(mh->file, tmp, spte->page_read_bytes);
+                        lock_release(&filesys_lock);
                         deallocate_fte(find_fte(tmp));
                         pagedir_clear_page(t->pagedir, tmp);
                     }
@@ -277,18 +290,21 @@ void munmap(mapid_t mapping){
                 }
                 else if(find_spte(tmp)->state == SPTE_MAPPED){
                     if(pagedir_is_dirty(spte->user_vaddr) || pagedir_is_dirty(spte->kpage)){
-                        write(mh->fd, tmp, spte->page_read_bytes);
+                        lock_acquire(&filesys_lock);
+                        file_write(mh->file, tmp, spte->page_read_bytes);
+                        lock_release(&filesys_lock);
                     }
                     deallocate_fte(find_fte(tmp));
                     deallocate_page(tmp);
                     pagedir_clear_page(t->pagedir,tmp);
                 }
-                //pagedir_clear_page
             }
+            lock_acquire(&filesys_lock);
+            file_close(mh->file);
+            lock_release(&filesys_lock);
             break;
         }
     }
-
     return;
 }
 
