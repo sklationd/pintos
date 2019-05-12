@@ -1,11 +1,11 @@
-Copying tests/filesys/base/sm-create into /tmp/eGHUoqm09m.dsk...
-Writing command line to /tmp/8fFbDCaQO0.dsk...
-qemu -hda /tmp/8fFbDCaQO0.dsk -hdb /tmp/AxbUQrxGIW.dsk -hdc /tmp/eGHUoqm09m.dsk -hdd /tmp/s9qhDZcRx9.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/sm-create into /tmp/9l6h6KhrLv.dsk...
+Writing command line to /tmp/zQO1XloI4V.dsk...
+qemu -hda /tmp/zQO1XloI4V.dsk -hdb /tmp/SNgUmm1Ohd.dsk -hdc /tmp/9l6h6KhrLv.dsk -hdd /tmp/JFn1hegyAr.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put sm-create run sm-create
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  154,624,000 loops/s.
+Calibrating timer...  140,288,000 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 100 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,13 +22,13 @@ Executing 'sm-create':
 (sm-create) end
 sm-create: exit(0)
 Execution of 'sm-create' complete.
-Timer: 153 ticks
-Thread: 30 idle ticks, 113 kernel ticks, 10 user ticks
+Timer: 152 ticks
+Thread: 30 idle ticks, 113 kernel ticks, 9 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 118 reads, 224 writes
 hd1:0: 100 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1053 characters output
+Console: 1052 characters output
 Keyboard: 0 keys pressed
 Exception: 6 page faults
 Powering off...

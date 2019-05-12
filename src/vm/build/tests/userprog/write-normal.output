@@ -1,12 +1,12 @@
-Copying tests/userprog/write-normal into /tmp/HN2iDwOTCz.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/HN2iDwOTCz.dsk...
-Writing command line to /tmp/547lPqXY3N.dsk...
-qemu -hda /tmp/547lPqXY3N.dsk -hdb /tmp/W9WFgBvc15.dsk -hdc /tmp/HN2iDwOTCz.dsk -hdd /tmp/cNnf_0uE_9.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/write-normal into /tmp/PPxhIoYAAA.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/PPxhIoYAAA.dsk...
+Writing command line to /tmp/QF1QtYr4h3.dsk...
+qemu -hda /tmp/QF1QtYr4h3.dsk -hdb /tmp/OubjdIHZUA.dsk -hdc /tmp/PPxhIoYAAA.dsk -hdd /tmp/MxCpqLVJWu.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put write-normal put sample.txt run write-normal
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  179,609,600 loops/s.
+Calibrating timer...  129,228,800 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 100 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,8 +22,8 @@ Executing 'write-normal':
 (write-normal) end
 write-normal: exit(0)
 Execution of 'write-normal' complete.
-Timer: 140 ticks
-Thread: 30 idle ticks, 107 kernel ticks, 3 user ticks
+Timer: 150 ticks
+Thread: 30 idle ticks, 115 kernel ticks, 5 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 144 reads, 216 writes
 hd1:0: 100 reads, 0 writes

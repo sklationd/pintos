@@ -1,11 +1,11 @@
-Copying tests/filesys/base/syn-remove into /tmp/DiniVgDbKK.dsk...
-Writing command line to /tmp/RbVkiPBBgw.dsk...
-qemu -hda /tmp/RbVkiPBBgw.dsk -hdb /tmp/Hy8FIfWns_.dsk -hdc /tmp/DiniVgDbKK.dsk -hdd /tmp/uA0Ni896lL.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/syn-remove into /tmp/4muIYCCqRS.dsk...
+Writing command line to /tmp/e4a8mF0trt.dsk...
+qemu -hda /tmp/e4a8mF0trt.dsk -hdb /tmp/YjcScFWpLa.dsk -hdc /tmp/4muIYCCqRS.dsk -hdd /tmp/gBM_svpadQ.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put syn-remove run syn-remove
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  98,201,600 loops/s.
+Calibrating timer...  130,867,200 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 102 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -25,13 +25,13 @@ Executing 'syn-remove':
 (syn-remove) end
 syn-remove: exit(0)
 Execution of 'syn-remove' complete.
-Timer: 145 ticks
-Thread: 30 idle ticks, 108 kernel ticks, 7 user ticks
+Timer: 150 ticks
+Thread: 30 idle ticks, 114 kernel ticks, 6 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 114 reads, 223 writes
 hd1:0: 102 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1129 characters output
+Console: 1130 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

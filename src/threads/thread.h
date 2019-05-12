@@ -113,6 +113,7 @@ struct thread
     struct list_elem child_elem;
     struct semaphore wait_lock;
     struct semaphore wait_memory;
+    struct semaphore wait_free;
     struct thread *parent;
     struct semaphore wait_load;
     //struct semaphore wait_process_start;

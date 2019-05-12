@@ -1,12 +1,12 @@
-Copying tests/userprog/rox-child into /tmp/jMuINov02s.dsk...
-Copying tests/userprog/child-rox into /tmp/jMuINov02s.dsk...
-Writing command line to /tmp/vm3GAmQoqB.dsk...
-qemu -hda /tmp/vm3GAmQoqB.dsk -hdb /tmp/yrK79fokrI.dsk -hdc /tmp/jMuINov02s.dsk -hdd /tmp/L4k3bp6iom.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/rox-child into /tmp/XGiPzNPYNB.dsk...
+Copying tests/userprog/child-rox into /tmp/XGiPzNPYNB.dsk...
+Writing command line to /tmp/F_IJ8jWRsH.dsk...
+qemu -hda /tmp/F_IJ8jWRsH.dsk -hdb /tmp/jSIH17sXyp.dsk -hdc /tmp/XGiPzNPYNB.dsk -hdd /tmp/nAjGlB8Cs_.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put rox-child put child-rox run rox-child
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  124,313,600 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 207 sector (103 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -31,7 +31,7 @@ child-rox: exit(12)
 rox-child: exit(0)
 Execution of 'rox-child' complete.
 Timer: 232 ticks
-Thread: 30 idle ticks, 199 kernel ticks, 3 user ticks
+Thread: 30 idle ticks, 198 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 147 reads, 426 writes
 hd1:0: 207 reads, 0 writes

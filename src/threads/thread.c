@@ -342,7 +342,6 @@ thread_tid (void)
 void
 thread_exit (void) 
 {
-  //printf("thread_exit function is called\n");
   ASSERT (!intr_context ());
 
 #ifdef USERPROG
@@ -558,6 +557,7 @@ init_thread (struct thread *t, const char *name, int priority)
   list_init(&t->child_list);
   sema_init(&t->wait_lock,0);
   sema_init(&t->wait_memory,0);
+  sema_init(&t->wait_free,0);
   sema_init(&t->wait_load, 0);
   list_push_back(&running_thread()->child_list,&t->child_elem);
   list_push_back(&thread_list, &t->thread_elem);

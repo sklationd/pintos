@@ -228,6 +228,7 @@ process_wait (tid_t child_tid)
         exit_status = t->exit_status;
         list_remove(&t->child_elem);
         sema_up(&t->wait_memory);
+        sema_down(&t->wait_free);
         return exit_status;
     }
   }
@@ -243,7 +244,6 @@ process_exit (void)
   file_close(curr->current_executable);
   sema_up(&curr->wait_lock); 
   sema_down(&curr->wait_memory);
-
   if(lock_held_by_current_thread(&filesys_lock))
     lock_release(&filesys_lock);
 
@@ -253,9 +253,8 @@ process_exit (void)
       close(i+3);
     }
   }
-  
   while(list_size(&curr->mmap_list)){
-    struct list_elem *e = list_pop_front(&curr->mmap_list);
+    struct list_elem *e = list_front(&curr->mmap_list);
     struct mmap_header *mh = list_entry(e, struct mmap_header, list_elem);
     munmap(mh->mapid);
   }
@@ -291,7 +290,7 @@ process_exit (void)
       pagedir_activate (NULL);
       pagedir_destroy (pd);
     }
-
+  sema_up(&curr->wait_free);
 }
 
 /* Sets up the CPU for running user code in the current

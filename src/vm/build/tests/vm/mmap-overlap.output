@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-overlap into /tmp/6TG6VKo0NW.dsk...
-Copying tests/vm/zeros into /tmp/6TG6VKo0NW.dsk...
-Writing command line to /tmp/1Q4u0BShvc.dsk...
-qemu -hda /tmp/1Q4u0BShvc.dsk -hdb /tmp/AmWs7TTQjJ.dsk -hdc /tmp/6TG6VKo0NW.dsk -hdd /tmp/NGt7hS9I67.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-overlap into /tmp/WP2Ybs_2OX.dsk...
+Copying tests/vm/zeros into /tmp/WP2Ybs_2OX.dsk...
+Writing command line to /tmp/I2CM4o8iV2.dsk...
+qemu -hda /tmp/I2CM4o8iV2.dsk -hdb /tmp/VkxHrLQG8X.dsk -hdc /tmp/WP2Ybs_2OX.dsk -hdd /tmp/zsUixLp4ni.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-overlap put zeros run mmap-overlap
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  207,257,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 112 sector (56 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -21,16 +21,16 @@ Executing 'mmap-overlap':
 (mmap-overlap) mmap "zeros"
 (mmap-overlap) open "zeros" again
 (mmap-overlap) try to mmap "zeros" again
-(mmap-overlap) try to mmap "zeros" again: FAILED
-mmap-overlap: exit(1)
+(mmap-overlap) end
+mmap-overlap: exit(0)
 Execution of 'mmap-overlap' complete.
-Timer: 148 ticks
-Thread: 30 idle ticks, 116 kernel ticks, 2 user ticks
+Timer: 154 ticks
+Thread: 30 idle ticks, 123 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 110 reads, 234 writes
 hd1:0: 112 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1148 characters output
+Console: 1118 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

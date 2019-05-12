@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-exit into /tmp/1zcgfPZ7OY.dsk...
-Copying tests/vm/child-mm-wrt into /tmp/1zcgfPZ7OY.dsk...
-Writing command line to /tmp/C1m0Zl1iF_.dsk...
-qemu -hda /tmp/C1m0Zl1iF_.dsk -hdb /tmp/TUJNJ0wNwr.dsk -hdc /tmp/1zcgfPZ7OY.dsk -hdd /tmp/GRmJ6KiRUg.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-exit into /tmp/x04mwd4kB6.dsk...
+Copying tests/vm/child-mm-wrt into /tmp/x04mwd4kB6.dsk...
+Writing command line to /tmp/PmMO2S6yiT.dsk...
+qemu -hda /tmp/PmMO2S6yiT.dsk -hdb /tmp/06k5TKFhBd.dsk -hdc /tmp/x04mwd4kB6.dsk -hdd /tmp/oITXZrryp1.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-exit put child-mm-wrt run mmap-exit
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  132,505,600 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 199 sector (99 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -24,28 +24,18 @@ Executing 'mmap-exit':
 (child-mm-wrt) end
 child-mm-wrt: exit(0)
 (mmap-exit) open "sample.txt" for verification
-(mmap-exit) 512 bytes read starting at offset 0 in "sample.txt" differ from expected.
-(mmap-exit) Showing first differing 64 bytes.
-(mmap-exit) Data actually read:
-00000000  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 |................|
-00000010  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 |................|
-00000020  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 |................|
-00000030  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 |................|
-(mmap-exit) Expected data:
-00000000  3d 3d 3d 20 20 41 4c 4c-20 55 53 45 52 53 20 50 |===  ALL USERS P|
-00000010  4c 45 41 53 45 20 4e 4f-54 45 20 20 3d 3d 3d 3d |LEASE NOTE  ====|
-00000020  3d 3d 3d 3d 3d 3d 3d 3d-3d 3d 3d 3d 3d 3d 3d 3d |================|
-00000030  3d 3d 3d 3d 0a 0a 43 41-52 20 61 6e 64 20 43 44 |====..CAR and CD|
-(mmap-exit) 512 bytes read starting at offset 0 in "sample.txt" differ from expected: FAILED
-mmap-exit: exit(1)
+(mmap-exit) verified contents of "sample.txt"
+(mmap-exit) close "sample.txt"
+(mmap-exit) end
+mmap-exit: exit(0)
 Execution of 'mmap-exit' complete.
-Timer: 237 ticks
-Thread: 30 idle ticks, 197 kernel ticks, 10 user ticks
+Timer: 229 ticks
+Thread: 30 idle ticks, 193 kernel ticks, 6 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 196 reads, 414 writes
+hd0:1: 198 reads, 416 writes
 hd1:0: 199 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 2067 characters output
+Console: 1259 characters output
 Keyboard: 0 keys pressed
 Exception: 11 page faults
 Powering off...
