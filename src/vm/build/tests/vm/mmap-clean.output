@@ -1,13 +1,13 @@
-Copying tests/vm/mmap-clean into /tmp/OA2Pynbhhk.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/OA2Pynbhhk.dsk...
-Writing command line to /tmp/cZKxfUj_zZ.dsk...
-qemu -hda /tmp/cZKxfUj_zZ.dsk -hdb /tmp/pxCNoYj1PV.dsk -hdc /tmp/OA2Pynbhhk.dsk -hdd /tmp/lf5xnr_A40.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-clean into /tmp/r4mKYB8afd.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/r4mKYB8afd.dsk...
+Writing command line to /tmp/97UEYluUGv.dsk...
+qemu -hda /tmp/97UEYluUGv.dsk -hdb /tmp/XfT6gwkA6j.dsk -hdc /tmp/r4mKYB8afd.dsk -hdd /tmp/VI6ilp7k5d.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-clean put sample.txt run mmap-clean
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  130,867,200 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+Calibrating timer...  211,763,200 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 104 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -19,16 +19,17 @@ Executing 'mmap-clean':
 (mmap-clean) begin
 (mmap-clean) open "sample.txt"
 (mmap-clean) mmap "sample.txt"
-unknown system call! 
-mmap-clean: exit(-1)
+(mmap-clean) write "sample.txt"
+(mmap-clean) write "sample.txt": FAILED
+mmap-clean: exit(1)
 Execution of 'mmap-clean' complete.
-Timer: 146 ticks
-Thread: 30 idle ticks, 115 kernel ticks, 1 user ticks
+Timer: 155 ticks
+Thread: 30 idle ticks, 123 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 107 reads, 218 writes
+hd0:1: 109 reads, 218 writes
 hd1:0: 104 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1044 characters output
+Console: 1093 characters output
 Keyboard: 0 keys pressed
 Exception: 6 page faults
 Powering off...

@@ -18,13 +18,20 @@
 static void syscall_handler (struct intr_frame *);
 struct lock filesys_lock;
 
-struct file 
-  {
+struct file {
     struct inode *inode;        /* File's inode. */
     off_t pos;                  /* Current position. */
     bool deny_write;            /* Has file_deny_write() been called? */
-  };
+};
 
+struct mmap_header{
+    struct list_elem list_elem;
+    struct file *file;
+    void *user; 
+    int fd;
+    size_t filesize;
+    mapid_t mapid;
+};
 
 void exit (int status);
 int exec(const char *cmd_line);
@@ -214,6 +221,77 @@ void close(int fd){
     thread_current()->fd[fd-3] = NULL;
 }
 
+mapid_t mmap(int fd, void *addr){
+    if(fd==0 || fd==1)
+        return MAP_FAILED;
+    if(addr == NULL)
+        return MAP_FAILED;
+    if(pg_ofs(addr))
+        return MAP_FAILED;
+    void *tmp;
+    struct thread *t = thread_current();
+    for(tmp = addr; tmp < addr + filesize(fd); tmp += PGSIZE){
+        if(pagedir_get_page(t->pagedir, tmp))
+            return MAP_FAILED;
+    }
+    for(tmp = addr; tmp < addr + filesize(fd); tmp += PGSIZE){
+        if(tmp == pg_round_down(addr+filesize(fd)))
+            lazy_load(t->fd[fd-3],tmp-addr, tmp, filesize(fd)+addr-tmp,
+                      PGSIZE-(filesize(fd)+addr-tmp), true, allocate_page(addr));
+        else
+            lazy_load(t->fd[fd-3],tmp-addr,tmp, PGSIZE, 0, true, allocate_page(addr));
+    }
+    struct mmap_header *mh = (struct mmap_header *)malloc(sizeof(struct mmap_header)); //TODO: freeeeeeeeeeeeeee
+    mh->file = t->fd[fd-3];
+    mh->fd = fd;
+    mh->filesize = filesize(fd);
+    mh->user = addr;
+    mh->mapid = (int)addr>>3;
+    list_push_back(&t->mmap_list, &mh->list_elem);
+    return mh->mapid;
+}
+
+void munmap(mapid_t mapping){
+    struct thread *t = thread_current();
+    struct list_elem *e;
+    struct list *mmap_list = &(t->mmap_list);
+    for(e=list_begin(mmap_list);e!=list_end(mmap_list);e=list_next(e)){
+        struct mmap_header *mh = list_entry(e, struct mmap_header, list_elem);
+        if(mh->mapid == mapping){
+            void *tmp;
+            if(find_spte(mh->user)->state == SPTE_LOAD){
+                for(tmp = mh->user; tmp < mh->user + mh->filesize; tmp += PGSIZE){
+                    deallocate_page(tmp);
+                }
+                return;
+            }
+            for(tmp = mh->user; tmp < mh->user + mh->filesize; tmp += PGSIZE){
+                struct sup_page_table_entry *spte = find_spte(tmp);
+                if(spte->state == SPTE_EVICTED){
+                    if(spte->dirty){
+                        write(mh->fd, tmp, spte->page_read_bytes);
+                        deallocate_fte(find_fte(tmp));
+                        pagedir_clear_page(t->pagedir, tmp);
+                    }
+                    deallocate_page(tmp);
+                }
+                else if(find_spte(tmp)->state == SPTE_MAPPED){
+                    if(pagedir_is_dirty(spte->user_vaddr) || pagedir_is_dirty(spte->kpage)){
+                        write(mh->fd, tmp, spte->page_read_bytes);
+                    }
+                    deallocate_fte(find_fte(tmp));
+                    deallocate_page(tmp);
+                    pagedir_clear_page(t->pagedir,tmp);
+                }
+                //pagedir_clear_page
+            }
+            break;
+        }
+    }
+
+    return;
+}
+
 
 void
 syscall_init (void) 
@@ -271,7 +349,7 @@ syscall_handler (struct intr_frame *f)
     	f->eax = open((const char *)first_arg(f));
     	break;
     case SYS_FILESIZE 	:
-    	if(is_kernel_vaddr(f->esp + 4))
+        if(is_kernel_vaddr(f->esp + 4))
     		exit(-1);
     	f->eax = filesize((int)first_arg(f));
     	break;
@@ -307,6 +385,18 @@ syscall_handler (struct intr_frame *f)
     		exit(-1);
     	close((int)first_arg(f));
     	break;     
+    case SYS_MMAP           :
+        if(is_kernel_vaddr(f->esp + 4) ||
+           is_kernel_vaddr(f->esp + 8) ||
+           is_kernel_vaddr((void *) second_arg(f)))
+           exit(-1); 
+        f->eax = mmap((int)first_arg(f), (void *)second_arg(f));
+        break;
+    case SYS_MUNMAP         :
+        if(is_kernel_vaddr(f->esp + 4))
+            exit(-1);
+        munmap((mapid_t)first_arg(f));
+        break;
     default				:
     	printf("unknown system call! \n");   
   }

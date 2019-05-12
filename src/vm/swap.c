@@ -14,7 +14,7 @@ static struct disk *swap_device;
 static struct bitmap *swap_table;
 
 /* Protects swap_table */
-static struct lock swap_lock;
+struct lock swap_lock;
 
 /* 
  * Initialize swap_device, swap_table, and swap_lock.
@@ -43,7 +43,7 @@ swap_init (void)
 bool 
 swap_in (void *addr, struct sup_page_table_entry *spte)
 {	
-	//printf("swap in %p\n", addr);
+	//printf("swap in enter %p\n", addr);
 	ASSERT(addr < PHYS_BASE);
 	const int swap_table_size = disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE;
 	struct hash_elem *e;
@@ -55,17 +55,11 @@ swap_in (void *addr, struct sup_page_table_entry *spte)
 	ASSERT(kpage);
 	// 5
 	struct frame_table_entry *fte;
-	lock_acquire(&frame_table_lock);
 	fte = find_fte(addr);
-	
-	if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) {
-      exit(-1);
-    }
+
 	read_from_disk(fte->kernel, spte->swap_offset);
-	lock_release(&frame_table_lock);
-	lock_acquire(&swap_lock);
 	bitmap_set(swap_table,spte->swap_offset,0);
-	lock_release(&swap_lock);
+	swap_prevent_off(addr);
 }
 
 /* 
@@ -85,8 +79,8 @@ swap_in (void *addr, struct sup_page_table_entry *spte)
 bool
 swap_out (void)
 {	
-	lock_acquire(&swap_lock);
-	lock_acquire(&frame_table_lock);
+	//printf("out enter\n");
+	struct thread *t;
 	const int swap_table_size = disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE;
 	if(bitmap_all(swap_table,0,swap_table_size)){
 		exit(-1);
@@ -98,7 +92,7 @@ swap_out (void)
 
 	while(1){
 		fte = list_entry(eviction_ptr, struct frame_table_entry, list_elem);
-		struct thread *t = fte->owner;
+		t = fte->owner;
 		if(!fte->swap_prevention){
 			if(pagedir_is_accessed(t->pagedir,fte->user)){
 				pagedir_set_accessed(t->pagedir,fte->user, 0);
@@ -117,13 +111,12 @@ swap_out (void)
 	ASSERT(fte);
 	fte->spte->state = SPTE_EVICTED;
 	fte->spte->swap_offset = index;
+	fte->spte->dirty = pagedir_is_dirty(t->pagedir, fte->user) || pagedir_is_dirty(t->pagedir, fte->kernel);
 	struct sup_page_table_entry *spte = fte->spte;
 	write_to_disk(fte->kernel, index);
 	if((eviction_ptr = list_next(&(fte->list_elem))) == list_tail(&frame_list)){
 		eviction_ptr = list_begin(&frame_list);
 	}
-	lock_release(&frame_table_lock);
-	lock_release(&swap_lock);
 	deallocate_fte(fte);
 	spte->kpage = NULL;
 	return true;
@@ -149,8 +142,6 @@ void write_to_disk (uint8_t *frame, int index)
 }
 
 void swap_free(int ofs){
-	lock_acquire(&swap_lock);
 	ASSERT(bitmap_test(swap_table,ofs));
 	bitmap_set(swap_table,ofs,0);
-	lock_release(&swap_lock);
 }

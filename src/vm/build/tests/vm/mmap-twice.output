@@ -1,13 +1,13 @@
-Copying tests/vm/mmap-twice into /tmp/gOqQsJW7af.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/gOqQsJW7af.dsk...
-Writing command line to /tmp/vtBmEFJU7F.dsk...
-qemu -hda /tmp/vtBmEFJU7F.dsk -hdb /tmp/5iySXAsNbw.dsk -hdc /tmp/gOqQsJW7af.dsk -hdd /tmp/L_DU4MJPcz.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-twice into /tmp/FL3KepyJGJ.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/FL3KepyJGJ.dsk...
+Writing command line to /tmp/JEyMmdLJBI.dsk...
+qemu -hda /tmp/JEyMmdLJBI.dsk -hdb /tmp/nEtQ8cACfv.dsk -hdc /tmp/FL3KepyJGJ.dsk -hdd /tmp/FNotkzedpd.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-twice put sample.txt run mmap-twice
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+Calibrating timer...  109,977,600 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -19,20 +19,20 @@ Executing 'mmap-twice':
 (mmap-twice) begin
 (mmap-twice) open "sample.txt" #0
 (mmap-twice) mmap "sample.txt" #0 at 0x10000000
-unknown system call! 
 (mmap-twice) open "sample.txt" #1
 (mmap-twice) mmap "sample.txt" #1 at 0x20000000
-unknown system call! 
 (mmap-twice) compare mmap'd file 0 against data
-mmap-twice: exit(-1)
+(mmap-twice) compare mmap'd file 1 against data
+(mmap-twice) end
+mmap-twice: exit(0)
 Execution of 'mmap-twice' complete.
-Timer: 143 ticks
-Thread: 30 idle ticks, 111 kernel ticks, 2 user ticks
+Timer: 149 ticks
+Thread: 30 idle ticks, 117 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 112 reads, 216 writes
+hd0:1: 116 reads, 216 writes
 hd1:0: 103 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1216 characters output
+Console: 1236 characters output
 Keyboard: 0 keys pressed
-Exception: 6 page faults
+Exception: 7 page faults
 Powering off...

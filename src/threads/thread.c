@@ -554,6 +554,7 @@ init_thread (struct thread *t, const char *name, int priority)
   else{
     t->priority = PRI_MAX - ftoi(fdiv((t->recent_cpu),itof(4))) - t->nice*2;
   }
+  list_init(&t->mmap_list);
   list_init(&t->child_list);
   sema_init(&t->wait_lock,0);
   sema_init(&t->wait_memory,0);

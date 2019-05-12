@@ -1,12 +1,12 @@
-Copying tests/vm/pt-grow-stk-sc into /tmp/tS5hXJqFTL.dsk...
-Writing command line to /tmp/lfg9tHxOtH.dsk...
-qemu -hda /tmp/lfg9tHxOtH.dsk -hdb /tmp/Btb7eycecd.dsk -hdc /tmp/tS5hXJqFTL.dsk -hdd /tmp/ZhIDJ2z8vQ.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-grow-stk-sc into /tmp/lzDt4PNkcD.dsk...
+Writing command line to /tmp/17OmpTqwVw.dsk...
+qemu -hda /tmp/17OmpTqwVw.dsk -hdb /tmp/1YGdLzxfdZ.dsk -hdc /tmp/lzDt4PNkcD.dsk -hdd /tmp/g_fGmsWYCE.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-grow-stk-sc run pt-grow-stk-sc
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  203,776,000 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+Calibrating timer...  150,528,000 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 100 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -25,7 +25,7 @@ Executing 'pt-grow-stk-sc':
 pt-grow-stk-sc: exit(0)
 Execution of 'pt-grow-stk-sc' complete.
 Timer: 148 ticks
-Thread: 30 idle ticks, 113 kernel ticks, 5 user ticks
+Thread: 30 idle ticks, 112 kernel ticks, 6 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 122 reads, 216 writes
 hd1:0: 100 reads, 0 writes

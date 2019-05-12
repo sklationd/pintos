@@ -1,13 +1,13 @@
-Copying tests/vm/pt-bad-read into /tmp/jnG6uBxdCE.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/jnG6uBxdCE.dsk...
-Writing command line to /tmp/SXu0tXQe0Q.dsk...
-qemu -hda /tmp/SXu0tXQe0Q.dsk -hdb /tmp/szaaADJmFZ.dsk -hdc /tmp/jnG6uBxdCE.dsk -hdd /tmp/f20NgxhUtZ.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-bad-read into /tmp/yrzmsql84n.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/yrzmsql84n.dsk...
+Writing command line to /tmp/vt4d8GUCf8.dsk...
+qemu -hda /tmp/vt4d8GUCf8.dsk -hdb /tmp/VxE8Nz9SXm.dsk -hdc /tmp/yrzmsql84n.dsk -hdd /tmp/pidVUhdRVj.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-bad-read put sample.txt run pt-bad-read
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  130,867,200 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+Calibrating timer...  209,510,400 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 100 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -20,8 +20,8 @@ Executing 'pt-bad-read':
 (pt-bad-read) open "sample.txt"
 pt-bad-read: exit(-1)
 Execution of 'pt-bad-read' complete.
-Timer: 138 ticks
-Thread: 30 idle ticks, 108 kernel ticks, 1 user ticks
+Timer: 137 ticks
+Thread: 30 idle ticks, 107 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 97 reads, 210 writes
 hd1:0: 100 reads, 0 writes

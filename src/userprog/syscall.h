@@ -5,6 +5,8 @@
 #define first_arg(f) (*(uint32_t *)((f)->esp + 4))
 #define second_arg(f) (*(uint32_t *)((f)->esp + 8))
 #define third_arg(f) (*(uint32_t *)((f)->esp + 12))
+typedef int mapid_t;
+#define MAP_FAILED ((mapid_t)-1);
 void syscall_init (void);
 extern struct lock filesys_lock;
 /*

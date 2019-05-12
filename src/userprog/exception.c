@@ -162,6 +162,7 @@ page_fault (struct intr_frame *f)
   if(user && is_kernel_vaddr(fault_addr)){
     exit(-1);
   }
+  lock_acquire(&frame_table_lock);
   //esp handling
   void *esp = user ? f->esp : thread_current()->esp;
   uint32_t *pd = thread_current()->pagedir;
@@ -169,15 +170,13 @@ page_fault (struct intr_frame *f)
 
   spte = find_spte(fault_page);
   
-
   if(spte == NULL){
     if(((fault_addr < PHYS_BASE) && (PHYS_BASE - STACK_SIZE <= fault_addr)) && // USER AREA ??
        ((esp <= fault_addr) || // ordinary case
        (fault_addr == esp-4) || (fault_addr == esp-32)) // pusha instruction
     ){ //stack growth
       void *kernel = allocate_frame(fault_page);
-      pagedir_set_page(pd,fault_page, kernel, true);
-      spte = find_spte(fault_page);
+      swap_prevent_off(fault_page);
     }
 
     else{
@@ -185,13 +184,15 @@ page_fault (struct intr_frame *f)
     }
   }
   
-  if(spte->state == SPTE_EVICTED){
+  else if(spte->state == SPTE_EVICTED){
+    //printf("swap_in\n");
     swap_in(fault_page, spte);
   }
 
   else if(spte->state == SPTE_LOAD){
     lazy_load_page(spte);
   }
+  lock_release(&frame_table_lock);
 }
 
   /* To implement virtual memory, delete the rest of the function

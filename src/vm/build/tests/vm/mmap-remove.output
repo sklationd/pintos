@@ -1,13 +1,13 @@
-Copying tests/vm/mmap-remove into /tmp/71_nKU4Y_D.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/71_nKU4Y_D.dsk...
-Writing command line to /tmp/K5yd76tr8Q.dsk...
-qemu -hda /tmp/K5yd76tr8Q.dsk -hdb /tmp/LhNWqzkR_J.dsk -hdc /tmp/71_nKU4Y_D.dsk -hdd /tmp/UtW0RHiFps.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-remove into /tmp/Q0Xg0Zu8NO.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/Q0Xg0Zu8NO.dsk...
+Writing command line to /tmp/v1dqD5H2EL.dsk...
+qemu -hda /tmp/v1dqD5H2EL.dsk -hdb /tmp/_89y5EWy_G.dsk -hdc /tmp/Q0Xg0Zu8NO.dsk -hdd /tmp/mpbzovUzcr.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-remove put sample.txt run mmap-remove
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
 Calibrating timer...  157,081,600 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -19,19 +19,18 @@ Executing 'mmap-remove':
 (mmap-remove) begin
 (mmap-remove) open "sample.txt"
 (mmap-remove) mmap "sample.txt"
-unknown system call! 
 (mmap-remove) remove "sample.txt"
 (mmap-remove) try to open "sample.txt"
 (mmap-remove) create "another"
 mmap-remove: exit(-1)
 Execution of 'mmap-remove' complete.
-Timer: 175 ticks
-Thread: 30 idle ticks, 108 kernel ticks, 38 user ticks
+Timer: 183 ticks
+Thread: 30 idle ticks, 114 kernel ticks, 39 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 165 reads, 301 writes
+hd0:1: 166 reads, 301 writes
 hd1:0: 103 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1158 characters output
+Console: 1136 characters output
 Keyboard: 0 keys pressed
 Exception: 6 page faults
 Powering off...

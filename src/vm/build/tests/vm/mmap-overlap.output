@@ -1,13 +1,13 @@
-Copying tests/vm/mmap-overlap into /tmp/c3m048HU3o.dsk...
-Copying tests/vm/zeros into /tmp/c3m048HU3o.dsk...
-Writing command line to /tmp/p5GWDGt79t.dsk...
-qemu -hda /tmp/p5GWDGt79t.dsk -hdb /tmp/8GBzaATh_J.dsk -hdc /tmp/c3m048HU3o.dsk -hdd /tmp/MBchXH5eyu.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-overlap into /tmp/froGNHHFiR.dsk...
+Copying tests/vm/zeros into /tmp/froGNHHFiR.dsk...
+Writing command line to /tmp/xwstCqTqYU.dsk...
+qemu -hda /tmp/xwstCqTqYU.dsk -hdb /tmp/0WD2zmKUEi.dsk -hdc /tmp/froGNHHFiR.dsk -hdd /tmp/2xkfKs9BLt.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-overlap put zeros run mmap-overlap
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+Calibrating timer...  111,206,400 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 112 sector (56 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -19,20 +19,18 @@ Executing 'mmap-overlap':
 (mmap-overlap) begin
 (mmap-overlap) open "zeros" once
 (mmap-overlap) mmap "zeros"
-unknown system call! 
 (mmap-overlap) open "zeros" again
 (mmap-overlap) try to mmap "zeros" again
-unknown system call! 
 (mmap-overlap) try to mmap "zeros" again: FAILED
 mmap-overlap: exit(1)
 Execution of 'mmap-overlap' complete.
-Timer: 155 ticks
-Thread: 30 idle ticks, 122 kernel ticks, 3 user ticks
+Timer: 156 ticks
+Thread: 30 idle ticks, 123 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 110 reads, 234 writes
 hd1:0: 112 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1192 characters output
+Console: 1148 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

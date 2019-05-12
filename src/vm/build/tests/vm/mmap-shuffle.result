@@ -35,6 +35,5 @@ Differences in `diff -u' format:
 - (mmap-shuffle) shuffle 8: cksum=735775156
 - (mmap-shuffle) shuffle 9: cksum=1864109763
 - (mmap-shuffle) end
-+ unknown system call! 
 
 (Process exit codes are excluded for matching purposes.)

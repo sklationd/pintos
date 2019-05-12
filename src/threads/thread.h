@@ -128,6 +128,10 @@ struct thread
 
     struct hash *sup_page_dir;
     uint8_t *esp;
+
+    //MMAP
+    struct list mmap_list;
+
 #endif
 
 

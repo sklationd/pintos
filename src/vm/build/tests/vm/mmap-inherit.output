@@ -1,14 +1,14 @@
-Copying tests/vm/mmap-inherit into /tmp/TyqUDM8rgm.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/TyqUDM8rgm.dsk...
-Copying tests/vm/child-inherit into /tmp/TyqUDM8rgm.dsk...
-Writing command line to /tmp/x_wR1ACmYu.dsk...
-qemu -hda /tmp/x_wR1ACmYu.dsk -hdb /tmp/hWbejcUr_r.dsk -hdc /tmp/TyqUDM8rgm.dsk -hdd /tmp/k_2ekRXT5U.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-inherit into /tmp/BR4nidJOu4.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/BR4nidJOu4.dsk...
+Copying tests/vm/child-inherit into /tmp/BR4nidJOu4.dsk...
+Writing command line to /tmp/Od5otQiq51.dsk...
+qemu -hda /tmp/Od5otQiq51.dsk -hdb /tmp/gNf19y7BIX.dsk -hdc /tmp/BR4nidJOu4.dsk -hdd /tmp/kXAvGN1kn3.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-inherit put sample.txt put child-inherit run mmap-inherit
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+Calibrating timer...  104,755,200 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 202 sector (101 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -21,16 +21,20 @@ Executing 'mmap-inherit':
 (mmap-inherit) begin
 (mmap-inherit) open "sample.txt"
 (mmap-inherit) mmap "sample.txt"
-unknown system call! 
-mmap-inherit: exit(-1)
+(mmap-inherit) exec "child-inherit"
+(child-inherit) begin
+child-inherit: exit(-1)
+(mmap-inherit) checking that mmap'd file still has same data
+(mmap-inherit) end
+mmap-inherit: exit(0)
 Execution of 'mmap-inherit' complete.
-Timer: 225 ticks
-Thread: 30 idle ticks, 193 kernel ticks, 2 user ticks
+Timer: 222 ticks
+Thread: 30 idle ticks, 189 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 135 reads, 416 writes
+hd0:1: 181 reads, 416 writes
 hd1:0: 202 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1129 characters output
+Console: 1268 characters output
 Keyboard: 0 keys pressed
-Exception: 6 page faults
+Exception: 12 page faults
 Powering off...

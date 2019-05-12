@@ -18,6 +18,7 @@ enum SPTE_STATE{
 struct sup_page_table_entry 
 {
 	//uint32_t* kernel_vaddr;
+	bool dirty; // 1: dirty, 0: clean
 	uint32_t* user_vaddr;
 	struct hash_elem hash_elem;
 	enum SPTE_STATE state;
@@ -31,6 +32,7 @@ struct sup_page_table_entry
 
 	//for swap
 	int swap_offset;
+
 };
 
 void page_init (void);

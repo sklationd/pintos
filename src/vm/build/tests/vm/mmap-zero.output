@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-zero into /tmp/4IMynqBq3s.dsk...
-Writing command line to /tmp/6QaFEn6pUI.dsk...
-qemu -hda /tmp/6QaFEn6pUI.dsk -hdb /tmp/Y3uf4bQSKe.dsk -hdc /tmp/4IMynqBq3s.dsk -hdd /tmp/KYbMZxDfKq.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-zero into /tmp/UDfjxkCs9m.dsk...
+Writing command line to /tmp/6k7HcvJkl1.dsk...
+qemu -hda /tmp/6k7HcvJkl1.dsk -hdb /tmp/2SngV3AtkA.dsk -hdc /tmp/UDfjxkCs9m.dsk -hdd /tmp/YSuIVEuFiE.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-zero run mmap-zero
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
 Calibrating timer...  157,081,600 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -18,16 +18,15 @@ Executing 'mmap-zero':
 (mmap-zero) create empty file "empty"
 (mmap-zero) open "empty"
 (mmap-zero) mmap "empty"
-unknown system call! 
 mmap-zero: exit(-1)
 Execution of 'mmap-zero' complete.
-Timer: 137 ticks
-Thread: 30 idle ticks, 104 kernel ticks, 3 user ticks
+Timer: 141 ticks
+Thread: 30 idle ticks, 107 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 106 reads, 206 writes
 hd1:0: 97 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1001 characters output
+Console: 979 characters output
 Keyboard: 0 keys pressed
 Exception: 6 page faults
 Powering off...

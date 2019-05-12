@@ -1,12 +1,12 @@
-Copying tests/vm/page-linear into /tmp/87WE7f_E34.dsk...
-Writing command line to /tmp/zcmYiBPZgN.dsk...
-qemu -hda /tmp/zcmYiBPZgN.dsk -hdb /tmp/TmCVQOq162.dsk -hdc /tmp/87WE7f_E34.dsk -hdd /tmp/YFtrDHDUrq.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-linear into /tmp/XRAzY2x60Z.dsk...
+Writing command line to /tmp/k3HGBDEzWJ.dsk...
+qemu -hda /tmp/k3HGBDEzWJ.dsk -hdb /tmp/aJ79UqGr2I.dsk -hdc /tmp/XRAzY2x60Z.dsk -hdd /tmp/Fm2wvphpP2.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-linear run page-linear
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
 Calibrating timer...  209,510,400 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 102 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -23,8 +23,8 @@ Executing 'page-linear':
 (page-linear) end
 page-linear: exit(0)
 Execution of 'page-linear' complete.
-Timer: 4266 ticks
-Thread: 30 idle ticks, 109 kernel ticks, 4127 user ticks
+Timer: 4260 ticks
+Thread: 30 idle ticks, 110 kernel ticks, 4120 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 63 reads, 212 writes
 hd1:0: 102 reads, 0 writes

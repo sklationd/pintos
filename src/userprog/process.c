@@ -259,8 +259,17 @@ process_exit (void)
      to the kernel-only page directory. */
   
   /* destroy spt */
-  destroy_sup_page_table();
-  deallocate_frame_owned_by_thread();
+  if(lock_held_by_current_thread(&frame_table_lock)){
+    destroy_sup_page_table();
+    deallocate_frame_owned_by_thread();
+    lock_release(&frame_table_lock);
+  }
+  else{
+    lock_acquire(&frame_table_lock);
+    destroy_sup_page_table();
+    deallocate_frame_owned_by_thread();
+    lock_release(&frame_table_lock);
+  }
 
   pd = curr->pagedir;
   if (pd != NULL) 
@@ -377,7 +386,6 @@ load (const char *file_name, void (**eip) (void), void **esp)
   off_t file_ofs;
   bool success = false;
   int i;
-  //lock_acquire(&filesys_lock);
   /* Allocate and activate page directory. */
   t->pagedir = pagedir_create ();
   if (t->pagedir == NULL) 
@@ -479,11 +487,9 @@ load (const char *file_name, void (**eip) (void), void **esp)
   /* We arrive here whether the load is successful or not. */
   if(file != NULL)
     file_deny_write(file);
-  //file_close (file);
-  //lock_release(&filesys_lock);
   return success;
 }
-
+
 /* load() helpers. */
 
 bool install_page (void *upage, void *kpage, bool writable);
@@ -553,6 +559,7 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
   ASSERT (pg_ofs (upage) == 0);
   ASSERT (ofs % PGSIZE == 0);
   file_seek (file, ofs);
+  int new_ofs = ofs;
   while (read_bytes > 0 || zero_bytes > 0) 
     {
       /* Do calculate how to fill this page.
@@ -562,33 +569,10 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
       size_t page_zero_bytes = PGSIZE - page_read_bytes;
       //uint8_t *kpage = allocate_frame(upage);
       struct sup_page_table_entry *spte = allocate_page(upage);
-      if(!lazy_load(file, ofs, upage, page_read_bytes, page_zero_bytes, writable, spte))
+      if(!lazy_load(file, new_ofs, upage, page_read_bytes, page_zero_bytes, writable, spte))
         return false;
-      ofs += PGSIZE;
+      new_ofs += PGSIZE;
       
-      //file, kpage, upage, page_read_bytes, page_zero_bytes, writable
-
-      /* Get a page of memory. */
-      /*
-      uint8_t *kpage = palloc_get_page (PAL_USER);
-      if (kpage == NULL){
-        return false;
-      }
-      */
-      /*
-      if (file_read (file, kpage, page_read_bytes) != (int) page_read_bytes)
-        {
-          palloc_free_page (kpage);
-          return false; 
-        }
-      memset (kpage + page_read_bytes, 0, page_zero_bytes);
-
-      if (!install_page (upage, kpage, writable)) 
-        {
-          palloc_free_page (kpage);
-          return false; 
-        }
-      */
       /* Advance. */
       read_bytes -= page_read_bytes;
       zero_bytes -= page_zero_bytes;
@@ -605,17 +589,12 @@ setup_stack (void **esp)
   uint8_t *kpage;
   bool success = false;
 
-  //kpage = palloc_get_page (PAL_USER | PAL_ZERO);
+  lock_acquire(&frame_table_lock);
   kpage = allocate_frame(((uint8_t *)PHYS_BASE) - PGSIZE);
-  if (kpage != NULL) 
-    {
-      success = install_page (((uint8_t *) PHYS_BASE) - PGSIZE, kpage, true);
-      if (success)
-        *esp = PHYS_BASE;
-      else
-        deallocate_frame(PHYS_BASE - PGSIZE);
-    }
-  return success;
+  *esp = PHYS_BASE;
+  swap_prevent_off(((uint8_t *)PHYS_BASE) - PGSIZE);
+  lock_release(&frame_table_lock);
+  return true;
 }
 
 /* Adds a mapping from user virtual address UPAGE to kernel
@@ -631,6 +610,7 @@ bool
 install_page (void *upage, void *kpage, bool writable)
 {
   struct thread *t = thread_current ();
+  //printf("kk %p\n", kpage);
 
   /* Verify that there's not already a page at that virtual
      address, then map our page there. */
@@ -640,17 +620,14 @@ install_page (void *upage, void *kpage, bool writable)
 
 bool lazy_load_page(struct sup_page_table_entry *spte){
     //printf("user: %p\n",spte->user_vaddr);
-    allocate_frame(spte->user_vaddr);
-    lock_acquire(&filesys_lock);
-    file_seek(spte->file, spte->ofs);
-    if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
-    {
-      exit(-1);
-    }
-    lock_release(&filesys_lock);
-    memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
-    if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
-    {
-      exit(-1);         
-    }
+  lock_acquire(&filesys_lock);
+  allocate_frame(spte->user_vaddr);
+  file_seek(spte->file, spte->ofs);
+  if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
+  {
+    exit(-1);
+  }
+  memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
+  swap_prevent_off(spte->user_vaddr);
+  lock_release(&filesys_lock);
 }

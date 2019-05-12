@@ -13,7 +13,6 @@ Differences in `diff -u' format:
   (mmap-remove) begin
   (mmap-remove) open "sample.txt"
   (mmap-remove) mmap "sample.txt"
-+ unknown system call! 
   (mmap-remove) remove "sample.txt"
   (mmap-remove) try to open "sample.txt"
   (mmap-remove) create "another"

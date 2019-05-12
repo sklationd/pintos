@@ -1,12 +1,12 @@
-Copying tests/userprog/bad-jump2 into /tmp/El23GWQfqQ.dsk...
-Writing command line to /tmp/GNhfM2QxWI.dsk...
-qemu -hda /tmp/GNhfM2QxWI.dsk -hdb /tmp/Pe5eTQrQ0V.dsk -hdc /tmp/El23GWQfqQ.dsk -hdd /tmp/NJ4IkOG_QM.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/bad-jump2 into /tmp/wD9GlvGALD.dsk...
+Writing command line to /tmp/LRGd8l7uHk.dsk...
+qemu -hda /tmp/LRGd8l7uHk.dsk -hdb /tmp/AK_lkWwVQa.dsk -hdc /tmp/wD9GlvGALD.dsk -hdd /tmp/JAc_be1nwF.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put bad-jump2 run bad-jump2
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+Calibrating timer...  196,403,200 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"

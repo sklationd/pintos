@@ -1,13 +1,13 @@
-Copying tests/vm/mmap-over-data into /tmp/xxFDC9rkz2.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/xxFDC9rkz2.dsk...
-Writing command line to /tmp/PazMcjGraN.dsk...
-qemu -hda /tmp/PazMcjGraN.dsk -hdb /tmp/uMcjpqj9if.dsk -hdc /tmp/xxFDC9rkz2.dsk -hdd /tmp/eM7AGAR9bI.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-over-data into /tmp/XXQbFdZlOd.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/XXQbFdZlOd.dsk...
+Writing command line to /tmp/c76J9JDt98.dsk...
+qemu -hda /tmp/c76J9JDt98.dsk -hdb /tmp/DLi9i05THg.dsk -hdc /tmp/XXQbFdZlOd.dsk -hdd /tmp/0aZejbNNgw.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-over-data put sample.txt run mmap-over-data
 Pintos booting with 4,096 kB RAM...
-374 pages available in kernel pool.
+373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  130,867,200 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+Calibrating timer...  78,540,800 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 101 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -19,17 +19,16 @@ Executing 'mmap-over-data':
 (mmap-over-data) begin
 (mmap-over-data) open "sample.txt"
 (mmap-over-data) try to mmap over data segment
-unknown system call! 
-(mmap-over-data) try to mmap over data segment: FAILED
-mmap-over-data: exit(1)
+(mmap-over-data) end
+mmap-over-data: exit(0)
 Execution of 'mmap-over-data' complete.
-Timer: 147 ticks
-Thread: 30 idle ticks, 115 kernel ticks, 2 user ticks
+Timer: 148 ticks
+Thread: 30 idle ticks, 116 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 96 reads, 212 writes
 hd1:0: 101 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1145 characters output
+Console: 1088 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

@@ -3,3 +3,5 @@ Constant subroutine SIGVTALRM redefined at /home/kim/pintos/src/utils/pintos lin
 Could not access KVM kernel module: No such file or directory
 failed to initialize KVM: No such file or directory
 Back to tcg accelerator.
+Use of uninitialized value in numeric le (<=) at /home/kim/pintos/src/utils/pintos line 767.
+qemu: terminating on signal 2 from pid 10020

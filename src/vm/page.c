@@ -28,9 +28,11 @@ struct sup_page_table_entry *
 allocate_page (void *addr)
 {
 	struct sup_page_table_entry *spte = malloc(sizeof(struct sup_page_table_entry));
+	ASSERT(spte);
 	spte->user_vaddr = addr;
 	hash_insert(thread_current()->sup_page_dir, &spte->hash_elem);
 	spte->state = SPTE_MAPPED;
+	spte->dirty = false;
 	return spte;
 }
 
