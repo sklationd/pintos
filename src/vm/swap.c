@@ -111,7 +111,7 @@ swap_out (void)
 	ASSERT(fte);
 	fte->spte->state = SPTE_EVICTED;
 	fte->spte->swap_offset = index;
-	fte->spte->dirty = pagedir_is_dirty(t->pagedir, fte->user) || pagedir_is_dirty(t->pagedir, fte->kernel);
+	fte->spte->dirty = fte->spte->dirty || pagedir_is_dirty(t->pagedir, fte->user) /* || pagedir_is_dirty(t->pagedir, fte->kernel)*/;
 	struct sup_page_table_entry *spte = fte->spte;
 	write_to_disk(fte->kernel, index);
 	if((eviction_ptr = list_next(&(fte->list_elem))) == list_tail(&frame_list)){

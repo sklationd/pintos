@@ -24,15 +24,6 @@ struct file {
     bool deny_write;            /* Has file_deny_write() been called? */
 };
 
-struct mmap_header{
-    struct list_elem list_elem;
-    struct file *file;
-    void *user; 
-    //int fd;
-    size_t filesize;
-    mapid_t mapid;
-};
-
 void exit (int status);
 int exec(const char *cmd_line);
 int wait(int pid);
@@ -45,7 +36,8 @@ int write(int fd, const void *buffer, unsigned size);
 void seek(int fd, unsigned position);
 unsigned tell(int fd);
 void close(int fd);
-
+mapid_t mmap(int fd, void *addr);
+void munmap(mapid_t mapping);
 
 void exit(int status){
 	printf("%s: exit(%d)\n",thread_name(),status);
@@ -228,30 +220,31 @@ mapid_t mmap(int fd, void *addr){
         return MAP_FAILED;
     if(pg_ofs(addr))
         return MAP_FAILED;
+    lock_acquire(&filesys_lock);
     void *tmp;
     struct thread *t = thread_current();
     struct mmap_header *mh = (struct mmap_header *)malloc(sizeof(struct mmap_header)); //TODO: freeeeeeeeeeeeeee
-    lock_acquire(&filesys_lock);
     mh->file = file_reopen(t->fd[fd-3]);
-    lock_release(&filesys_lock);
+    if(mh->file == NULL){
+        goto FAIL;
+    }
     size_t filesize = file_length(mh->file);
+
+    if(filesize == 0)
+        goto FAIL;
 
     for(tmp = addr; tmp < addr + filesize; tmp += PGSIZE){
         if(find_spte(tmp)){
-            file_close(mh->file);
-            free(mh);
-            return MAP_FAILED;
+            goto FAIL;
         }
     }
-
-
 
     for(tmp = addr; tmp < addr + filesize; tmp += PGSIZE){
         if(tmp == pg_round_down(addr+filesize))
             lazy_load(mh->file,tmp-addr, tmp, filesize+addr-tmp,
-                      PGSIZE-(filesize+addr-tmp), true, allocate_page(addr));
+                      PGSIZE-(filesize+addr-tmp), true, allocate_page(tmp));
         else
-            lazy_load(mh->file,tmp-addr,tmp, PGSIZE, 0, true, allocate_page(addr));
+            lazy_load(mh->file,tmp-addr,tmp, PGSIZE, 0, true, allocate_page(tmp));
     }
     
     //mh->fd = fd;
@@ -259,52 +252,55 @@ mapid_t mmap(int fd, void *addr){
     mh->user = addr;
     mh->mapid = (int)addr>>3;
     list_push_back(&t->mmap_list, &mh->list_elem);
+    lock_release(&filesys_lock);
     return mh->mapid;
+
+FAIL:
+    file_close(mh->file);
+    free(mh);
+    lock_release(&filesys_lock);
+    return MAP_FAILED;
 }
 
 void munmap(mapid_t mapping){
     struct thread *t = thread_current();
     struct list_elem *e;
     struct list *mmap_list = &(t->mmap_list);
+    lock_acquire(&filesys_lock);
     for(e=list_begin(mmap_list);e!=list_end(mmap_list);e=list_next(e)){
         struct mmap_header *mh = list_entry(e, struct mmap_header, list_elem);
         if(mh->mapid == mapping){
             void *tmp;
-            if(find_spte(mh->user)->state == SPTE_LOAD){
-                for(tmp = mh->user; tmp < mh->user + mh->filesize; tmp += PGSIZE){
-                    deallocate_page(tmp);
-                }
-                return;
-            }
             for(tmp = mh->user; tmp < mh->user + mh->filesize; tmp += PGSIZE){
                 struct sup_page_table_entry *spte = find_spte(tmp);
-                if(spte->state == SPTE_EVICTED){
-                    if(spte->dirty){
-                        lock_acquire(&filesys_lock);
-                        file_write(mh->file, tmp, spte->page_read_bytes);
-                        lock_release(&filesys_lock);
+                if(spte->state == SPTE_LOAD){
+                    deallocate_page(tmp);
+                }
+                else if(spte->state == SPTE_EVICTED){
+                    if(spte->dirty || pagedir_is_dirty(t->pagedir, spte->user_vaddr) || pagedir_is_dirty(t->pagedir, spte->kpage)) {
+                        file_write_at(mh->file, tmp, spte->page_read_bytes,spte->ofs);
                         deallocate_fte(find_fte(tmp));
                         pagedir_clear_page(t->pagedir, tmp);
                     }
                     deallocate_page(tmp);
                 }
-                else if(find_spte(tmp)->state == SPTE_MAPPED){
-                    if(pagedir_is_dirty(spte->user_vaddr) || pagedir_is_dirty(spte->kpage)){
-                        lock_acquire(&filesys_lock);
-                        file_write(mh->file, tmp, spte->page_read_bytes);
-                        lock_release(&filesys_lock);
+                else if(spte->state == SPTE_MAPPED){
+                    swap_prevent_on(tmp);
+                    if(spte->dirty || pagedir_is_dirty(t->pagedir, spte->user_vaddr) /* pagedir_is_dirty(t->pagedir, spte->kpage)*/){
+                        file_write_at(mh->file, tmp, spte->page_read_bytes,spte->ofs);
                     }
                     deallocate_fte(find_fte(tmp));
                     deallocate_page(tmp);
                     pagedir_clear_page(t->pagedir,tmp);
                 }
             }
-            lock_acquire(&filesys_lock);
+            list_remove(&mh->list_elem);
             file_close(mh->file);
-            lock_release(&filesys_lock);
+            free(mh);
             break;
         }
     }
+    lock_release(&filesys_lock);
     return;
 }
 

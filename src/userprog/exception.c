@@ -185,7 +185,6 @@ page_fault (struct intr_frame *f)
   }
   
   else if(spte->state == SPTE_EVICTED){
-    //printf("swap_in\n");
     swap_in(fault_page, spte);
   }
 

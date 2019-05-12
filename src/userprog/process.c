@@ -253,11 +253,17 @@ process_exit (void)
       close(i+3);
     }
   }
+  
+  while(list_size(&curr->mmap_list)){
+    struct list_elem *e = list_pop_front(&curr->mmap_list);
+    struct mmap_header *mh = list_entry(e, struct mmap_header, list_elem);
+    munmap(mh->mapid);
+  }
+  
   //file_allow_write(curr->current_executable);
 
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
-  
   /* destroy spt */
   if(lock_held_by_current_thread(&frame_table_lock)){
     destroy_sup_page_table();
@@ -625,6 +631,7 @@ bool lazy_load_page(struct sup_page_table_entry *spte){
   file_seek(spte->file, spte->ofs);
   if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
   {
+    printf("asdfasd\n");
     exit(-1);
   }
   memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
