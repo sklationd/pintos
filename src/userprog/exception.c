@@ -168,7 +168,6 @@ page_fault (struct intr_frame *f)
   struct sup_page_table_entry *spte;
 
   spte = find_spte(fault_page);
-  ////lock_acquire(&frame_table_lock);
 
   if(spte == NULL){
     if(((fault_addr < PHYS_BASE) && (PHYS_BASE - STACK_SIZE <= fault_addr)) && // USER AREA ??
@@ -191,7 +190,6 @@ page_fault (struct intr_frame *f)
   else if(spte->state == SPTE_LOAD){
     lazy_load_page(spte);
   }
-  //lock_release(&frame_table_lock);
 }
 
   /* To implement virtual memory, delete the rest of the function
