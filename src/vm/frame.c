@@ -90,17 +90,25 @@ _allocate_frame (void *addr) // user virtual address
 
 uint32_t *
 allocate_frame (void *_addr){
+	bool l = lock_held_by_current_thread(&frame_table_lock);
+	if(!l)
+		lock_acquire(&frame_table_lock);
 	void *addr = (void*)pg_round_down(_addr);
 	uint32_t *kernel;// = _allocate_frame(addr);
 	while((kernel = _allocate_frame(addr)) == NULL) {
-		if(!swap_out())
+		if(!swap_out()){
+			lock_release(&frame_table_lock);
 			exit(-1); // TODO panic
+		}
 	}
 	struct sup_page_table_entry *spte = find_spte(addr);
     if (!install_page (spte->user_vaddr, spte->kpage, spte->writable)) 
     {
+	  lock_release(&frame_table_lock);
       exit(-1);         
     }
+    if(!l)
+		lock_release(&frame_table_lock);
 	return kernel;
 }
 /*
@@ -188,8 +196,6 @@ void swap_prevent_off(void *addr){
 		ASSERT(spte->state != SPTE_MAPPED);
 		if(spte->state == SPTE_EVICTED)
 			swap_in(addr, spte);
-		//else if(spte->state == SPTE_LOAD)
-		//	lazy_load_page(spte);
 	}
 	fte = find_fte(addr);
 	ASSERT(fte);

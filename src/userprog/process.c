@@ -238,7 +238,7 @@ process_wait (tid_t child_tid)
 /* Free the current process's resources. */
 void
 process_exit (void)
-{ 
+{
   struct thread *curr = thread_current ();
   uint32_t *pd;
   file_close(curr->current_executable);
@@ -249,7 +249,6 @@ process_exit (void)
     lock_release(&filesys_lock);
   if(lock_held_by_current_thread(&frame_table_lock))
     lock_release(&frame_table_lock);
-  
   int i;
   for(i = 0; i < 128; ++i){
     if(curr->fd[i]){
@@ -269,6 +268,7 @@ process_exit (void)
      to the kernel-only page directory. */
   /* destroy spt */
   lock_acquire(&frame_table_lock);
+  pd = curr->pagedir;
   if (pd != NULL) 
     {
       /* Correct ordering here is crucial.  We must set
@@ -285,7 +285,6 @@ process_exit (void)
       pagedir_destroy (pd);
     }
   lock_release(&frame_table_lock);
-
   if(lock_held_by_current_thread(&filesys_lock))
     lock_release(&filesys_lock);
   sema_up(&curr->wait_free);
@@ -592,11 +591,9 @@ setup_stack (void **esp)
   uint8_t *kpage;
   bool success = false;
 
-  lock_acquire(&frame_table_lock);
   kpage = allocate_frame(((uint8_t *)PHYS_BASE) - PGSIZE);
   *esp = PHYS_BASE;
   swap_prevent_off(((uint8_t *)PHYS_BASE) - PGSIZE);
-  lock_release(&frame_table_lock);
   return true;
 }
 
@@ -613,7 +610,6 @@ bool
 install_page (void *upage, void *kpage, bool writable)
 {
   struct thread *t = thread_current ();
-  //printf("kk %p\n", kpage);
 
   /* Verify that there's not already a page at that virtual
      address, then map our page there. */
@@ -622,16 +618,14 @@ install_page (void *upage, void *kpage, bool writable)
 }
 
 bool lazy_load_page(struct sup_page_table_entry *spte){
-    //printf("user: %p\n",spte->user_vaddr);
-  lock_acquire(&filesys_lock);
   allocate_frame(spte->user_vaddr);
+  lock_acquire(&filesys_lock);
   file_seek(spte->file, spte->ofs);
   if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
   {
-    printf("asdfasd\n");
     exit(-1);
   }
   memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
-  swap_prevent_off(spte->user_vaddr);
   lock_release(&filesys_lock);
+  swap_prevent_off(spte->user_vaddr);
 }

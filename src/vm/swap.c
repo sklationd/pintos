@@ -44,6 +44,7 @@ bool
 swap_in (void *addr, struct sup_page_table_entry *spte)
 {	
 	//printf("swap in enter %p\n", addr);
+	lock_acquire(&frame_table_lock);
 	ASSERT(addr < PHYS_BASE);
 	const int swap_table_size = disk_size(swap_device) * DISK_SECTOR_SIZE / PGSIZE;
 	struct hash_elem *e;
@@ -59,6 +60,7 @@ swap_in (void *addr, struct sup_page_table_entry *spte)
 
 	read_from_disk(fte->kernel, spte->swap_offset);
 	bitmap_set(swap_table,spte->swap_offset,0);
+	lock_release(&frame_table_lock);
 	swap_prevent_off(addr);
 }
 
