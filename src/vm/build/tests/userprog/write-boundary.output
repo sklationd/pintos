@@ -1,12 +1,12 @@
-Copying tests/userprog/write-boundary into /tmp/WfmugE_DHd.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/WfmugE_DHd.dsk...
-Writing command line to /tmp/2gXiuZh500.dsk...
-qemu -hda /tmp/2gXiuZh500.dsk -hdb /tmp/z2jjsCLGkb.dsk -hdc /tmp/WfmugE_DHd.dsk -hdd /tmp/32W8w3VxNj.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/write-boundary into /tmp/GDU_vdC8eg.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/GDU_vdC8eg.dsk...
+Writing command line to /tmp/kbfxI2g3Ld.dsk...
+qemu -hda /tmp/kbfxI2g3Ld.dsk -hdb /tmp/KSuIQmu0Eu.dsk -hdc /tmp/GDU_vdC8eg.dsk -hdd /tmp/JYV1QObQnW.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put write-boundary put sample.txt run write-boundary
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  55,603,200 loops/s.
+Calibrating timer...  148,889,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -21,13 +21,13 @@ Executing 'write-boundary':
 (write-boundary) end
 write-boundary: exit(0)
 Execution of 'write-boundary' complete.
-Timer: 147 ticks
-Thread: 30 idle ticks, 115 kernel ticks, 2 user ticks
+Timer: 146 ticks
+Thread: 30 idle ticks, 116 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 105 reads, 217 writes
 hd1:0: 103 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1042 characters output
+Console: 1043 characters output
 Keyboard: 0 keys pressed
 Exception: 7 page faults
 Powering off...

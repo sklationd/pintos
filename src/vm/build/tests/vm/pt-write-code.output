@@ -1,11 +1,11 @@
-Copying tests/vm/pt-write-code into /tmp/p84DwSQeu1.dsk...
-Writing command line to /tmp/wyULZG_tPu.dsk...
-qemu -hda /tmp/wyULZG_tPu.dsk -hdb /tmp/NU2GeXT9lX.dsk -hdc /tmp/p84DwSQeu1.dsk -hdd /tmp/HNN7AMZ6Ku.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-write-code into /tmp/5bqwVWCmg8.dsk...
+Writing command line to /tmp/xqVwMPOLYT.dsk...
+qemu -hda /tmp/xqVwMPOLYT.dsk -hdb /tmp/Q29AWgj93w.dsk -hdc /tmp/5bqwVWCmg8.dsk -hdd /tmp/BKnO4DWGNC.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-write-code run pt-write-code
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  207,872,000 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -17,8 +17,8 @@ Executing 'pt-write-code':
 (pt-write-code) begin
 pt-write-code: exit(-1)
 Execution of 'pt-write-code' complete.
-Timer: 137 ticks
-Thread: 30 idle ticks, 106 kernel ticks, 1 user ticks
+Timer: 139 ticks
+Thread: 30 idle ticks, 108 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 62 reads, 202 writes
 hd1:0: 97 reads, 0 writes

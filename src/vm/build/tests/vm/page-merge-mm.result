@@ -1,2 +1,25 @@
 FAIL
-run: TIMEOUT after 61 seconds of wall-clock time - load average: 0.85, 0.70, 0.42
+Kernel panic in run: PANIC at ../../threads/synch.c:198 in lock_acquire(): assertion `!lock_held_by_current_thread (lock)' failed.
+Call stack: 0xc0107a19 0xc010322a 0xc010aee1 0xc0101f27 0xc010205f 0xc010500b 0xc010d002 0xc010c754 0xc010b167 0xc0109afd 0xc010100c 0xc010b4be 0xc010ba96 0xc0101f27 0xc010205f 0x804a4c9
+Translation of call stack:
+In kernel.o:
+0xc0107a19: debug_panic (.../../lib/kernel/debug.c:34)
+0xc010322a: lock_acquire (...../../threads/synch.c:200)
+0xc010aee1: page_fault (.../userprog/exception.c:167)
+0xc0101f27: intr_handler (..../threads/interrupt.c:361)
+0xc010205f: intr_entry (threads/intr-stubs.S:38)
+0xc010500b: outsw (...ld/../../threads/io.h:147)
+0xc010d002: inode_write_at (...../../filesys/inode.c:287)
+0xc010c754: file_write_at (.../../../filesys/file.c:114)
+0xc010b167: munmap (...../userprog/syscall.c:282)
+0xc0109afd: process_exit (...../userprog/process.c:260)
+0xc010100c: thread_exit (..../../threads/thread.c:353)
+0xc010b4be: close (...../userprog/syscall.c:204)
+0xc010ba96: syscall_handler (...../userprog/syscall.c:334)
+0xc0101f27: intr_handler (..../threads/interrupt.c:361)
+0xc010205f: intr_entry (threads/intr-stubs.S:38)
+In tests/vm/page-merge-mm:
+0x0804a4c9: sdiv64 (..../../lib/arithmetic.c:144)
+Translations of user virtual addresses above are based on a guess at
+the binary to use.  If this guess is incorrect, then those
+translations will be misleading.

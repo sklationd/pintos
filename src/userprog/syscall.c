@@ -267,6 +267,7 @@ void munmap(mapid_t mapping){
     struct list_elem *e;
     struct list *mmap_list = &(t->mmap_list);
     lock_acquire(&filesys_lock);
+    //printf("lock acquire\n");
     for(e=list_begin(mmap_list);e!=list_end(mmap_list);e=list_next(e)){
         struct mmap_header *mh = list_entry(e, struct mmap_header, list_elem);
         if(mh->mapid == mapping){
@@ -274,9 +275,11 @@ void munmap(mapid_t mapping){
             for(tmp = mh->user; tmp < mh->user + mh->filesize; tmp += PGSIZE){
                 struct sup_page_table_entry *spte = find_spte(tmp);
                 if(spte->state == SPTE_LOAD){
+                    //printf("load\n");
                     deallocate_page(tmp);
                 }
                 else if(spte->state == SPTE_EVICTED){
+                    //printf("evicted\n");
                     if(spte->dirty || pagedir_is_dirty(t->pagedir, spte->user_vaddr) || pagedir_is_dirty(t->pagedir, spte->kpage)) {
                         file_write_at(mh->file, tmp, spte->page_read_bytes,spte->ofs);
                         deallocate_fte(find_fte(tmp));
@@ -285,6 +288,7 @@ void munmap(mapid_t mapping){
                     deallocate_page(tmp);
                 }
                 else if(spte->state == SPTE_MAPPED){
+                    //printf("mapped\n");
                     swap_prevent_on(tmp);
                     if(spte->dirty || pagedir_is_dirty(t->pagedir, spte->user_vaddr) /* pagedir_is_dirty(t->pagedir, spte->kpage)*/){
                         file_write_at(mh->file, tmp, spte->page_read_bytes,spte->ofs);
@@ -301,6 +305,7 @@ void munmap(mapid_t mapping){
         }
     }
     lock_release(&filesys_lock);
+    //printf("lock release\n");
     return;
 }
 

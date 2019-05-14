@@ -1,12 +1,12 @@
-Copying tests/vm/page-merge-mm into /tmp/oSfw5c_Bz4.dsk...
-Copying tests/vm/child-qsort-mm into /tmp/oSfw5c_Bz4.dsk...
-Writing command line to /tmp/DBXXEzxpob.dsk...
-qemu -hda /tmp/DBXXEzxpob.dsk -hdb /tmp/0PUm6Qj4_N.dsk -hdc /tmp/oSfw5c_Bz4.dsk -hdd /tmp/2hWxcCajSc.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-mm into /tmp/reafSt_ihL.dsk...
+Copying tests/vm/child-qsort-mm into /tmp/reafSt_ihL.dsk...
+Writing command line to /tmp/3Ovu_t3IJ0.dsk...
+qemu -hda /tmp/3Ovu_t3IJ0.dsk -hdb /tmp/lwLYIPMLsJ.dsk -hdc /tmp/reafSt_ihL.dsk -hdd /tmp/B37Z7YvxIl.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-mm put child-qsort-mm run page-merge-mm
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  180,838,400 loops/s.
+Calibrating timer...  104,755,200 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 211 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -33,5 +33,16 @@ child-qsort-mm: exit(80)
 child-qsort-mm: exit(80)
 (page-merge-mm) sort chunk 7
 child-qsort-mm: exit(80)
-
-TIMEOUT after 61 seconds of wall-clock time - load average: 0.85, 0.70, 0.42
+(page-merge-mm) wait for child 0
+Kernel PANIC at ../../threads/synch.c:198 in lock_acquire(): assertion `!lock_held_by_current_thread (lock)' failed.
+Call stack: 0xc0107a19 0xc010322a 0xc010aee1 0xc0101f27 0xc010205f 0xc010500b 0xc010d002 0xc010c754 0xc010b167 0xc0109afd 0xc010100c 0xc010b4be 0xc010ba96 0xc0101f27 0xc010205f 0x804a4c9Kernel PANIC recursion at ../../threads/synch.c:198 in lock_acquire().
+Timer: 2673 ticks
+Thread: 30 idle ticks, 201 kernel ticks, 2442 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 2960 reads, 4560 writes
+hd1:0: 211 reads, 0 writes
+hd1:1: 256 reads, 1736 writes
+Console: 1773 characters output
+Keyboard: 0 keys pressed
+Exception: 551 page faults
+Powering off...

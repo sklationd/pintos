@@ -244,38 +244,33 @@ process_exit (void)
   file_close(curr->current_executable);
   sema_up(&curr->wait_lock); 
   sema_down(&curr->wait_memory);
+
   if(lock_held_by_current_thread(&filesys_lock))
     lock_release(&filesys_lock);
-
+  if(lock_held_by_current_thread(&frame_table_lock))
+    lock_release(&frame_table_lock);
   int i;
   for(i = 0; i < 128; ++i){
     if(curr->fd[i]){
       close(i+3);
     }
   }
+
   while(list_size(&curr->mmap_list)){
     struct list_elem *e = list_front(&curr->mmap_list);
     struct mmap_header *mh = list_entry(e, struct mmap_header, list_elem);
     munmap(mh->mapid);
   }
   
+  lock_acquire(&frame_table_lock);
   //file_allow_write(curr->current_executable);
 
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
   /* destroy spt */
-  if(lock_held_by_current_thread(&frame_table_lock)){
-    destroy_sup_page_table();
-    deallocate_frame_owned_by_thread();
-    lock_release(&frame_table_lock);
-  }
-  else{
-    lock_acquire(&frame_table_lock);
-    destroy_sup_page_table();
-    deallocate_frame_owned_by_thread();
-    lock_release(&frame_table_lock);
-  }
-
+  printf("exit\n");
+  destroy_sup_page_table();
+  deallocate_frame_owned_by_thread();
   pd = curr->pagedir;
   if (pd != NULL) 
     {
@@ -290,6 +285,9 @@ process_exit (void)
       pagedir_activate (NULL);
       pagedir_destroy (pd);
     }
+  lock_release(&frame_table_lock);
+  if(lock_held_by_current_thread(&filesys_lock))
+    lock_release(&filesys_lock);
   sema_up(&curr->wait_free);
 }
 

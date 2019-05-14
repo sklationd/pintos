@@ -162,7 +162,6 @@ page_fault (struct intr_frame *f)
   if(user && is_kernel_vaddr(fault_addr)){
     exit(-1);
   }
-  lock_acquire(&frame_table_lock);
   //esp handling
   void *esp = user ? f->esp : thread_current()->esp;
   uint32_t *pd = thread_current()->pagedir;
@@ -170,6 +169,7 @@ page_fault (struct intr_frame *f)
 
   spte = find_spte(fault_page);
   
+  lock_acquire(&frame_table_lock);
   if(spte == NULL){
     if(((fault_addr < PHYS_BASE) && (PHYS_BASE - STACK_SIZE <= fault_addr)) && // USER AREA ??
        ((esp <= fault_addr) || // ordinary case
@@ -180,6 +180,7 @@ page_fault (struct intr_frame *f)
     }
 
     else{
+      lock_release(&frame_table_lock);
       exit(-1);
     }
   }

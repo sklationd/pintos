@@ -30,8 +30,8 @@ void eviction_ptr_push(struct list_elem *list_elem){
 	struct list_elem *current_ptr = eviction_ptr;
 	if(list_elem == eviction_ptr){
 		current_ptr = list_next(current_ptr);
-		if(current_ptr == list_tail(&frame_table))
-			current_ptr = list_begin(&frame_table);
+		if(current_ptr == list_tail(&frame_list))
+			current_ptr = list_size(&frame_list)==1 ? NULL : list_begin(&frame_list);
 	}
 	eviction_ptr = current_ptr;
 	return;
@@ -188,8 +188,8 @@ void swap_prevent_off(void *addr){
 		ASSERT(spte->state != SPTE_MAPPED);
 		if(spte->state == SPTE_EVICTED)
 			swap_in(addr, spte);
-		else if(spte->state == SPTE_LOAD)
-			lazy_load_page(spte);
+		//else if(spte->state == SPTE_LOAD)
+		//	lazy_load_page(spte);
 	}
 	fte = find_fte(addr);
 	ASSERT(fte);

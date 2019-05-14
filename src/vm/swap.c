@@ -100,23 +100,20 @@ swap_out (void)
 			else 
 				break;
 		}
-		if((eviction_ptr = list_next(&(fte->list_elem))) == list_tail(&frame_list)){
-			eviction_ptr = list_begin(&frame_list);
-		}
+		eviction_ptr_push(&(fte->list_elem));
 	}
 	size_t index = bitmap_scan(swap_table, 0, 1, 0);
 	if(index == BITMAP_ERROR)
 		PANIC("swap full\n");
 	bitmap_set(swap_table, index,1);
 	ASSERT(fte);
+	pagedir_clear_page(t->pagedir, fte->user);
 	fte->spte->state = SPTE_EVICTED;
 	fte->spte->swap_offset = index;
 	fte->spte->dirty = fte->spte->dirty || pagedir_is_dirty(t->pagedir, fte->user) /* || pagedir_is_dirty(t->pagedir, fte->kernel)*/;
 	struct sup_page_table_entry *spte = fte->spte;
 	write_to_disk(fte->kernel, index);
-	if((eviction_ptr = list_next(&(fte->list_elem))) == list_tail(&frame_list)){
-		eviction_ptr = list_begin(&frame_list);
-	}
+	eviction_ptr_push(&(fte->list_elem));
 	deallocate_fte(fte);
 	spte->kpage = NULL;
 	return true;
