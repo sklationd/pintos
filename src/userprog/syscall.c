@@ -46,6 +46,7 @@ void exit(int status){
 }
 
 int exec(const char *cmd_line){ // return pid
+
     return process_execute(cmd_line);  
 }
 
@@ -60,8 +61,10 @@ bool create(const char *file, unsigned initial_size){
     bool b;
 
     /* if file is null, exit */
-    if(file == NULL)
+    if(file == NULL){
+        lock_release(&filesys_lock);
         exit(-1);
+    }
 
     /* if file already exists, fail */
     if (dir != NULL)
@@ -156,26 +159,30 @@ int write(int fd, const void *buffer, unsigned size){
         exit(-1);
     if(buffer == NULL)
         exit(-1);
+    lock_acquire(&filesys_lock);
     if(fd == 1){ // console write
         putbuf(buffer, size);
+        lock_release(&filesys_lock);
         return size;
     }
     else if (fd == 0){ //std input
+        lock_release(&filesys_lock);
         return -1;
     }
     else if(thread_current()->fd[fd-3] == NULL){
+        lock_release(&filesys_lock);
         exit(-1);
     }
 
     else{
         if(!thread_current()->fd[fd-3]->deny_write){
             swap_prevention_buffer(buffer, size, true);
-            lock_acquire(&filesys_lock);
             int len = file_write(thread_current()->fd[fd-3],buffer,size);
             lock_release(&filesys_lock);
             swap_prevention_buffer(buffer, size, false);
             return len;
         }
+        lock_release(&filesys_lock);
         return 0;
     }
 }
@@ -202,7 +209,6 @@ unsigned tell(int fd){
 }
 
 void close(int fd){
-
 	if(fd > 130 || fd < 3)
 		exit(-1);
 	if(thread_current()->fd[fd-3] == NULL)

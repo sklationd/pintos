@@ -238,7 +238,7 @@ process_wait (tid_t child_tid)
 /* Free the current process's resources. */
 void
 process_exit (void)
-{
+{ 
   struct thread *curr = thread_current ();
   uint32_t *pd;
   file_close(curr->current_executable);
@@ -249,6 +249,7 @@ process_exit (void)
     lock_release(&filesys_lock);
   if(lock_held_by_current_thread(&frame_table_lock))
     lock_release(&frame_table_lock);
+  
   int i;
   for(i = 0; i < 128; ++i){
     if(curr->fd[i]){
@@ -262,16 +263,12 @@ process_exit (void)
     munmap(mh->mapid);
   }
   
-  lock_acquire(&frame_table_lock);
   //file_allow_write(curr->current_executable);
 
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
   /* destroy spt */
-  printf("exit\n");
-  destroy_sup_page_table();
-  deallocate_frame_owned_by_thread();
-  pd = curr->pagedir;
+  lock_acquire(&frame_table_lock);
   if (pd != NULL) 
     {
       /* Correct ordering here is crucial.  We must set
@@ -281,11 +278,14 @@ process_exit (void)
          directory before destroying the process's page
          directory, or our active page directory will be one
          that's been freed (and cleared). */
+      destroy_sup_page_table();
+      deallocate_frame_owned_by_thread();
       curr->pagedir = NULL;
       pagedir_activate (NULL);
       pagedir_destroy (pd);
     }
   lock_release(&frame_table_lock);
+
   if(lock_held_by_current_thread(&filesys_lock))
     lock_release(&filesys_lock);
   sema_up(&curr->wait_free);

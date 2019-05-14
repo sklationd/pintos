@@ -168,8 +168,11 @@ page_fault (struct intr_frame *f)
   struct sup_page_table_entry *spte;
 
   spte = find_spte(fault_page);
-  
+  //bool filelock = lock_held_by_current_thread(&filesys_lock);
+  //if(filelock)
+  //  lock_release(&filesys_lock);
   lock_acquire(&frame_table_lock);
+
   if(spte == NULL){
     if(((fault_addr < PHYS_BASE) && (PHYS_BASE - STACK_SIZE <= fault_addr)) && // USER AREA ??
        ((esp <= fault_addr) || // ordinary case
