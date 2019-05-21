@@ -1,0 +1,47 @@
+Copying tests/filesys/extended/grow-root-lg into /tmp/EemYdppLIU.dsk...
+Copying tests/filesys/extended/tar into /tmp/EemYdppLIU.dsk...
+Writing command line to /tmp/5R5yfdfMul.dsk...
+qemu -hda /tmp/5R5yfdfMul.dsk -hdb tmp.dsk -hdc /tmp/EemYdppLIU.dsk -hdd /tmp/f4PazqcwKf.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put grow-root-lg put tar run grow-root-lg
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  130,867,200 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 210 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'grow-root-lg' into the file system...
+Putting 'tar' into the file system...
+Executing 'grow-root-lg':
+(grow-root-lg) begin
+(grow-root-lg) creating and checking "file0"
+(grow-root-lg) creating and checking "file1"
+(grow-root-lg) creating and checking "file2"
+(grow-root-lg) creating and checking "file3"
+(grow-root-lg) creating and checking "file4"
+(grow-root-lg) creating and checking "file5"
+(grow-root-lg) creating and checking "file6"
+(grow-root-lg) creating and checking "file7"
+(grow-root-lg) creating and checking "file8"
+(grow-root-lg) creating and checking "file9"
+(grow-root-lg) creating and checking "file10"
+(grow-root-lg) creating and checking "file11"
+(grow-root-lg) creating and checking "file12"
+(grow-root-lg) creating and checking "file13"
+(grow-root-lg) creating and checking "file14"
+(grow-root-lg) create "file14": FAILED
+grow-root-lg: exit(1)
+Execution of 'grow-root-lg' complete.
+Timer: 361 ticks
+Thread: 30 idle ticks, 284 kernel ticks, 47 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 1531 reads, 725 writes
+hd1:0: 210 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1681 characters output
+Keyboard: 0 keys pressed
+Exception: 5 page faults
+Powering off...

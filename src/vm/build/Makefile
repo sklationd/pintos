@@ -68,6 +68,7 @@ filesys_SRC += filesys/directory.c	# Directories.
 filesys_SRC += filesys/inode.c		# File headers.
 filesys_SRC += filesys/fsutil.c		# Utilities.
 
+
 SOURCES = $(foreach dir,$(KERNEL_SUBDIRS),$($(dir)_SRC))
 OBJECTS = $(patsubst %.c,%.o,$(patsubst %.S,%.o,$(SOURCES)))
 DEPENDS = $(patsubst %.o,%.d,$(OBJECTS))

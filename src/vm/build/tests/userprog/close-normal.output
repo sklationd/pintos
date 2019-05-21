@@ -1,7 +1,7 @@
-Copying tests/userprog/close-normal into /tmp/x1P0ZVWmGa.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/x1P0ZVWmGa.dsk...
-Writing command line to /tmp/FVuRfY3A1K.dsk...
-qemu -hda /tmp/FVuRfY3A1K.dsk -hdb /tmp/T7RkQwOnIQ.dsk -hdc /tmp/x1P0ZVWmGa.dsk -hdd /tmp/ZswAEV3Fdq.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/close-normal into /tmp/fD_abXkpd7.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/fD_abXkpd7.dsk...
+Writing command line to /tmp/Lri7rwofJY.dsk...
+qemu -hda /tmp/Lri7rwofJY.dsk -hdb /tmp/SdmqwaDuzO.dsk -hdc /tmp/fD_abXkpd7.dsk -hdd /tmp/VUlFrEAFdC.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put close-normal put sample.txt run close-normal
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
@@ -22,13 +22,13 @@ Executing 'close-normal':
 (close-normal) end
 close-normal: exit(0)
 Execution of 'close-normal' complete.
-Timer: 142 ticks
-Thread: 30 idle ticks, 111 kernel ticks, 1 user ticks
+Timer: 175 ticks
+Thread: 30 idle ticks, 144 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 96 reads, 208 writes
+hd0:1: 191 reads, 303 writes
 hd1:0: 99 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1056 characters output
+Console: 1057 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

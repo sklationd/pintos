@@ -1,12 +1,12 @@
-Copying tests/vm/page-merge-mm into /tmp/reafSt_ihL.dsk...
-Copying tests/vm/child-qsort-mm into /tmp/reafSt_ihL.dsk...
-Writing command line to /tmp/3Ovu_t3IJ0.dsk...
-qemu -hda /tmp/3Ovu_t3IJ0.dsk -hdb /tmp/lwLYIPMLsJ.dsk -hdc /tmp/reafSt_ihL.dsk -hdd /tmp/B37Z7YvxIl.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-mm into /tmp/HQu4cFoJof.dsk...
+Copying tests/vm/child-qsort-mm into /tmp/HQu4cFoJof.dsk...
+Writing command line to /tmp/eqvOhVhdMw.dsk...
+qemu -hda /tmp/eqvOhVhdMw.dsk -hdb /tmp/sq6dvabZ92.dsk -hdc /tmp/HQu4cFoJof.dsk -hdd /tmp/laR60vqh9M.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-mm put child-qsort-mm run page-merge-mm
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 211 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -34,15 +34,26 @@ child-qsort-mm: exit(80)
 (page-merge-mm) sort chunk 7
 child-qsort-mm: exit(80)
 (page-merge-mm) wait for child 0
-Kernel PANIC at ../../threads/synch.c:198 in lock_acquire(): assertion `!lock_held_by_current_thread (lock)' failed.
-Call stack: 0xc0107a19 0xc010322a 0xc010aee1 0xc0101f27 0xc010205f 0xc010500b 0xc010d002 0xc010c754 0xc010b167 0xc0109afd 0xc010100c 0xc010b4be 0xc010ba96 0xc0101f27 0xc010205f 0x804a4c9Kernel PANIC recursion at ../../threads/synch.c:198 in lock_acquire().
-Timer: 2673 ticks
-Thread: 30 idle ticks, 201 kernel ticks, 2442 user ticks
+child-qsort-mm: exit(80)
+(page-merge-mm) wait for child 1
+(page-merge-mm) wait for child 2
+(page-merge-mm) wait for child 3
+(page-merge-mm) wait for child 4
+(page-merge-mm) wait for child 5
+(page-merge-mm) wait for child 6
+(page-merge-mm) wait for child 7
+(page-merge-mm) merge
+(page-merge-mm) verify
+(page-merge-mm) bad value 0 in byte 4076: FAILED
+page-merge-mm: exit(1)
+Execution of 'page-merge-mm' complete.
+Timer: 4258 ticks
+Thread: 30 idle ticks, 287 kernel ticks, 3941 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 2960 reads, 4560 writes
+hd0:1: 12823 reads, 8903 writes
 hd1:0: 211 reads, 0 writes
-hd1:1: 256 reads, 1736 writes
-Console: 1773 characters output
+hd1:1: 64 reads, 1216 writes
+Console: 1811 characters output
 Keyboard: 0 keys pressed
-Exception: 551 page faults
+Exception: 812 page faults
 Powering off...

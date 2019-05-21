@@ -1,0 +1,40 @@
+Copying tests/filesys/extended/dir-mk-tree into /tmp/nezNdWcsoX.dsk...
+Copying tests/filesys/extended/tar into /tmp/nezNdWcsoX.dsk...
+Writing command line to /tmp/ZDVmURmha6.dsk...
+qemu -hda /tmp/ZDVmURmha6.dsk -hdb tmp.dsk -hdc /tmp/nezNdWcsoX.dsk -hdd /tmp/SwEwvHNpN9.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put dir-mk-tree put tar run dir-mk-tree
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  209,715,200 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 214 sector (107 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'dir-mk-tree' into the file system...
+Putting 'tar' into the file system...
+Executing 'dir-mk-tree':
+(dir-mk-tree) begin
+(dir-mk-tree) creating /0/0/0/0 through /3/2/2/3...
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+(dir-mk-tree) create "/0/1/0/2": FAILED
+dir-mk-tree: exit(1)
+Execution of 'dir-mk-tree' complete.
+Timer: 1114 ticks
+Thread: 30 idle ticks, 301 kernel ticks, 783 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 2821 reads, 2553 writes
+hd1:0: 214 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1204 characters output
+Keyboard: 0 keys pressed
+Exception: 4 page faults
+Powering off...

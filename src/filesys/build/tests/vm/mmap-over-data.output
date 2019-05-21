@@ -1,0 +1,34 @@
+Copying tests/vm/mmap-over-data into /tmp/PzLl5tekJp.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/PzLl5tekJp.dsk...
+Writing command line to /tmp/kHJkFwvY5g.dsk...
+qemu -hda /tmp/kHJkFwvY5g.dsk -hdb /tmp/lC1DXalrEl.dsk -hdc /tmp/PzLl5tekJp.dsk -hdd /tmp/49kDv43sjR.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put mmap-over-data put sample.txt run mmap-over-data
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  209,305,600 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 101 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'mmap-over-data' into the file system...
+Putting 'sample.txt' into the file system...
+Executing 'mmap-over-data':
+(mmap-over-data) begin
+(mmap-over-data) open "sample.txt"
+(mmap-over-data) try to mmap over data segment
+(mmap-over-data) end
+mmap-over-data: exit(0)
+Execution of 'mmap-over-data' complete.
+Timer: 177 ticks
+Thread: 30 idle ticks, 145 kernel ticks, 2 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 193 reads, 309 writes
+hd1:0: 101 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1090 characters output
+Keyboard: 0 keys pressed
+Exception: 5 page faults
+Powering off...

@@ -1,0 +1,40 @@
+Copying tests/filesys/extended/dir-rm-tree into /tmp/AQoUfbS2iN.dsk...
+Copying tests/filesys/extended/tar into /tmp/AQoUfbS2iN.dsk...
+Writing command line to /tmp/_MAqCxUMli.dsk...
+qemu -hda /tmp/_MAqCxUMli.dsk -hdb tmp.dsk -hdc /tmp/AQoUfbS2iN.dsk -hdd /tmp/zNSAM1GVXs.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put dir-rm-tree put tar run dir-rm-tree
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  130,662,400 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 217 sector (108 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'dir-rm-tree' into the file system...
+Putting 'tar' into the file system...
+Executing 'dir-rm-tree':
+(dir-rm-tree) begin
+(dir-rm-tree) creating /0/0/0/0 through /3/2/2/3...
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+(dir-rm-tree) create "/0/1/0/2": FAILED
+dir-rm-tree: exit(1)
+Execution of 'dir-rm-tree' complete.
+Timer: 1109 ticks
+Thread: 30 idle ticks, 298 kernel ticks, 781 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 2826 reads, 2562 writes
+hd1:0: 217 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1204 characters output
+Keyboard: 0 keys pressed
+Exception: 5 page faults
+Powering off...

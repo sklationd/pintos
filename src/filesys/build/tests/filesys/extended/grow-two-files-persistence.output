@@ -1,0 +1,30 @@
+Writing command line to /tmp/B9XmbrfMYA.dsk...
+qemu -hda /tmp/B9XmbrfMYA.dsk -hdb tmp.dsk -hdc /tmp/7yOLT2hyIn.dsk -hdd /tmp/u4iFT4FWBI.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q run 'tar fs.tar /' get fs.tar
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  208,486,400 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 2,048 sector (1024 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Boot complete.
+Executing 'tar fs.tar /':
+/: open failed
+Kernel PANIC at ../../threads/synch.c:198 in lock_acquire(): assertion `!lock_held_by_current_thread (lock)' failed.
+Call stack: 0xc0107a19 0xc010322a 0xc0109941 0xc010e185 0xc010e1f8 0xc010b6ee 0xc010bc74 0xc0101f27 0xc010205f 0x804a8a4 0x80480c1 0x8048699 0x8048e60.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 107 ticks
+Thread: 30 idle ticks, 25 kernel ticks, 52 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 229 reads, 127 writes
+hd1:0: 0 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1187 characters output
+Keyboard: 0 keys pressed
+Exception: 3 page faults
+Powering off...
+Copying tests/filesys/extended/grow-two-files.tar out of /tmp/7yOLT2hyIn.dsk...

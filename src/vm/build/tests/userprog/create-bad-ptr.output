@@ -1,11 +1,11 @@
-Copying tests/userprog/create-bad-ptr into /tmp/7c6riNsWH9.dsk...
-Writing command line to /tmp/Go70yKSVkt.dsk...
-qemu -hda /tmp/Go70yKSVkt.dsk -hdb /tmp/hNssiuyKpC.dsk -hdc /tmp/7c6riNsWH9.dsk -hdd /tmp/jigXm_v8sg.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-bad-ptr into /tmp/MGZj7KU6FP.dsk...
+Writing command line to /tmp/VftmNOqfXx.dsk...
+qemu -hda /tmp/VftmNOqfXx.dsk -hdb /tmp/tzKrLCh7Fa.dsk -hdc /tmp/MGZj7KU6FP.dsk -hdd /tmp/oiDqOWlrcJ.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-bad-ptr run create-bad-ptr
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -17,13 +17,13 @@ Executing 'create-bad-ptr':
 (create-bad-ptr) begin
 create-bad-ptr: exit(-1)
 Execution of 'create-bad-ptr' complete.
-Timer: 138 ticks
-Thread: 30 idle ticks, 108 kernel ticks, 0 user ticks
+Timer: 167 ticks
+Thread: 30 idle ticks, 136 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 64 reads, 202 writes
+hd0:1: 159 reads, 297 writes
 hd1:0: 97 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 925 characters output
+Console: 926 characters output
 Keyboard: 0 keys pressed
 Exception: 6 page faults
 Powering off...

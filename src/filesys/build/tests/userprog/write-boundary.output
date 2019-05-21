@@ -1,0 +1,33 @@
+Copying tests/userprog/write-boundary into /tmp/cDRPbP0e6E.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/cDRPbP0e6E.dsk...
+Writing command line to /tmp/4Chw6yNXEj.dsk...
+qemu -hda /tmp/4Chw6yNXEj.dsk -hdb /tmp/keQ4T6uYKO.dsk -hdc /tmp/cDRPbP0e6E.dsk -hdd /tmp/nCAz0qO6AU.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put write-boundary put sample.txt run write-boundary
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  205,824,000 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'write-boundary' into the file system...
+Putting 'sample.txt' into the file system...
+Executing 'write-boundary':
+(write-boundary) begin
+(write-boundary) open "sample.txt"
+(write-boundary) end
+write-boundary: exit(0)
+Execution of 'write-boundary' complete.
+Timer: 184 ticks
+Thread: 30 idle ticks, 153 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 204 reads, 316 writes
+hd1:0: 103 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1043 characters output
+Keyboard: 0 keys pressed
+Exception: 7 page faults
+Powering off...

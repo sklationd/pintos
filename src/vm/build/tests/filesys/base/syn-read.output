@@ -1,12 +1,12 @@
-Copying tests/filesys/base/syn-read into /tmp/BRetmO9qCQ.dsk...
-Copying tests/filesys/base/child-syn-read into /tmp/BRetmO9qCQ.dsk...
-Writing command line to /tmp/tiYd34EuZF.dsk...
-qemu -hda /tmp/tiYd34EuZF.dsk -hdb /tmp/VTQntXGLQf.dsk -hdc /tmp/BRetmO9qCQ.dsk -hdd /tmp/EodaomBLZC.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/syn-read into /tmp/gymGuSAq_A.dsk...
+Copying tests/filesys/base/child-syn-read into /tmp/gymGuSAq_A.dsk...
+Writing command line to /tmp/9B0zswH9iE.dsk...
+qemu -hda /tmp/9B0zswH9iE.dsk -hdb /tmp/sxvl5KQgku.dsk -hdc /tmp/gymGuSAq_A.dsk -hdd /tmp/UjTfMJF6bT.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put syn-read put child-syn-read run syn-read
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  156,876,800 loops/s.
+Calibrating timer...  119,808,000 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 213 sector (106 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,24 +22,24 @@ Executing 'syn-read':
 (syn-read) write "data"
 (syn-read) close "data"
 (syn-read) exec child 1 of 10: "child-syn-read 0"
-(syn-read) exec child 2 of 10: "child-syn-read 1"
 child-syn-read: exit(0)
-(syn-read) exec child 3 of 10: "child-syn-read 2"
+(syn-read) exec child 2 of 10: "child-syn-read 1"
 child-syn-read: exit(1)
-(syn-read) exec child 4 of 10: "child-syn-read 3"
+(syn-read) exec child 3 of 10: "child-syn-read 2"
 child-syn-read: exit(2)
-(syn-read) exec child 5 of 10: "child-syn-read 4"
+(syn-read) exec child 4 of 10: "child-syn-read 3"
 child-syn-read: exit(3)
-(syn-read) exec child 6 of 10: "child-syn-read 5"
+(syn-read) exec child 5 of 10: "child-syn-read 4"
 child-syn-read: exit(4)
-(syn-read) exec child 7 of 10: "child-syn-read 6"
+(syn-read) exec child 6 of 10: "child-syn-read 5"
 child-syn-read: exit(5)
-(syn-read) exec child 8 of 10: "child-syn-read 7"
+(syn-read) exec child 7 of 10: "child-syn-read 6"
 child-syn-read: exit(6)
-(syn-read) exec child 9 of 10: "child-syn-read 8"
+(syn-read) exec child 8 of 10: "child-syn-read 7"
 child-syn-read: exit(7)
-(syn-read) exec child 10 of 10: "child-syn-read 9"
+(syn-read) exec child 9 of 10: "child-syn-read 8"
 child-syn-read: exit(8)
+(syn-read) exec child 10 of 10: "child-syn-read 9"
 child-syn-read: exit(9)
 (syn-read) wait for child 1 of 10 returned 0 (expected 0)
 (syn-read) wait for child 2 of 10 returned 1 (expected 1)
@@ -54,10 +54,10 @@ child-syn-read: exit(9)
 (syn-read) end
 syn-read: exit(0)
 Execution of 'syn-read' complete.
-Timer: 316 ticks
-Thread: 30 idle ticks, 206 kernel ticks, 80 user ticks
+Timer: 407 ticks
+Thread: 30 idle ticks, 298 kernel ticks, 79 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 10797 reads, 444 writes
+hd0:1: 11007 reads, 654 writes
 hd1:0: 213 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 2390 characters output

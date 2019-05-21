@@ -1,0 +1,23 @@
+FAIL
+Kernel panic in run: PANIC at ../../lib/kernel/list.c:84 in list_next(): assertion `is_head (elem) || is_interior (elem)' failed.
+Call stack: 0xc0107a19 0xc0107e63 0xc01092a9 0xc01092f0 0xc010e036 0xc010e0bc 0xc010e202 0xc010b830 0xc010bc20 0xc0101f27 0xc010205f 0x804a78f 0x8048176 0x8048980
+Translation of call stack:
+In kernel.o:
+0xc0107a19: debug_panic (.../../lib/kernel/debug.c:34)
+0xc0107e63: is_sorted (.../../lib/kernel/list.c:354)
+0xc01092a9: find_elem (.../../lib/kernel/hash.c:319)
+0xc01092f0: hash_find (.../../lib/kernel/hash.c:135)
+0xc010e036: find_fte (...uild/../../vm/frame.c:162)
+0xc010e0bc: swap_prevent_off (...uild/../../vm/frame.c:201)
+0xc010e202: swap_prevention_buffer (...uild/../../vm/frame.c:208)
+0xc010b830: read (...../userprog/syscall.c:156)
+0xc010bc20: syscall_handler (...../userprog/syscall.c:385)
+0xc0101f27: intr_handler (..../threads/interrupt.c:361)
+0xc010205f: intr_entry (threads/intr-stubs.S:38)
+0x0804a78f: (unknown)
+In tests/filesys/extended/syn-rw:
+0x08048176: test_main (...esys/extended/syn-rw.c:29)
+0x08048980: main (...ild/../../tests/main.c:13)
+Translations of user virtual addresses above are based on a guess at
+the binary to use.  If this guess is incorrect, then those
+translations will be misleading.

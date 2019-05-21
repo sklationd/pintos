@@ -1,0 +1,35 @@
+Copying tests/filesys/extended/grow-tell into /tmp/zc13V26i9Z.dsk...
+Copying tests/filesys/extended/tar into /tmp/zc13V26i9Z.dsk...
+Writing command line to /tmp/QC5vgXjxvL.dsk...
+qemu -hda /tmp/QC5vgXjxvL.dsk -hdb tmp.dsk -hdc /tmp/zc13V26i9Z.dsk -hdd /tmp/hpdScv9Z40.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put grow-tell put tar run grow-tell
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  104,755,200 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 211 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'grow-tell' into the file system...
+Putting 'tar' into the file system...
+Executing 'grow-tell':
+(grow-tell) begin
+(grow-tell) create "foobar"
+(grow-tell) open "foobar"
+(grow-tell) writing "foobar"
+(grow-tell) write 37 bytes at offset 0 in "foobar" failed: FAILED
+grow-tell: exit(1)
+Execution of 'grow-tell' complete.
+Timer: 366 ticks
+Thread: 30 idle ticks, 283 kernel ticks, 53 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 466 reads, 766 writes
+hd1:0: 211 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1089 characters output
+Keyboard: 0 keys pressed
+Exception: 5 page faults
+Powering off...

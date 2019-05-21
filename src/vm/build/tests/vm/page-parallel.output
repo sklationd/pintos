@@ -1,12 +1,12 @@
-Copying tests/vm/page-parallel into /tmp/Js9cUBSNSN.dsk...
-Copying tests/vm/child-linear into /tmp/Js9cUBSNSN.dsk...
-Writing command line to /tmp/bIfM7zO7iN.dsk...
-qemu -hda /tmp/bIfM7zO7iN.dsk -hdb /tmp/KGiixL5q3Q.dsk -hdc /tmp/Js9cUBSNSN.dsk -hdd /tmp/7pYArRV4yn.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-parallel into /tmp/C09ZGBq7P6.dsk...
+Copying tests/vm/child-linear into /tmp/C09ZGBq7P6.dsk...
+Writing command line to /tmp/ZSu9y5EO4i.dsk...
+qemu -hda /tmp/ZSu9y5EO4i.dsk -hdb /tmp/Ckdf4CiFlK.dsk -hdc /tmp/C09ZGBq7P6.dsk -hdd /tmp/W7TdhyroeF.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-parallel put child-linear run page-parallel
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  153,804,800 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 198 sector (99 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,23 +22,23 @@ Executing 'page-parallel':
 (page-parallel) exec "child-linear"
 child-linear: exit(66)
 (page-parallel) exec "child-linear"
+child-linear: exit(66)
+child-linear: exit(66)
 (page-parallel) wait for child 0
 (page-parallel) wait for child 1
-child-linear: exit(66)
-child-linear: exit(66)
-child-linear: exit(66)
 (page-parallel) wait for child 2
 (page-parallel) wait for child 3
+child-linear: exit(66)
 (page-parallel) end
 page-parallel: exit(0)
 Execution of 'page-parallel' complete.
-Timer: 2980 ticks
-Thread: 30 idle ticks, 198 kernel ticks, 2752 user ticks
+Timer: 3175 ticks
+Thread: 30 idle ticks, 263 kernel ticks, 2882 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 219 reads, 406 writes
+hd0:1: 413 reads, 600 writes
 hd1:0: 198 reads, 0 writes
-hd1:1: 3000 reads, 6584 writes
+hd1:1: 2704 reads, 6848 writes
 Console: 1382 characters output
 Keyboard: 0 keys pressed
-Exception: 1416 page faults
+Exception: 1379 page faults
 Powering off...

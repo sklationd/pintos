@@ -1,0 +1,36 @@
+Copying tests/filesys/extended/grow-sparse into /tmp/f_uJwVH6gD.dsk...
+Copying tests/filesys/extended/tar into /tmp/f_uJwVH6gD.dsk...
+Writing command line to /tmp/KsDTOjfETp.dsk...
+qemu -hda /tmp/KsDTOjfETp.dsk -hdb tmp.dsk -hdc /tmp/f_uJwVH6gD.dsk -hdd /tmp/VevvoJqinD.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put grow-sparse put tar run grow-sparse
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  209,510,400 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 210 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'grow-sparse' into the file system...
+Putting 'tar' into the file system...
+Executing 'grow-sparse':
+(grow-sparse) begin
+(grow-sparse) create "testfile"
+(grow-sparse) open "testfile"
+(grow-sparse) seek "testfile"
+(grow-sparse) write "testfile"
+(grow-sparse) write "testfile": FAILED
+grow-sparse: exit(1)
+Execution of 'grow-sparse' complete.
+Timer: 367 ticks
+Thread: 30 idle ticks, 285 kernel ticks, 52 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 466 reads, 763 writes
+hd1:0: 210 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1116 characters output
+Keyboard: 0 keys pressed
+Exception: 4 page faults
+Powering off...

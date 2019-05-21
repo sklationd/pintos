@@ -1,0 +1,31 @@
+Copying tests/userprog/create-normal into /tmp/0a3uDk85Vg.dsk...
+Writing command line to /tmp/ZffCtRBlVH.dsk...
+qemu -hda /tmp/ZffCtRBlVH.dsk -hdb /tmp/7Y7GdALQqB.dsk -hdc /tmp/0a3uDk85Vg.dsk -hdd /tmp/zdWoMWhZEf.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put create-normal run create-normal
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  157,081,600 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'create-normal' into the file system...
+Executing 'create-normal':
+(create-normal) begin
+(create-normal) create quux.dat
+(create-normal) end
+create-normal: exit(0)
+Execution of 'create-normal' complete.
+Timer: 228 ticks
+Thread: 30 idle ticks, 147 kernel ticks, 51 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 318 reads, 424 writes
+hd1:0: 97 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 971 characters output
+Keyboard: 0 keys pressed
+Exception: 5 page faults
+Powering off...

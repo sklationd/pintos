@@ -1,0 +1,35 @@
+Copying tests/vm/page-linear into /tmp/MQTV7qQj7J.dsk...
+Writing command line to /tmp/3gBg5_IzP1.dsk...
+qemu -hda /tmp/3gBg5_IzP1.dsk -hdb /tmp/_OVM57ZxXl.dsk -hdc /tmp/MQTV7qQj7J.dsk -hdd /tmp/VcoFnjXfEW.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put page-linear run page-linear
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  207,462,400 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 102 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'page-linear' into the file system...
+Executing 'page-linear':
+(page-linear) begin
+(page-linear) initialize
+(page-linear) read pass
+(page-linear) read/modify/write pass one
+(page-linear) read/modify/write pass two
+(page-linear) read pass
+(page-linear) end
+page-linear: exit(0)
+Execution of 'page-linear' complete.
+Timer: 4311 ticks
+Thread: 30 idle ticks, 152 kernel ticks, 4129 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 163 reads, 312 writes
+hd1:0: 102 reads, 0 writes
+hd1:1: 9184 reads, 10344 writes
+Console: 1090 characters output
+Keyboard: 0 keys pressed
+Exception: 1665 page faults
+Powering off...

@@ -1,12 +1,12 @@
-Copying tests/userprog/rox-multichild into /tmp/CyeAhqP1fR.dsk...
-Copying tests/userprog/child-rox into /tmp/CyeAhqP1fR.dsk...
-Writing command line to /tmp/XzMcbGI6Tb.dsk...
-qemu -hda /tmp/XzMcbGI6Tb.dsk -hdb /tmp/j_zZE4WMRB.dsk -hdc /tmp/CyeAhqP1fR.dsk -hdd /tmp/DyfHYcniJm.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/rox-multichild into /tmp/GtnZxOfjj4.dsk...
+Copying tests/userprog/child-rox into /tmp/GtnZxOfjj4.dsk...
+Writing command line to /tmp/oH__qGCOJb.dsk...
+qemu -hda /tmp/oH__qGCOJb.dsk -hdb /tmp/PsSVF0xSVT.dsk -hdc /tmp/GtnZxOfjj4.dsk -hdd /tmp/P1JzfFdRiH.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put rox-multichild put child-rox run rox-multichild
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  196,403,200 loops/s.
+Calibrating timer...  207,052,800 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 207 sector (103 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -54,13 +54,13 @@ child-rox: exit(12)
 (rox-multichild) end
 rox-multichild: exit(0)
 Execution of 'rox-multichild' complete.
-Timer: 245 ticks
-Thread: 30 idle ticks, 205 kernel ticks, 10 user ticks
+Timer: 316 ticks
+Thread: 30 idle ticks, 277 kernel ticks, 9 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 335 reads, 426 writes
+hd0:1: 538 reads, 629 writes
 hd1:0: 207 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1946 characters output
+Console: 1945 characters output
 Keyboard: 0 keys pressed
 Exception: 25 page faults
 Powering off...

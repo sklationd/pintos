@@ -1,6 +1,6 @@
-Copying tests/vm/mmap-zero into /tmp/XIKmJUztUP.dsk...
-Writing command line to /tmp/sDYyIyAKtO.dsk...
-qemu -hda /tmp/sDYyIyAKtO.dsk -hdb /tmp/0da_fddaJL.dsk -hdc /tmp/XIKmJUztUP.dsk -hdd /tmp/w0T_xqMksK.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-zero into /tmp/t1dxuFscp_.dsk...
+Writing command line to /tmp/mBEMybPbD8.dsk...
+qemu -hda /tmp/mBEMybPbD8.dsk -hdb /tmp/JmjlzglVmA.dsk -hdc /tmp/t1dxuFscp_.dsk -hdd /tmp/Hkmviv46Je.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-zero run mmap-zero
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
@@ -20,13 +20,13 @@ Executing 'mmap-zero':
 (mmap-zero) mmap "empty"
 mmap-zero: exit(-1)
 Execution of 'mmap-zero' complete.
-Timer: 140 ticks
-Thread: 30 idle ticks, 108 kernel ticks, 3 user ticks
+Timer: 230 ticks
+Thread: 30 idle ticks, 148 kernel ticks, 52 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 106 reads, 206 writes
+hd0:1: 324 reads, 424 writes
 hd1:0: 97 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 979 characters output
+Console: 980 characters output
 Keyboard: 0 keys pressed
 Exception: 6 page faults
 Powering off...

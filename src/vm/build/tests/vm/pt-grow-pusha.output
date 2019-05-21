@@ -1,11 +1,11 @@
-Copying tests/vm/pt-grow-pusha into /tmp/Z3X9FX6Wag.dsk...
-Writing command line to /tmp/JoNMg3S_GD.dsk...
-qemu -hda /tmp/JoNMg3S_GD.dsk -hdb /tmp/V2MjdduDqI.dsk -hdc /tmp/Z3X9FX6Wag.dsk -hdd /tmp/BUxep5xZJN.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-grow-pusha into /tmp/yhov7jlpyk.dsk...
+Writing command line to /tmp/ilSJBmnBpK.dsk...
+qemu -hda /tmp/ilSJBmnBpK.dsk -hdb /tmp/yAl4nqkFXK.dsk -hdc /tmp/yhov7jlpyk.dsk -hdd /tmp/hJpX4Lc323.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-grow-pusha run pt-grow-pusha
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  147,251,200 loops/s.
+Calibrating timer...  126,771,200 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -18,13 +18,13 @@ Executing 'pt-grow-pusha':
 (pt-grow-pusha) end
 pt-grow-pusha: exit(0)
 Execution of 'pt-grow-pusha' complete.
-Timer: 134 ticks
-Thread: 30 idle ticks, 103 kernel ticks, 1 user ticks
+Timer: 183 ticks
+Thread: 30 idle ticks, 153 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 62 reads, 202 writes
+hd0:1: 157 reads, 297 writes
 hd1:0: 97 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 937 characters output
+Console: 938 characters output
 Keyboard: 0 keys pressed
 Exception: 6 page faults
 Powering off...
