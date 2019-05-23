@@ -1,11 +1,11 @@
-Copying tests/userprog/create-empty into /tmp/BjZuAeEivt.dsk...
-Writing command line to /tmp/JrwSHlCSfl.dsk...
-qemu -hda /tmp/JrwSHlCSfl.dsk -hdb /tmp/jMH_23q7PO.dsk -hdc /tmp/BjZuAeEivt.dsk -hdd /tmp/VaLOXfzqkI.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-empty into /tmp/YQzgicsZMy.dsk...
+Writing command line to /tmp/iXArzl0MU6.dsk...
+qemu -hda /tmp/iXArzl0MU6.dsk -hdb /tmp/E0HTEeVbF3.dsk -hdc /tmp/YQzgicsZMy.dsk -hdd /tmp/ItYOdN7sGl.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-empty run create-empty
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  143,974,400 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,10 +19,10 @@ Executing 'create-empty':
 (create-empty) end
 create-empty: exit(0)
 Execution of 'create-empty' complete.
-Timer: 219 ticks
-Thread: 30 idle ticks, 141 kernel ticks, 48 user ticks
+Timer: 229 ticks
+Thread: 30 idle ticks, 147 kernel ticks, 52 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 300 reads, 424 writes
+hd0:1: 299 reads, 423 writes
 hd1:0: 97 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 960 characters output

@@ -1,12 +1,12 @@
-Copying tests/userprog/open-twice into /tmp/_3ZdRu3wMN.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/_3ZdRu3wMN.dsk...
-Writing command line to /tmp/Jyumn9SUmF.dsk...
-qemu -hda /tmp/Jyumn9SUmF.dsk -hdb /tmp/NI0WThLVg7.dsk -hdc /tmp/_3ZdRu3wMN.dsk -hdd /tmp/RfDFLXxqJu.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/open-twice into /tmp/rvGBUG5zPK.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/rvGBUG5zPK.dsk...
+Writing command line to /tmp/SISd_VBHbM.dsk...
+qemu -hda /tmp/SISd_VBHbM.dsk -hdb /tmp/b8i0pfCV0G.dsk -hdc /tmp/rvGBUG5zPK.dsk -hdd /tmp/MSWei22acX.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put open-twice put sample.txt run open-twice
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  189,849,600 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 99 sector (49 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,8 +22,8 @@ Executing 'open-twice':
 (open-twice) end
 open-twice: exit(0)
 Execution of 'open-twice' complete.
-Timer: 178 ticks
-Thread: 30 idle ticks, 148 kernel ticks, 1 user ticks
+Timer: 176 ticks
+Thread: 30 idle ticks, 144 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 210 reads, 303 writes
 hd1:0: 99 reads, 0 writes

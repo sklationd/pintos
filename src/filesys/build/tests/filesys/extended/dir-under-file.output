@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/dir-under-file into /tmp/52TgfEKuQy.dsk...
-Copying tests/filesys/extended/tar into /tmp/52TgfEKuQy.dsk...
-Writing command line to /tmp/eTZhs1KWTM.dsk...
-qemu -hda /tmp/eTZhs1KWTM.dsk -hdb tmp.dsk -hdc /tmp/52TgfEKuQy.dsk -hdd /tmp/Ug2OouljvT.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-under-file into /tmp/_aoWkpf0PR.dsk...
+Copying tests/filesys/extended/tar into /tmp/_aoWkpf0PR.dsk...
+Writing command line to /tmp/aoNpEPiKr7.dsk...
+qemu -hda /tmp/aoNpEPiKr7.dsk -hdb tmp.dsk -hdc /tmp/_aoWkpf0PR.dsk -hdd /tmp/04raJquw4j.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-under-file put tar run dir-under-file
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
+Calibrating timer...  104,755,200 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 209 sector (104 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -23,10 +23,10 @@ unknown system call!
 (dir-under-file) mkdir "abc" (must return false): FAILED
 dir-under-file: exit(1)
 Execution of 'dir-under-file' complete.
-Timer: 367 ticks
-Thread: 30 idle ticks, 285 kernel ticks, 52 user ticks
+Timer: 359 ticks
+Thread: 30 idle ticks, 277 kernel ticks, 52 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 457 reads, 760 writes
+hd0:1: 456 reads, 759 writes
 hd1:0: 209 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1133 characters output

@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/grow-file-size into /tmp/0sMnqBJiM7.dsk...
-Copying tests/filesys/extended/tar into /tmp/0sMnqBJiM7.dsk...
-Writing command line to /tmp/GFrSuNs8sI.dsk...
-qemu -hda /tmp/GFrSuNs8sI.dsk -hdb tmp.dsk -hdc /tmp/0sMnqBJiM7.dsk -hdd /tmp/Qn0U0vxF2N.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-file-size into /tmp/uDxQenGFdI.dsk...
+Copying tests/filesys/extended/tar into /tmp/uDxQenGFdI.dsk...
+Writing command line to /tmp/rv0XUDIwah.dsk...
+qemu -hda /tmp/rv0XUDIwah.dsk -hdb tmp.dsk -hdc /tmp/uDxQenGFdI.dsk -hdd /tmp/vdLOhGLLfx.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-file-size put tar run grow-file-size
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
+Calibrating timer...  209,715,200 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 211 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -20,16 +20,20 @@ Executing 'grow-file-size':
 (grow-file-size) create "testfile"
 (grow-file-size) open "testfile"
 (grow-file-size) writing "testfile"
-(grow-file-size) write 37 bytes at offset 0 in "testfile" failed: FAILED
-grow-file-size: exit(1)
+(grow-file-size) close "testfile"
+(grow-file-size) open "testfile" for verification
+(grow-file-size) verified contents of "testfile"
+(grow-file-size) close "testfile"
+(grow-file-size) end
+grow-file-size: exit(0)
 Execution of 'grow-file-size' complete.
-Timer: 367 ticks
-Thread: 30 idle ticks, 285 kernel ticks, 52 user ticks
+Timer: 411 ticks
+Thread: 30 idle ticks, 300 kernel ticks, 81 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 466 reads, 766 writes
+hd0:1: 543 reads, 832 writes
 hd1:0: 211 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1152 characters output
+Console: 1267 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

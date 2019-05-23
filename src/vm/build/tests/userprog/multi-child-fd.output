@@ -1,13 +1,13 @@
-Copying tests/userprog/multi-child-fd into /tmp/ZnqWVTCfEK.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/ZnqWVTCfEK.dsk...
-Copying tests/userprog/child-close into /tmp/ZnqWVTCfEK.dsk...
-Writing command line to /tmp/zQwJ2jGAJc.dsk...
-qemu -hda /tmp/zQwJ2jGAJc.dsk -hdb /tmp/tdrUg3VCRj.dsk -hdc /tmp/ZnqWVTCfEK.dsk -hdd /tmp/ulDSQWrjxj.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/multi-child-fd into /tmp/FoWj_xzKri.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/FoWj_xzKri.dsk...
+Copying tests/userprog/child-close into /tmp/FoWj_xzKri.dsk...
+Writing command line to /tmp/RdYybYTBWF.dsk...
+qemu -hda /tmp/RdYybYTBWF.dsk -hdb /tmp/gG627enMj5.dsk -hdc /tmp/FoWj_xzKri.dsk -hdd /tmp/wKbi8G1kSz.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put multi-child-fd put sample.txt put child-close run multi-child-fd
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  104,755,200 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 207 sector (103 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -27,8 +27,8 @@ child-close: exit(-1)
 (multi-child-fd) end
 multi-child-fd: exit(0)
 Execution of 'multi-child-fd' complete.
-Timer: 289 ticks
-Thread: 30 idle ticks, 258 kernel ticks, 2 user ticks
+Timer: 313 ticks
+Thread: 30 idle ticks, 279 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 381 reads, 627 writes
 hd1:0: 207 reads, 0 writes

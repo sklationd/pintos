@@ -205,6 +205,8 @@ void swap_prevent_off(void *addr){
 
 void swap_prevention_buffer(const void *buf, size_t size, bool onoff){
 	void *page;
+	lock_acquire(&frame_table_lock);
 	for(page = pg_round_down(buf); page < buf + size; page += PGSIZE)
 		onoff ? swap_prevent_on(page) : swap_prevent_off(page);
+	lock_release(&frame_table_lock);
 }

@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/dir-mk-tree into /tmp/nezNdWcsoX.dsk...
-Copying tests/filesys/extended/tar into /tmp/nezNdWcsoX.dsk...
-Writing command line to /tmp/ZDVmURmha6.dsk...
-qemu -hda /tmp/ZDVmURmha6.dsk -hdb tmp.dsk -hdc /tmp/nezNdWcsoX.dsk -hdd /tmp/SwEwvHNpN9.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-mk-tree into /tmp/Gijkoq0noZ.dsk...
+Copying tests/filesys/extended/tar into /tmp/Gijkoq0noZ.dsk...
+Writing command line to /tmp/9LE3_gGBsf.dsk...
+qemu -hda /tmp/9LE3_gGBsf.dsk -hdb tmp.dsk -hdc /tmp/Gijkoq0noZ.dsk -hdd /tmp/a_mfi33Wsa.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-mk-tree put tar run dir-mk-tree
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,715,200 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 214 sector (107 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -25,16 +25,21 @@ unknown system call!
 unknown system call! 
 unknown system call! 
 unknown system call! 
-(dir-mk-tree) create "/0/1/0/2": FAILED
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+unknown system call! 
+(dir-mk-tree) create "/0/2/1/2": FAILED
 dir-mk-tree: exit(1)
 Execution of 'dir-mk-tree' complete.
-Timer: 1114 ticks
-Thread: 30 idle ticks, 301 kernel ticks, 783 user ticks
+Timer: 1926 ticks
+Thread: 30 idle ticks, 288 kernel ticks, 1608 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 2821 reads, 2553 writes
+hd0:1: 5908 reads, 4524 writes
 hd1:0: 214 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1204 characters output
+Console: 1315 characters output
 Keyboard: 0 keys pressed
 Exception: 4 page faults
 Powering off...

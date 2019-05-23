@@ -621,13 +621,11 @@ install_page (void *upage, void *kpage, bool writable)
 
 bool lazy_load_page(struct sup_page_table_entry *spte){
   allocate_frame(spte->user_vaddr);
-  lock_acquire(&filesys_lock);
   file_seek(spte->file, spte->ofs);
   if (file_read (spte->file, spte->kpage, spte->page_read_bytes) != (int) spte->page_read_bytes)
   {
     exit(-1);
   }
   memset (spte->kpage + spte->page_read_bytes, 0, spte->page_zero_bytes);
-  lock_release(&filesys_lock);
   swap_prevent_off(spte->user_vaddr);
 }

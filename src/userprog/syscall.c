@@ -159,24 +159,23 @@ int write(int fd, const void *buffer, unsigned size){
         exit(-1);
     if(buffer == NULL)
         exit(-1);
-    lock_acquire(&filesys_lock);
     if(fd == 1){ // console write
+        lock_acquire(&filesys_lock);    
         putbuf(buffer, size);
         lock_release(&filesys_lock);
         return size;
     }
     else if (fd == 0){ //std input
-        lock_release(&filesys_lock);
         return -1;
     }
     else if(thread_current()->fd[fd-3] == NULL){
-        lock_release(&filesys_lock);
         exit(-1);
     }
 
     else{
         if(!thread_current()->fd[fd-3]->deny_write){
             swap_prevention_buffer(buffer, size, true);
+            lock_acquire(&filesys_lock);
             int len = file_write(thread_current()->fd[fd-3],buffer,size);
             lock_release(&filesys_lock);
             swap_prevention_buffer(buffer, size, false);
@@ -401,7 +400,7 @@ syscall_handler (struct intr_frame *f)
     case SYS_TELL  		:
    		if(is_kernel_vaddr(f->esp + 4))
     		exit(-1);
-    	tell((int)first_arg(f));
+    	f->eax = tell((int)first_arg(f));
     	break;	               
     case SYS_CLOSE 		:
     	if(is_kernel_vaddr(f->esp + 4))

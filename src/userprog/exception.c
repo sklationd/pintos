@@ -184,11 +184,15 @@ page_fault (struct intr_frame *f)
   }
   
   else if(spte->state == SPTE_EVICTED){
+    lock_acquire(&frame_table_lock);
     swap_in(fault_page, spte);
+    lock_release(&frame_table_lock);
   }
 
   else if(spte->state == SPTE_LOAD){
+    lock_acquire(&filesys_lock);
     lazy_load_page(spte);
+    lock_release(&filesys_lock);
   }
 }
 

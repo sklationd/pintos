@@ -1,6 +1,6 @@
-Copying tests/vm/mmap-write into /tmp/WPL66C6MYl.dsk...
-Writing command line to /tmp/4VBUb4WWjM.dsk...
-qemu -hda /tmp/4VBUb4WWjM.dsk -hdb /tmp/DVUertSqb_.dsk -hdc /tmp/WPL66C6MYl.dsk -hdd /tmp/wPVU6stAin.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-write into /tmp/u_CVHNSXy8.dsk...
+Writing command line to /tmp/Jo6rhtgRU4.dsk...
+qemu -hda /tmp/Jo6rhtgRU4.dsk -hdb /tmp/oirmXRWpoS.dsk -hdc /tmp/u_CVHNSXy8.dsk -hdd /tmp/rZuvGSeDIa.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-write run mmap-write
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
@@ -23,7 +23,7 @@ Executing 'mmap-write':
 mmap-write: exit(0)
 Execution of 'mmap-write' complete.
 Timer: 184 ticks
-Thread: 30 idle ticks, 148 kernel ticks, 6 user ticks
+Thread: 30 idle ticks, 148 kernel ticks, 7 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 219 reads, 315 writes
 hd1:0: 100 reads, 0 writes

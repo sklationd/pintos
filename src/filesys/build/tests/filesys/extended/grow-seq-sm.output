@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/grow-seq-sm into /tmp/ynXvvhq5E9.dsk...
-Copying tests/filesys/extended/tar into /tmp/ynXvvhq5E9.dsk...
-Writing command line to /tmp/VbTxREj0Nv.dsk...
-qemu -hda /tmp/VbTxREj0Nv.dsk -hdb tmp.dsk -hdc /tmp/ynXvvhq5E9.dsk -hdd /tmp/hbHNl2wFjt.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-seq-sm into /tmp/vUsZC8SBGr.dsk...
+Copying tests/filesys/extended/tar into /tmp/vUsZC8SBGr.dsk...
+Writing command line to /tmp/aqLZh_dtlG.dsk...
+qemu -hda /tmp/aqLZh_dtlG.dsk -hdb tmp.dsk -hdc /tmp/vUsZC8SBGr.dsk -hdd /tmp/kZFBc6uMbj.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-seq-sm put tar run grow-seq-sm
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  156,876,800 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 210 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -20,16 +20,20 @@ Executing 'grow-seq-sm':
 (grow-seq-sm) create "testme"
 (grow-seq-sm) open "testme"
 (grow-seq-sm) writing "testme"
-(grow-seq-sm) write 1234 bytes at offset 0 in "testme" failed: FAILED
-grow-seq-sm: exit(1)
+(grow-seq-sm) close "testme"
+(grow-seq-sm) open "testme" for verification
+(grow-seq-sm) verified contents of "testme"
+(grow-seq-sm) close "testme"
+(grow-seq-sm) end
+grow-seq-sm: exit(0)
 Execution of 'grow-seq-sm' complete.
-Timer: 369 ticks
-Thread: 30 idle ticks, 286 kernel ticks, 53 user ticks
+Timer: 381 ticks
+Thread: 30 idle ticks, 286 kernel ticks, 65 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 465 reads, 763 writes
+hd0:1: 503 reads, 790 writes
 hd1:0: 210 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1113 characters output
+Console: 1208 characters output
 Keyboard: 0 keys pressed
 Exception: 6 page faults
 Powering off...

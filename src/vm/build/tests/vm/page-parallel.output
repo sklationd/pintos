@@ -1,12 +1,12 @@
-Copying tests/vm/page-parallel into /tmp/C09ZGBq7P6.dsk...
-Copying tests/vm/child-linear into /tmp/C09ZGBq7P6.dsk...
-Writing command line to /tmp/ZSu9y5EO4i.dsk...
-qemu -hda /tmp/ZSu9y5EO4i.dsk -hdb /tmp/Ckdf4CiFlK.dsk -hdc /tmp/C09ZGBq7P6.dsk -hdd /tmp/W7TdhyroeF.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-parallel into /tmp/lyV4k7vP82.dsk...
+Copying tests/vm/child-linear into /tmp/lyV4k7vP82.dsk...
+Writing command line to /tmp/422pfTyl3e.dsk...
+qemu -hda /tmp/422pfTyl3e.dsk -hdb /tmp/AoFTBJTCxE.dsk -hdc /tmp/lyV4k7vP82.dsk -hdd /tmp/1gdgcQmJSS.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-parallel put child-linear run page-parallel
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
+Calibrating timer...  64,921,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 198 sector (99 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -20,25 +20,25 @@ Executing 'page-parallel':
 (page-parallel) exec "child-linear"
 (page-parallel) exec "child-linear"
 (page-parallel) exec "child-linear"
-child-linear: exit(66)
 (page-parallel) exec "child-linear"
 child-linear: exit(66)
 child-linear: exit(66)
 (page-parallel) wait for child 0
+child-linear: exit(66)
 (page-parallel) wait for child 1
 (page-parallel) wait for child 2
-(page-parallel) wait for child 3
 child-linear: exit(66)
+(page-parallel) wait for child 3
 (page-parallel) end
 page-parallel: exit(0)
 Execution of 'page-parallel' complete.
-Timer: 3175 ticks
-Thread: 30 idle ticks, 263 kernel ticks, 2882 user ticks
+Timer: 4552 ticks
+Thread: 30 idle ticks, 288 kernel ticks, 4235 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 413 reads, 600 writes
 hd1:0: 198 reads, 0 writes
-hd1:1: 2704 reads, 6848 writes
-Console: 1382 characters output
+hd1:1: 4144 reads, 9528 writes
+Console: 1381 characters output
 Keyboard: 0 keys pressed
-Exception: 1379 page faults
+Exception: 1559 page faults
 Powering off...

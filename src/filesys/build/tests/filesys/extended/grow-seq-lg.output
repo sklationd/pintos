@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/grow-seq-lg into /tmp/3EYTsTqbsi.dsk...
-Copying tests/filesys/extended/tar into /tmp/3EYTsTqbsi.dsk...
-Writing command line to /tmp/pUScBjeEZK.dsk...
-qemu -hda /tmp/pUScBjeEZK.dsk -hdb tmp.dsk -hdc /tmp/3EYTsTqbsi.dsk -hdd /tmp/QQ6QrtxNvc.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-seq-lg into /tmp/KksMPypBm9.dsk...
+Copying tests/filesys/extended/tar into /tmp/KksMPypBm9.dsk...
+Writing command line to /tmp/iV7cm_OXvF.dsk...
+qemu -hda /tmp/iV7cm_OXvF.dsk -hdb tmp.dsk -hdc /tmp/KksMPypBm9.dsk -hdd /tmp/q2hn0H0ShH.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-seq-lg put tar run grow-seq-lg
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  196,403,200 loops/s.
+Calibrating timer...  199,680,000 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 210 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -20,16 +20,20 @@ Executing 'grow-seq-lg':
 (grow-seq-lg) create "testme"
 (grow-seq-lg) open "testme"
 (grow-seq-lg) writing "testme"
-(grow-seq-lg) write 1234 bytes at offset 0 in "testme" failed: FAILED
-grow-seq-lg: exit(1)
+(grow-seq-lg) close "testme"
+(grow-seq-lg) open "testme" for verification
+(grow-seq-lg) verified contents of "testme"
+(grow-seq-lg) close "testme"
+(grow-seq-lg) end
+grow-seq-lg: exit(0)
 Execution of 'grow-seq-lg' complete.
-Timer: 367 ticks
-Thread: 30 idle ticks, 285 kernel ticks, 52 user ticks
+Timer: 557 ticks
+Thread: 30 idle ticks, 288 kernel ticks, 239 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 465 reads, 763 writes
+hd0:1: 1021 reads, 1206 writes
 hd1:0: 210 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1113 characters output
+Console: 1211 characters output
 Keyboard: 0 keys pressed
 Exception: 22 page faults
 Powering off...

@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/grow-sparse into /tmp/f_uJwVH6gD.dsk...
-Copying tests/filesys/extended/tar into /tmp/f_uJwVH6gD.dsk...
-Writing command line to /tmp/KsDTOjfETp.dsk...
-qemu -hda /tmp/KsDTOjfETp.dsk -hdb tmp.dsk -hdc /tmp/f_uJwVH6gD.dsk -hdd /tmp/VevvoJqinD.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-sparse into /tmp/FzsS1CuBQ7.dsk...
+Copying tests/filesys/extended/tar into /tmp/FzsS1CuBQ7.dsk...
+Writing command line to /tmp/aqVDaBiZt8.dsk...
+qemu -hda /tmp/aqVDaBiZt8.dsk -hdb tmp.dsk -hdc /tmp/FzsS1CuBQ7.dsk -hdd /tmp/tOHf9dHGWD.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-sparse put tar run grow-sparse
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  209,510,400 loops/s.
+Calibrating timer...  78,540,800 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 210 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -21,16 +21,20 @@ Executing 'grow-sparse':
 (grow-sparse) open "testfile"
 (grow-sparse) seek "testfile"
 (grow-sparse) write "testfile"
-(grow-sparse) write "testfile": FAILED
-grow-sparse: exit(1)
+(grow-sparse) close "testfile"
+(grow-sparse) open "testfile" for verification
+(grow-sparse) verified contents of "testfile"
+(grow-sparse) close "testfile"
+(grow-sparse) end
+grow-sparse: exit(0)
 Execution of 'grow-sparse' complete.
-Timer: 367 ticks
-Thread: 30 idle ticks, 285 kernel ticks, 52 user ticks
+Timer: 430 ticks
+Thread: 30 idle ticks, 285 kernel ticks, 115 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 466 reads, 763 writes
+hd0:1: 802 reads, 915 writes
 hd1:0: 210 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1116 characters output
+Console: 1250 characters output
 Keyboard: 0 keys pressed
-Exception: 4 page faults
+Exception: 23 page faults
 Powering off...

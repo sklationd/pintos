@@ -1,11 +1,11 @@
-Copying tests/userprog/args-single into /tmp/LmL_rx5iGB.dsk...
-Writing command line to /tmp/PR6GcVZto_.dsk...
-qemu -hda /tmp/PR6GcVZto_.dsk -hdb /tmp/oYd4ZUOYTD.dsk -hdc /tmp/LmL_rx5iGB.dsk -hdd /tmp/RiywCD4r6q.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/args-single into /tmp/0_aq8JHwpq.dsk...
+Writing command line to /tmp/n09if4Qyjz.dsk...
+qemu -hda /tmp/n09if4Qyjz.dsk -hdb /tmp/s_c8ktNVHi.dsk -hdc /tmp/0_aq8JHwpq.dsk -hdd /tmp/Cdulg3qcvt.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put args-single run 'args-single onearg'
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  186,572,800 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 96 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -23,7 +23,7 @@ Executing 'args-single onearg':
 args-single: exit(0)
 Execution of 'args-single onearg' complete.
 Timer: 175 ticks
-Thread: 30 idle ticks, 143 kernel ticks, 2 user ticks
+Thread: 30 idle ticks, 145 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 156 reads, 294 writes
 hd1:0: 96 reads, 0 writes

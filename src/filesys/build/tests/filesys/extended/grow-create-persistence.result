@@ -1,17 +1,3 @@
 FAIL
-Kernel panic in file system extraction run: PANIC at ../../threads/synch.c:198 in lock_acquire(): assertion `!lock_held_by_current_thread (lock)' failed.
-Call stack: 0xc0107a19 0xc010322a 0xc0109941 0xc010e185 0xc010e1f8 0xc010b6ee 0xc010bc74 0xc0101f27 0xc010205f 0x804a8a4 0x80480c1 0x8048699 0x8048e60
-Translation of call stack:
-0xc0107a19: debug_panic (.../../lib/kernel/debug.c:34)
-0xc010322a: lock_acquire (...../../threads/synch.c:200)
-0xc0109941: lazy_load_page (...../userprog/process.c:625)
-0xc010e185: swap_prevent_on (...uild/../../vm/frame.c:182)
-0xc010e1f8: swap_prevention_buffer (...uild/../../vm/frame.c:209)
-0xc010b6ee: write (...../userprog/syscall.c:180)
-0xc010bc74: syscall_handler (...../userprog/syscall.c:393)
-0xc0101f27: intr_handler (..../threads/interrupt.c:361)
-0xc010205f: intr_entry (threads/intr-stubs.S:38)
-0x0804a8a4: (unknown)
-0x080480c1: (unknown)
-0x08048699: (unknown)
-0x08048e60: (unknown)
+Error extracting file system:
+/: open failed
