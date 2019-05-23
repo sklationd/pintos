@@ -1,6 +1,6 @@
-Copying tests/userprog/create-empty into /tmp/V0PitjNNLD.dsk...
-Writing command line to /tmp/w5lqu7nlRC.dsk...
-qemu -hda /tmp/w5lqu7nlRC.dsk -hdb /tmp/ZCPJAaCjnS.dsk -hdc /tmp/V0PitjNNLD.dsk -hdd /tmp/QBItnBJeFX.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-empty into /tmp/iCd9ugXB8W.dsk...
+Writing command line to /tmp/g2f_RY7UsK.dsk...
+qemu -hda /tmp/g2f_RY7UsK.dsk -hdb /tmp/dgbZXiwrmM.dsk -hdc /tmp/iCd9ugXB8W.dsk -hdd /tmp/X3sy3gmYy4.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-empty run create-empty
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
@@ -19,8 +19,8 @@ Executing 'create-empty':
 (create-empty) end
 create-empty: exit(0)
 Execution of 'create-empty' complete.
-Timer: 224 ticks
-Thread: 30 idle ticks, 146 kernel ticks, 48 user ticks
+Timer: 222 ticks
+Thread: 30 idle ticks, 143 kernel ticks, 49 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 299 reads, 423 writes
 hd1:0: 97 reads, 0 writes

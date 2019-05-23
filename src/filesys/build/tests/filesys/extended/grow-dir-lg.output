@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/grow-dir-lg into /tmp/eN5N9clRsT.dsk...
-Copying tests/filesys/extended/tar into /tmp/eN5N9clRsT.dsk...
-Writing command line to /tmp/9uAHqItPOR.dsk...
-qemu -hda /tmp/9uAHqItPOR.dsk -hdb tmp.dsk -hdc /tmp/eN5N9clRsT.dsk -hdd /tmp/hFS5dcV8vX.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-dir-lg into /tmp/2AoWPjn7df.dsk...
+Copying tests/filesys/extended/tar into /tmp/2AoWPjn7df.dsk...
+Writing command line to /tmp/RGuhJhzQkb.dsk...
+qemu -hda /tmp/RGuhJhzQkb.dsk -hdb tmp.dsk -hdc /tmp/2AoWPjn7df.dsk -hdd /tmp/YEgTpWF96e.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-dir-lg put tar run grow-dir-lg
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  209,305,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 211 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -72,8 +72,8 @@ unknown system call!
 (grow-dir-lg) end
 grow-dir-lg: exit(0)
 Execution of 'grow-dir-lg' complete.
-Timer: 500 ticks
-Thread: 30 idle ticks, 286 kernel ticks, 184 user ticks
+Timer: 498 ticks
+Thread: 30 idle ticks, 284 kernel ticks, 184 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 10441 reads, 943 writes
 hd1:0: 211 reads, 0 writes

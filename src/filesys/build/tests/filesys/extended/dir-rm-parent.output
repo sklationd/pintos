@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/dir-rm-parent into /tmp/CjQrcHspT4.dsk...
-Copying tests/filesys/extended/tar into /tmp/CjQrcHspT4.dsk...
-Writing command line to /tmp/CtJVWVCeuG.dsk...
-qemu -hda /tmp/CtJVWVCeuG.dsk -hdb tmp.dsk -hdc /tmp/CjQrcHspT4.dsk -hdd /tmp/JD7Mnt3nuo.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-rm-parent into /tmp/gyrh4lnP1b.dsk...
+Copying tests/filesys/extended/tar into /tmp/gyrh4lnP1b.dsk...
+Writing command line to /tmp/w6YdkznN3t.dsk...
+qemu -hda /tmp/w6YdkznN3t.dsk -hdb tmp.dsk -hdc /tmp/gyrh4lnP1b.dsk -hdd /tmp/LyaVAeXzWo.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-rm-parent put tar run dir-rm-parent
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  52,377,600 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 209 sector (104 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -29,13 +29,13 @@ unknown system call!
 (dir-rm-parent) end
 dir-rm-parent: exit(0)
 Execution of 'dir-rm-parent' complete.
-Timer: 315 ticks
-Thread: 30 idle ticks, 283 kernel ticks, 2 user ticks
+Timer: 309 ticks
+Thread: 30 idle ticks, 277 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 312 reads, 633 writes
 hd1:0: 209 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1218 characters output
+Console: 1219 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

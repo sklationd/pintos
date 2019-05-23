@@ -39,6 +39,12 @@ void close(int fd);
 mapid_t mmap(int fd, void *addr);
 void munmap(mapid_t mapping);
 
+bool chdir(const char *dir);
+bool mkdir(const char *dir);
+bool readdir(int fd, char *name);
+bool isdir(int fd);
+int inumber(int fd);
+
 void exit(int status){
 	printf("%s: exit(%d)\n",thread_name(),status);
     thread_current()->exit_status = status;
@@ -154,6 +160,7 @@ int read(int fd, void *buffer, unsigned size){
         return len;
     }   
 }
+
 int write(int fd, const void *buffer, unsigned size){
     if(fd > 130)
         exit(-1);
@@ -315,6 +322,11 @@ void munmap(mapid_t mapping){
 }
 
 
+
+bool mkdir(const char *dir){
+
+}
+
 void
 syscall_init (void) 
 {
@@ -418,6 +430,16 @@ syscall_handler (struct intr_frame *f)
         if(is_kernel_vaddr(f->esp + 4))
             exit(-1);
         munmap((mapid_t)first_arg(f));
+        break;
+    case SYS_CHDIR      :
+        break;
+    case SYS_MKDIR      :
+        break;
+    case SYS_READDIR    :
+        break;
+    case SYS_ISDIR      :
+        break;
+    case SYS_INUMBER    :
         break;
     default				:
     	printf("unknown system call! \n");   

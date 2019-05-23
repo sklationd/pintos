@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/dir-vine into /tmp/ouDFLxWy2I.dsk...
-Copying tests/filesys/extended/tar into /tmp/ouDFLxWy2I.dsk...
-Writing command line to /tmp/NbyXiggDSq.dsk...
-qemu -hda /tmp/NbyXiggDSq.dsk -hdb tmp.dsk -hdc /tmp/ouDFLxWy2I.dsk -hdd /tmp/sjvW7rCYWP.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-vine into /tmp/IIMdqvYSnJ.dsk...
+Copying tests/filesys/extended/tar into /tmp/IIMdqvYSnJ.dsk...
+Writing command line to /tmp/8hjXW8qeif.dsk...
+qemu -hda /tmp/8hjXW8qeif.dsk -hdb tmp.dsk -hdc /tmp/IIMdqvYSnJ.dsk -hdd /tmp/CQzzJm_e6F.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-vine put tar run dir-vine
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  183,296,000 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 213 sector (106 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -24,8 +24,8 @@ unknown system call!
 (dir-vine) open ".": FAILED
 dir-vine: exit(1)
 Execution of 'dir-vine' complete.
-Timer: 374 ticks
-Thread: 30 idle ticks, 289 kernel ticks, 55 user ticks
+Timer: 370 ticks
+Thread: 30 idle ticks, 287 kernel ticks, 53 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 488 reads, 773 writes
 hd1:0: 213 reads, 0 writes

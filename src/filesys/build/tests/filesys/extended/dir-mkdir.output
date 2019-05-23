@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/dir-mkdir into /tmp/1OlqzTWyrs.dsk...
-Copying tests/filesys/extended/tar into /tmp/1OlqzTWyrs.dsk...
-Writing command line to /tmp/Ubi8DOYTGV.dsk...
-qemu -hda /tmp/Ubi8DOYTGV.dsk -hdb tmp.dsk -hdc /tmp/1OlqzTWyrs.dsk -hdd /tmp/i7oY8sqmIH.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-mkdir into /tmp/BZqNF3Dlo3.dsk...
+Copying tests/filesys/extended/tar into /tmp/BZqNF3Dlo3.dsk...
+Writing command line to /tmp/qa8sZN57eS.dsk...
+qemu -hda /tmp/qa8sZN57eS.dsk -hdb tmp.dsk -hdc /tmp/BZqNF3Dlo3.dsk -hdd /tmp/JQMlHO74A6.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-mkdir put tar run dir-mkdir
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  207,052,800 loops/s.
+Calibrating timer...  183,296,000 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 209 sector (104 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -26,8 +26,8 @@ unknown system call!
 (dir-mkdir) open "b": FAILED
 dir-mkdir: exit(1)
 Execution of 'dir-mkdir' complete.
-Timer: 321 ticks
-Thread: 30 idle ticks, 286 kernel ticks, 5 user ticks
+Timer: 312 ticks
+Thread: 30 idle ticks, 279 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 350 reads, 638 writes
 hd1:0: 209 reads, 0 writes

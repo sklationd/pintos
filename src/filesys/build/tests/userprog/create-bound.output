@@ -1,11 +1,11 @@
-Copying tests/userprog/create-bound into /tmp/u8zHNpdFWC.dsk...
-Writing command line to /tmp/8FSUQ09VoN.dsk...
-qemu -hda /tmp/8FSUQ09VoN.dsk -hdb /tmp/vHoaW7Mioy.dsk -hdc /tmp/u8zHNpdFWC.dsk -hdd /tmp/aFla76nDAo.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-bound into /tmp/4rE8v3Lk_k.dsk...
+Writing command line to /tmp/jho_d_q_Na.dsk...
+qemu -hda /tmp/jho_d_q_Na.dsk -hdb /tmp/ChJH46_U9E.dsk -hdc /tmp/4rE8v3Lk_k.dsk -hdd /tmp/GiGJc100hy.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-bound run create-bound
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  170,188,800 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 99 sector (49 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,8 +19,8 @@ Executing 'create-bound':
 (create-bound) end
 create-bound: exit(0)
 Execution of 'create-bound' complete.
-Timer: 224 ticks
-Thread: 30 idle ticks, 145 kernel ticks, 49 user ticks
+Timer: 228 ticks
+Thread: 30 idle ticks, 148 kernel ticks, 51 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 320 reads, 429 writes
 hd1:0: 99 reads, 0 writes

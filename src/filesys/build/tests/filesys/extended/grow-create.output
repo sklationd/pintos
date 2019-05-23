@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/grow-create into /tmp/WdSBiNEJuJ.dsk...
-Copying tests/filesys/extended/tar into /tmp/WdSBiNEJuJ.dsk...
-Writing command line to /tmp/tjE3e2uQvh.dsk...
-qemu -hda /tmp/tjE3e2uQvh.dsk -hdb tmp.dsk -hdc /tmp/WdSBiNEJuJ.dsk -hdd /tmp/kmdyqTPjFz.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-create into /tmp/CJZdnkjcXF.dsk...
+Copying tests/filesys/extended/tar into /tmp/CJZdnkjcXF.dsk...
+Writing command line to /tmp/GXa23A4BKT.dsk...
+qemu -hda /tmp/GXa23A4BKT.dsk -hdb tmp.dsk -hdc /tmp/CJZdnkjcXF.dsk -hdd /tmp/w5bIK9TY_G.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-create put tar run grow-create
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  202,547,200 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 209 sector (104 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -24,8 +24,8 @@ Executing 'grow-create':
 (grow-create) end
 grow-create: exit(0)
 Execution of 'grow-create' complete.
-Timer: 366 ticks
-Thread: 30 idle ticks, 284 kernel ticks, 52 user ticks
+Timer: 365 ticks
+Thread: 30 idle ticks, 283 kernel ticks, 52 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 463 reads, 759 writes
 hd1:0: 209 reads, 0 writes

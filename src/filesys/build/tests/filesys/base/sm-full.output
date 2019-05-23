@@ -1,11 +1,11 @@
-Copying tests/filesys/base/sm-full into /tmp/iQ4xpAaqcA.dsk...
-Writing command line to /tmp/UKGLpKB8Km.dsk...
-qemu -hda /tmp/UKGLpKB8Km.dsk -hdb /tmp/EPO6yRXuHb.dsk -hdc /tmp/iQ4xpAaqcA.dsk -hdd /tmp/mSzJlkOGVq.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/sm-full into /tmp/Qq6Ji49ePA.dsk...
+Writing command line to /tmp/QbUE95whHN.dsk...
+qemu -hda /tmp/QbUE95whHN.dsk -hdb /tmp/EMBfqBvsuL.dsk -hdc /tmp/Qq6Ji49ePA.dsk -hdd /tmp/7jy6okPhe1.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put sm-full run sm-full
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  207,462,400 loops/s.
+Calibrating timer...  206,233,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 101 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -25,8 +25,8 @@ Executing 'sm-full':
 (sm-full) end
 sm-full: exit(0)
 Execution of 'sm-full' complete.
-Timer: 200 ticks
-Thread: 30 idle ticks, 152 kernel ticks, 18 user ticks
+Timer: 191 ticks
+Thread: 30 idle ticks, 147 kernel ticks, 14 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 233 reads, 348 writes
 hd1:0: 101 reads, 0 writes

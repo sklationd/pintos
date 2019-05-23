@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/grow-two-files into /tmp/Y3hIbLeWhK.dsk...
-Copying tests/filesys/extended/tar into /tmp/Y3hIbLeWhK.dsk...
-Writing command line to /tmp/9reu6vqbpr.dsk...
-qemu -hda /tmp/9reu6vqbpr.dsk -hdb tmp.dsk -hdc /tmp/Y3hIbLeWhK.dsk -hdd /tmp/QYHHMoUWEV.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-two-files into /tmp/KEcmryb0cm.dsk...
+Copying tests/filesys/extended/tar into /tmp/KEcmryb0cm.dsk...
+Writing command line to /tmp/RR2ICqfqB_.dsk...
+qemu -hda /tmp/RR2ICqfqB_.dsk -hdb tmp.dsk -hdc /tmp/KEcmryb0cm.dsk -hdd /tmp/ukqs86u7lt.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-two-files put tar run grow-two-files
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 212 sector (106 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -33,8 +33,8 @@ Executing 'grow-two-files':
 (grow-two-files) end
 grow-two-files: exit(0)
 Execution of 'grow-two-files' complete.
-Timer: 464 ticks
-Thread: 30 idle ticks, 287 kernel ticks, 147 user ticks
+Timer: 453 ticks
+Thread: 30 idle ticks, 277 kernel ticks, 146 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 774 reads, 991 writes
 hd1:0: 212 reads, 0 writes

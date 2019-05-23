@@ -1,5 +1,5 @@
-Writing command line to /tmp/xBFqKxu_LY.dsk...
-qemu -hda /tmp/xBFqKxu_LY.dsk -hdb tmp.dsk -hdc /tmp/owqty92x2Y.dsk -hdd /tmp/u1S3YvuIGQ.dsk -m 4 -net none -nographic -monitor null
+Writing command line to /tmp/WhpanrVsbg.dsk...
+qemu -hda /tmp/WhpanrVsbg.dsk -hdb tmp.dsk -hdc /tmp/RczN1vlRlt.dsk -hdd /tmp/0gkl0yrAIx.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q run 'tar fs.tar /' get fs.tar
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
@@ -16,12 +16,12 @@ tar: exit(1)
 Execution of 'tar fs.tar /' complete.
 Getting 'fs.tar' from the file system...
 Kernel PANIC at ../../filesys/fsutil.c:167 in fsutil_get(): fs.tar: open failed
-Call stack: 0xc0107a19 0xc010db66 0xc01006e3.
+Call stack: 0xc0107a19 0xc010db86 0xc01006e3.
 The `backtrace' program can make call stacks useful.
 Read "Backtraces" in the "Debugging Tools" chapter
 of the Pintos documentation for more information.
-Timer: 58 ticks
-Thread: 30 idle ticks, 27 kernel ticks, 1 user ticks
+Timer: 54 ticks
+Thread: 30 idle ticks, 22 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 73 reads, 2 writes
 hd1:0: 0 reads, 0 writes
@@ -30,4 +30,4 @@ Console: 1138 characters output
 Keyboard: 0 keys pressed
 Exception: 3 page faults
 Powering off...
-Copying tests/filesys/extended/dir-mk-tree.tar out of /tmp/owqty92x2Y.dsk...
+Copying tests/filesys/extended/dir-mk-tree.tar out of /tmp/RczN1vlRlt.dsk...

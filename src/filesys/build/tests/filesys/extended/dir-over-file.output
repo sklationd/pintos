@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/dir-over-file into /tmp/RGHEcLhAT5.dsk...
-Copying tests/filesys/extended/tar into /tmp/RGHEcLhAT5.dsk...
-Writing command line to /tmp/DYkd980jLp.dsk...
-qemu -hda /tmp/DYkd980jLp.dsk -hdb tmp.dsk -hdc /tmp/RGHEcLhAT5.dsk -hdd /tmp/4NI2CcgRON.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-over-file into /tmp/G6pUljdS6e.dsk...
+Copying tests/filesys/extended/tar into /tmp/G6pUljdS6e.dsk...
+Writing command line to /tmp/wXFK18O6xm.dsk...
+qemu -hda /tmp/wXFK18O6xm.dsk -hdb tmp.dsk -hdc /tmp/G6pUljdS6e.dsk -hdd /tmp/9bYwBgj369.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-over-file put tar run dir-over-file
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  130,867,200 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 209 sector (104 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -23,8 +23,8 @@ unknown system call!
 (dir-over-file) create "abc" (must return false): FAILED
 dir-over-file: exit(1)
 Execution of 'dir-over-file' complete.
-Timer: 364 ticks
-Thread: 30 idle ticks, 282 kernel ticks, 52 user ticks
+Timer: 352 ticks
+Thread: 30 idle ticks, 273 kernel ticks, 49 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 456 reads, 759 writes
 hd1:0: 209 reads, 0 writes
