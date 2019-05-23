@@ -18,12 +18,6 @@
 static void syscall_handler (struct intr_frame *);
 struct lock filesys_lock;
 
-struct file {
-    struct inode *inode;        /* File's inode. */
-    off_t pos;                  /* Current position. */
-    bool deny_write;            /* Has file_deny_write() been called? */
-};
-
 void exit (int status);
 int exec(const char *cmd_line);
 int wait(int pid);
@@ -321,10 +315,66 @@ void munmap(mapid_t mapping){
     return;
 }
 
+char *separate_filename(char *name){
+    char *ptr = name;
+    while(*ptr)
+        ptr++;
+    ptr--;
+    while(*ptr != '/'){
+        ptr--;
+        if(ptr < name)
+            return NULL;
+    }
+    *ptr = 0;
+    return ptr + 1;
+}
 
+struct dir *path_to_dir(struct dir *dir_itr_, char *path){
+    char *token, *save_ptr;
+    struct dir_entry e;
+    struct dir *dir_itr = dir_itr_;
 
-bool mkdir(const char *dir){
+    for (token = strtok_r (path, "/", &save_ptr); token != NULL;
+        token = strtok_r (NULL, "/", &save_ptr)){
+        if(!lookup(dir_itr, token, &e, NULL)){
+            if(dir_itr != dir_itr_)
+                dir_close(dir_itr);
+            return NULL;
+        }
+        if(dir_itr != dir_itr_)
+            dir_close(dir_itr);
+        dir_itr = dir_open(inode_open(e.inode_sector));
+    }
+    return dir_itr;
+}
 
+bool mkdir(const char *path_){
+    char path[strlen(path_) + 1];
+    struct dir *dir_itr;
+    char *filename;
+
+    strlcpy(path, path_, strlen(path_)+1);
+
+    if(path[0] == '/'){
+        dir_itr = dir_open_root();
+    }
+    else{
+        dir_itr = thread_current()->curr_dir;
+    }
+
+    if((filename = separate_filename(path+1)) == NULL){
+        filename = path+1;
+    }
+    else{
+        dir_itr = path_to_dir(dir_itr, path+1);
+    }
+    uint32_t inode_sector;
+    if(!free_map_allocate(1, &inode_sector))
+        return false;
+    if(!dir_create(inode_sector, dir_itr->inode->sector, 16))
+        return false;
+    dir_add(dir_itr, filename, inode_sector);
+    return true;
 }
 
 void

@@ -3,4 +3,5 @@ threads/synch.o: ../../threads/synch.c ../../threads/synch.h \
  ../../lib/stdint.h ../../lib/stdio.h ../../lib/debug.h \
  ../../lib/stdarg.h ../../lib/kernel/stdio.h ../../lib/string.h \
  ../../threads/interrupt.h ../../threads/thread.h ../../filesys/file.h \
- ../../filesys/off_t.h ../../lib/kernel/hash.h ../../lib/kernel/list.h
+ ../../filesys/off_t.h ../../filesys/directory.h ../../devices/disk.h \
+ ../../lib/inttypes.h ../../lib/kernel/hash.h ../../lib/kernel/list.h

@@ -561,9 +561,6 @@ init_thread (struct thread *t, const char *name, int priority)
   sema_init(&t->wait_load, 0);
   list_push_back(&running_thread()->child_list,&t->child_elem);
   list_push_back(&thread_list, &t->thread_elem);
-  
-  t->curr_dir = dir_open_root();
-
   t->magic = THREAD_MAGIC;
   t->parent = running_thread();
 }

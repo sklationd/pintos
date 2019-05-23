@@ -4,6 +4,6 @@ threads/interrupt.o: ../../threads/interrupt.c ../../threads/interrupt.h \
  ../../lib/stddef.h ../../lib/kernel/stdio.h ../../threads/flags.h \
  ../../threads/intr-stubs.h ../../threads/io.h ../../threads/thread.h \
  ../../lib/kernel/list.h ../../threads/synch.h ../../filesys/file.h \
- ../../filesys/off_t.h ../../lib/kernel/hash.h ../../lib/kernel/list.h \
- ../../threads/vaddr.h ../../threads/loader.h ../../devices/timer.h \
- ../../lib/round.h
+ ../../filesys/off_t.h ../../filesys/directory.h ../../devices/disk.h \
+ ../../lib/kernel/hash.h ../../lib/kernel/list.h ../../threads/vaddr.h \
+ ../../threads/loader.h ../../devices/timer.h ../../lib/round.h

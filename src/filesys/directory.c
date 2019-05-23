@@ -19,15 +19,30 @@ struct dir_entry
     disk_sector_t inode_sector;         /* Sector number of header. */
     char name[NAME_MAX + 1];            /* Null terminated file name. */
     bool in_use;                        /* In use or free? */
-    struct dir *parent;
   };
 
 /* Creates a directory with space for ENTRY_CNT entries in the
    given SECTOR.  Returns true if successful, false on failure. */
 bool
-dir_create (disk_sector_t sector, size_t entry_cnt) 
+dir_create (disk_sector_t sector, disk_sector_t parent, size_t entry_cnt)
 {
-  return inode_create (sector, entry_cnt * sizeof (struct dir_entry), 1);
+
+  if(!inode_create (sector, entry_cnt * sizeof (struct dir_entry), 1))
+    return false;
+  struct dir_entry write_entry[2];
+  strlcpy(write_entry[0].name, ".", 2);
+  strlcpy(write_entry[1].name, "..", 3);
+  write_entry[0].in_use = true;
+  write_entry[1].in_use = true;
+
+  if(sector == ROOT_DIR_SECTOR){
+    write_entry[0].inode_sector = sector;
+    write_entry[1].inode_sector = sector;
+  }    
+  else{
+    write_entry[0].inode_sector = sector;
+    write_entry[1].inode_sector = parent;
+  }
 }
 
 /* Opens and returns the directory for the given INODE, of which
@@ -89,7 +104,7 @@ dir_get_inode (struct dir *dir)
    if EP is non-null, and sets *OFSP to the byte offset of the
    directory entry if OFSP is non-null.
    otherwise, returns false and ignores EP and OFSP. */
-static bool
+bool
 lookup (const struct dir *dir, const char *name,
         struct dir_entry *ep, off_t *ofsp) 
 {
@@ -173,7 +188,6 @@ dir_add (struct dir *dir, const char *name, disk_sector_t inode_sector)
   e.in_use = true;
   strlcpy (e.name, name, sizeof e.name);
   e.inode_sector = inode_sector;
-  e.parent = dir;
   success = inode_write_at (dir->inode, &e, sizeof e, ofs) == sizeof e;
 
  done:

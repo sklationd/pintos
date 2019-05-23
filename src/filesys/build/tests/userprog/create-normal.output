@@ -1,31 +1,15 @@
-Copying tests/userprog/create-normal into /tmp/lJbS7_g_OI.dsk...
-Writing command line to /tmp/Xx0VdyBfaS.dsk...
-qemu -hda /tmp/Xx0VdyBfaS.dsk -hdb /tmp/1AgCrf1SoT.dsk -hdc /tmp/lJbS7_g_OI.dsk -hdd /tmp/f4D5yxKbBa.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/create-normal into /tmp/n_y_fJTx4k.dsk...
+Writing command line to /tmp/uqdlU2AqE6.dsk...
+qemu -hda /tmp/uqdlU2AqE6.dsk -hdb /tmp/c1G08GARmD.dsk -hdc /tmp/n_y_fJTx4k.dsk -hdd /tmp/02QKI9MAoF.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put create-normal run create-normal
-Pintos booting with 4,096 kB RAM...
-373 pages available in kernel pool.
-373 pages available in user pool.
-Calibrating timer...  143,974,400 loops/s.
-hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 97 sector (48 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'create-normal' into the file system...
-Executing 'create-normal':
-(create-normal) begin
-(create-normal) create quux.dat
-(create-normal) end
-create-normal: exit(0)
-Execution of 'create-normal' complete.
-Timer: 218 ticks
-Thread: 30 idle ticks, 141 kernel ticks, 47 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 317 reads, 423 writes
-hd1:0: 97 reads, 0 writes
-hd1:1: 0 reads, 0 writes
-Console: 971 characters output
+Kernel PANIC at ../../lib/kernel/list.c:84 in list_next(): assertion `is_head (elem) || is_interior (elem)' failed.
+Call stack: 0xc0107a29 0xc0107e73 0xc010d69f 0xc010cfdd 0xc01012b5 0xc01018bb 0xc0100365.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 0 ticks
+Thread: 0 idle ticks, 0 kernel ticks, 0 user ticks
+Console: 489 characters output
 Keyboard: 0 keys pressed
-Exception: 5 page faults
+Exception: 0 page faults
 Powering off...

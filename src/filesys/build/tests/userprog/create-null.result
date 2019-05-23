@@ -1,1 +1,11 @@
-PASS
+FAIL
+Kernel panic in run: PANIC at ../../lib/kernel/list.c:84 in list_next(): assertion `is_head (elem) || is_interior (elem)' failed.
+Call stack: 0xc0107a29 0xc0107e73 0xc010d69f 0xc010cfdd 0xc01012b5 0xc01018bb 0xc0100365
+Translation of call stack:
+0xc0107a29: debug_panic (.../../lib/kernel/debug.c:34)
+0xc0107e73: is_sorted (.../../lib/kernel/list.c:354)
+0xc010d69f: inode_open (...../../filesys/inode.c:265)
+0xc010cfdd: dir_open_root (...../filesys/directory.c:71)
+0xc01012b5: init_thread (..../../threads/thread.c:565)
+0xc01018bb: thread_init (..../../threads/thread.c:126)
+0xc0100365: main (...d/../../threads/init.c:83)

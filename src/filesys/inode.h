@@ -5,6 +5,12 @@
 #include "filesys/off_t.h"
 #include "devices/disk.h"
 
+#define NUM_OF_DIRECT_BLOCK 123
+#define NUM_OF_INDIRECT_BLOCK 128
+#define sq(x) ((x)*(x))
+#define min(x,y) ((x)<(y) ? (x) : (y))
+#define max(x,y) ((x)>(y) ? (x) : (y))
+
 struct bitmap;
 
 void inode_init (void);

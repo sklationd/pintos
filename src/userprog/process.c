@@ -179,6 +179,7 @@ start_process (void *lan_)
   argc = parse_instruction(file_name, argv);
 
   page_init();
+  thread_current()->curr_dir = dir_open_root();
 
   success = load (argv[0], &if_.eip, &if_.esp);
   sema_up(&thread_current()->parent->wait_load);

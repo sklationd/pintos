@@ -4,8 +4,9 @@ userprog/exception.o: ../../userprog/exception.c \
  ../../lib/stdbool.h ../../lib/stddef.h ../../lib/kernel/stdio.h \
  ../../userprog/gdt.h ../../threads/loader.h ../../threads/interrupt.h \
  ../../threads/thread.h ../../lib/kernel/list.h ../../threads/synch.h \
- ../../filesys/file.h ../../filesys/off_t.h ../../lib/kernel/hash.h \
- ../../lib/kernel/list.h ../../threads/pte.h ../../threads/vaddr.h \
- ../../userprog/process.h ../../vm/page.h ../../threads/palloc.h \
- ../../devices/timer.h ../../lib/round.h ../../vm/frame.h \
- ../../userprog/syscall.h ../../vm/swap.h
+ ../../filesys/file.h ../../filesys/off_t.h ../../filesys/directory.h \
+ ../../devices/disk.h ../../lib/kernel/hash.h ../../lib/kernel/list.h \
+ ../../threads/pte.h ../../threads/vaddr.h ../../userprog/process.h \
+ ../../vm/page.h ../../threads/palloc.h ../../devices/timer.h \
+ ../../lib/round.h ../../vm/frame.h ../../userprog/syscall.h \
+ ../../filesys/inode.h ../../vm/swap.h
