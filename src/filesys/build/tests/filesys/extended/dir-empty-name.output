@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/dir-empty-name into /tmp/IkyBm9icn4.dsk...
-Copying tests/filesys/extended/tar into /tmp/IkyBm9icn4.dsk...
-Writing command line to /tmp/chtqS1o6Pu.dsk...
-qemu -hda /tmp/chtqS1o6Pu.dsk -hdb tmp.dsk -hdc /tmp/IkyBm9icn4.dsk -hdd /tmp/PBoKRMMs8D.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-empty-name into /tmp/cs9W8RjesJ.dsk...
+Copying tests/filesys/extended/tar into /tmp/cs9W8RjesJ.dsk...
+Writing command line to /tmp/IdLQigO5uF.dsk...
+qemu -hda /tmp/IdLQigO5uF.dsk -hdb tmp.dsk -hdc /tmp/cs9W8RjesJ.dsk -hdd /tmp/QkNsOHtiBR.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-empty-name put tar run dir-empty-name
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  194,764,800 loops/s.
+Calibrating timer...  173,465,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 209 sector (104 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -18,17 +18,16 @@ Putting 'tar' into the file system...
 Executing 'dir-empty-name':
 (dir-empty-name) begin
 (dir-empty-name) mkdir "" (must return false)
-unknown system call! 
 (dir-empty-name) mkdir "" (must return false): FAILED
 dir-empty-name: exit(1)
 Execution of 'dir-empty-name' complete.
-Timer: 317 ticks
-Thread: 30 idle ticks, 286 kernel ticks, 1 user ticks
+Timer: 313 ticks
+Thread: 30 idle ticks, 281 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 295 reads, 633 writes
 hd1:0: 209 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1096 characters output
+Console: 1074 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

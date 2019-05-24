@@ -1,12 +1,12 @@
-Copying tests/userprog/read-boundary into /tmp/Q61OIPa3G7.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/Q61OIPa3G7.dsk...
-Writing command line to /tmp/sBh0f6l8fr.dsk...
-qemu -hda /tmp/sBh0f6l8fr.dsk -hdb /tmp/eYdWqKx3dR.dsk -hdc /tmp/Q61OIPa3G7.dsk -hdd /tmp/u8ekYtrgGY.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/read-boundary into /tmp/v2t0ZdOJW3.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/v2t0ZdOJW3.dsk...
+Writing command line to /tmp/EjMm3ohW_8.dsk...
+qemu -hda /tmp/EjMm3ohW_8.dsk -hdb /tmp/Wm0cpu9Er5.dsk -hdc /tmp/v2t0ZdOJW3.dsk -hdd /tmp/tH3xcfidTg.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put read-boundary put sample.txt run read-boundary
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  183,296,000 loops/s.
+Calibrating timer...  157,081,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -21,10 +21,10 @@ Executing 'read-boundary':
 (read-boundary) end
 read-boundary: exit(0)
 Execution of 'read-boundary' complete.
-Timer: 179 ticks
-Thread: 30 idle ticks, 148 kernel ticks, 1 user ticks
+Timer: 181 ticks
+Thread: 30 idle ticks, 150 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 205 reads, 315 writes
+hd0:1: 203 reads, 315 writes
 hd1:0: 103 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1034 characters output

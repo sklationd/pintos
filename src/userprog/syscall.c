@@ -352,7 +352,8 @@ bool mkdir(const char *path_){
     char path[strlen(path_) + 1];
     struct dir *dir_itr;
     char *filename;
-
+    if(path_[0] == 0)
+        return false;
     strlcpy(path, path_, strlen(path_)+1);
 
     if(path[0] == '/'){
@@ -368,6 +369,8 @@ bool mkdir(const char *path_){
     else{
         dir_itr = path_to_dir(dir_itr, path+1);
     }
+    if(dir_itr == NULL)
+        return false;
     uint32_t inode_sector;
     if(!free_map_allocate(1, &inode_sector))
         return false;
@@ -376,6 +379,7 @@ bool mkdir(const char *path_){
     dir_add(dir_itr, filename, inode_sector);
     return true;
 }
+
 
 void
 syscall_init (void) 
@@ -484,6 +488,10 @@ syscall_handler (struct intr_frame *f)
     case SYS_CHDIR      :
         break;
     case SYS_MKDIR      :
+        if(is_kernel_vaddr(f->esp + 4)||
+           is_kernel_vaddr((void *)first_arg(f)))
+            exit(-1);
+        mkdir((char *)first_arg(f));
         break;
     case SYS_READDIR    :
         break;

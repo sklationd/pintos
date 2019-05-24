@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/grow-root-sm into /tmp/SaxOH1Yy87.dsk...
-Copying tests/filesys/extended/tar into /tmp/SaxOH1Yy87.dsk...
-Writing command line to /tmp/6MacTs4HkY.dsk...
-qemu -hda /tmp/6MacTs4HkY.dsk -hdb tmp.dsk -hdc /tmp/SaxOH1Yy87.dsk -hdd /tmp/WdM7_JkBSp.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-root-sm into /tmp/haCJzXovxq.dsk...
+Copying tests/filesys/extended/tar into /tmp/haCJzXovxq.dsk...
+Writing command line to /tmp/VXgewyN2_W.dsk...
+qemu -hda /tmp/VXgewyN2_W.dsk -hdb tmp.dsk -hdc /tmp/haCJzXovxq.dsk -hdd /tmp/nslp240lf1.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-root-sm put tar run grow-root-sm
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  150,528,000 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 210 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -40,10 +40,10 @@ Executing 'grow-root-sm':
 (grow-root-sm) end
 grow-root-sm: exit(0)
 Execution of 'grow-root-sm' complete.
-Timer: 378 ticks
-Thread: 30 idle ticks, 283 kernel ticks, 65 user ticks
+Timer: 372 ticks
+Thread: 30 idle ticks, 278 kernel ticks, 64 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 2311 reads, 756 writes
+hd0:1: 2310 reads, 756 writes
 hd1:0: 210 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1891 characters output

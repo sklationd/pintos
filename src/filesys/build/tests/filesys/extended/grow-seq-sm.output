@@ -1,7 +1,7 @@
-Copying tests/filesys/extended/grow-seq-sm into /tmp/jFA6MvH8Yv.dsk...
-Copying tests/filesys/extended/tar into /tmp/jFA6MvH8Yv.dsk...
-Writing command line to /tmp/eyMIqVNH0N.dsk...
-qemu -hda /tmp/eyMIqVNH0N.dsk -hdb tmp.dsk -hdc /tmp/jFA6MvH8Yv.dsk -hdd /tmp/GE7ARNYLCb.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-seq-sm into /tmp/6EDdEShPdU.dsk...
+Copying tests/filesys/extended/tar into /tmp/6EDdEShPdU.dsk...
+Writing command line to /tmp/dAtvU_7Yyz.dsk...
+qemu -hda /tmp/dAtvU_7Yyz.dsk -hdb tmp.dsk -hdc /tmp/6EDdEShPdU.dsk -hdd /tmp/qIxc8mbGMd.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-seq-sm put tar run grow-seq-sm
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
@@ -27,10 +27,10 @@ Executing 'grow-seq-sm':
 (grow-seq-sm) end
 grow-seq-sm: exit(0)
 Execution of 'grow-seq-sm' complete.
-Timer: 379 ticks
-Thread: 30 idle ticks, 285 kernel ticks, 64 user ticks
+Timer: 380 ticks
+Thread: 30 idle ticks, 285 kernel ticks, 65 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 503 reads, 790 writes
+hd0:1: 502 reads, 790 writes
 hd1:0: 210 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1208 characters output

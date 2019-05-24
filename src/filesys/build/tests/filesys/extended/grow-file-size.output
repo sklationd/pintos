@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/grow-file-size into /tmp/sQbhDauqIq.dsk...
-Copying tests/filesys/extended/tar into /tmp/sQbhDauqIq.dsk...
-Writing command line to /tmp/tjYM1ld35b.dsk...
-qemu -hda /tmp/tjYM1ld35b.dsk -hdb tmp.dsk -hdc /tmp/sQbhDauqIq.dsk -hdd /tmp/JUTFC5aXQA.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-file-size into /tmp/UhKaPdU5kX.dsk...
+Copying tests/filesys/extended/tar into /tmp/UhKaPdU5kX.dsk...
+Writing command line to /tmp/z7A1I8iyJh.dsk...
+qemu -hda /tmp/z7A1I8iyJh.dsk -hdb tmp.dsk -hdc /tmp/UhKaPdU5kX.dsk -hdd /tmp/etUKyFS_I2.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-file-size put tar run grow-file-size
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  183,296,000 loops/s.
+Calibrating timer...  209,715,200 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 211 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -27,10 +27,10 @@ Executing 'grow-file-size':
 (grow-file-size) end
 grow-file-size: exit(0)
 Execution of 'grow-file-size' complete.
-Timer: 396 ticks
-Thread: 30 idle ticks, 287 kernel ticks, 79 user ticks
+Timer: 395 ticks
+Thread: 30 idle ticks, 285 kernel ticks, 80 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 543 reads, 832 writes
+hd0:1: 542 reads, 832 writes
 hd1:0: 211 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1267 characters output

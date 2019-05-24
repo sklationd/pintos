@@ -1,10 +1,10 @@
-Writing command line to /tmp/VjPjvnDcwY.dsk...
-qemu -hda /tmp/VjPjvnDcwY.dsk -hdb tmp.dsk -hdc /tmp/Y8KlmN5xX3.dsk -hdd /tmp/zmcCJ9h9PP.dsk -m 4 -net none -nographic -monitor null
+Writing command line to /tmp/3sraStXsHE.dsk...
+qemu -hda /tmp/3sraStXsHE.dsk -hdb tmp.dsk -hdc /tmp/infFBE6epx.dsk -hdd /tmp/uFDchNF_hA.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q run 'tar fs.tar /' get fs.tar
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  143,974,400 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 2,048 sector (1024 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -16,18 +16,18 @@ tar: exit(1)
 Execution of 'tar fs.tar /' complete.
 Getting 'fs.tar' from the file system...
 Kernel PANIC at ../../filesys/fsutil.c:167 in fsutil_get(): fs.tar: open failed
-Call stack: 0xc0107a19 0xc010db86 0xc01006e3.
+Call stack: 0xc0107a19 0xc010de06 0xc01006e3.
 The `backtrace' program can make call stacks useful.
 Read "Backtraces" in the "Debugging Tools" chapter
 of the Pintos documentation for more information.
-Timer: 57 ticks
-Thread: 30 idle ticks, 25 kernel ticks, 2 user ticks
+Timer: 55 ticks
+Thread: 30 idle ticks, 23 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 73 reads, 2 writes
+hd0:1: 72 reads, 2 writes
 hd1:0: 0 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1138 characters output
 Keyboard: 0 keys pressed
 Exception: 3 page faults
 Powering off...
-Copying tests/filesys/extended/dir-rm-tree.tar out of /tmp/Y8KlmN5xX3.dsk...
+Copying tests/filesys/extended/dir-rm-tree.tar out of /tmp/infFBE6epx.dsk...

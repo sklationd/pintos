@@ -1,7 +1,7 @@
-Copying tests/userprog/write-bad-ptr into /tmp/bGSZRjQV4e.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/bGSZRjQV4e.dsk...
-Writing command line to /tmp/CMWirODuaU.dsk...
-qemu -hda /tmp/CMWirODuaU.dsk -hdb /tmp/Y8CIzqhbdw.dsk -hdc /tmp/bGSZRjQV4e.dsk -hdd /tmp/_HAtPlSXvL.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/write-bad-ptr into /tmp/rhY_59shLZ.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/rhY_59shLZ.dsk...
+Writing command line to /tmp/WmzA8pO2AU.dsk...
+qemu -hda /tmp/WmzA8pO2AU.dsk -hdb /tmp/zgNyOHcnZJ.dsk -hdc /tmp/rhY_59shLZ.dsk -hdd /tmp/mAqq6yaYCs.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put write-bad-ptr put sample.txt run write-bad-ptr
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
@@ -20,10 +20,10 @@ Executing 'write-bad-ptr':
 (write-bad-ptr) open "sample.txt"
 write-bad-ptr: exit(-1)
 Execution of 'write-bad-ptr' complete.
-Timer: 178 ticks
-Thread: 30 idle ticks, 147 kernel ticks, 1 user ticks
+Timer: 177 ticks
+Thread: 30 idle ticks, 148 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 192 reads, 303 writes
+hd0:1: 190 reads, 303 writes
 hd1:0: 99 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1013 characters output

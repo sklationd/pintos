@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/dir-open into /tmp/jaURpBiuuO.dsk...
-Copying tests/filesys/extended/tar into /tmp/jaURpBiuuO.dsk...
-Writing command line to /tmp/PFCaksgddh.dsk...
-qemu -hda /tmp/PFCaksgddh.dsk -hdb tmp.dsk -hdc /tmp/jaURpBiuuO.dsk -hdd /tmp/NbaHIUIxYy.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-open into /tmp/SkzAmjsmD0.dsk...
+Copying tests/filesys/extended/tar into /tmp/SkzAmjsmD0.dsk...
+Writing command line to /tmp/JCFaOh0rxv.dsk...
+qemu -hda /tmp/JCFaOh0rxv.dsk -hdb tmp.dsk -hdc /tmp/SkzAmjsmD0.dsk -hdd /tmp/QsVkdf_f4D.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-open put tar run dir-open
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  157,081,600 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 210 sector (105 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -18,18 +18,17 @@ Putting 'tar' into the file system...
 Executing 'dir-open':
 (dir-open) begin
 (dir-open) mkdir "xyzzy"
-unknown system call! 
 (dir-open) open "xyzzy"
 (dir-open) open "xyzzy": FAILED
 dir-open: exit(1)
 Execution of 'dir-open' complete.
-Timer: 312 ticks
-Thread: 30 idle ticks, 281 kernel ticks, 1 user ticks
+Timer: 317 ticks
+Thread: 30 idle ticks, 284 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 313 reads, 636 writes
+hd0:1: 334 reads, 641 writes
 hd1:0: 210 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1035 characters output
+Console: 1013 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

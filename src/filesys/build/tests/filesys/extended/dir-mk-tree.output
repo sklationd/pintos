@@ -1,12 +1,12 @@
-Copying tests/filesys/extended/dir-mk-tree into /tmp/ZqGm3UlvG9.dsk...
-Copying tests/filesys/extended/tar into /tmp/ZqGm3UlvG9.dsk...
-Writing command line to /tmp/HNDbGJxxFa.dsk...
-qemu -hda /tmp/HNDbGJxxFa.dsk -hdb tmp.dsk -hdc /tmp/ZqGm3UlvG9.dsk -hdd /tmp/QK6eqzL8WP.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-mk-tree into /tmp/RGARS2JEtG.dsk...
+Copying tests/filesys/extended/tar into /tmp/RGARS2JEtG.dsk...
+Writing command line to /tmp/P9r5jgKswQ.dsk...
+qemu -hda /tmp/P9r5jgKswQ.dsk -hdb tmp.dsk -hdc /tmp/RGARS2JEtG.dsk -hdd /tmp/JitKmMeBcW.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-mk-tree put tar run dir-mk-tree
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  104,755,200 loops/s.
+Calibrating timer...  150,528,000 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 214 sector (107 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -18,28 +18,16 @@ Putting 'tar' into the file system...
 Executing 'dir-mk-tree':
 (dir-mk-tree) begin
 (dir-mk-tree) creating /0/0/0/0 through /3/2/2/3...
-unknown system call! 
-unknown system call! 
-unknown system call! 
-unknown system call! 
-unknown system call! 
-unknown system call! 
-unknown system call! 
-unknown system call! 
-unknown system call! 
-unknown system call! 
-unknown system call! 
-unknown system call! 
 (dir-mk-tree) create "/0/2/1/2": FAILED
 dir-mk-tree: exit(1)
 Execution of 'dir-mk-tree' complete.
-Timer: 1891 ticks
-Thread: 30 idle ticks, 277 kernel ticks, 1584 user ticks
+Timer: 2001 ticks
+Thread: 30 idle ticks, 288 kernel ticks, 1683 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 5908 reads, 4524 writes
+hd0:1: 6252 reads, 4560 writes
 hd1:0: 214 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1315 characters output
+Console: 1051 characters output
 Keyboard: 0 keys pressed
 Exception: 4 page faults
 Powering off...

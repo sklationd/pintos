@@ -1,11 +1,11 @@
-Copying tests/filesys/base/lg-full into /tmp/UjvA6e2GZ4.dsk...
-Writing command line to /tmp/v20lWamz6r.dsk...
-qemu -hda /tmp/v20lWamz6r.dsk -hdb /tmp/TCeHeW5JQO.dsk -hdc /tmp/UjvA6e2GZ4.dsk -hdd /tmp/KixtCqUtJq.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/lg-full into /tmp/IA4ixIjPQk.dsk...
+Writing command line to /tmp/oV5cLYF71c.dsk...
+qemu -hda /tmp/oV5cLYF71c.dsk -hdb /tmp/1w4mH2VxpQ.dsk -hdc /tmp/IA4ixIjPQk.dsk -hdd /tmp/GSUoInPhCz.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put lg-full run lg-full
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  130,867,200 loops/s.
+Calibrating timer...  209,305,600 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 101 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -25,10 +25,10 @@ Executing 'lg-full':
 (lg-full) end
 lg-full: exit(0)
 Execution of 'lg-full' complete.
-Timer: 360 ticks
-Thread: 30 idle ticks, 149 kernel ticks, 182 user ticks
+Timer: 365 ticks
+Thread: 30 idle ticks, 152 kernel ticks, 183 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 583 reads, 758 writes
+hd0:1: 582 reads, 758 writes
 hd1:0: 101 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1088 characters output

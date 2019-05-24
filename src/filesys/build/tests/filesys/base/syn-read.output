@@ -1,7 +1,7 @@
-Copying tests/filesys/base/syn-read into /tmp/H0f3xvyQSp.dsk...
-Copying tests/filesys/base/child-syn-read into /tmp/H0f3xvyQSp.dsk...
-Writing command line to /tmp/JPfeGVTcYV.dsk...
-qemu -hda /tmp/JPfeGVTcYV.dsk -hdb /tmp/iLXP9ntYEu.dsk -hdc /tmp/H0f3xvyQSp.dsk -hdd /tmp/QydVL9_S5x.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/syn-read into /tmp/xydaoWxXR5.dsk...
+Copying tests/filesys/base/child-syn-read into /tmp/xydaoWxXR5.dsk...
+Writing command line to /tmp/W81FxVk72z.dsk...
+qemu -hda /tmp/W81FxVk72z.dsk -hdb /tmp/GMsXUqBM4A.dsk -hdc /tmp/xydaoWxXR5.dsk -hdd /tmp/rQrndT8LJy.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put syn-read put child-syn-read run syn-read
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
@@ -54,10 +54,10 @@ child-syn-read: exit(9)
 (syn-read) end
 syn-read: exit(0)
 Execution of 'syn-read' complete.
-Timer: 392 ticks
-Thread: 30 idle ticks, 280 kernel ticks, 82 user ticks
+Timer: 396 ticks
+Thread: 30 idle ticks, 278 kernel ticks, 88 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 11007 reads, 654 writes
+hd0:1: 11006 reads, 654 writes
 hd1:0: 213 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 2390 characters output

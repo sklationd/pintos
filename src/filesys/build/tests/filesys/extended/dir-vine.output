@@ -1,7 +1,7 @@
-Copying tests/filesys/extended/dir-vine into /tmp/IIMdqvYSnJ.dsk...
-Copying tests/filesys/extended/tar into /tmp/IIMdqvYSnJ.dsk...
-Writing command line to /tmp/8hjXW8qeif.dsk...
-qemu -hda /tmp/8hjXW8qeif.dsk -hdb tmp.dsk -hdc /tmp/IIMdqvYSnJ.dsk -hdd /tmp/CQzzJm_e6F.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-vine into /tmp/fWfFTzDUdI.dsk...
+Copying tests/filesys/extended/tar into /tmp/fWfFTzDUdI.dsk...
+Writing command line to /tmp/5TAvmKwmrQ.dsk...
+qemu -hda /tmp/5TAvmKwmrQ.dsk -hdb tmp.dsk -hdc /tmp/fWfFTzDUdI.dsk -hdd /tmp/R08XzOBZut.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-vine put tar run dir-vine
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
@@ -18,19 +18,16 @@ Putting 'tar' into the file system...
 Executing 'dir-vine':
 (dir-vine) begin
 (dir-vine) creating many levels of files and directories...
-unknown system call! 
-unknown system call! 
-unknown system call! 
 (dir-vine) open ".": FAILED
 dir-vine: exit(1)
 Execution of 'dir-vine' complete.
-Timer: 370 ticks
-Thread: 30 idle ticks, 287 kernel ticks, 53 user ticks
+Timer: 378 ticks
+Thread: 30 idle ticks, 290 kernel ticks, 58 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 488 reads, 773 writes
+hd0:1: 536 reads, 783 writes
 hd1:0: 213 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1087 characters output
+Console: 1021 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...
