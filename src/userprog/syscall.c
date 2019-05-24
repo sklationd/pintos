@@ -320,25 +320,13 @@ bool mkdir(const char *path_){
     char path[strlen(path_) + 1];
     char *abs_path = path;
     struct dir *dir_itr;
-    char *filename;
+    char filename[NAME_MAX + 1];
     if(path_[0] == 0)
         return false;
     strlcpy(path, path_, strlen(path_)+1);
 
-    if(path[0] == '/'){
-        dir_itr = dir_open_root();
-        abs_path++;
-    }
-    else{
-        dir_itr = thread_current()->curr_dir;
-    }
+    dir_itr = get_path_and_name(path, filename);
 
-    if((filename = separate_filename(abs_path)) == NULL){
-        filename = abs_path;
-    }
-    else{
-        dir_itr = path_to_dir(dir_itr, abs_path);
-    }
     if(dir_itr == NULL)
         return false;
     uint32_t inode_sector;
@@ -359,20 +347,8 @@ bool chdir(const char *path_){
         return false;
     strlcpy(path, path_, strlen(path_)+1);
 
-    if(path[0] == '/'){
-        dir_itr = dir_open_root();
-        abs_path++;
-    }
-    else{
-        dir_itr = thread_current()->curr_dir;
-    }
+    dir_itr = get_path_and_name(path, NULL);
 
-    if((filename = separate_filename(abs_path)) == NULL){
-        filename = abs_path;
-    }
-    else{
-        dir_itr = path_to_dir(dir_itr, abs_path);
-    }
     if(dir_itr == NULL)
         return false;
     thread_current()->curr_dir = dir_itr;

@@ -5,6 +5,7 @@
 #include "filesys/filesys.h"
 #include "filesys/inode.h"
 #include "threads/malloc.h"
+#include "threads/thread.h"
 
 /* A directory. */
 struct dir 
@@ -282,4 +283,32 @@ struct dir *path_to_dir(struct dir *dir_itr_, char *path){
         dir_itr = dir_open(inode_open(e.inode_sector));
     }
     return dir_itr;
+}
+
+struct dir *get_path_and_name(char *path, char *name){
+  char *abs_path = path;  
+  char *filename;
+  struct dir* dir_itr;
+  if(path[0] == '/'){
+      dir_itr = dir_open_root();
+      abs_path++;
+  }
+  else{
+      dir_itr = thread_current()->curr_dir;
+  }
+
+  if(name != NULL){
+    if((filename = separate_filename(abs_path)) == NULL){
+        filename = abs_path;
+    }
+    else{
+        dir_itr = path_to_dir(dir_itr, abs_path);
+    }
+    strlcpy(name, filename, strlen(filename)+1);
+  }
+  else{
+    dir_itr = path_to_dir(dir_itr, abs_path);
+  }
+
+  return dir_itr;
 }
