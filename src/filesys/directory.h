@@ -30,5 +30,5 @@ bool dir_readdir (struct dir *, char name[NAME_MAX + 1]);
 
 char *separate_filename(char *name);
 struct dir *path_to_dir(struct dir *dir_itr_, char *path);
-
+struct dir *get_path_and_name(char *path, char *name);
 #endif /* filesys/directory.h */
