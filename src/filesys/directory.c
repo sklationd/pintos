@@ -250,3 +250,36 @@ dir_readdir (struct dir *dir, char name[NAME_MAX + 1])
     }
   return false;
 }
+
+char *separate_filename(char *name){
+    char *ptr = name;
+    while(*ptr)
+        ptr++;
+    ptr--;
+    while(*ptr != '/'){
+        ptr--;
+        if(ptr < name)
+            return NULL;
+    }
+    *ptr = 0;
+    return ptr + 1;
+}
+
+struct dir *path_to_dir(struct dir *dir_itr_, char *path){
+    char *token, *save_ptr;
+    struct dir_entry e;
+    struct dir *dir_itr = dir_itr_;
+
+    for (token = strtok_r (path, "/", &save_ptr); token != NULL;
+        token = strtok_r (NULL, "/", &save_ptr)){
+        if(!lookup(dir_itr, token, &e, NULL)){
+            if(dir_itr != dir_itr_)
+                dir_close(dir_itr);
+            return NULL;
+        }
+        if(dir_itr != dir_itr_)
+            dir_close(dir_itr);
+        dir_itr = dir_open(inode_open(e.inode_sector));
+    }
+    return dir_itr;
+}

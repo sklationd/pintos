@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-twice into /tmp/Hdxlt_ssXx.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/Hdxlt_ssXx.dsk...
-Writing command line to /tmp/PSwLoJzZ0W.dsk...
-qemu -hda /tmp/PSwLoJzZ0W.dsk -hdb /tmp/LLyjUW99aL.dsk -hdc /tmp/Hdxlt_ssXx.dsk -hdd /tmp/8bik0B2Xj2.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-twice into /tmp/jLk0BtQwvr.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/jLk0BtQwvr.dsk...
+Writing command line to /tmp/IOnBBDdUnn.dsk...
+qemu -hda /tmp/IOnBBDdUnn.dsk -hdb /tmp/HUrO84Ho9g.dsk -hdc /tmp/jLk0BtQwvr.dsk -hdd /tmp/JYWg89cgvF.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-twice put sample.txt run mmap-twice
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  155,443,200 loops/s.
+Calibrating timer...  194,764,800 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -26,10 +26,10 @@ Executing 'mmap-twice':
 (mmap-twice) end
 mmap-twice: exit(0)
 Execution of 'mmap-twice' complete.
-Timer: 184 ticks
-Thread: 30 idle ticks, 149 kernel ticks, 5 user ticks
+Timer: 182 ticks
+Thread: 30 idle ticks, 149 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 215 reads, 315 writes
+hd0:1: 211 reads, 315 writes
 hd1:0: 103 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1236 characters output

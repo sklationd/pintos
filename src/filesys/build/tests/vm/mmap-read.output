@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-read into /tmp/IVDKxLPdIe.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/IVDKxLPdIe.dsk...
-Writing command line to /tmp/8f8kXEySwT.dsk...
-qemu -hda /tmp/8f8kXEySwT.dsk -hdb /tmp/Jt64gXiZkX.dsk -hdc /tmp/IVDKxLPdIe.dsk -hdd /tmp/p2WhZnc0H_.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-read into /tmp/7457G9JA0Q.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/7457G9JA0Q.dsk...
+Writing command line to /tmp/Wqsr3fwSV1.dsk...
+qemu -hda /tmp/Wqsr3fwSV1.dsk -hdb /tmp/7i4H7ZP3uv.dsk -hdc /tmp/7457G9JA0Q.dsk -hdd /tmp/3qfcu0ANMn.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-read put sample.txt run mmap-read
 Pintos booting with 4,096 kB RAM...
 373 pages available in kernel pool.
 373 pages available in user pool.
-Calibrating timer...  155,443,200 loops/s.
+Calibrating timer...  104,755,200 loops/s.
 hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,10 +22,10 @@ Executing 'mmap-read':
 (mmap-read) end
 mmap-read: exit(0)
 Execution of 'mmap-read' complete.
-Timer: 182 ticks
-Thread: 30 idle ticks, 151 kernel ticks, 2 user ticks
+Timer: 175 ticks
+Thread: 30 idle ticks, 144 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 206 reads, 315 writes
+hd0:1: 204 reads, 315 writes
 hd1:0: 103 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1028 characters output

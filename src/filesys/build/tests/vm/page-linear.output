@@ -17,3 +17,19 @@ Executing 'page-linear':
 (page-linear) begin
 (page-linear) initialize
 (page-linear) read pass
+(page-linear) read/modify/write pass one
+(page-linear) read/modify/write pass two
+(page-linear) read pass
+(page-linear) end
+page-linear: exit(0)
+Execution of 'page-linear' complete.
+Timer: 4288 ticks
+Thread: 30 idle ticks, 149 kernel ticks, 4109 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 163 reads, 312 writes
+hd1:0: 102 reads, 0 writes
+hd1:1: 9184 reads, 10344 writes
+Console: 1090 characters output
+Keyboard: 0 keys pressed
+Exception: 1665 page faults
+Powering off...

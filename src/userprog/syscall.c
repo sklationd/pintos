@@ -315,41 +315,10 @@ void munmap(mapid_t mapping){
     return;
 }
 
-char *separate_filename(char *name){
-    char *ptr = name;
-    while(*ptr)
-        ptr++;
-    ptr--;
-    while(*ptr != '/'){
-        ptr--;
-        if(ptr < name)
-            return NULL;
-    }
-    *ptr = 0;
-    return ptr + 1;
-}
-
-struct dir *path_to_dir(struct dir *dir_itr_, char *path){
-    char *token, *save_ptr;
-    struct dir_entry e;
-    struct dir *dir_itr = dir_itr_;
-
-    for (token = strtok_r (path, "/", &save_ptr); token != NULL;
-        token = strtok_r (NULL, "/", &save_ptr)){
-        if(!lookup(dir_itr, token, &e, NULL)){
-            if(dir_itr != dir_itr_)
-                dir_close(dir_itr);
-            return NULL;
-        }
-        if(dir_itr != dir_itr_)
-            dir_close(dir_itr);
-        dir_itr = dir_open(inode_open(e.inode_sector));
-    }
-    return dir_itr;
-}
 
 bool mkdir(const char *path_){
     char path[strlen(path_) + 1];
+    char *abs_path = path;
     struct dir *dir_itr;
     char *filename;
     if(path_[0] == 0)
@@ -358,16 +327,17 @@ bool mkdir(const char *path_){
 
     if(path[0] == '/'){
         dir_itr = dir_open_root();
+        abs_path++;
     }
     else{
         dir_itr = thread_current()->curr_dir;
     }
 
-    if((filename = separate_filename(path+1)) == NULL){
-        filename = path+1;
+    if((filename = separate_filename(abs_path)) == NULL){
+        filename = abs_path;
     }
     else{
-        dir_itr = path_to_dir(dir_itr, path+1);
+        dir_itr = path_to_dir(dir_itr, abs_path);
     }
     if(dir_itr == NULL)
         return false;
@@ -380,6 +350,34 @@ bool mkdir(const char *path_){
     return true;
 }
 
+bool chdir(const char *path_){
+    char path[strlen(path_) + 1];
+    char *abs_path = path;
+    struct dir *dir_itr;
+    char *filename;
+    if(path_[0] == 0)
+        return false;
+    strlcpy(path, path_, strlen(path_)+1);
+
+    if(path[0] == '/'){
+        dir_itr = dir_open_root();
+        abs_path++;
+    }
+    else{
+        dir_itr = thread_current()->curr_dir;
+    }
+
+    if((filename = separate_filename(abs_path)) == NULL){
+        filename = abs_path;
+    }
+    else{
+        dir_itr = path_to_dir(dir_itr, abs_path);
+    }
+    if(dir_itr == NULL)
+        return false;
+    thread_current()->curr_dir = dir_itr;
+    return true;
+}
 
 void
 syscall_init (void) 
@@ -486,12 +484,16 @@ syscall_handler (struct intr_frame *f)
         munmap((mapid_t)first_arg(f));
         break;
     case SYS_CHDIR      :
+        if(is_kernel_vaddr(f->esp + 4)||
+           is_kernel_vaddr((void *)first_arg(f)))
+            exit(-1);
+        f->eax = chdir((char *)first_arg(f));
         break;
     case SYS_MKDIR      :
         if(is_kernel_vaddr(f->esp + 4)||
            is_kernel_vaddr((void *)first_arg(f)))
             exit(-1);
-        mkdir((char *)first_arg(f));
+        f->eax = mkdir((char *)first_arg(f));
         break;
     case SYS_READDIR    :
         break;
