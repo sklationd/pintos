@@ -24,7 +24,7 @@ struct dir
   {
     struct inode *inode;                /* Backing store. */
     off_t pos;                          /* Current position. */
-    //int size;
+    int size;
   };
 
 /* A single directory entry. */
@@ -54,6 +54,6 @@ char *separate_filename(char *name);
 struct dir *path_to_dir(struct dir *dir_itr_, char *path);
 struct dir *get_path_and_name(char *path, char *name);
 
-//int dir_size(struct dir *dir);
+int dir_size(struct dir *dir);
 
 #endif /* filesys/directory.h */

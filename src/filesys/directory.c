@@ -40,6 +40,15 @@ dir_open (struct inode *inode)
     {
       dir->inode = inode;
       dir->pos = 0;
+      size_t ofs;
+      struct dir_entry e;
+      int used=0;
+      for (ofs = 0; inode_read_at (dir->inode, &e, sizeof e, ofs) == sizeof e;
+       ofs += sizeof e){
+        if(e.in_use)
+          used++;
+      }
+      dir->size = used-2;
       return dir;
     }
   else
@@ -178,8 +187,8 @@ dir_add (struct dir *dir, const char *name, disk_sector_t inode_sector)
   success = inode_write_at (dir->inode, &e, sizeof e, ofs) == sizeof e;
 
  done:
-  //if(success)
-  //  dir->size++;
+  if(success)
+    dir->size++;
   return success;
 }
 
@@ -206,10 +215,10 @@ dir_remove (struct dir *dir, const char *name)
   if (inode == NULL)
     goto done;
 
-  //if(inode_isdir(inode)){
-  //  if(dir->size > 0)
-  //    goto done;
-  //}
+  if(inode_isdir(inode)){
+    if(dir->size > 0)
+      goto done;
+  }
 
   /* Erase directory entry. */
   e.in_use = false;
@@ -222,8 +231,8 @@ dir_remove (struct dir *dir, const char *name)
 
  done:
   inode_close (inode);
-  //if(success)
-  //  dir->size--;
+  if(success)
+    dir->size--;
   return success;
 }
 
@@ -317,6 +326,6 @@ struct dir *get_path_and_name(char *path_, char *name){
   return dir_itr;
 }
 
-//int dir_size(struct dir *dir){
-//  return dir->size;
-//}
+int dir_size(struct dir *dir){
+  return dir->size;
+}
