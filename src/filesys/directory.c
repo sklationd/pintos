@@ -1,35 +1,15 @@
 #include "filesys/directory.h"
-#include <stdio.h>
-#include <string.h>
-#include <list.h>
-#include "filesys/filesys.h"
-#include "filesys/inode.h"
-#include "threads/malloc.h"
-#include "threads/thread.h"
 
-/* A directory. */
-struct dir 
-  {
-    struct inode *inode;                /* Backing store. */
-    off_t pos;                          /* Current position. */
-  };
-
-/* A single directory entry. */
-struct dir_entry 
-  {
-    disk_sector_t inode_sector;         /* Sector number of header. */
-    char name[NAME_MAX + 1];            /* Null terminated file name. */
-    bool in_use;                        /* In use or free? */
-  };
 
 /* Creates a directory with space for ENTRY_CNT entries in the
    given SECTOR.  Returns true if successful, false on failure. */
 bool
 dir_create (disk_sector_t sector, disk_sector_t parent, size_t entry_cnt)
 {
-
-  if(!inode_create (sector, entry_cnt * sizeof (struct dir_entry), 1))
-    return false;
+  struct inode *inode;
+  if(sector == ROOT_DIR_SECTOR)
+    if(!inode_create (sector, entry_cnt * sizeof (struct dir_entry), 1))
+      return false;
   struct dir_entry write_entry[2];
   strlcpy(write_entry[0].name, ".", 2);
   strlcpy(write_entry[1].name, "..", 3);
@@ -44,6 +24,10 @@ dir_create (disk_sector_t sector, disk_sector_t parent, size_t entry_cnt)
     write_entry[0].inode_sector = sector;
     write_entry[1].inode_sector = parent;
   }
+  inode = inode_open(sector);
+  inode_write_at(inode, write_entry, 2*sizeof(struct dir_entry), 0);
+  inode_close(inode);
+  return true;
 }
 
 /* Opens and returns the directory for the given INODE, of which
@@ -114,9 +98,10 @@ lookup (const struct dir *dir, const char *name,
   
   ASSERT (dir != NULL);
   ASSERT (name != NULL);
-
   for (ofs = 0; inode_read_at (dir->inode, &e, sizeof e, ofs) == sizeof e;
-       ofs += sizeof e) 
+       ofs += sizeof e) {
+    //if(e.in_use)
+      //printf("lookup %s %s\n", name, e.name);
     if (e.in_use && !strcmp (name, e.name)) 
       {
         if (ep != NULL)
@@ -125,6 +110,7 @@ lookup (const struct dir *dir, const char *name,
           *ofsp = ofs;
         return true;
       }
+  }
   return false;
 }
 
@@ -192,6 +178,8 @@ dir_add (struct dir *dir, const char *name, disk_sector_t inode_sector)
   success = inode_write_at (dir->inode, &e, sizeof e, ofs) == sizeof e;
 
  done:
+  //if(success)
+  //  dir->size++;
   return success;
 }
 
@@ -218,6 +206,11 @@ dir_remove (struct dir *dir, const char *name)
   if (inode == NULL)
     goto done;
 
+  //if(inode_isdir(inode)){
+  //  if(dir->size > 0)
+  //    goto done;
+  //}
+
   /* Erase directory entry. */
   e.in_use = false;
   if (inode_write_at (dir->inode, &e, sizeof e, ofs) != sizeof e) 
@@ -229,6 +222,8 @@ dir_remove (struct dir *dir, const char *name)
 
  done:
   inode_close (inode);
+  //if(success)
+  //  dir->size--;
   return success;
 }
 
@@ -274,37 +269,46 @@ struct dir *path_to_dir(struct dir *dir_itr_, char *path){
     for (token = strtok_r (path, "/", &save_ptr); token != NULL;
         token = strtok_r (NULL, "/", &save_ptr)){
         if(!lookup(dir_itr, token, &e, NULL)){
-            if(dir_itr != dir_itr_)
-                dir_close(dir_itr);
+            dir_close(dir_itr);
             return NULL;
         }
-        if(dir_itr != dir_itr_)
-            dir_close(dir_itr);
+        dir_close(dir_itr);
         dir_itr = dir_open(inode_open(e.inode_sector));
     }
     return dir_itr;
 }
 
-struct dir *get_path_and_name(char *path, char *name){
+struct dir *get_path_and_name(char *path_, char *name){
+  char path[strlen(path_) + 1];
   char *abs_path = path;  
   char *filename;
   struct dir* dir_itr;
+
   if(path[0] == '/'){
       dir_itr = dir_open_root();
       abs_path++;
   }
   else{
-      dir_itr = thread_current()->curr_dir;
+    if(thread_current()->curr_dir == NULL)
+      dir_itr = dir_open_root();
+    else
+      dir_itr = dir_reopen(thread_current()->curr_dir);
   }
+
+  strlcpy(path, path_, strlen(path_)+1);
 
   if(name != NULL){
     if((filename = separate_filename(abs_path)) == NULL){
-        filename = abs_path;
+      filename = abs_path;
     }
     else{
         dir_itr = path_to_dir(dir_itr, abs_path);
     }
-    strlcpy(name, filename, strlen(filename)+1);
+    if(strlen(filename) > NAME_MAX){
+      dir_close(dir_itr);
+      return NULL;
+    }
+    strlcpy(name, filename, NAME_MAX+1);
   }
   else{
     dir_itr = path_to_dir(dir_itr, abs_path);
@@ -312,3 +316,7 @@ struct dir *get_path_and_name(char *path, char *name){
 
   return dir_itr;
 }
+
+//int dir_size(struct dir *dir){
+//  return dir->size;
+//}

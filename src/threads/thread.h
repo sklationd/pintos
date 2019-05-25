@@ -109,7 +109,6 @@ struct thread
     int priority_stack[10];             /* Priority before receiving donation. default value is -1 */
     struct lock* lock_stack[10];        /* Stack that stores lock that caused donation */
     
-    //int child_pid[128];                 //same index
     struct list child_list;
     struct list_elem child_elem;
     struct semaphore wait_lock;
@@ -124,6 +123,7 @@ struct thread
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
     struct file* fd[128];
+    struct dir * dd[128];
     struct file *current_executable;
     int child_exit_status[128];         //same index
     int exit_status;

@@ -1,34 +1,8 @@
 #include "filesys/inode.h"
-#include <list.h>
-#include <debug.h>
-#include <round.h>
-#include <string.h>
-#include "filesys/filesys.h"
-#include "filesys/free-map.h"
-#include "threads/malloc.h"
 
 /* Identifies an inode. */
 #define INODE_MAGIC 0x494e4f44
 
-/* On-disk inode.
-   Must be exactly DISK_SECTOR_SIZE bytes long. */
-
-
-
-struct indirect_block_sector
-  {
-    uint32_t indirect_block_sector[NUM_OF_INDIRECT_BLOCK];
-  };
-
-struct inode_disk
-  {
-    uint32_t isdir;
-    uint32_t direct_block[NUM_OF_DIRECT_BLOCK];
-    uint32_t indirect_block;
-    uint32_t db_indirect_block;
-    off_t length;                       /* File size in bytes. */
-    unsigned magic;                     /* Magic number. */
-  };
 
 /* Returns the number of sectors to allocate for an inode SIZE
    bytes long. */
@@ -64,17 +38,6 @@ uint32_t find_sector(struct inode_disk *id, int index){ // index starts with 0
   }
   NOT_REACHED();
 }
-
-/* In-memory inode. */
-struct inode 
-  {
-    struct list_elem elem;              /* Element in inode list. */
-    disk_sector_t sector;               /* Sector number of disk location. */
-    int open_cnt;                       /* Number of openers. */
-    bool removed;                       /* True if deleted, false otherwise. */
-    int deny_write_cnt;                 /* 0: writes ok, >0: deny writes. */
-    struct inode_disk data;             /* Inode content. */
-  };
 
 /* Returns the disk sector that contains byte offset POS within
    INODE.
@@ -118,13 +81,15 @@ create_inode_disk(struct inode_disk *disk_inode, size_t sectors, size_t original
     int remain_sectors = sectors;
     int current_sector = 0;
     //printf("Sectors %d\n", sectors);
-    for(i = 0; i < NUM_OF_DIRECT_BLOCK; i++){
-      if(current_sector++ >= original_sectors){
-        if(!free_map_allocate(1, disk_inode->direct_block + i))
-          goto FAIL;
+    if(sectors > 0){
+      for(i = 0; i < NUM_OF_DIRECT_BLOCK; i++){
+        if(current_sector++ >= original_sectors){
+          if(!free_map_allocate(1, disk_inode->direct_block + i))
+            goto FAIL;
+        }
+        if(--remain_sectors == 0)
+          break;
       }
-      if(--remain_sectors == 0)
-        break;
     }
     if(sectors > NUM_OF_DIRECT_BLOCK){
       if(original_sectors < NUM_OF_DIRECT_BLOCK)
@@ -319,6 +284,8 @@ inode_close (struct inode *inode)
     {
       /* Remove from inode list and release lock. */
       list_remove (&inode->elem);
+
+      disk_write (filesys_disk, inode->sector, &inode->data);
  
       /* Deallocate blocks if removed. */
       if (inode->removed) 
@@ -498,4 +465,8 @@ off_t
 inode_length (const struct inode *inode)
 {
   return inode->data.length;
+}
+
+bool inode_isdir(struct inode *inode){
+  return inode->data.isdir;
 }
