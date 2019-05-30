@@ -115,7 +115,6 @@ static tid_t allocate_tid (void);
 void
 thread_init (void) 
 {
-  //printf("thread_init function is called\n");
   ASSERT (intr_get_level () == INTR_OFF);
   lock_init (&tid_lock);
   list_init (&ready_list);
@@ -140,7 +139,6 @@ void
 thread_start (void) 
 {
   /* Create the idle thread. */
-  //printf("thread_start function is called\n");
   struct semaphore idle_started;
   sema_init (&idle_started, 0);
   thread_create ("idle", PRI_MIN, idle, &idle_started);
@@ -157,13 +155,12 @@ thread_start (void)
 void
 thread_tick (void) 
 {
-  //printf("thread_tick function is called\n");
   struct thread *t = thread_current ();
   struct list_elem *e;
   if(thread_mlfqs){
-    t->recent_cpu = fadd(t->recent_cpu,itof(1));
+    t->recent_cpu = fadd(t->recent_cpu, itof(1));
     if(timer_ticks() % 4 == 0){
-      for(e=list_begin(&thread_list); e!=list_end(&thread_list); e=list_next(e)){
+      for(e = list_begin(&thread_list); e != list_end(&thread_list); e = list_next(e)){
         struct thread *e_thread = list_entry(e, struct thread, thread_elem);
         e_thread->priority = PRI_MAX - ftoi(fdiv((e_thread->recent_cpu),itof(4))) - e_thread->nice*2;
         if(e_thread->priority > PRI_MAX)
@@ -176,7 +173,7 @@ thread_tick (void)
       int not_idle = (t != idle_thread); 
       load_avg = fmul(fdiv(itof(59),itof(60)),load_avg) +
                  fmul(fdiv(itof(1), itof(60)),itof(list_size(&ready_list)+not_idle));
-      for(e=list_begin(&thread_list); e!=list_end(&thread_list); e=list_next(e)){
+      for(e = list_begin(&thread_list); e != list_end(&thread_list); e = list_next(e)){
         struct thread *e_thread = list_entry(e, struct thread, thread_elem);
         e_thread->recent_cpu = fadd(fmul(fdiv(fmul(itof(2), load_avg),fadd(fmul(itof(2), load_avg),itof(1))), e_thread->recent_cpu),itof(e_thread->nice));
       }
@@ -224,7 +221,6 @@ tid_t
 thread_create (const char *name, int priority,
                thread_func *function, void *aux) 
 {
-  //printf("thread_create function is called\n");
   struct thread *t;
   ///thread_list 
   struct kernel_thread_frame *kf;
@@ -272,7 +268,6 @@ thread_create (const char *name, int priority,
 void
 thread_block (void) 
 {
-  //printf("thread_block function is called\n");
   ASSERT (!intr_context ());
   ASSERT (intr_get_level () == INTR_OFF);
 
@@ -291,12 +286,11 @@ thread_block (void)
 void
 thread_unblock (struct thread *t) 
 {
-  //printf("thread_unblock function is called\n");
   enum intr_level old_level;
   ASSERT (is_thread (t));
   old_level = intr_disable ();
   ASSERT (t->status == THREAD_BLOCKED);
-  list_insert_ordered(&ready_list, &t->elem,priority_bigger,NULL);
+  list_insert_ordered(&ready_list, &t->elem,priority_bigger, NULL);
   t->status = THREAD_READY;
   intr_set_level (old_level);
 }
@@ -305,7 +299,6 @@ thread_unblock (struct thread *t)
 const char *
 thread_name (void) 
 {
-  //printf("thread_name function is called\n");
   return thread_current ()->name;
 }
 
@@ -315,7 +308,6 @@ thread_name (void)
 struct thread *
 thread_current (void) 
 {
-  //printf("thread_current function is called\n");
   struct thread *t = running_thread ();
   
   /* Make sure T is really a thread.
@@ -333,7 +325,6 @@ thread_current (void)
 tid_t
 thread_tid (void) 
 {
-  //printf("thread_tid function is called\n");
   return thread_current ()->tid;
 }
 
@@ -366,7 +357,6 @@ thread_exit (void)
 void
 thread_yield (void) 
 {
-  //printf("thread_yield function is called\n");
   struct thread *curr = thread_current ();
   enum intr_level old_level;
   ASSERT (!intr_context ());
@@ -382,7 +372,6 @@ thread_yield (void)
 void
 thread_set_priority (int new_priority) 
 {
-  //printf("thread_set_priority function is called\n");
   struct thread *curr = thread_current();
   if(!thread_mlfqs){
     if(curr->priority < new_priority){
@@ -404,7 +393,6 @@ thread_set_priority (int new_priority)
 int
 thread_get_priority (void) 
 {
-  //printf("thread_get_priority function is called\n");
   return thread_current ()->priority;
 }
 
@@ -412,7 +400,6 @@ thread_get_priority (void)
 void
 thread_set_nice (int nice) 
 {
-  //printf("thread_set_nice function is called\n");
   ASSERT(thread_mlfqs);
   struct thread *curr = thread_current();
   curr->nice = nice;
@@ -427,7 +414,6 @@ thread_set_nice (int nice)
 int
 thread_get_nice (void) 
 {
-  //printf("thread_get_nice function is called\n");
   ASSERT(thread_mlfqs);
   return thread_current()->nice;
 }
@@ -436,9 +422,7 @@ thread_get_nice (void)
 int
 thread_get_load_avg (void) 
 {
-  //printf("thread_get_load_avg function is called\n");
   /* Not yet implemented. */
-  //printf("load_avg: %d\n",ftoi(fmul(itof(100),load_avg)));
   return ftoi(fmul(itof(100),load_avg));
 }
 
@@ -446,7 +430,6 @@ thread_get_load_avg (void)
 int
 thread_get_recent_cpu (void) 
 {
-  //printf("thread_get_recent_cpu function is called\n");
   ASSERT(thread_mlfqs);
   return ftoi(fmul(itof(100),thread_current()->recent_cpu));
 }
@@ -463,7 +446,6 @@ thread_get_recent_cpu (void)
 static void
 idle (void *idle_started_ UNUSED) 
 {
- // printf("idle function is called\n");
   struct semaphore *idle_started = idle_started_;
   idle_thread = thread_current ();
   sema_up (idle_started);
@@ -494,7 +476,6 @@ idle (void *idle_started_ UNUSED)
 static void
 kernel_thread (thread_func *function, void *aux) 
 {
-  //printf("kernel_thread function is called\n");
   ASSERT (function != NULL);
                     
   intr_enable ();       /* The scheduler runs with interrupts off. */
@@ -506,7 +487,6 @@ kernel_thread (thread_func *function, void *aux)
 struct thread *
 running_thread (void) 
 {
-  //printf("running_thread function is called\n");
   uint32_t *esp;
 
   /* Copy the CPU's stack pointer into `esp', and then round that
@@ -521,7 +501,6 @@ running_thread (void)
 static bool
 is_thread (struct thread *t)
 {
-  //printf("is_thread function is called\n");
   ASSERT(t);
   ASSERT(t->magic == THREAD_MAGIC);
   return t != NULL && t->magic == THREAD_MAGIC;
@@ -532,7 +511,6 @@ is_thread (struct thread *t)
 static void
 init_thread (struct thread *t, const char *name, int priority)
 {
-  //printf("init_thread function is called\n");
   ASSERT (t != NULL);
   ASSERT (PRI_MIN <= priority && priority <= PRI_MAX);
   ASSERT (name != NULL);
@@ -542,7 +520,6 @@ init_thread (struct thread *t, const char *name, int priority)
   strlcpy (t->name, name, sizeof t->name);
   t->stack = (uint8_t *) t + PGSIZE;
 
-  //list_init(&t->holding_lock_list);
   if(!thread_mlfqs){
     t->priority = priority;
     t->priority_stack[0] = priority;
@@ -559,7 +536,7 @@ init_thread (struct thread *t, const char *name, int priority)
   sema_init(&t->wait_memory,0);
   sema_init(&t->wait_free,0);
   sema_init(&t->wait_load, 0);
-  list_push_back(&running_thread()->child_list,&t->child_elem);
+  list_push_back(&running_thread()->child_list, &t->child_elem);
   list_push_back(&thread_list, &t->thread_elem);
   t->magic = THREAD_MAGIC;
   t->parent = running_thread();
@@ -570,7 +547,6 @@ init_thread (struct thread *t, const char *name, int priority)
 static void *
 alloc_frame (struct thread *t, size_t size) 
 {
-  //printf("alloc_frame function is called\n");
   /* Stack data is always allocated in word-size units. */
   ASSERT (is_thread (t));
   ASSERT (size % sizeof (uint32_t) == 0);
@@ -587,7 +563,6 @@ alloc_frame (struct thread *t, size_t size)
 static struct thread *
 next_thread_to_run (void) 
 {
- // printf("next_thread_to_run function is called\n");
   if (list_empty (&ready_list))
     return idle_thread;
   else /// need to modify
@@ -613,7 +588,6 @@ next_thread_to_run (void)
 void
 schedule_tail (struct thread *prev) 
 {
-  //printf("schedule_tail function is called\n");
   struct thread *curr = running_thread ();
   
   ASSERT (intr_get_level () == INTR_OFF);
@@ -651,7 +625,6 @@ schedule_tail (struct thread *prev)
 static void
 schedule (void) 
 {
-  //printf("schedule function is called\n");
   struct thread *curr = running_thread ();
   struct thread *next = next_thread_to_run ();
   struct thread *prev = NULL;
@@ -669,7 +642,6 @@ schedule (void)
 static tid_t
 allocate_tid (void) 
 {
-  //printf("allocate_tid function is called\n");
   static tid_t next_tid = 1;
   tid_t tid;
 
@@ -679,7 +651,7 @@ allocate_tid (void)
 
   return tid;
 }
-
+
 /* Offset of `stack' member within `struct thread'.
    Used by switch.S, which can't figure it out on its own. */
 uint32_t thread_stack_ofs = offsetof (struct thread, stack);

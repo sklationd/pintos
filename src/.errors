@@ -1,0 +1,3 @@
+Prototype mismatch: sub main::SIGVTALRM () vs none at /home/lomotos10/bochs-2.6.2/pintos/src/utils/pintos line 872.
+Constant subroutine SIGVTALRM redefined at /home/lomotos10/bochs-2.6.2/pintos/src/utils/pintos line 864.
+Cannot find OS disk

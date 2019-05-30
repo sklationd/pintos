@@ -28,7 +28,6 @@ filesys_init (bool format)
 
   if (format) 
     do_format ();
-
   free_map_open ();
 }
 
@@ -51,15 +50,23 @@ filesys_create (const char *name, off_t initial_size, int isdir)
   char filename[NAME_MAX + 1];
 
   struct dir *dir = get_path_and_name(name, filename);
-  bool success = (dir != NULL
-                  && free_map_allocate (1, &inode_sector)
+
+  if(dir == NULL)
+    return false;
+
+  if(dir->inode->removed){
+    dir_close(dir);
+    return false;
+  }
+
+  bool success = (free_map_allocate (1, &inode_sector)
                   && inode_create (inode_sector, initial_size, isdir)
                   && dir_add (dir, filename, inode_sector));
 
   if (!success && inode_sector != 0) 
     free_map_release (inode_sector, 1);
   if(success && isdir)
-    dir_create(inode_sector, dir, 16);
+    dir_create(inode_sector, dir->inode->sector, 16);
   dir_close (dir);
   return success;
 }
@@ -76,6 +83,21 @@ filesys_open (const char *name)
 
   struct dir *dir = get_path_and_name(name, filename);
   struct inode *inode = NULL;
+
+  if(strcmp(name, "/") == 0){
+    struct dir *root = dir_open_root();
+    struct file *file = file_open(inode_reopen(root->inode));
+    dir_close(root);
+    return file;
+  }
+
+  if(dir == NULL)
+    return NULL;
+
+  if(dir->inode->removed){
+    dir_close(dir);
+    return NULL;
+  }
 
   if (dir != NULL)
     dir_lookup (dir, filename, &inode);

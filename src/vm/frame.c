@@ -94,11 +94,11 @@ allocate_frame (void *_addr){
 	if(!l)
 		lock_acquire(&frame_table_lock);
 	void *addr = (void*)pg_round_down(_addr);
-	uint32_t *kernel;// = _allocate_frame(addr);
+	uint32_t *kernel;
 	while((kernel = _allocate_frame(addr)) == NULL) {
 		if(!swap_out()){
 			lock_release(&frame_table_lock);
-			exit(-1); // TODO panic
+			exit(-1);
 		}
 	}
 	struct sup_page_table_entry *spte = find_spte(addr);

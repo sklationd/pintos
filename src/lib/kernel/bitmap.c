@@ -129,7 +129,7 @@ bitmap_destroy (struct bitmap *b)
       free (b);
     }
 }
-
+
 /* Bitmap size. */
 
 /* Returns the number of bits in B. */

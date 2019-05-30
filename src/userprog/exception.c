@@ -142,8 +142,6 @@ page_fault (struct intr_frame *f)
   asm ("movl %%cr2, %0" : "=r" (fault_addr));
   //printf("fault %p\n", fault_addr);
   void* fault_page = (void *) pg_round_down(fault_addr);
- // printf("fault_addr: %p\n",fault_page);
-  //printf("fault_address 0x%x\n", fault_addr);
   /* Turn interrupts back on (they were only off so that we could
      be assured of reading CR2 before it changed). */
   intr_enable ();
@@ -179,6 +177,7 @@ page_fault (struct intr_frame *f)
     }
 
     else{
+      //ASSERT(0);
       exit(-1);
     }
   }

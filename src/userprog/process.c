@@ -255,6 +255,7 @@ process_exit (void)
       close(i+3);
     }
   }
+  dir_close(curr->curr_dir);
 
   while(list_size(&curr->mmap_list)){
     struct list_elem *e = list_front(&curr->mmap_list);
@@ -265,7 +266,6 @@ process_exit (void)
   sema_up(&curr->wait_lock); 
   sema_down(&curr->wait_memory);
   
-  //file_allow_write(curr->current_executable);
 
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
@@ -572,7 +572,6 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
          and zero the final PAGE_ZERO_BYTES bytes. */
       size_t page_read_bytes = read_bytes < PGSIZE ? read_bytes : PGSIZE;
       size_t page_zero_bytes = PGSIZE - page_read_bytes;
-      //uint8_t *kpage = allocate_frame(upage);
       struct sup_page_table_entry *spte = allocate_page(upage);
       if(!lazy_load(file, new_ofs, upage, page_read_bytes, page_zero_bytes, writable, spte))
         return false;

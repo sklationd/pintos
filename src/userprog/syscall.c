@@ -197,7 +197,6 @@ int open(const char *file){
     /* if file is null, exit */
     if(file == NULL)
         exit(-1);
-    //printf("open %s\n",file);
     lock_acquire(&filesys_lock);
     struct file *opened_file = filesys_open(file);
     if(opened_file == NULL){
@@ -209,7 +208,7 @@ int open(const char *file){
         if(thread_current()->fd[i] == NULL){
             thread_current()->fd[i] = opened_file;
             if(inode_isdir(opened_file->inode))
-                thread_current()->fd[i]->dir = dir_open(opened_file->inode);
+                thread_current()->fd[i]->dir = dir_open(inode_reopen(opened_file->inode));
             lock_release(&filesys_lock);
             return i+3;
         }
@@ -318,7 +317,6 @@ void close(int fd){
     file_close(thread_current()->fd[fd-3]);
     lock_release(&filesys_lock);
     thread_current()->fd[fd-3] = NULL;
-    //thread_current()->dd[fd-3] = NULL;
 }
 
 mapid_t mmap(int fd, void *addr){
@@ -331,7 +329,7 @@ mapid_t mmap(int fd, void *addr){
     lock_acquire(&filesys_lock);
     void *tmp;
     struct thread *t = thread_current();
-    struct mmap_header *mh = (struct mmap_header *)malloc(sizeof(struct mmap_header)); //TODO: freeeeeeeeeeeeeee
+    struct mmap_header *mh = (struct mmap_header *)malloc(sizeof(struct mmap_header));
     mh->file = file_reopen(t->fd[fd-3]);
     if(mh->file == NULL){
         goto FAIL;
@@ -355,7 +353,6 @@ mapid_t mmap(int fd, void *addr){
             lazy_load(mh->file,tmp-addr,tmp, PGSIZE, 0, true, allocate_page(tmp));
     }
     
-    //mh->fd = fd;
     mh->filesize = filesize;
     mh->user = addr;
     mh->mapid = (int)addr>>3;
@@ -375,7 +372,6 @@ void munmap(mapid_t mapping){
     struct list_elem *e;
     struct list *mmap_list = &(t->mmap_list);
     lock_acquire(&filesys_lock);
-    //printf("lock acquire\n");
     for(e=list_begin(mmap_list);e!=list_end(mmap_list);e=list_next(e)){
         struct mmap_header *mh = list_entry(e, struct mmap_header, list_elem);
         if(mh->mapid == mapping){
@@ -383,11 +379,9 @@ void munmap(mapid_t mapping){
             for(tmp = mh->user; tmp < mh->user + mh->filesize; tmp += PGSIZE){
                 struct sup_page_table_entry *spte = find_spte(tmp);
                 if(spte->state == SPTE_LOAD){
-                    //printf("load\n");
                     deallocate_page(tmp);
                 }
                 else if(spte->state == SPTE_EVICTED){
-                    //printf("evicted\n");
                     if(spte->dirty || pagedir_is_dirty(t->pagedir, spte->user_vaddr) || pagedir_is_dirty(t->pagedir, spte->kpage)) {
                         file_write_at(mh->file, tmp, spte->page_read_bytes,spte->ofs);
                         deallocate_fte(find_fte(tmp));
@@ -396,7 +390,6 @@ void munmap(mapid_t mapping){
                     deallocate_page(tmp);
                 }
                 else if(spte->state == SPTE_MAPPED){
-                    //printf("mapped\n");
                     swap_prevent_on(tmp);
                     if(spte->dirty || pagedir_is_dirty(t->pagedir, spte->user_vaddr) /* pagedir_is_dirty(t->pagedir, spte->kpage)*/){
                         file_write_at(mh->file, tmp, spte->page_read_bytes,spte->ofs);
@@ -413,17 +406,13 @@ void munmap(mapid_t mapping){
         }
     }
     lock_release(&filesys_lock);
-    //printf("lock release\n");
     return;
 }
 
 bool mkdir(const char *path){
-
     if(path[0] == 0)
         return false;
 
-    //printf("mkdir %s\n", path);
-    //printf("current mkdir %p\n",thread_current()->curr_dir);
     int result =  filesys_create(path, 16 * sizeof(struct dir_entry), 1);
     return result;
 }
@@ -432,10 +421,7 @@ bool chdir(const char *path){
     struct dir *dir_itr;
     if(path[0] == 0)
         return false;
-    //printf("chdir %s\n", path);
-    //printf("current chdir %p\n",thread_current()->curr_dir);
-    //if(lookup(thread_current()->curr_dir, path, NULL, NULL))
-    //    printf("exists\n");
+
     dir_itr = get_path_and_name(path, NULL);
     if(dir_itr == NULL)
         return false;
@@ -444,16 +430,13 @@ bool chdir(const char *path){
 }
 
 bool readdir(int fd, char *name){
-    //struct dir *dir = thread_current()->dd[fd-3];
     struct dir *dir = thread_current()->fd[fd-3]->dir;
 
     do{
         if(!dir_readdir(dir, name)){
-            dir_close(dir);
             return false;
         }
     } while(strcmp(name, ".") == 0 || strcmp(name, "..") == 0);
-    
     return true;
 }
 

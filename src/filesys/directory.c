@@ -42,7 +42,7 @@ dir_open (struct inode *inode)
       dir->pos = 0;
       size_t ofs;
       struct dir_entry e;
-      int used=0;
+      int used = 0;
       for (ofs = 0; inode_read_at (dir->inode, &e, sizeof e, ofs) == sizeof e;
        ofs += sizeof e){
         if(e.in_use)
@@ -109,8 +109,6 @@ lookup (const struct dir *dir, const char *name,
   ASSERT (name != NULL);
   for (ofs = 0; inode_read_at (dir->inode, &e, sizeof e, ofs) == sizeof e;
        ofs += sizeof e) {
-    //if(e.in_use)
-      //printf("lookup %s %s\n", name, e.name);
     if (e.in_use && !strcmp (name, e.name)) 
       {
         if (ep != NULL)
@@ -216,8 +214,12 @@ dir_remove (struct dir *dir, const char *name)
     goto done;
 
   if(inode_isdir(inode)){
-    if(dir->size > 0)
+    struct dir *rm_dir = dir_open(inode);
+    if(rm_dir->size > 0){
+      dir_close(rm_dir);
       goto done;
+    }
+    dir_close(rm_dir);
   }
 
   /* Erase directory entry. */
@@ -258,6 +260,8 @@ dir_readdir (struct dir *dir, char name[NAME_MAX + 1])
 
 char *separate_filename(char *name){
     char *ptr = name;
+    if(*ptr == 0)
+      return NULL;
     while(*ptr)
         ptr++;
     ptr--;
@@ -277,12 +281,16 @@ struct dir *path_to_dir(struct dir *dir_itr_, char *path){
 
     for (token = strtok_r (path, "/", &save_ptr); token != NULL;
         token = strtok_r (NULL, "/", &save_ptr)){
-        if(!lookup(dir_itr, token, &e, NULL)){
-            dir_close(dir_itr);
-            return NULL;
-        }
+      if(dir_itr->inode->removed){
         dir_close(dir_itr);
-        dir_itr = dir_open(inode_open(e.inode_sector));
+        return NULL;
+      }
+      if(!lookup(dir_itr, token, &e, NULL)){
+          dir_close(dir_itr);
+          return NULL;
+      }
+      dir_close(dir_itr);
+      dir_itr = dir_open(inode_open(e.inode_sector));
     }
     return dir_itr;
 }
@@ -293,9 +301,12 @@ struct dir *get_path_and_name(char *path_, char *name){
   char *filename;
   struct dir* dir_itr;
 
+  strlcpy(path, path_, strlen(path_)+1);
+
   if(path[0] == '/'){
       dir_itr = dir_open_root();
-      abs_path++;
+      while(*abs_path == '/')
+        abs_path++;
   }
   else{
     if(thread_current()->curr_dir == NULL)
@@ -303,8 +314,6 @@ struct dir *get_path_and_name(char *path_, char *name){
     else
       dir_itr = dir_reopen(thread_current()->curr_dir);
   }
-
-  strlcpy(path, path_, strlen(path_)+1);
 
   if(name != NULL){
     if((filename = separate_filename(abs_path)) == NULL){
@@ -322,7 +331,6 @@ struct dir *get_path_and_name(char *path_, char *name){
   else{
     dir_itr = path_to_dir(dir_itr, abs_path);
   }
-
   return dir_itr;
 }
 
