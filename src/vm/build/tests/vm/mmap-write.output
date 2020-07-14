@@ -1,0 +1,34 @@
+Copying tests/vm/mmap-write into /tmp/u_CVHNSXy8.dsk...
+Writing command line to /tmp/Jo6rhtgRU4.dsk...
+qemu -hda /tmp/Jo6rhtgRU4.dsk -hdb /tmp/oirmXRWpoS.dsk -hdc /tmp/u_CVHNSXy8.dsk -hdd /tmp/rZuvGSeDIa.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put mmap-write run mmap-write
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  157,081,600 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 100 sector (50 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'mmap-write' into the file system...
+Executing 'mmap-write':
+(mmap-write) begin
+(mmap-write) create "sample.txt"
+(mmap-write) open "sample.txt"
+(mmap-write) mmap "sample.txt"
+(mmap-write) compare read data against written data
+(mmap-write) end
+mmap-write: exit(0)
+Execution of 'mmap-write' complete.
+Timer: 184 ticks
+Thread: 30 idle ticks, 148 kernel ticks, 7 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 219 reads, 315 writes
+hd1:0: 100 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1063 characters output
+Keyboard: 0 keys pressed
+Exception: 6 page faults
+Powering off...

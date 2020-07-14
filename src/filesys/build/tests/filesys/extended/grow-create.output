@@ -1,0 +1,36 @@
+Copying tests/filesys/extended/grow-create into /tmp/DKPebkeas5.dsk...
+Copying tests/filesys/extended/tar into /tmp/DKPebkeas5.dsk...
+Writing command line to /tmp/I9LbWMjtsH.dsk...
+qemu -hda /tmp/I9LbWMjtsH.dsk -hdb tmp.dsk -hdc /tmp/DKPebkeas5.dsk -hdd /tmp/akFO224fN3.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put grow-create put tar run grow-create
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  209,510,400 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 209 sector (104 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'grow-create' into the file system...
+Putting 'tar' into the file system...
+Executing 'grow-create':
+(grow-create) begin
+(grow-create) create "blargle"
+(grow-create) open "blargle" for verification
+(grow-create) verified contents of "blargle"
+(grow-create) close "blargle"
+(grow-create) end
+grow-create: exit(0)
+Execution of 'grow-create' complete.
+Timer: 367 ticks
+Thread: 30 idle ticks, 285 kernel ticks, 53 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 462 reads, 759 writes
+hd1:0: 209 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1124 characters output
+Keyboard: 0 keys pressed
+Exception: 5 page faults
+Powering off...

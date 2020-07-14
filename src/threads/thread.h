@@ -6,6 +6,8 @@
 #include <stdint.h>
 #include "threads/synch.h"
 #include "filesys/file.h"
+#include "filesys/directory.h"
+#include <hash.h>
 /* States in a thread's life cycle. */
 enum thread_status
   {
@@ -26,8 +28,8 @@ typedef int tid_t;      /* thread id */
 #define PRI_MAX 63                      /* Highest priority. */
  
 
-int32_t load_avg;
-int is_thread_system_ready;
+extern int32_t load_avg;
+extern int is_thread_system_ready;
 /* A kernel thread or user process.
 
    Each thread structure is stored in its own 4 kB page.  The
@@ -107,11 +109,11 @@ struct thread
     int priority_stack[10];             /* Priority before receiving donation. default value is -1 */
     struct lock* lock_stack[10];        /* Stack that stores lock that caused donation */
     
-    //int child_pid[128];                 //same index
     struct list child_list;
     struct list_elem child_elem;
     struct semaphore wait_lock;
     struct semaphore wait_memory;
+    struct semaphore wait_free;
     struct thread *parent;
     struct semaphore wait_load;
     //struct semaphore wait_process_start;
@@ -125,14 +127,20 @@ struct thread
     int child_exit_status[128];         //same index
     int exit_status;
 
+    struct hash *sup_page_dir;
+    uint8_t *esp;
 
+    //MMAP
+    struct list mmap_list;
 #endif
+    struct dir* curr_dir;
+
+
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */
 
   };
 
-struct list* all_thread();
 bool priority_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
 bool sema_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);
 bool cond_bigger(const struct list_elem *a, const struct list_elem *b, void *aux);

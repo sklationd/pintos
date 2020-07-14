@@ -4,7 +4,13 @@
 #include "userprog/gdt.h"
 #include "threads/interrupt.h"
 #include "threads/thread.h"
-
+#include "threads/pte.h"
+#include "userprog/process.h"
+#include "userprog/syscall.h"
+#include "vm/frame.h"
+#include "vm/page.h"
+#include "vm/swap.h"
+#include "threads/vaddr.h"
 /* Number of page faults processed. */
 static long long page_fault_cnt;
 
@@ -126,7 +132,6 @@ page_fault (struct intr_frame *f)
   bool write;        /* True: access was write, false: access was read. */
   bool user;         /* True: access by user, false: access by kernel. */
   void *fault_addr;  /* Fault address. */
-
   /* Obtain faulting address, the virtual address that was
      accessed to cause the fault.  It may point to code or to
      data.  It is not necessarily the address of the instruction
@@ -135,7 +140,8 @@ page_fault (struct intr_frame *f)
      [IA32-v3a] 5.15 "Interrupt 14--Page Fault Exception
      (#PF)". */
   asm ("movl %%cr2, %0" : "=r" (fault_addr));
-
+  //printf("fault %p\n", fault_addr);
+  void* fault_page = (void *) pg_round_down(fault_addr);
   /* Turn interrupts back on (they were only off so that we could
      be assured of reading CR2 before it changed). */
   intr_enable ();
@@ -148,18 +154,54 @@ page_fault (struct intr_frame *f)
   write = (f->error_code & PF_W) != 0;
   user = (f->error_code & PF_U) != 0;
   
+  if(!not_present){
+    exit(-1);
+  }
+  if(user && is_kernel_vaddr(fault_addr)){
+    exit(-1);
+  }
+  //esp handling
+  void *esp = user ? f->esp : thread_current()->esp;
+  uint32_t *pd = thread_current()->pagedir;
+  struct sup_page_table_entry *spte;
 
-  //if(!user)
-  exit(-1);
+  spte = find_spte(fault_page);
+
+  if(spte == NULL){
+    if(((fault_addr < PHYS_BASE) && (PHYS_BASE - STACK_SIZE <= fault_addr)) && // USER AREA ??
+       ((esp <= fault_addr) || // ordinary case
+       (fault_addr == esp-4) || (fault_addr == esp-32)) // pusha instruction
+    ){ //stack growth
+      void *kernel = allocate_frame(fault_page);
+      swap_prevent_off(fault_page);
+    }
+
+    else{
+      //ASSERT(0);
+      exit(-1);
+    }
+  }
   
+  else if(spte->state == SPTE_EVICTED){
+    lock_acquire(&frame_table_lock);
+    swap_in(fault_page, spte);
+    lock_release(&frame_table_lock);
+  }
+
+  else if(spte->state == SPTE_LOAD){
+    lock_acquire(&filesys_lock);
+    lazy_load_page(spte);
+    lock_release(&filesys_lock);
+  }
+}
+
   /* To implement virtual memory, delete the rest of the function
      body, and replace it with code that brings in the page to
      which fault_addr refers. */
+/*FAIL:
   printf ("Page fault at %p: %s error %s page in %s context.\n",
           fault_addr,
           not_present ? "not present" : "rights violation",
           write ? "writing" : "reading",
           user ? "user" : "kernel");
-  kill (f);
-}
-
+  kill (f);*/

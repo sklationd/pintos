@@ -1,0 +1,37 @@
+Copying tests/vm/mmap-remove into /tmp/YPdLJkJIgy.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/YPdLJkJIgy.dsk...
+Writing command line to /tmp/13jbv_H4XH.dsk...
+qemu -hda /tmp/13jbv_H4XH.dsk -hdb /tmp/52RBtYOeBC.dsk -hdc /tmp/YPdLJkJIgy.dsk -hdd /tmp/Jyt56J8WuW.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put mmap-remove put sample.txt run mmap-remove
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  207,872,000 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'mmap-remove' into the file system...
+Putting 'sample.txt' into the file system...
+Executing 'mmap-remove':
+(mmap-remove) begin
+(mmap-remove) open "sample.txt"
+(mmap-remove) mmap "sample.txt"
+(mmap-remove) remove "sample.txt"
+(mmap-remove) try to open "sample.txt"
+(mmap-remove) create "another"
+(mmap-remove) end
+mmap-remove: exit(0)
+Execution of 'mmap-remove' complete.
+Timer: 250 ticks
+Thread: 30 idle ticks, 153 kernel ticks, 67 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 339 reads, 479 writes
+hd1:0: 103 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1153 characters output
+Keyboard: 0 keys pressed
+Exception: 6 page faults
+Powering off...

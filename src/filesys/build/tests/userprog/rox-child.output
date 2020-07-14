@@ -1,0 +1,42 @@
+Copying tests/userprog/rox-child into /tmp/78JFcm5CvO.dsk...
+Copying tests/userprog/child-rox into /tmp/78JFcm5CvO.dsk...
+Writing command line to /tmp/qtHWbYpmwy.dsk...
+qemu -hda /tmp/qtHWbYpmwy.dsk -hdb /tmp/7rk3qJsYDz.dsk -hdc /tmp/78JFcm5CvO.dsk -hdd /tmp/lYWz1G5yBz.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put rox-child put child-rox run rox-child
+Pintos booting with 4,096 kB RAM...
+373 pages available in kernel pool.
+373 pages available in user pool.
+Calibrating timer...  209,510,400 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 207 sector (103 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'rox-child' into the file system...
+Putting 'child-rox' into the file system...
+Executing 'rox-child':
+(rox-child) begin
+(rox-child) open "child-rox"
+(rox-child) read "child-rox"
+(rox-child) write "child-rox"
+(rox-child) exec "child-rox 1"
+(child-rox) begin
+(child-rox) try to write "child-rox"
+(child-rox) try to write "child-rox"
+(child-rox) end
+child-rox: exit(12)
+(rox-child) write "child-rox"
+(rox-child) end
+rox-child: exit(0)
+Execution of 'rox-child' complete.
+Timer: 307 ticks
+Thread: 30 idle ticks, 274 kernel ticks, 3 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 342 reads, 629 writes
+hd1:0: 207 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1244 characters output
+Keyboard: 0 keys pressed
+Exception: 9 page faults
+Powering off...
