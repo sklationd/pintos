@@ -5,7 +5,7 @@ KAIST CS330 Course's Pintos project
 
 This OS is run in the specific environment below:
 
-- Ubuntu 8.04 (Hardy Heron)
+- Ubuntu 12.04
 - GCC 3.4
 - Bochs 2.2.6
 - QEMU 0.15.0
