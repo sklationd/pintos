@@ -1,4 +1,4 @@
-# OS
+# Pintos
 KAIST CS330 Course's Pintos project
 
 ## Requirements
